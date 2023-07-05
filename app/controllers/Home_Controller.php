@@ -1,16 +1,7 @@
 <?php
-require './app/models/Home_Model.php';
 
-class HomeHandler
+class HomeController
 {
-    private $homeModel;
-    private $mailer;
-    public function __construct()
-    {
-        $this->homeModel = new HomeModel();
-        $this->mailer = new Mailer();
-
-    }
 
     public function getUsers()
     {

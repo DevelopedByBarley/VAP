@@ -1,5 +1,5 @@
 @import './initial/variables.css';
-
+@import './components//navbar.css';
 
 
 @import './admin_login_form.css';

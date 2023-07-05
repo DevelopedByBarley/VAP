@@ -1,6 +1,7 @@
 <?php
 require 'app/models/Admin_Model.php';
 require 'app/services/AuthService.php';
+require 'app/helpers/LoginChecker.php';
 
 class AdminController
 {
@@ -42,6 +43,7 @@ class AdminController
   }
 
   public function adminDashboard() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/Dashboard.php", [])
     ]);

@@ -1,0 +1,27 @@
+.navbar #user-registration-button {
+  background-color: var(--sc-color);
+  border: none;
+}
+
+.navbar .navigation-link {
+  border: 1px solid var(--pr-color);
+  color: var(--pr-color);
+  padding: .5rem 1.5rem;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+}
+.navbar .navigation-link:hover {
+  color: white;
+  background-color: var(--pr-color);
+}
+
+
+@media(max-width: 768px) {
+  .navbar #user-registration-button {
+    background-color: var(--sc-color);
+    border: none;
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
