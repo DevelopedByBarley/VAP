@@ -16,13 +16,15 @@
 <body>
     <?php include 'includes/Navbar.php' ?>
     <div class="container-fluid">
-        <div class="row mt-5 mb-5">
+        <div class="row mb-5">
             <div class="col-xs-12 p-0 d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh">
                 <?= $params["content"] ?? "" ?>
             </div>
         </div>
     </div>
     <?php //include 'includes/Footer.php' ?>
+
+    <script src="/public/js/Navbar.js"></script>
 </body>
 
 </html>

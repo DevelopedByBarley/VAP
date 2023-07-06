@@ -1,0 +1,42 @@
+#secondary-header-nav {
+  display: none;
+}
+
+
+@media(min-width: 1024px) {
+  #secondary-header-nav {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+
+
+#secondary-header-nav #secondary-header-list .nav-link{
+  width: 50%;
+  margin: 0 auto;
+  color: var(--pr-color);
+  border: 1px solid var(--pr-color);
+  border-radius: 7px;
+  margin: 0 auto; 
+  transition: all .4s ease-in-out;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+#secondary-header-nav #secondary-header-list .nav-link:hover {
+  color: white;
+  background-color: var(--pr-color);
+}
+
+.registration-button {
+  background-color: var(--sc-color);
+  border: none;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#header-image {
+  background: url("/public/assets/images/header_image.jpg") center center/cover;
+}

@@ -14,20 +14,6 @@ class AdminController
     $this->authService = new AuthService();
   }
 
-  public function adminLoginPage()
-  {
-   session_start();
-   if(isset($_SESSION["adminId"])) {
-    header("Location: /admin/dashboard");
-    return;
-   }    
-
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/Login.php", [])
-    ]);
-  }
-
   public function registerAdmin()
   {
     $this->authService->register($_POST);
@@ -38,14 +24,29 @@ class AdminController
     $this->authService->login($_POST);
   }
 
-  public function logoutAdmin() {
+  public function logoutAdmin()
+  {
     $this->authService->logout();
   }
 
-  public function adminDashboard() {
+  public function adminDashboard()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/Dashboard.php", [])
+    ]);
+  }
+
+  public function adminLoginPage()
+  {
+    session_start();
+    if (isset($_SESSION["adminId"])) {
+      header("Location: /admin/dashboard");
+      return;
+    }
+    
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/Login.php", [])
     ]);
   }
 }

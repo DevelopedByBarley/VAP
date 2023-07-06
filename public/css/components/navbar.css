@@ -6,11 +6,12 @@
 .navbar .navigation-link {
   border: 1px solid var(--pr-color);
   color: var(--pr-color);
-  padding: .5rem 1.5rem;
+  padding: .5rem 1rem;
   border-radius: 7px;
   text-decoration: none;
   transition: all .3s ease-in-out;
 }
+
 .navbar .navigation-link:hover {
   color: white;
   background-color: var(--pr-color);
@@ -23,5 +24,17 @@
     border: none;
     margin-top: 2rem;
     text-align: center;
+  }
+}
+
+@media(min-width: 1024px) {
+  #public-navbar {
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+  }
+
+  #public-navbar.show-nav {
+    transform: translateY(0);
+    transition: transform 0.3s;
   }
 }

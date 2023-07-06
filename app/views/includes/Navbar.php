@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col">
             <?php if ($_SERVER['REQUEST_URI'] !== '/admin/dashboard') : ?>
-                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white;">
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white;" id="public-navbar">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#"><img src="public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">Edu</a>
-                                </li> 
+                                </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">Partner Oldalak</a>
                                 </li>
@@ -32,6 +32,18 @@
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">Kapcsolat</a>
+                                </li>
+                                <li class="nav-item m-1 mt-3">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle navigation-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Nyelv
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Hu</a></li>
+                                            <li><a class="dropdown-item" href="#">En</a></li>
+                                            <li><a class="dropdown-item" href="#">Sp</a></li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                             <div class="navbar-text text-center mt-3">
@@ -59,7 +71,7 @@
                             <li class="list-group-item">An item</li>
                             <li class="list-group-item">A second item</li>
                             <li class="list-group-item">A third item</li>
-                            <li class="list-group-item">A fourth item</li>
+                            <li class="list-group-item">Partnerek</li>
                             <li class="list-group-item">And a fifth one</li>
                         </ul>
                     </div>
