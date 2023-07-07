@@ -1,3 +1,8 @@
+.line {
+  width: 50%;
+  margin: 0 auto
+}
+
 #secondary-header-nav {
   display: none;
 }
@@ -13,13 +18,13 @@
 
 
 
-#secondary-header-nav #secondary-header-list .nav-link{
+#secondary-header-nav #secondary-header-list .nav-link {
   width: 50%;
   margin: 0 auto;
   color: var(--pr-color);
   border: 1px solid var(--pr-color);
   border-radius: 7px;
-  margin: 0 auto; 
+  margin: 0 auto;
   transition: all .4s ease-in-out;
   list-style-type: none;
   text-decoration: none;
@@ -39,4 +44,22 @@
 
 #header-image {
   background: url("/public/assets/images/header_image.jpg") center center/cover;
+}
+
+
+
+
+
+/* ABOUT ME SECTION */
+
+#about-me-image {
+  background: url("/public/assets/images/art_2.jpg") center center/cover;
+  width: 100%;
+}
+
+@media(min-width: 1024px) {
+  #about-me-dc {
+    width: 80%;
+    margin: 0 auto;
+  }
 }

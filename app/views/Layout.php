@@ -7,14 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/public/css/main.css?v=<?php echo time() ?>" />
-
     <script src="/public/bootstrap/js/bootstrap.js"></script>
-
-    <title>Layout</title>
+    <title>VAP</title>
 </head>
 
 <body>
-    <div id="VAP-app" style="max-width: 1700px">
+    <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;" >
         <?php include 'includes/Navbar.php' ?>
 
         <div class="container-fluid">

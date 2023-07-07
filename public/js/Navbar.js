@@ -1,6 +1,6 @@
   document.addEventListener("DOMContentLoaded", function () {
     var headerContainer = document.getElementById("public-navbar");
-    var pageHeaderBottom = document.getElementById("page-header").getBoundingClientRect().bottom;
+    var pageHeaderBottom = document.getElementById("secondary-header-list").getBoundingClientRect().bottom;
     console.log(pageHeaderBottom);
     window.onscroll = function () {
       var scrollPosition = window.scrollY;

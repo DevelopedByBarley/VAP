@@ -7,7 +7,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
     <div class="row">
         <div class="col">
             <?php if ($_SERVER['REQUEST_URI'] !== '/administrator/dashboard') : ?>
-                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 1700px; margin: 0 auto;" id="public-navbar">
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#"><img src="public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
                                 </li>
                             </ul>
                             <div class="navbar-text text-center mt-3">
-                                <a href="/user/registration" class="btn btn-primary text-light" id="user-registration-button">Regisztráció</a>
+                                <a href="/user/registration" class="btn text-light" id="user-registration-button">Regisztráció</a>
                             </div>
                         </div>
                     </div>
