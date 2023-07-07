@@ -31,7 +31,7 @@ class AdminController
 
   public function adminDashboard()
   {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/Dashboard.php", [])
     ]);
@@ -41,7 +41,7 @@ class AdminController
   {
     session_start();
     if (isset($_SESSION["adminId"])) {
-      header("Location: /admin/dashboard");
+      header("Location: /administrator/dashboard");
       return;
     }
     

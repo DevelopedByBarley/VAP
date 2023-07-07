@@ -1,5 +1,6 @@
 @import './initial/variables.css';
 @import './components//navbar.css';
+@import './components//languange_modal.css';
 
 
 @import './admin_login_form.css';

@@ -38,3 +38,7 @@
     transition: transform 0.3s;
   }
 }
+
+#language-dropdown {
+  padding: .20rem 1rem;
+}

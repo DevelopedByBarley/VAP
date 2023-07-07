@@ -38,18 +38,18 @@ class AuthService
 
 
         if (!$admin || count($admin) === 0) {
-            header("Location: /admin");
+            header("Location: /administrator");
         }
 
         $isVerified = password_verify($pw, $admin["password"]);
 
         if (!$isVerified) {
-            header("Location: /admin");
+            header("Location: /administrator");
         }
 
         $_SESSION["adminId"] = $admin["adminId"];
 
-        header("Location: /admin/dashboard");
+        header("Location: /administrator/dashboard");
     }
 
     public function logout()
@@ -61,6 +61,6 @@ class AuthService
         setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
 
 
-        header("Location: /admin");
+        header("Location: /administrator");
     }
 }

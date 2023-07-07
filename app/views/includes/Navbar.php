@@ -1,10 +1,13 @@
-<?php require 'config/lang/lang.php' ?>
+<?php
+require 'config/lang/lang.php';
+$lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+?>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <?php if ($_SERVER['REQUEST_URI'] !== '/admin/dashboard') : ?>
-                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white;" id="public-navbar">
+            <?php if ($_SERVER['REQUEST_URI'] !== '/administrator/dashboard') : ?>
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 1700px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#"><img src="public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,35 +16,66 @@
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex align-items-center justify-content-center">
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Rólunk</a>
+                                    <a class="navigation-link" href="#about-me">
+                                        <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Önkéntes beszámolók</a>
+                                    <a class="navigation-link" href="#">
+                                        <?= $langs["components"]["navbar"]["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Edu</a>
+                                    <a class="navigation-link" href="#">
+                                        <?= $langs["components"]["navbar"]["edu"][$lang] ?? 'Edu' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Partner Oldalak</a>
+                                    <a class="navigation-link" href="#">
+                                        <?= $langs["components"]["navbar"]["partners"][$lang] ?? 'Partner Oldalak' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Gyakori kérdések</a>
+                                    <a class="navigation-link" href="#">
+                                        <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'Blog' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Blog</a>
-                                </li>
-                                <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">Kapcsolat</a>
+                                    <a class="navigation-link" href="#">
+                                        <?= $langs["components"]["navbar"]["contact"][$lang] ?? 'Kapcsolat' ?>
+                                    </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle navigation-link" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Nyelv
+                                        <button class="btn dropdown-toggle navigation-link" type="button" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                            <?php if ($_COOKIE["lang"] === "hu") : ?>
+                                                <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
+                                            <?php elseif ($_COOKIE["lang"] === "en") : ?>
+                                                <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                            <?php else : ?>
+                                                <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                            <?php endif ?>
+
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Hu</a></li>
-                                            <li><a class="dropdown-item" href="#">En</a></li>
-                                            <li><a class="dropdown-item" href="#">Sp</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="language-dropdown">
+                                            <li>
+                                                <a class="dropdown-item text-center" href="/language/hu">
+                                                    <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-center" href="/language/en">
+                                                    <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                                </a>
+                                            </li>
+                                            <!--
+                                            <li>
+                                                <a class="dropdown-item disabled bg-secondary" href="/language/sp">
+                                                    <img src="/public/assets/icons/sp.png" style="height: 30px; width: 30px;" />
+                                                </a>
+                                            </li>
+                                        -->
                                         </ul>
                                     </div>
                                 </li>
@@ -57,7 +91,7 @@
                     <div class="container-fluid">
                         <div class="navbar-brand"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Menu</button></div>
                         <span class="navbar-text">
-                            <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
+                            <a href="/administrator/logout" class="btn btn-danger text-light">Kijelentkezés</a>
                         </span>
                     </div>
                 </nav>
