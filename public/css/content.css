@@ -3,10 +3,16 @@
   margin: 0 auto
 }
 
-#secondary-header-nav {
-  display: none;
-}
+@media(max-width: 768px) {
+  #secondary-header-nav {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+  #secondary-header-list .nav-link {
+    width: 100% !important;
+  }
 
+}
 
 @media(min-width: 1024px) {
   #secondary-header-nav {

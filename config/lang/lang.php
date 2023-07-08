@@ -80,5 +80,253 @@ $langs = [
         "sp" => ""
       ]
     ]
+  ],
+
+  "registration" =>  [
+    "title" => [
+      "en" => "Voluntary registration",
+      "hu" => "Önkéntes regisztráció",
+      "sp" => ""
+    ],
+
+    "form" => [
+      "name" => [
+        "en" => "Name",
+        "hu" => "Név",
+        "sp" => ""
+      ],
+
+      "email" => [
+        "en" => "E-mail address",
+        "hu" => "E-mail cim",
+        "sp" => ""
+      ],
+
+      "password" => [
+        "en" => "Password",
+        "hu" => "Jelszó",
+        "sp" => ""
+      ],
+
+      "address" => [
+        "en" => "Address",
+        "hu" => "Lakhely",
+        "sp" => ""
+      ],
+
+      "mobile" => [
+        "en" => "Mobile number",
+        "hu" => "Mobil szám",
+        "sp" => ""
+      ],
+
+      "professions" => [
+        "title" => [
+          "en" => "What is your profession?",
+          "hu" => "Mivel foglalkozol?",
+          "sp" => ""
+        ],
+        "student" => [
+          "en" => "I'm a student",
+          "hu" => "Diák vagyok",
+          "sp" => ""
+        ],
+        "worker" => [
+          "en" => "I've job",
+          "hu" => "Dolgozok",
+          "sp" => ""
+
+        ]
+      ],
+
+      "edu_institution" => [
+        "en" => "If you are still a student, please write the name of the educational institution here.",
+        "hu" => "Ha diák vagy még, kérjük írd ide az oktatási intézmény nevét.",
+        "sp" => ""
+      ],
+
+      "programs" => [
+        "title" => [
+          "en" => "Which program are you interested in?",
+          "hu" => "Melyik program érdekel?",
+          "sp" => ""
+        ],
+        "program_1" => [
+          "en" => "Intern (minimum 1 month of office preparation work before and during the fair)",
+          "hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
+          "sp" => ""
+        ],
+        "program_2" => [
+          "en" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
+          "hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
+          "sp" => ""
+        ],
+        "program_3" => [
+          "en" => "Both",
+          "hu" => "Mindkettő",
+          "sp" => ""
+        ],
+      ],
+
+      "language_knowledge" => [
+        "title" =>  [
+          "en" => "Language knowledge",
+          "hu" => "Idegennyelv ismeret",
+          "sp" => ""
+        ],
+
+
+        "language" => [
+          "en" => "Language",
+          "hu" => "Nyelv",
+          "sp" => ""
+        ],
+        "basic" => [
+          "en" => "Basic",
+          "hu" => "Alap",
+          "sp" => ""
+        ],
+        "advanced" => [
+          "en" => "Advanced",
+          "hu" => "Haladó",
+          "sp" => ""
+        ],
+        "higher" => [
+          "en" => "Higher",
+          "hu" => "Felsőfok",
+          "sp" => ""
+        ],
+        "dont_speek" => [
+          "en" => "I don't speek",
+          "hu" => "Nem beszélem",
+          "sp" => ""
+        ],
+
+        "languages" => [
+          "English" => [
+            "en" => "English",
+            "hu" => "Angol",
+            "sp" => ""
+          ],
+          "Germany" => [
+            "en" => "Germany",
+            "hu" => "Német",
+            "sp" => ""
+          ],
+          "Italy" => [
+            "en" => "Italy",
+            "hu" => "Olasz",
+            "sp" => ""
+          ],
+          "Serbian" => [
+            "en" => "Serbian",
+            "hu" => "Szerb",
+            "sp" => ""
+          ],
+        ]
+
+      ],
+
+
+
+      "other_languages" => [
+        "en" => "Other languanges",
+        "hu" => "További nyelvismeret",
+        "sp" => ""
+      ],
+
+
+
+      "task_area" => [
+        "title" => [
+          "en" => "
+          Which task areas are you interested in and willing to complete at the fair?",
+          "hu" => "Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron?",
+          "sp" => ""
+        ],
+        "area_1" => [
+          "en" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
+          "hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+          "sp" => ""
+        ],
+
+        "area_2" => [
+          "en" => "Administration, event organizer assistant",
+          "hu" => "Ügyintézés, rendezvényszervező asszisztens",
+          "sp" => ""
+        ],
+        "area_3" => [
+          "en" => "Registration (Galleries and VIP guests)",
+          "hu" => "Regisztráció (Galériák és VIP vendégek)",
+          "sp" => ""
+        ],
+        "area_4" => [
+          "en" => "Worker at the information desk",
+          "hu" => "Információs pultban munkatárs",
+          "sp" => ""
+        ],
+        "area_5" => [
+          "en" => "Architect, logistics, warehouse supervision",
+          "hu" => "Építész, logisztika, raktár felügyelet",
+          "sp" => ""
+        ],
+        "area_6" => [
+          "en" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
+          "hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+          "sp" => ""
+        ],
+        "area_7" => [
+          "en" => "I am interested in every task",
+          "hu" => "Mindegyik feladat érdekel",
+          "sp" => ""
+        ],
+
+      ],
+
+
+
+      "informedBy" => [
+        "title" => [
+          "en" => "How did you hear about the program?",
+          "hu" => "Honnan hallottál a programról?",
+          "sp" => ""
+        ],
+        "info_1" => [
+          "en" => "From a Facebook ad",
+          "hu" => "Facebook hirdetésből",
+          "sp" => ""
+        ],
+        "info_2" => [
+          "en" => "Recommended by my teacher/school",
+          "hu" => "Tanárom/iskola ajánlotta",
+          "sp" => ""
+        ],
+        "info_3" => [
+          "en" => "Recommended by a friend/family",
+          "hu" => "Ismerősöm/család ajánlotta",
+          "sp" => ""
+        ],
+        "info_4" => [
+          "en" => "I received an email because I was a volunteer in previous years as well",
+          "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
+          "sp" => ""
+        ],
+        "info_5" => [
+          "en" => "Other",
+          "hu" => "Egyéb",
+          "sp" => ""
+        ],
+      ],
+
+      "email_permission" => [
+        "en" => "Can we be included in the AMB volunteer database for the following years,
+        to be the first to hear about Art Market news?",
+        "hu" => "Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban,
+        hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?",
+        "sp" => ""
+      ]
+
+    ]
+
   ]
 ];

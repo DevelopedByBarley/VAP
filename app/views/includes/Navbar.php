@@ -9,14 +9,15 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
             <?php if ($_SERVER['REQUEST_URI'] !== '/administrator/dashboard') : ?>
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#"><img src="public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
+                        <a class="navbar-brand" href="#"><img src="/public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex align-items-center justify-content-center">
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#about-me">
+
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-me' : '#about-me' ?>">
                                         <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
                                     </a>
                                 </li>
@@ -81,7 +82,9 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
                                 </li>
                             </ul>
                             <div class="navbar-text text-center mt-3">
-                                <a href="/user/registration" class="btn text-light" id="user-registration-button">Regisztráció</a>
+                                <a href="/user/registration" class="btn text-light" id="user-registration-button">
+                                    <?= $langs["components"]["navbar"]["registrationBtn"][$lang] ?? 'Regisztráció' ?>
+                                </a>
                             </div>
                         </div>
                     </div>

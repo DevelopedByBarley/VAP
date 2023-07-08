@@ -15,11 +15,8 @@ class UserController
     $this->renderer = new Renderer();
   }
 
-  public function registrationPage()
-  {
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/RegistrationForm.php", [])
-    ]);
+  public function registerUser() {
+    $this->userModel->register($_POST);
   }
 
 
@@ -31,5 +28,12 @@ class UserController
   public function switchLanguage($vars)
   {
     $this->languageService->switch($vars["lang"]);
+  }
+
+  public function registerForm()
+  {
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/Register.php", [])
+    ]);
   }
 }

@@ -10,7 +10,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
 <div class="container-fluid">
     <div class="row" id="page-header">
-        <div class="col-12 col-lg-6" style="min-height: 100vh;" id="secondary-header-nav">
+        <div class="col-12 col-lg-6" style="min-height: 30vh;" id="secondary-header-nav">
             <div class="text-center">
                 <img src="/public/assets/icons/VAP.png" style="height: 100px; width: 180px;" />
             </div>
