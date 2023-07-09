@@ -16,17 +16,17 @@ class AdminController
 
   public function registerAdmin()
   {
-    $this->authService->register($_POST);
+    $this->authService->registerAdmin($_POST);
   }
 
   public function loginAdmin()
   {
-    $this->authService->login($_POST);
+    $this->authService->loginAdmin($_POST);
   }
 
   public function logoutAdmin()
   {
-    $this->authService->logout();
+    $this->authService->logoutAdmin();
   }
 
   public function adminDashboard()

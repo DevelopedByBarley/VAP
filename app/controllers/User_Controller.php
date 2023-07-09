@@ -6,12 +6,14 @@ class UserController
 {
   private $userModel;
   private $languageService;
+  private $authService;
   private $renderer;
 
   public function __construct()
   {
     $this->userModel = new  UserModel();
     $this->languageService = new LanguageService();
+    $this->authService = new AuthService();
     $this->renderer = new Renderer();
   }
 
@@ -35,5 +37,9 @@ class UserController
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/Register.php", [])
     ]);
+  }
+
+  public function registration() {
+    $this->authService->registerUser($_POST);
   }
 }

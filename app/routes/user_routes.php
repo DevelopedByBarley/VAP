@@ -8,4 +8,4 @@ $r->addRoute('GET', '/language/{lang}', [UserController::class, 'switchLanguage'
 
 
 $r->addRoute('POST', '/language', [UserController::class, 'setLanguage']);
-$r->addRoute('POST', '/user/register', [UserController::class, 'registerUser']);
+$r->addRoute('POST', '/user/register', [UserController::class, 'registration']);

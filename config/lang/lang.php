@@ -1,5 +1,5 @@
 <?php
-$langs = [
+define("LANGS", [
   "components" => [
     "navbar" => [
       "aboutMe" => [
@@ -235,6 +235,23 @@ $langs = [
         "sp" => ""
       ],
 
+      "participation" =>  [
+        "title" => [
+          "en" => "Have you previously participated in the AMB or other fine arts festivals (MÉF, GWB) as a volunteer?",
+          "hu" => "Részt vettél korábban az AMB vagy további képzőművészeti fesztiválon (MÉF, GWB), mint önkéntes?"
+        ],
+        "1" => [
+          "en" => "Yes",
+          "hu" => "Igen",
+          "sp" => ""
+        ],
+        "2" => [
+          "en" => "No",
+          "hu" => "Nem",
+          "sp" => ""
+        ]
+      ],
+
 
 
       "task_area" => [
@@ -329,4 +346,4 @@ $langs = [
     ]
 
   ]
-];
+]);

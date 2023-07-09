@@ -4,6 +4,7 @@ if (!isset($_COOKIE["lang"])) {
 }
 require 'config/lang/lang.php';
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+$langs = LANGS;
 ?>
 
 

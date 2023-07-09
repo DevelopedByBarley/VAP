@@ -1,4 +1,6 @@
 <?php
+require 'config/variables/vars.php';
+
 class UserModel
 {
   private $pdo;
@@ -14,6 +16,7 @@ class UserModel
   {
     echo "<pre>";
     var_dump($body);
+    var_dump(PROGRAMS[$body["programs"]]["hu"]);
     exit;
   }
 }
