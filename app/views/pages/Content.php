@@ -2,7 +2,6 @@
 if (!isset($_COOKIE["lang"])) {
     include 'app/views/components/LanguageModal.php';
 }
-require 'config/lang/lang.php';
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>

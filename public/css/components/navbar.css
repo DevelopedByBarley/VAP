@@ -42,3 +42,10 @@
 #language-dropdown {
   padding: .20rem 1rem;
 }
+
+#user-login-button {
+  background-color: var(--pr-color);
+  border: none;
+  margin-top: 2rem;
+  text-align: center;
+}

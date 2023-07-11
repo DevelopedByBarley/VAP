@@ -1,11 +1,10 @@
 <?php
-require 'config/lang/lang.php';
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
 ?>
 
-<form class="p-5" id="register-form" action="/user/register" method="POST">
+<form class="p-3" id="register-form" action="/user/register" method="POST">
   <h1 class="text-center display-5"><?= $langs["registration"]["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
   <div class="row mb-4 mt-5">
 
@@ -63,12 +62,12 @@ $langs = LANGS;
       <div class="form-outline mb-4 text-center">
         <label class="form-label mb-3 required"><b><?= $langs["registration"]["form"]["professions"]["title"][$lang] ?? 'Mivel foglalkozol?' ?></b></label>
         <br>
-        <input type="radio" class="btn-check" name="profession" id="profession_1" value="Tanuló" autocomplete="off" required>
+        <input type="radio" class="btn-check" name="profession" id="profession_1" value="<?= $langs["registration"]["form"]["professions"]["student"]['hu'] ?>" autocomplete="off" required>
         <label class="btn btn-outline-primary" for="profession_1">
           <?= $langs["registration"]["form"]["professions"]["student"][$lang] ?? 'Diák vagyok' ?>
         </label>
 
-        <input type="radio" class="btn-check" name="profession" id="profession_2" value="Munkás" autocomplete="off">
+        <input type="radio" class="btn-check" name="profession" id="profession_2" value="<?= $langs["registration"]["form"]["professions"]["student"]['hu'] ?>" autocomplete="off">
         <label class="btn btn-outline-primary" for="profession_2">
           <?= $langs["registration"]["form"]["professions"]["worker"][$lang] ?? 'Dolgozok' ?>
         </label>
@@ -211,45 +210,45 @@ $langs = LANGS;
             <td><?= $langs["registration"]["form"]["task_area"]["title"][$lang] ?? 'Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron? ' ?></td>
           </b></label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="tasks" id="task-1" value="task-1" required>
+          <input class="form-check-input" type="radio" name="tasks" id="task-1" value="1" required>
           <label class="form-check-label" for="task-1">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_1"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["1"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="tasks" id="task-2" value="task-2">
+          <input class="form-check-input" type="radio" name="tasks" id="task-2" value="2">
           <label class="form-check-label" for="task-2">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_2"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["2"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="tasks" id="task-3" value="task-3">
+          <input class="form-check-input" type="radio" name="tasks" id="task-3" value="3">
           <label class="form-check-label" for="task-3">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_3"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["3"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="tasks" id="task-4" value="task-4">
+          <input class="form-check-input" type="radio" name="tasks" id="task-4" value="4">
           <label class="form-check-label" for="task-4">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_4"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["4"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="tasks" id="task-5" value="task-5">
+          <input class="form-check-input" type="radio" name="tasks" id="task-5" value="5">
           <label class="form-check-label" for="task-5">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_5"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["5"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="tasks" id="task-6" value="6">
           <label class="form-check-label" for="task-6">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_6"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["6"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="tasks" id="task-7" value="7">
           <label class="form-check-label" for="task-7">
-            <td><?= $langs["registration"]["form"]["task_area"]["area_7"][$lang] ?? 'Név' ?>
+            <td><?= $langs["registration"]["form"]["task_area"]["areas"]["7"][$lang] ?? 'Név' ?>
           </label>
         </div>
       </div>
@@ -269,31 +268,31 @@ $langs = LANGS;
         <div class="form-check">
           <input class="form-check-input" type="radio" name="informed_by" id="1" value="1" required>
           <label class="form-check-label" for="program-1">
-            <?= $langs["registration"]["form"]["informedBy"]["info_1"][$lang] ?? 'Név' ?>
+            <?= $langs["registration"]["form"]["informedBy"]["inform"]["1"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="informed_by" id="2" value="2">
           <label class="form-check-label" for="program-2">
-            <?= $langs["registration"]["form"]["informedBy"]["info_2"][$lang] ?? 'Név' ?>
+            <?= $langs["registration"]["form"]["informedBy"]["inform"]["2"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="informed_by" id="3" value="3">
           <label class="form-check-label" for="program-3">
-            <?= $langs["registration"]["form"]["informedBy"]["info_3"][$lang] ?? 'Név' ?>
+            <?= $langs["registration"]["form"]["informedBy"]["inform"]["3"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="informed_by" id="3" value="4">
           <label class="form-check-label" for="program-3">
-            <?= $langs["registration"]["form"]["informedBy"]["info_4"][$lang] ?? 'Név' ?>
+            <?= $langs["registration"]["form"]["informedBy"]["inform"]["4"][$lang] ?? 'Név' ?>
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="radio" name="informed_by" id="5" value="5">
           <label class="form-check-label" for="program-3">
-            <?= $langs["registration"]["form"]["informedBy"]["info_5"][$lang] ?? 'Név' ?>
+            <?= $langs["registration"]["form"]["informedBy"]["inform"]["5"][$lang] ?? 'Név' ?>
           </label>
         </div>
       </div>
@@ -304,23 +303,23 @@ $langs = LANGS;
 
 
 
-    <div class="col-xs-12 mt-3 d-flex align-items-center justify-content-center">
-      <div class="form-outline mb-4">
-        <div class="form-check form-switch">
+    <div class="col-xs-12 mt-3 d-flex align-items-center justify-content-center border">
+      <div class="form-outline mb-4 p-3">
+        <div class="form-check form-switch text-center d-flex align-items-center justify-content-center">
           <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" id="flexSwitchCheckDefault" name="permission" value="on">
-
-          <label class="form-check-label" for="flexSwitchCheckDefault">
-            <?= $langs["registration"]["form"]["email_permission"][$lang] ?? 'Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban, hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?' ?>
-          </label>
         </div>
+        <label class="form-check-label mt-2 text-center" for="flexSwitchCheckDefault">
+          <?= $langs["registration"]["form"]["email_permission"][$lang] ?? 'Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban, hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?' ?>
+        </label>
       </div>
     </div>
+
   </div>
 
 
 
 
   <div class="text-center">
-    <button type="submit" class="btn btn-outline-success">Regisztráció</button>
+    <button type="submit" class="btn btn-outline-success"> <?= $langs["registration"]["form"]["registrationBtn"][$lang] ?? 'Rdsadegisztráció' ?></button>
   </div>
 </form>

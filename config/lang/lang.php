@@ -31,7 +31,17 @@ define("LANGS", [
         "en" => "Registration",
         "hu" => "Regisztráció",
         "sp" => ""
-      ]
+      ],
+      "loginBtn" => [
+        "en" => "Login",
+        "hu" => "Bejelentkezés",
+        "sp" => ""
+      ],
+      "logoutBtn" => [
+        "en" => "Logout",
+        "hu" => "Kijelentkezés",
+        "sp" => ""
+      ],
     ]
   ],
 
@@ -135,7 +145,6 @@ define("LANGS", [
           "en" => "I've job",
           "hu" => "Dolgozok",
           "sp" => ""
-
         ]
       ],
 
@@ -223,9 +232,11 @@ define("LANGS", [
             "hu" => "Szerb",
             "sp" => ""
           ],
-        ]
+        ],
+
 
       ],
+
 
 
 
@@ -261,42 +272,43 @@ define("LANGS", [
           "hu" => "Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron?",
           "sp" => ""
         ],
-        "area_1" => [
-          "en" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
-          "hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
-          "sp" => ""
-        ],
-
-        "area_2" => [
-          "en" => "Administration, event organizer assistant",
-          "hu" => "Ügyintézés, rendezvényszervező asszisztens",
-          "sp" => ""
-        ],
-        "area_3" => [
-          "en" => "Registration (Galleries and VIP guests)",
-          "hu" => "Regisztráció (Galériák és VIP vendégek)",
-          "sp" => ""
-        ],
-        "area_4" => [
-          "en" => "Worker at the information desk",
-          "hu" => "Információs pultban munkatárs",
-          "sp" => ""
-        ],
-        "area_5" => [
-          "en" => "Architect, logistics, warehouse supervision",
-          "hu" => "Építész, logisztika, raktár felügyelet",
-          "sp" => ""
-        ],
-        "area_6" => [
-          "en" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
-          "hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
-          "sp" => ""
-        ],
-        "area_7" => [
-          "en" => "I am interested in every task",
-          "hu" => "Mindegyik feladat érdekel",
-          "sp" => ""
-        ],
+        "areas" => [
+          "1" => [
+            "en" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
+            "hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+            "sp" => ""
+          ],
+          "2" => [
+            "en" => "Administration, event organizer assistant",
+            "hu" => "Ügyintézés, rendezvényszervező asszisztens",
+            "sp" => ""
+          ],
+          "3" => [
+            "en" => "Registration (Galleries and VIP guests)",
+            "hu" => "Regisztráció (Galériák és VIP vendégek)",
+            "sp" => ""
+          ],
+          "4" => [
+            "en" => "Worker at the information desk",
+            "hu" => "Információs pultban munkatárs",
+            "sp" => ""
+          ],
+          "5" => [
+            "en" => "Architect, logistics, warehouse supervision",
+            "hu" => "Építész, logisztika, raktár felügyelet",
+            "sp" => ""
+          ],
+          "6" => [
+            "en" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
+            "hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+            "sp" => ""
+          ],
+          "7" => [
+            "en" => "I am interested in every task",
+            "hu" => "Mindegyik feladat érdekel",
+            "sp" => ""
+          ],
+        ]
 
       ],
 
@@ -308,31 +320,33 @@ define("LANGS", [
           "hu" => "Honnan hallottál a programról?",
           "sp" => ""
         ],
-        "info_1" => [
-          "en" => "From a Facebook ad",
-          "hu" => "Facebook hirdetésből",
-          "sp" => ""
-        ],
-        "info_2" => [
-          "en" => "Recommended by my teacher/school",
-          "hu" => "Tanárom/iskola ajánlotta",
-          "sp" => ""
-        ],
-        "info_3" => [
-          "en" => "Recommended by a friend/family",
-          "hu" => "Ismerősöm/család ajánlotta",
-          "sp" => ""
-        ],
-        "info_4" => [
-          "en" => "I received an email because I was a volunteer in previous years as well",
-          "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
-          "sp" => ""
-        ],
-        "info_5" => [
-          "en" => "Other",
-          "hu" => "Egyéb",
-          "sp" => ""
-        ],
+        "inform" => [
+          "1" => [
+            "en" => "From a Facebook ad",
+            "hu" => "Facebook hirdetésből",
+            "sp" => ""
+          ],
+          "2" => [
+            "en" => "Recommended by my teacher/school",
+            "hu" => "Tanárom/iskola ajánlotta",
+            "sp" => ""
+          ],
+          "3" => [
+            "en" => "Recommended by a friend/family",
+            "hu" => "Ismerősöm/család ajánlotta",
+            "sp" => ""
+          ],
+          "4" => [
+            "en" => "I received an email because I was a volunteer in previous years as well",
+            "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
+            "sp" => ""
+          ],
+          "5" => [
+            "en" => "Other",
+            "hu" => "Egyéb",
+            "sp" => ""
+          ],
+        ]
       ],
 
       "email_permission" => [
@@ -341,9 +355,94 @@ define("LANGS", [
         "hu" => "Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban,
         hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?",
         "sp" => ""
+      ],
+
+      "registrationBtn" => [
+        "en" => "Registration",
+        "hu" => "Regisztráció",
+        "sp" => ""
+      ],
+
+    ],
+
+  ],
+
+
+
+  "loginForm" => [
+    "title" => [
+      "en" => "Login",
+      "hu" => "Bejelentkezés",
+      "sp" => ""
+    ],
+
+    "email" => [
+      "en" => "Email address",
+      "hu" => "Email cim",
+      "sp" => ""
+    ],
+    "password" => [
+      "en" => "Password",
+      "hu" => "Jelszó",
+      "sp" => ""
+    ],
+    "loginBtn" => [
+      "en" => "Login",
+      "hu" => "Bejelentkezés",
+      "sp" => ""
+    ]
+  ],
+
+
+
+  "profile" => [
+    "header" => [
+      "createdAt" => [
+        "en" => "Profile created",
+        "hu" => "Profil létrehozva",
+        "sp" => ""
+      ],
+      "logoutBtn" => [
+        "en" => "Logout",
+        "hu" => "Kijelentkezés",
+        "sp" => ""
+      ],
+    ],
+    "subscriptions" => [
+      "title" => [
+        "en" => "Subscriptions",
+        "hu" => "Feliratkozások",
+        "sp" => ""
+      ],
+      "no_subscriptions" => [
+        "en" => "You haven't signed up for any of our events so far!",
+        "hu" => "Idáig nem iratkozott fel egyetlen eseményünkre sem!",
+        "sp" => ""
+      ],
+      "check_subscription_btn" => [
+        "en" => "Check our events",
+        "hu" => "Események megtekintése",
+        "sp" => ""
       ]
 
+    ],
+    "profile_settings" => [
+      "title" => [
+        "en" => "Profile settings",
+        "hu" => "Profil beállitások",
+        "sp" => ""
+      ],
+      "change_password_btn" => [
+        "en" => "Change password",
+        "hu" => "Jelszó megváltoztatása",
+        "sp" => ""
+      ],
+      "update_profile_button" => [
+        "en" => "Update profile",
+        "hu" => "Profil frissitése",
+        "sp" => ""
+      ],
     ]
-
   ]
+
 ]);

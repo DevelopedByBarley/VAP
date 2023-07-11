@@ -8,6 +8,7 @@ class UserController
   private $languageService;
   private $authService;
   private $renderer;
+  private $loginChecker;
 
   public function __construct()
   {
@@ -15,10 +16,27 @@ class UserController
     $this->languageService = new LanguageService();
     $this->authService = new AuthService();
     $this->renderer = new Renderer();
+    $this->loginChecker = new LoginChecker();
   }
 
-  public function registerUser() {
-    $this->userModel->register($_POST);
+
+  public function loginForm()
+  {
+    session_start();
+    if(isset($_SESSION["userId"])) {
+      header("Location: /user/dashboard");
+      return;
+    }
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Login.php", [])
+    ]);
+  }
+
+
+  public function updateUser() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
+    $this->userModel->update($_POST);
   }
 
 
@@ -35,11 +53,33 @@ class UserController
   public function registerForm()
   {
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/Register.php", [])
+      "content" => $this->renderer->render("/pages/user/Register.php", [])
     ]);
   }
 
-  public function registration() {
+  public function registration()
+  {
     $this->authService->registerUser($_POST);
+  }
+
+  public function login()
+  {
+    $this->authService->loginUser($_POST);
+  }
+
+
+  public function logout() {
+    $this->authService->logoutUser();
+  }
+
+  public function dashboard()
+  {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Dashboard.php", [
+        "user" => $user ?? null
+      ])
+    ]);
   }
 }

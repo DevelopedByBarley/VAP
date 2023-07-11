@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +20,7 @@
 
         <div class="container-fluid">
             <div class="row mb-5">
-                <div class="col-xs-12 p-0 d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh">
+                <div class="col-xs-12 p-0 d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh;">
                     <?= $params["content"] ?? "" ?>
                 </div>
             </div>

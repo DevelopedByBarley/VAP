@@ -85,6 +85,7 @@ class AuthService
 
     public function registerUser($body)
     {
+        
         $userId = uniqid();
         $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_EMAIL);
         $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
@@ -100,10 +101,12 @@ class AuthService
         $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $task = filter_var(TASK_AREAS[(int)$body["tasks"]]["hu"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+        $task = filter_var(TASK_AREAS[$body["tasks"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on' ) ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
         $createdAt = time();
+
+
 
         $isUserExist = self::checkIsUserExist($email);
 
@@ -177,14 +180,17 @@ class AuthService
 
 
         if (!$user || count($user) === 0) {
-            header("Location: /user/login");
+            header("Location: /login");
+            return;
         }
-
+        
         $isVerified = password_verify($pw, $user["password"]);
-
+        
         if (!$isVerified) {
-            header("Location: /user/login");
+            header("Location: /login");
+            return;
         }
+
 
         $_SESSION["userId"] = $user["userId"];
 
@@ -200,7 +206,7 @@ class AuthService
         setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
 
 
-        header("Location: /user/login");
+        header("Location: /");
     }
 
     private  function checkIsUserExist($email)

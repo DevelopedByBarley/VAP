@@ -1,5 +1,4 @@
 <?php
-require 'config/variables/vars.php';
 
 class UserModel
 {
@@ -11,12 +10,81 @@ class UserModel
     $this->pdo = $db->getConnect();
   }
 
-
-  public function register($body)
+  public function getMe()
   {
-    echo "<pre>";
-    var_dump($body);
-    var_dump(PROGRAMS[$body["programs"]]["hu"]);
-    exit;
+    $userId = $_SESSION["userId"] ?? null;
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `userId` = :userId");
+    $stmt->bindParam(":userId", $userId);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $user;
+  }
+
+  public function update($body)
+  {
+    $userId = $_SESSION["userId"] ?? null;
+    $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_EMAIL);
+    $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
+    $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $programs = filter_var(PROGRAMS[$body["programs"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $english = filter_var($body["english"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $germany = filter_var($body["germany"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $italy = filter_var($body["italy"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $task = filter_var(TASK_AREAS[$body["tasks"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
+
+
+    $stmt = $this->pdo->prepare("UPDATE `users` 
+        SET 
+        `name` = :name, 
+        `email` = :email,
+        `address` = :address,
+        `mobile` = :mobile, 
+        `profession` = :profession, 
+        `schoolName` = :schoolName, 
+        `programs` = :programs,
+        `english` = :english,
+        `germany` = :germany,
+        `italy` = :italy,
+        `serbian` = :serbian,
+        `otherLanguages` = :otherLanguages,
+        `participation` = :participation,
+        `tasks` = :tasks,
+        `informedBy` = :informedBy,
+        `permission` = :permission
+         WHERE `users`.`userId` = :userId;");
+
+    $stmt->bindParam(':userId', $userId);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':address', $address);
+    $stmt->bindParam(':mobile', $mobile);
+    $stmt->bindParam(':profession', $profession);
+    $stmt->bindParam(':schoolName', $school_name);
+    $stmt->bindParam(':programs', $programs);
+    $stmt->bindParam(':english', $english);
+    $stmt->bindParam(':germany', $germany);
+    $stmt->bindParam(':italy', $italy);
+    $stmt->bindParam(':serbian', $serbian);
+    $stmt->bindParam(':otherLanguages', $otherLanguages);
+    $stmt->bindParam(':participation', $participation);
+    $stmt->bindParam(':tasks', $task);
+    $stmt->bindParam(':informedBy', $informedBy);
+    $stmt->bindParam(':permission', $permission);
+
+    // INSERT parancs végrehajtása
+    $isSuccess = $stmt->execute();
+
+    if($isSuccess) {
+      header('Location: /user/dashboard');
+    }
   }
 }

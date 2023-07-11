@@ -81,11 +81,29 @@ $langs = LANGS;
                                     </div>
                                 </li>
                             </ul>
-                            <div class="navbar-text text-center mt-3">
-                                <a href="/user/registration" class="btn text-light" id="user-registration-button">
-                                    <?= $langs["components"]["navbar"]["registrationBtn"][$lang] ?? 'Regisztráció' ?>
-                                </a>
-                            </div>
+                            <?php if (!isset($_SESSION["userId"])) : ?>
+                                <div class="navbar-text text-center mt-3 d-flex align-items-center justify-content-center">
+                                    <a href="/user/registration" class="btn text-light m-1" id="user-registration-button">
+                                        <?= $langs["components"]["navbar"]["registrationBtn"][$lang] ?? 'Regisztráció' ?>
+                                    </a>
+                                    <a href="/login" class="btn text-light m-1" id="user-login-button">
+                                        <?= $langs["components"]["navbar"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?>
+                                    </a>
+                                </div>
+                            <?php else : ?>
+                                <?php if ($_SERVER['REQUEST_URI'] !== '/user/dashboard') : ?>
+                                    <div class="text-center">
+                                        <a class="m-1" href="/user/dashboard">
+                                            <img src="/public/assets/icons/user.png" style="height: 40px; width: 40px;" />
+                                        </a>
+                                    </div>
+                                <?php endif ?>
+                                <div class="text-center">
+                                    <a href="/user/logout" class="m-1 btn btn-danger text-light" id="user-logout-button">
+                                        <?= $langs["components"]["navbar"]["logoutBtn"][$lang] ?? 'Önkéntes beszámolók' ?>
+                                    </a>
+                                </div>
+                            <?php endif ?>
                         </div>
                     </div>
                 </nav>

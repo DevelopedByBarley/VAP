@@ -1,5 +1,17 @@
 <?php
+define('PROFESSIONS', [
+  "student" => [
+    "en" => "Student",
+    "hu" => "Diák vagyok",
+    "sp" => ""
+  ],
+  "worker" => [
+    "en" => "I've job",
+    "hu" => "Dolgozok",
+    "sp" => ""
 
+  ]
+]);
 
 define('PROGRAMS', [
   "program_1" => [
@@ -61,32 +73,47 @@ define('TASK_AREAS', [
 
 define('INFORMED_BY',  [
   "1" => [
-    "en" => "From a Facebook ad",
     "hu" => "Facebook hirdetésből",
-    "sp" => ""
   ],
   "2" => [
-    "en" => "Recommended by my teacher/school",
     "hu" => "Tanárom/iskola ajánlotta",
-    "sp" => ""
   ],
   "3" => [
-    "en" => "Recommended by a friend/family",
     "hu" => "Ismerősöm/család ajánlotta",
-    "sp" => ""
   ],
   "4" => [
-    "en" => "I received an email because I was a volunteer in previous years as well",
     "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
-    "sp" => ""
   ],
   "5" => [
-    "en" => "Other",
     "hu" => "Egyéb",
-    "sp" => ""
   ],
 ]);
 
+define('PARTICIPATIONS', [
+  "1" => [
+    "en" => "Yes",
+    "hu" => "Igen",
+    "sp" => ""
+  ],
+  "2" => [
+    "en" => "No",
+    "hu" => "Nem",
+    "sp" => ""
+  ]
+]);
+
 define('LANGUAGE_KNOWLEDGE', [
+  "English" => [
+    1,2,3,4
+  ],
+  "Germany" => [
+    1,2,3,4
+  ],
+  "Italy" => [
+    1,2,3,4
+  ],
+  "Serbian" => [
+    1,2,3,4
+  ],
 
 ]);
