@@ -99,9 +99,9 @@ $langs = LANGS;
             <br>
 
             <?php foreach (PROFESSIONS as $index => $profession) : ?>
-              <input type="radio" class="btn-check" name="profession" id="profession_<?= $index ?>" value="<?= $profession['hu'] ?>" autocomplete="off" required <?php echo $profession['hu'] === $user["profession"] ? 'checked' :  '' ?>>
+              <input type="radio" class="btn-check" name="profession" id="profession_<?= $index ?>" value="<?= $profession['Hu'] ?>" autocomplete="off" required <?php echo $profession['Hu'] === $user["profession"] ? 'checked' :  '' ?>>
               <label class="btn btn-outline-primary" for="profession_<?= $index ?>">
-                <?= $langs["registration"]["form"]["professions"][$index][$lang] ?? 'Diák vagyok' ?>
+                <?= $langs["registration"]["form"]["professions"]["profession"][$index][$lang] ?? '' ?>
               </label>
             <?php endforeach ?>
           </div>
@@ -130,7 +130,7 @@ $langs = LANGS;
 
             <?php foreach (PROGRAMS as $index => $program) : ?>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="programs" id="program-<?= $index ?>" value="<?= $index ?>" required <?php echo $program['hu'] === $user["programs"] ? 'checked' :  '' ?>>
+                <input class="form-check-input" type="radio" name="programs" id="program-<?= $index ?>" value="<?= $index ?>" required <?php echo $program['Hu'] === $user["programs"] ? 'checked' :  '' ?>>
                 <label class="form-check-label" for="program-<?= $index ?>">
                   <?= $langs["registration"]["form"]["programs"][$index][$lang] ?? 'Név' ?>
                 </label>
@@ -233,7 +233,7 @@ $langs = LANGS;
 
             <?php foreach (TASK_AREAS as $index => $task) : ?>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="tasks" id="task-1" value="<?= $index ?>" required <?php echo $task["hu"] === $user["tasks"] ? 'checked' :  '' ?>>
+                <input class="form-check-input" type="radio" name="tasks" id="task-1" value="<?= $index ?>" required <?php echo $task["Hu"] === $user["tasks"] ? 'checked' :  '' ?>>
                 <label class=" form-check-label" for="task-1">
                   <td><?= $langs["registration"]["form"]["task_area"]["areas"][$index][$lang] ?? 'asd' ?>
                 </label>
@@ -256,7 +256,7 @@ $langs = LANGS;
             <?php foreach (INFORMED_BY as $index => $inform) : ?>
 
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="informed_by" id="1" value="<?= $index ?>" required <?php echo $inform["hu"] === $user["informedBy"] ? 'checked' :  '' ?>>
+                <input class="form-check-input" type="radio" name="informed_by" id="1" value="<?= $index ?>" required <?php echo $inform["Hu"] === $user["informedBy"] ? 'checked' :  '' ?>>
                 <label class="form-check-label" for="program-1">
                   <?= $langs["registration"]["form"]["informedBy"]["inform"][$index][$lang] ?? 'Név' ?>
                 </label>

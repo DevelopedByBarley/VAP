@@ -14,7 +14,6 @@ class FileSaver
 
   public function saver($files, $path, $prevImages)
   {
-
     $this->unlinkPrevImages($prevImages, $path);
 
     if (empty($files["name"])) return false;;

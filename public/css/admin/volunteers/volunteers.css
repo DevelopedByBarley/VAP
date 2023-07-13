@@ -1,0 +1,32 @@
+#admin-volunteers {
+  width: 100%;
+  margin-top: 75px;
+}
+
+#admin-volunteers #volunteer-list {
+  width: 100%;
+}
+#volunteers-list {
+ width: 100%;
+}
+
+@media(min-width: 768px) {
+  #admin-volunteers #volunteer-list {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  #volunteers-list {
+    width: 60%;
+   }
+}
+@media(min-width: 1200px) {
+  #admin-volunteers #volunteer-list {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  #volunteers-list {
+    width: 30%;
+   }
+}

@@ -60,16 +60,16 @@ $langs = LANGS;
 
     <div class="col-xs-12 mt-3">
       <div class="form-outline mb-4 text-center">
-        <label class="form-label mb-3 required"><b><?= $langs["registration"]["form"]["professions"]["title"][$lang] ?? 'Mivel foglalkozol?' ?></b></label>
+        <label class="form-label mb-3 required"><b><?= $langs["registration"]["form"]["professions"]["profession"]["title"][$lang] ?? 'Mivel foglalkozol?' ?></b></label>
         <br>
-        <input type="radio" class="btn-check" name="profession" id="profession_1" value="<?= $langs["registration"]["form"]["professions"]["student"]['hu'] ?>" autocomplete="off" required>
+        <input type="radio" class="btn-check" name="profession" id="profession_1" value="<?= $langs["registration"]["form"]["professions"]["profession"]["student"]['Hu'] ?>" autocomplete="off" required>
         <label class="btn btn-outline-primary" for="profession_1">
-          <?= $langs["registration"]["form"]["professions"]["student"][$lang] ?? 'Diák vagyok' ?>
+          <?= $langs["registration"]["form"]["professions"]["profession"]["student"][$lang] ?? 'Diák vagyok' ?>
         </label>
 
-        <input type="radio" class="btn-check" name="profession" id="profession_2" value="<?= $langs["registration"]["form"]["professions"]["student"]['hu'] ?>" autocomplete="off">
+        <input type="radio" class="btn-check" name="profession" id="profession_2" value="<?= $langs["registration"]["form"]["professions"]["profession"]["student"]['Hu'] ?>" autocomplete="off">
         <label class="btn btn-outline-primary" for="profession_2">
-          <?= $langs["registration"]["form"]["professions"]["worker"][$lang] ?? 'Dolgozok' ?>
+          <?= $langs["registration"]["form"]["professions"]["profession"]["worker"][$lang] ?? 'Dolgozok' ?>
         </label>
       </div>
     </div>

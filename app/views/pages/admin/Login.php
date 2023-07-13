@@ -1,4 +1,4 @@
-<form class="border p-5" id="admin-login-form" action="/administrator/login" method="POST">
+<form class="border p-5" id="admin-login-form" action="/admin/login" method="POST">
   <div class="mb-3">
     <label class="form-label">Név</label>
     <input type="text" class="form-control" name="name" placeholder="Név" required>

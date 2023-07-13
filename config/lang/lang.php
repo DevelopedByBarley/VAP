@@ -3,44 +3,44 @@ define("LANGS", [
   "components" => [
     "navbar" => [
       "aboutMe" => [
-        "en" => "About us",
-        "hu" => "Rólunk",
-        "sp" => ''
+        "En" => "About us",
+        "Hu" => "Rólunk",
+        "Sp" => ''
       ],
       "VoluntaryReports" => [
-        "en" => "Voluntary reports",
-        "hu" => "Önkéntes beszámolók",
-        "sp" => ""
+        "En" => "Voluntary reports",
+        "Hu" => "Önkéntes beszámolók",
+        "Sp" => ""
       ],
       "edu" => [
-        "en" => "Edu",
-        "hu" => "Edu",
-        "sp" => ""
+        "En" => "Edu",
+        "Hu" => "Edu",
+        "Sp" => ""
       ],
       "partners" => [
-        "en" => "Partner sites",
-        "hu" => "Partner oldalak",
-        "sp" => ""
+        "En" => "Partner sites",
+        "Hu" => "Partner oldalak",
+        "Sp" => ""
       ],
       "contact" => [
-        "en" => "Contact",
-        "hu" => "Kapcsolat",
-        "sp" => ""
+        "En" => "Contact",
+        "Hu" => "Kapcsolat",
+        "Sp" => ""
       ],
       "registrationBtn" => [
-        "en" => "Registration",
-        "hu" => "Regisztráció",
-        "sp" => ""
+        "En" => "Registration",
+        "Hu" => "Regisztráció",
+        "Sp" => ""
       ],
       "loginBtn" => [
-        "en" => "Login",
-        "hu" => "Bejelentkezés",
-        "sp" => ""
+        "En" => "Login",
+        "Hu" => "Bejelentkezés",
+        "Sp" => ""
       ],
       "logoutBtn" => [
-        "en" => "Logout",
-        "hu" => "Kijelentkezés",
-        "sp" => ""
+        "En" => "Logout",
+        "Hu" => "Kijelentkezés",
+        "Sp" => ""
       ],
     ]
   ],
@@ -48,12 +48,12 @@ define("LANGS", [
   "content" => [
     "aboutUs" => [
       "title" => [
-        "en" => "About us",
-        "hu" => "Rólunk",
-        "sp" => ""
+        "En" => "About us",
+        "Hu" => "Rólunk",
+        "Sp" => ""
       ],
       "description" => [
-        "en" => "Our goal is to create an online platform in the cultural sphere,
+        "En" => "Our goal is to create an online platform in the cultural sphere,
       within the field of fine arts, through which opportunity
       we provide for young people who are studying art
       (primarily in higher education) or are interested in fine arts
@@ -70,7 +70,7 @@ define("LANGS", [
       for their students, offering cooperation in the art
       with organizations and art festivals for which
       looking for volunteers or interns.",
-        "hu" => "Célunk egy olyan online platform létrehozása a kulturális szférában,
+        "Hu" => "Célunk egy olyan online platform létrehozása a kulturális szférában,
       azon belül képzőművészeti területen, amelyen keresztül lehetőséget
       biztosítunk a fiataloknak, akik művészeti tanulmányokat folytatnak
       (elsősorban a felsőoktatásban) vagy érdeklődnek a képzőművészet
@@ -87,150 +87,159 @@ define("LANGS", [
       hallgatóik részére, együttműködést ajánlva a művészeti
       szervezetekkel és művészeti fesztiválokkal, amelyeknek
       önkénteseket vagy gyakornokokat keresnek.",
-        "sp" => ""
+        "Sp" => ""
+      ]
+    ],
+    "volunteers" => [
+      "title" => [
+        "En" => "We had volunteers",
+        "Hu" => "Önkénteseink voltak",
+        "Sp" => ""
       ]
     ]
   ],
 
   "registration" =>  [
     "title" => [
-      "en" => "Voluntary registration",
-      "hu" => "Önkéntes regisztráció",
-      "sp" => ""
+      "En" => "Voluntary registration",
+      "Hu" => "Önkéntes regisztráció",
+      "Sp" => ""
     ],
 
     "form" => [
       "name" => [
-        "en" => "Name",
-        "hu" => "Név",
-        "sp" => ""
+        "En" => "Name",
+        "Hu" => "Név",
+        "Sp" => ""
       ],
 
       "email" => [
-        "en" => "E-mail address",
-        "hu" => "E-mail cim",
-        "sp" => ""
+        "En" => "E-mail address",
+        "Hu" => "E-mail cim",
+        "Sp" => ""
       ],
 
       "password" => [
-        "en" => "Password",
-        "hu" => "Jelszó",
-        "sp" => ""
+        "En" => "Password",
+        "Hu" => "Jelszó",
+        "Sp" => ""
       ],
 
       "address" => [
-        "en" => "Address",
-        "hu" => "Lakhely",
-        "sp" => ""
+        "En" => "Address",
+        "Hu" => "Lakhely",
+        "Sp" => ""
       ],
 
       "mobile" => [
-        "en" => "Mobile number",
-        "hu" => "Mobil szám",
-        "sp" => ""
+        "En" => "Mobile number",
+        "Hu" => "Mobil szám",
+        "Sp" => ""
       ],
 
       "professions" => [
         "title" => [
-          "en" => "What is your profession?",
-          "hu" => "Mivel foglalkozol?",
-          "sp" => ""
+          "En" => "What is your profession?",
+          "Hu" => "Mivel foglalkozol?",
+          "Sp" => ""
         ],
-        "student" => [
-          "en" => "I'm a student",
-          "hu" => "Diák vagyok",
-          "sp" => ""
+        "profession" => [
+          "student" => [
+            "En" => "I'm a student",
+            "Hu" => "Diák vagyok",
+            "Sp" => ""
+          ],
+          "worker" => [
+            "En" => "I've job",
+            "Hu" => "Dolgozok",
+            "sp" => ""
+          ]
         ],
-        "worker" => [
-          "en" => "I've job",
-          "hu" => "Dolgozok",
-          "sp" => ""
-        ]
       ],
 
       "edu_institution" => [
-        "en" => "If you are still a student, please write the name of the educational institution here.",
-        "hu" => "Ha diák vagy még, kérjük írd ide az oktatási intézmény nevét.",
-        "sp" => ""
+        "En" => "If you are still a student, please write the name of the educational institution here.",
+        "Hu" => "Ha diák vagy még, kérjük írd ide az oktatási intézmény nevét.",
+        "Sp" => ""
       ],
 
       "programs" => [
         "title" => [
-          "en" => "Which program are you interested in?",
-          "hu" => "Melyik program érdekel?",
-          "sp" => ""
+          "En" => "Which program are you interested in?",
+          "Hu" => "Melyik program érdekel?",
+          "Sp" => ""
         ],
         "program_1" => [
-          "en" => "Intern (minimum 1 month of office preparation work before and during the fair)",
-          "hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
-          "sp" => ""
+          "En" => "Intern (minimum 1 month of office preparation work before and during the fair)",
+          "Hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
+          "Sp" => ""
         ],
         "program_2" => [
-          "en" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
-          "hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
-          "sp" => ""
+          "En" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
+          "Hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
+          "Sp" => ""
         ],
         "program_3" => [
-          "en" => "Both",
-          "hu" => "Mindkettő",
-          "sp" => ""
+          "En" => "Both",
+          "Hu" => "Mindkettő",
+          "Sp" => ""
         ],
       ],
 
       "language_knowledge" => [
         "title" =>  [
-          "en" => "Language knowledge",
-          "hu" => "Idegennyelv ismeret",
-          "sp" => ""
+          "En" => "Language knowledge",
+          "Hu" => "Idegennyelv ismeret",
+          "Sp" => ""
         ],
 
 
         "language" => [
-          "en" => "Language",
-          "hu" => "Nyelv",
-          "sp" => ""
+          "En" => "Language",
+          "Hu" => "Nyelv",
+          "Sp" => ""
         ],
         "basic" => [
-          "en" => "Basic",
-          "hu" => "Alap",
-          "sp" => ""
+          "En" => "Basic",
+          "Hu" => "Alap",
+          "Sp" => ""
         ],
         "advanced" => [
-          "en" => "Advanced",
-          "hu" => "Haladó",
-          "sp" => ""
+          "En" => "Advanced",
+          "Hu" => "Haladó",
+          "Sp" => ""
         ],
         "higher" => [
-          "en" => "Higher",
-          "hu" => "Felsőfok",
-          "sp" => ""
+          "En" => "Higher",
+          "Hu" => "Felsőfok",
+          "Sp" => ""
         ],
         "dont_speek" => [
-          "en" => "I don't speek",
-          "hu" => "Nem beszélem",
-          "sp" => ""
+          "En" => "I don't speek",
+          "Hu" => "Nem beszélem",
+          "Sp" => ""
         ],
 
         "languages" => [
           "English" => [
-            "en" => "English",
-            "hu" => "Angol",
-            "sp" => ""
+            "En" => "English",
+            "Hu" => "Angol",
+            "Sp" => ""
           ],
           "Germany" => [
-            "en" => "Germany",
-            "hu" => "Német",
-            "sp" => ""
+            "En" => "Germany",
+            "Hu" => "Német",
+            "Sp" => ""
           ],
           "Italy" => [
-            "en" => "Italy",
-            "hu" => "Olasz",
-            "sp" => ""
+            "En" => "Italy",
+            "Hu" => "Olasz",
+            "Sp" => ""
           ],
           "Serbian" => [
-            "en" => "Serbian",
-            "hu" => "Szerb",
-            "sp" => ""
+            "En" => "Serbian",
+            "Hu" => "Szerb",
+            "Sp" => ""
           ],
         ],
 
@@ -241,24 +250,25 @@ define("LANGS", [
 
 
       "other_languages" => [
-        "en" => "Other languanges",
-        "hu" => "További nyelvismeret",
-        "sp" => ""
+        "En" => "Other languanges",
+        "Hu" => "További nyelvismeret",
+        "Sp" => ""
       ],
 
       "participation" =>  [
         "title" => [
-          "en" => "Have you previously participated in the AMB or other fine arts festivals (MÉF, GWB) as a volunteer?",
-          "hu" => "Részt vettél korábban az AMB vagy további képzőművészeti fesztiválon (MÉF, GWB), mint önkéntes?"
+          "En" => "Have you previously participated in the AMB or other fine arts festivals (MÉF, GWB) as a volunteer?",
+          "Hu" => "Részt vettél korábban az AMB vagy további képzőművészeti fesztiválon (MÉF, GWB), mint önkéntes?",
+          "Sp" => ""
         ],
         "1" => [
-          "en" => "Yes",
-          "hu" => "Igen",
+          "En" => "Yes",
+          "Hu" => "Igen",
           "sp" => ""
         ],
         "2" => [
-          "en" => "No",
-          "hu" => "Nem",
+          "En" => "No",
+          "Hu" => "Nem",
           "sp" => ""
         ]
       ],
@@ -267,45 +277,45 @@ define("LANGS", [
 
       "task_area" => [
         "title" => [
-          "en" => "
+          "En" => "
           Which task areas are you interested in and willing to complete at the fair?",
-          "hu" => "Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron?",
+          "Hu" => "Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron?",
           "sp" => ""
         ],
         "areas" => [
           "1" => [
-            "en" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
-            "hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+            "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
+            "Hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
             "sp" => ""
           ],
           "2" => [
-            "en" => "Administration, event organizer assistant",
-            "hu" => "Ügyintézés, rendezvényszervező asszisztens",
+            "En" => "Administration, event organizer assistant",
+            "Hu" => "Ügyintézés, rendezvényszervező asszisztens",
             "sp" => ""
           ],
           "3" => [
-            "en" => "Registration (Galleries and VIP guests)",
-            "hu" => "Regisztráció (Galériák és VIP vendégek)",
+            "En" => "Registration (Galleries and VIP guests)",
+            "Hu" => "Regisztráció (Galériák és VIP vendégek)",
             "sp" => ""
           ],
           "4" => [
-            "en" => "Worker at the information desk",
-            "hu" => "Információs pultban munkatárs",
+            "En" => "Worker at the information desk",
+            "Hu" => "Információs pultban munkatárs",
             "sp" => ""
           ],
           "5" => [
-            "en" => "Architect, logistics, warehouse supervision",
-            "hu" => "Építész, logisztika, raktár felügyelet",
+            "En" => "Architect, logistics, warehouse supervision",
+            "Hu" => "Építész, logisztika, raktár felügyelet",
             "sp" => ""
           ],
           "6" => [
-            "en" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
-            "hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+            "En" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
+            "Hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
             "sp" => ""
           ],
           "7" => [
-            "en" => "I am interested in every task",
-            "hu" => "Mindegyik feladat érdekel",
+            "En" => "I am interested in every task",
+            "Hu" => "Mindegyik feladat érdekel",
             "sp" => ""
           ],
         ]
@@ -316,50 +326,50 @@ define("LANGS", [
 
       "informedBy" => [
         "title" => [
-          "en" => "How did you hear about the program?",
-          "hu" => "Honnan hallottál a programról?",
+          "En" => "How did you hear about the program?",
+          "Hu" => "Honnan hallottál a programról?",
           "sp" => ""
         ],
         "inform" => [
           "1" => [
-            "en" => "From a Facebook ad",
-            "hu" => "Facebook hirdetésből",
+            "En" => "From a Facebook ad",
+            "Hu" => "Facebook hirdetésből",
             "sp" => ""
           ],
           "2" => [
-            "en" => "Recommended by my teacher/school",
-            "hu" => "Tanárom/iskola ajánlotta",
+            "En" => "Recommended by my teacher/school",
+            "Hu" => "Tanárom/iskola ajánlotta",
             "sp" => ""
           ],
           "3" => [
-            "en" => "Recommended by a friend/family",
-            "hu" => "Ismerősöm/család ajánlotta",
+            "En" => "Recommended by a friend/family",
+            "Hu" => "Ismerősöm/család ajánlotta",
             "sp" => ""
           ],
           "4" => [
-            "en" => "I received an email because I was a volunteer in previous years as well",
-            "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
+            "En" => "I received an email because I was a volunteer in previous years as well",
+            "Hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
             "sp" => ""
           ],
           "5" => [
-            "en" => "Other",
-            "hu" => "Egyéb",
+            "En" => "Other",
+            "Hu" => "Egyéb",
             "sp" => ""
           ],
         ]
       ],
 
       "email_permission" => [
-        "en" => "Can we be included in the AMB volunteer database for the following years,
+        "En" => "Can we be included in the AMB volunteer database for the following years,
         to be the first to hear about Art Market news?",
-        "hu" => "Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban,
+        "Hu" => "Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban,
         hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?",
         "sp" => ""
       ],
 
       "registrationBtn" => [
-        "en" => "Registration",
-        "hu" => "Regisztráció",
+        "En" => "Registration",
+        "Hu" => "Regisztráció",
         "sp" => ""
       ],
 
@@ -371,24 +381,24 @@ define("LANGS", [
 
   "loginForm" => [
     "title" => [
-      "en" => "Login",
-      "hu" => "Bejelentkezés",
+      "En" => "Login",
+      "Hu" => "Bejelentkezés",
       "sp" => ""
     ],
 
     "email" => [
-      "en" => "Email address",
-      "hu" => "Email cim",
+      "En" => "Email address",
+      "Hu" => "Email cim",
       "sp" => ""
     ],
     "password" => [
-      "en" => "Password",
-      "hu" => "Jelszó",
+      "En" => "Password",
+      "Hu" => "Jelszó",
       "sp" => ""
     ],
     "loginBtn" => [
-      "en" => "Login",
-      "hu" => "Bejelentkezés",
+      "En" => "Login",
+      "Hu" => "Bejelentkezés",
       "sp" => ""
     ]
   ],
@@ -398,51 +408,54 @@ define("LANGS", [
   "profile" => [
     "header" => [
       "createdAt" => [
-        "en" => "Profile created",
-        "hu" => "Profil létrehozva",
+        "En" => "Profile created",
+        "Hu" => "Profil létrehozva",
         "sp" => ""
       ],
       "logoutBtn" => [
-        "en" => "Logout",
-        "hu" => "Kijelentkezés",
+        "En" => "Logout",
+        "Hu" => "Kijelentkezés",
         "sp" => ""
       ],
     ],
     "subscriptions" => [
       "title" => [
-        "en" => "Subscriptions",
-        "hu" => "Feliratkozások",
+        "En" => "Subscriptions",
+        "Hu" => "Feliratkozások",
         "sp" => ""
       ],
       "no_subscriptions" => [
-        "en" => "You haven't signed up for any of our events so far!",
-        "hu" => "Idáig nem iratkozott fel egyetlen eseményünkre sem!",
+        "En" => "You haven't signed up for any of our events so far!",
+        "Hu" => "Idáig nem iratkozott fel egyetlen eseményünkre sem!",
         "sp" => ""
       ],
       "check_subscription_btn" => [
-        "en" => "Check our events",
-        "hu" => "Események megtekintése",
+        "En" => "Check our events",
+        "Hu" => "Események megtekintése",
         "sp" => ""
       ]
 
     ],
     "profile_settings" => [
       "title" => [
-        "en" => "Profile settings",
-        "hu" => "Profil beállitások",
+        "En" => "Profile settings",
+        "Hu" => "Profil beállitások",
         "sp" => ""
       ],
       "change_password_btn" => [
-        "en" => "Change password",
-        "hu" => "Jelszó megváltoztatása",
+        "En" => "Change password",
+        "Hu" => "Jelszó megváltoztatása",
         "sp" => ""
       ],
       "update_profile_button" => [
-        "en" => "Update profile",
-        "hu" => "Profil frissitése",
+        "En" => "Update profile",
+        "Hu" => "Profil frissitése",
         "sp" => ""
       ],
     ]
   ]
+
+
+
 
 ]);

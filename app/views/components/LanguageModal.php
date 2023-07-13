@@ -4,15 +4,15 @@
       <h1>Nyelv kiválasztása</h1>
     </div>
     <div>
-      <input type="radio" class="btn-check" name="language" id="en" value="hu" autocomplete="off" checked>
+      <input type="radio" class="btn-check" name="language" id="en" value="Hu" autocomplete="off" checked>
       <label class="btn btn-outline-success m-2" for="en">
         <img src="/public/assets/icons/hu.png" style="height: 50px; width: 50px;" />
       </label>
-      <input type="radio" class="btn-check" name="language" id="hu" value="en" autocomplete="off">
+      <input type="radio" class="btn-check" name="language" id="hu" value="En" autocomplete="off">
       <label class="btn btn-outline-danger m-2" for="hu">
         <img src="/public/assets/icons/en.png" style="height: 50px; width: 50px;" />
       </label>
-      <input type="radio" class="btn-check" name="language" id="sp" value="sp" disabled autocomplete="off">
+      <input type="radio" class="btn-check" name="language" id="sp" value="Sp" disabled autocomplete="off">
       <label class="btn btn-outline-warning m-2" for="sp">
         <img src="/public/assets/icons/sp.png" style="height: 50px; width: 50px;" />
       </label>

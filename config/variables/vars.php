@@ -1,71 +1,71 @@
 <?php
 define('PROFESSIONS', [
   "student" => [
-    "en" => "Student",
-    "hu" => "Diák vagyok",
-    "sp" => ""
+    "En" => "Student",
+    "Hu" => "Diák vagyok",
+    "Sp" => ""
   ],
   "worker" => [
-    "en" => "I've job",
-    "hu" => "Dolgozok",
-    "sp" => ""
+    "En" => "I've job",
+    "Hu" => "Dolgozok",
+    "Sp" => ""
 
   ]
 ]);
 
 define('PROGRAMS', [
   "program_1" => [
-    "en" => "Intern (minimum 1 month of office preparation work before and during the fair)",
-    "hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
-    "sp" => ""
+    "En" => "Intern (minimum 1 month of office preparation work before and during the fair)",
+    "Hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
+    "Sp" => ""
   ],
   "program_2" => [
-    "en" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
-    "hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
-    "sp" => ""
+    "En" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
+    "Hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
+    "Sp" => ""
   ],
   "program_3" => [
-    "en" => "Both",
-    "hu" => "Mindkettő",
-    "sp" => ""
+    "En" => "Both",
+    "Hu" => "Mindkettő",
+    "Sp" => ""
   ],
 ]);
 
 define('TASK_AREAS', [
   "1" => [
-    "en" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
-    "hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
-    "sp" => ""
+    "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
+    "Hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+    "Sp" => ""
   ],
   "2" => [
-    "en" => "Administration, event organizer assistant",
-    "hu" => "Ügyintézés, rendezvényszervező asszisztens",
-    "sp" => ""
+    "En" => "Administration, event organizer assistant",
+    "Hu" => "Ügyintézés, rendezvényszervező asszisztens",
+    "Sp" => ""
   ],
   "3" => [
-    "en" => "Registration (Galleries and VIP guests)",
-    "hu" => "Regisztráció (Galériák és VIP vendégek)",
-    "sp" => ""
+    "En" => "Registration (Galleries and VIP guests)",
+    "Hu" => "Regisztráció (Galériák és VIP vendégek)",
+    "Sp" => ""
   ],
   "4" => [
-    "en" => "Worker at the information desk",
-    "hu" => "Információs pultban munkatárs",
-    "sp" => ""
+    "En" => "Worker at the information desk",
+    "Hu" => "Információs pultban munkatárs",
+    "Sp" => ""
   ],
   "5" => [
-    "en" => "Architect, logistics, warehouse supervision",
-    "hu" => "Építész, logisztika, raktár felügyelet",
-    "sp" => ""
+    "En" => "Architect, logistics, warehouse supervision",
+    "Hu" => "Építész, logisztika, raktár felügyelet",
+    "Sp" => ""
   ],
   "6" => [
-    "en" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
-    "hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
-    "sp" => ""
+    "En" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
+    "Hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+    "Sp" => ""
   ],
   "7" => [
-    "en" => "I am interested in every task",
-    "hu" => "Mindegyik feladat érdekel",
-    "sp" => ""
+    "En" => "I am interested in every task",
+    "Hu" => "Mindegyik feladat érdekel",
+    "Sp" => ""
   ],
 
 ]);
@@ -73,32 +73,32 @@ define('TASK_AREAS', [
 
 define('INFORMED_BY',  [
   "1" => [
-    "hu" => "Facebook hirdetésből",
+    "Hu" => "Facebook hirdetésből",
   ],
   "2" => [
-    "hu" => "Tanárom/iskola ajánlotta",
+    "Hu" => "Tanárom/iskola ajánlotta",
   ],
   "3" => [
-    "hu" => "Ismerősöm/család ajánlotta",
+    "Hu" => "Ismerősöm/család ajánlotta",
   ],
   "4" => [
-    "hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
+    "Hu" => "Emailt kaptam, mert előző években is voltam önkéntes",
   ],
   "5" => [
-    "hu" => "Egyéb",
+    "Hu" => "Egyéb",
   ],
 ]);
 
 define('PARTICIPATIONS', [
   "1" => [
-    "en" => "Yes",
-    "hu" => "Igen",
-    "sp" => ""
+    "En" => "Yes",
+    "Hu" => "Igen",
+    "Sp" => ""
   ],
   "2" => [
-    "en" => "No",
-    "hu" => "Nem",
-    "sp" => ""
+    "En" => "No",
+    "Hu" => "Nem",
+    "Sp" => ""
   ]
 ]);
 

@@ -1,11 +1,11 @@
 <?php
 require 'app/controllers/Admin_Controller.php';
-$r->addRoute('GET', '/administrator', [AdminController::class, 'adminLoginPage']);
-$r->addRoute('GET', '/administrator/logout', [AdminController::class, 'logoutAdmin']);
-$r->addRoute('GET', '/administrator/dashboard', [AdminController::class, 'adminDashboard']);
+$r->addRoute('GET', '/admin', [AdminController::class, 'adminLoginPage']);
+$r->addRoute('GET', '/admin/logout', [AdminController::class, 'logoutAdmin']);
+$r->addRoute('GET', '/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
 
 
+$r->addRoute('POST', '/admin/login', [AdminController::class, 'loginAdmin']);
+$r->addRoute('POST', '/admin/register', [AdminController::class, 'registerAdmin']);
 
-$r->addRoute('POST', '/administrator/login', [AdminController::class, 'loginAdmin']);
-$r->addRoute('POST', '/administrator/register', [AdminController::class, 'registerAdmin']);

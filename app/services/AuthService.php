@@ -38,18 +38,20 @@ class AuthService
 
 
         if (!$admin || count($admin) === 0) {
-            header("Location: /administrator");
+            header("Location: /admin");
         }
 
         $isVerified = password_verify($pw, $admin["password"]);
 
-        if (!$isVerified) {
-            header("Location: /administrator");
+
+        if(!$isVerified) {
+            header("Location: /admin");
+            exit;
         }
 
         $_SESSION["adminId"] = $admin["adminId"];
 
-        header("Location: /administrator/dashboard");
+        header("Location: /admin/dashboard");
     }
 
     public function logoutAdmin()
@@ -61,7 +63,7 @@ class AuthService
         setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
 
 
-        header("Location: /administrator");
+        header("Location: /admin");
     }
 
 
@@ -94,15 +96,15 @@ class AuthService
         $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $programs = filter_var(PROGRAMS[$body["programs"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $programs = filter_var(PROGRAMS[$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $english = filter_var($body["english"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $germany = filter_var($body["germany"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $italy = filter_var($body["italy"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $task = filter_var(TASK_AREAS[$body["tasks"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $task = filter_var(TASK_AREAS[$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+        $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on' ) ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
         $createdAt = time();
 

@@ -1,12 +1,13 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
+
 ?>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <?php if ($_SERVER['REQUEST_URI'] !== '/administrator/dashboard') : ?>
+            <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#"><img src="/public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
@@ -17,7 +18,7 @@ $langs = LANGS;
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex align-items-center justify-content-center">
                                 <li class="nav-item m-1 mt-3">
 
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-me' : '#about-me' ?>">
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-us' : '#about-us' ?>">
                                         <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
                                     </a>
                                 </li>
@@ -50,9 +51,9 @@ $langs = LANGS;
                                     <div class="dropdown">
                                         <button class="btn dropdown-toggle navigation-link" type="button" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                            <?php if ($_COOKIE["lang"] === "hu") : ?>
+                                            <?php if (isset($_COOKIE["lang"]) && $_COOKIE["lang"] === "Hu") : ?>
                                                 <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
-                                            <?php elseif ($_COOKIE["lang"] === "en") : ?>
+                                            <?php elseif (isset($_COOKIE["lang"]) &&$_COOKIE["lang"] === "En") : ?>
                                                 <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
                                             <?php else : ?>
                                                 <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
@@ -61,12 +62,12 @@ $langs = LANGS;
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="language-dropdown">
                                             <li>
-                                                <a class="dropdown-item text-center" href="/language/hu">
+                                                <a class="dropdown-item text-center" href="/language/Hu">
                                                     <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item text-center" href="/language/en">
+                                                <a class="dropdown-item text-center" href="/language/En">
                                                     <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
                                                 </a>
                                             </li>
@@ -110,24 +111,34 @@ $langs = LANGS;
             <?php else : ?>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                     <div class="container-fluid">
-                        <div class="navbar-brand"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Menu</button></div>
+                        <div class="navbar-brand"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><i style="font-size: 1.2rem;" class="bi bi-list"></i></button></div>
                         <span class="navbar-text">
-                            <a href="/administrator/logout" class="btn btn-danger text-light">Kijelentkezés</a>
+                            <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
                         </span>
                     </div>
                 </nav>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Menu</h5>
+                        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"><?= $params["admin"]["name"] ?></h5>
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <ul class="list-group">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                            <li class="list-group-item">Partnerek</li>
-                            <li class="list-group-item">And a fifth one</li>
+                            <a href="#" class="nav-link">
+                                <li class="list-group-item bg-danger text-light">Regisztrációk</li>
+                            </a>
+                            <a href="/admin/volunteers" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Önkéntesek</li>
+                            </a>
+                            <a href="/admin/partners" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Partnerek</li>
+                            </a>
+                            <a href="#" class="nav-link">
+                                <li class="list-group-item bg-danger text-light">EDU</li>
+                            </a>
+                            <a href="#" class="nav-link">
+                                <li class="list-group-item bg-danger text-light">Blog</li>
+                            </a>
                         </ul>
                     </div>
                 </div>
