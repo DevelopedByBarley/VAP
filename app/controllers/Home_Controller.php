@@ -17,10 +17,11 @@ class HomeController
         session_start();
         $user = $this->userModel->getMe();
         $volunteers = $this->volunteerModel->getVolunteers();
-
+        $descriptionInLang = "descriptionIn" . $_COOKIE["lang"];
         echo $renderer->render("Layout.php", [
             "content" => $renderer->render("/pages/Content.php", [
-                "volunteers" => $volunteers ?? null
+                "volunteers" => $volunteers ?? null,
+                "descriptionInLang" => $descriptionInLang ?? null
             ]),
             "user" => $user ?? null,
         ]);

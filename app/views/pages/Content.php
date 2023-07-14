@@ -6,7 +6,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
 $volunteers = $params["volunteers"];
-$volunteerDescription = "descriptionIn" . $_COOKIE["lang"];
+$descriptionInLang = $params["descriptionInLang"];
 
 ?>
 
@@ -64,10 +64,10 @@ $volunteerDescription = "descriptionIn" . $_COOKIE["lang"];
                 <h1 class="text-center display-4 text-light mt-5 mb-5"><?= $langs["content"]["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
                 <?php foreach ($volunteers as $volunteer) : ?>
                     <div class="col-xs-12 col-sm-5 col-lg-4 d-flex align-items-center justify-content-center">
-                        <div class="card text-light volunteer-card bg-dark" style="width: 100%;">
+                        <div class="card text-light volunteer-card bg-dark" style="width: 21rem;">
                             <img src="/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>" class="card-img-top volunteer-profile-image" alt="...">
                             <div class="card-body volunteer-card-body">
-                                <p class="card-text"><?= $volunteer[$volunteerDescription]  ?></p>
+                                <p class="card-text"><?= $volunteer[$descriptionInLang]  ?></p>
                                 <i><?= $volunteer["name"] ?></i>
                             </div>
                         </div>

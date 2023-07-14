@@ -53,7 +53,7 @@ $langs = LANGS;
 
                                             <?php if (isset($_COOKIE["lang"]) && $_COOKIE["lang"] === "Hu") : ?>
                                                 <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
-                                            <?php elseif (isset($_COOKIE["lang"]) &&$_COOKIE["lang"] === "En") : ?>
+                                            <?php elseif (isset($_COOKIE["lang"]) && $_COOKIE["lang"] === "En") : ?>
                                                 <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
                                             <?php else : ?>
                                                 <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
@@ -134,10 +134,13 @@ $langs = LANGS;
                                 <li class="list-group-item bg-primary text-light">Partnerek</li>
                             </a>
                             <a href="#" class="nav-link">
-                                <li class="list-group-item bg-danger text-light">EDU</li>
+                                <li class="list-group-item bg-danger text-light">Blog</li>
+                            </a>
+                            <a href="/admin/questions" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Gyakori kérdések</li>
                             </a>
                             <a href="#" class="nav-link">
-                                <li class="list-group-item bg-danger text-light">Blog</li>
+                                <li class="list-group-item bg-danger text-light">EDU</li>
                             </a>
                         </ul>
                     </div>

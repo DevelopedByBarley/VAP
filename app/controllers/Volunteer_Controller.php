@@ -32,11 +32,13 @@ class VolunteerController extends AdminController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");
     $volunteers = $this->volunteerModel->getVolunteers();
+
     $admin = $this->adminModel->admin();
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/volunteers/Volunteers.php", [
-        "volunteers" => $volunteers ?? null
+        "volunteers" => $volunteers ?? null,
+        "descriptionInLang" => $descriptionInLang ?? null
       ]),
       "admin" => $admin
     ]);

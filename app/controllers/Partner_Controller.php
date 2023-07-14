@@ -16,6 +16,8 @@ class PartnerController extends AdminController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $partnersData = $this->partnerModel->getPartners();
+
+
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/partners/Partners.php", [
         "admin" => $admin ?? null,
