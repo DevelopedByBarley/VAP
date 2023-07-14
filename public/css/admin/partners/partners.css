@@ -1,0 +1,17 @@
+#admin-partners {
+  width: 95%;
+  margin: 0 auto;
+}
+
+@media(min-width: 768px) {
+  #admin-partners {
+    width: 65%;
+    margin: 0 auto;
+  }
+}
+@media(min-width: 1200px) {
+  #admin-partners {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
