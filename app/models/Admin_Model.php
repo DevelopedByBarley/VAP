@@ -13,6 +13,26 @@ class AdminModel
     $this->fileSaver = new FileSaver();
   }
 
+  public function index() {
+    $offset = $_GET["offset"] ?? 1;
+    $limit = 7; // Az oldalanként megjelenített rekordok száma
+    $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
+    $stmt->execute();
+    $countOfRecords = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
+    $numOfPage = ceil($countOfRecords / $limit); // A lapozó lapok számának kiszámítása
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` LIMIT $limit OFFSET $calculated");
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return [
+      "users" => $users,
+      "numOfPage" => $numOfPage,
+      "limit" => $limit
+    ];
+  }
+
   public function admin()
   {
     $adminId = $_SESSION["adminId"] ?? null;
@@ -23,5 +43,7 @@ class AdminModel
 
     return $admin;
   }
+
+
 
 }

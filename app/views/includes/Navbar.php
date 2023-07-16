@@ -124,8 +124,8 @@ $langs = LANGS;
                     </div>
                     <div class="offcanvas-body">
                         <ul class="list-group">
-                            <a href="#" class="nav-link">
-                                <li class="list-group-item bg-danger text-light">Regisztrációk</li>
+                            <a href="/admin/registrations" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Regisztrációk</li>
                             </a>
                             <a href="/admin/volunteers" class="nav-link">
                                 <li class="list-group-item bg-primary text-light">Önkéntesek</li>

@@ -16,13 +16,34 @@ class AdminController
     $this->adminModel = new AdminModel();
     $this->authService = new AuthService();
   }
+  public function getUsers()
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
-
-
+    $this->adminModel->index();
+  }
 
   public function registerAdmin()
   {
     $this->authService->registerAdmin($_POST);
+  }
+
+  public function registrations()
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+
+    $admin = $this->adminModel->admin();
+    $usersData = $this->adminModel->index();
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/registrations/Registrations.php", [
+        "admin" => $admin ?? null,
+        "users" => $usersData["users"] ?? null,
+        "numOfPage" => $usersData["numOfPage"] ?? null,
+        "limit" => $usersData["limit"] ?? null
+      ]),
+      "admin" => $admin ?? null
+    ]);
   }
 
   public function loginAdmin()
@@ -34,9 +55,6 @@ class AdminController
   {
     $this->authService->logoutAdmin();
   }
-
-
-
 
   public function adminDashboard()
   {
