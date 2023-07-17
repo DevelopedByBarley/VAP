@@ -26,6 +26,15 @@ class PartnerModel extends AdminModel
     header("Location: /admin/partners");
   }
 
+
+  public function partners() {
+    $stmt = $this->pdo->prepare("SELECT * FROM `partners`");
+    $stmt->execute();
+    $partners = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $partners;
+  }
+
   public function getPartners()
   {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM partners");

@@ -5,10 +5,10 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 ?>
 
-<div id="admin-users" class="d-flex align-items-center justify-content-center flex-column">
+<div id="admin-registrations" class="d-flex align-items-center justify-content-center flex-column">
   <?php if (!isset($users) || count($users) === 0) : ?>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Regisztrációk listája</h1>
+    <h1 class="text-center display-4 mt-5 mb-2">Regisztrációk listája</h1>
     <nav aria-label="Page navigation example" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>

@@ -15,7 +15,7 @@ class AdminModel
 
   public function index() {
     $offset = $_GET["offset"] ?? 1;
-    $limit = 7; // Az oldalanként megjelenített rekordok száma
+    $limit = 10; // Az oldalanként megjelenített rekordok száma
     $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
     $stmt->execute();

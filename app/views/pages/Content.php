@@ -7,7 +7,12 @@ $langs = LANGS;
 
 $volunteers = $params["volunteers"];
 $descriptionInLang = $params["descriptionInLang"];
-
+$questions = $params["questions"];
+$partners = $params["partners"];
+$questionInLang = $params["questionInLang"];
+$answerInLang = $params["answerInLang"];
+$nameInLang = $params["nameInLang"];
+$documents = $params["documents"];
 ?>
 
 
@@ -79,5 +84,69 @@ $descriptionInLang = $params["descriptionInLang"];
 
         </div>
     </div>
+
+    <div class="row mt-5" id="faq">
+        <div class="col-xs-12 col-lg-6">
+            <h1 class="display-4 text-center mt-5 mb-5">Gyakori kérdések</h1>
+            <div class="accordion mt-5 mb-5" id="accordionExample">
+                <?php foreach ($questions as $index => $question) : ?>
+                    <div class="accordion-item mt-2">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $question["q_id"] ?>" aria-expanded="true" aria-controls="collapseOne">
+                                <?= $question[$questionInLang] ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <?= $question[$answerInLang] ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+        <div id="faq-image" class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center" style="min-height: 80vh;"></div>
+    </div>
+    <div class="row" id="partners">
+        <div class="col-xs-12">
+            <h1 class="display-4 text-center mt-5 mb-5">Partnereink</h1>
+            <div class="row mb-5">
+                <?php $counter = 0; ?>
+                <?php foreach ($partners as $index => $partner) : ?>
+                    <?php if ($counter < 4) : ?>
+                        <div class="col-xs-12 col-sm-6 col-lg-3 mt-5">
+                            <div class="card partner-card" style="width: 23rem; border: none">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img src="/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $partner["name"] ?></h5>
+                                    <p class="card-text"><?= $partner[$descriptionInLang] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php $counter++; ?>
+                    <?php endif; ?>
+                <?php endforeach ?>
+                <div class="text-center">
+                    <a href="#" class="btn btn-outline-primary mt-5">További partnerek</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="edu">
+        <h1 class="text-center display-4 mt-5 mb-5">Edu</h1>
+        <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
+            <h1 class="text-center display-4 mt-5 mb-5">Haszos dokumentumok</h1>
+            <?php foreach ($documents as $index => $document) : ?>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
+                <?php endforeach ?>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+            <h1 class="text-center display-4 mt-5 mb-5">Haszos linkek</h1>
+                
+        </div>
+    </div>
+</div>
 
 </div>

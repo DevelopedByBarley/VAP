@@ -23,7 +23,7 @@ $langs = LANGS;
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
                                         <?= $langs["components"]["navbar"]["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
                                     </a>
                                 </li>
@@ -40,6 +40,11 @@ $langs = LANGS;
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">
                                         <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'Blog' ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item m-1 mt-3">
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
+                                        <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'GYIK' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
@@ -139,8 +144,8 @@ $langs = LANGS;
                             <a href="/admin/questions" class="nav-link">
                                 <li class="list-group-item bg-primary text-light">Gyakori kérdések</li>
                             </a>
-                            <a href="#" class="nav-link">
-                                <li class="list-group-item bg-danger text-light">EDU</li>
+                            <a href="/admin/documents" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Hasznos anyagok</li>
                             </a>
                         </ul>
                     </div>
