@@ -7,6 +7,7 @@ class HomeController
     private $questionModel;
     private $partnerModel;
     private $documentModel;
+    private $linkModel;
 
 
     public function __construct()
@@ -16,6 +17,7 @@ class HomeController
         $this->questionModel = new QuestionModel();
         $this->partnerModel = new PartnerModel;
         $this->documentModel = new DocumentModel();
+        $this->linkModel = new LinkModel();
 
     }
 
@@ -28,10 +30,16 @@ class HomeController
         $questions = $this->questionModel->questions();
         $partners = $this->partnerModel->partners();
         $documents = $this->documentModel->index();
+        $links = $this->linkModel->index();
+
+
         $nameInLang = "nameIn" . $_COOKIE["lang"];
         $descriptionInLang = "descriptionIn" . $_COOKIE["lang"];
         $questionInLang = "questionIn" . $_COOKIE["lang"];
         $answerInLang = "answerIn" . $_COOKIE["lang"];
+
+
+
         echo $renderer->render("Layout.php", [
             "content" => $renderer->render("/pages/Content.php", [
                 "volunteers" => $volunteers ?? null,
@@ -41,7 +49,8 @@ class HomeController
                 "answerInLang" => $answerInLang,
                 "partners" => $partners,
                 "documents" => $documents,
-                "nameInLang" => $nameInLang
+                "nameInLang" => $nameInLang,
+                "links" => $links
             ]),
             "user" => $user ?? null,
         ]);

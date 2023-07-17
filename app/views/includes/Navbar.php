@@ -147,6 +147,9 @@ $langs = LANGS;
                             <a href="/admin/documents" class="nav-link">
                                 <li class="list-group-item bg-primary text-light">Hasznos anyagok</li>
                             </a>
+                            <a href="/admin/links" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Hasznos linkek</li>
+                            </a>
                         </ul>
                     </div>
                 </div>

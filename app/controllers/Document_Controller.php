@@ -28,6 +28,8 @@ class DocumentController extends AdminController
       "admin" => $admin ?? null
     ]);
   }
+
+  
   public function documentForm()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");

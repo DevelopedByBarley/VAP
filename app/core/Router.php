@@ -8,6 +8,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     require 'app/routes/partner_routes.php';
     require 'app/routes/question_routes.php';
     require 'app/routes/document_routes.php';
+    require 'app/routes/link_routes.php';
 });
 
 // Fetch method and URI from somewhere

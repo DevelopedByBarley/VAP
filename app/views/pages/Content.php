@@ -13,6 +13,7 @@ $questionInLang = $params["questionInLang"];
 $answerInLang = $params["answerInLang"];
 $nameInLang = $params["nameInLang"];
 $documents = $params["documents"];
+$links = $params["links"];
 ?>
 
 
@@ -140,11 +141,13 @@ $documents = $params["documents"];
             <h1 class="text-center display-4 mt-5 mb-5">Haszos dokumentumok</h1>
             <?php foreach ($documents as $index => $document) : ?>
                 <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
-                <?php endforeach ?>
-            </div>
-            <div class="col-xs-12 col-lg-6">
+            <?php endforeach ?>
+        </div>
+        <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5">Haszos linkek</h1>
-                
+            <?php foreach ($links as $index => $link) : ?>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"    ><?= $link[$nameInLang] ?></a></p>
+            <?php endforeach ?>
         </div>
     </div>
 </div>
