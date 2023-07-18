@@ -1,4 +1,5 @@
 @import './initial/variables.css';
+@import './initial/basic.css';
 @import './components//navbar.css';
 @import './components//languange_modal.css';
 

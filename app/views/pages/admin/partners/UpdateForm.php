@@ -1,9 +1,10 @@
 <?php $partner = $params["partner"]; ?>
 
 
-<form enctype="multipart/form-data" action="/admin/partners/update/<?= $partner["id"] ?>" method="POST">
+<form enctype="multipart/form-data" action="/admin/partners/update/<?= $partner["id"] ?>" method="POST" class="form">
 
-  <h1 class="text-center mb-5 display-4" style="margin-top: 100px;">Önkéntes frissitése</h1>
+  <h1 class="display-5">Partner frissitése</h1>
+  <hr class="mb-5">
 
   <div class="form-outline mb-4">
     <label class="form-label" for="name">Név</label>

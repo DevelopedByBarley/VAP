@@ -1,21 +1,21 @@
-<form enctype="multipart/form-data" action="/admin/volunteers/new" method="POST">
-
-  <h1 class="text-center mb-5 display-4" style="margin-top: 100px;">Önkéntes hozzáadása</h1>
+<form enctype="multipart/form-data" action="/admin/volunteers/new" method="POST" class="form mt-5">
+  <h1 class="display-5">Önkéntes hozzáadása</h1>
+  <hr class="mb-5">
 
   <div class="form-outline mb-4">
     <label class="form-label" for="name">Név</label>
-    <input type="text" id="name" class="form-control" name="name" required />
+    <input type="text" id="name" class="form-control" name="name" required placeholder="Önkéntes neve"/>
   </div>
 
   <!-- Message input -->
 
   <div class="form-outline mb-4">
     <label class="form-label" for="form4Example3">Rövid leirás</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="description" required></textarea>
+    <textarea class="form-control" id="form4Example3" rows="4" name="description" required placeholder="Önkéntes rövid leirása"></textarea>
   </div>
   <div class="form-outline mb-4">
     <label class="form-label" for="form4Example3">Rövid leirás angolul</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="descriptionInEn" required></textarea>
+    <textarea class="form-control" id="form4Example3" rows="4" name="descriptionInEn" required placeholder="Önkéntes rövid leirása angolul"></textarea>
   </div>
   <div class="form-outline mb-4">
     <div class="mb-3">

@@ -1,14 +1,15 @@
-<form enctype="multipart/form-data" action="/admin/document/new" method="POST">
+<form enctype="multipart/form-data" action="/admin/document/new" method="POST" class="form">
 
-  <h1 class="text-center mb-5 display-4" style="margin-top: 100px;">Partner hozzáadása</h1>
+  <h1 class="display-5">Dokumentum hozzáadása</h1>
+  <hr class="mb-5">
 
   <div class="form-outline mb-4">
     <label class="form-label" for="name">Név</label>
-    <input type="text" id="name" class="form-control" name="nameInHu" required />
+    <input type="text" id="name" class="form-control" name="nameInHu" required placeholder="Dokumentum neve magyarul"/>
   </div>
   <div class="form-outline mb-4">
     <label class="form-label" for="name">Név angolul</label>
-    <input type="text" id="name" class="form-control" name="nameInEn" required />
+    <input type="text" id="name" class="form-control" name="nameInEn" required placeholder="Dokumentum neve angolul"/>
   </div>
 
   <div class="form-outline mb-4">
