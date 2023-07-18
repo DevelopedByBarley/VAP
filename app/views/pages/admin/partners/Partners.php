@@ -12,7 +12,8 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
       <a href="/admin/partners/new" class="btn btn-lg btn-outline-primary">Partner hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Partnerek listája</h1>
+    <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Partnerek</h1>
+    <hr class="w-100">
     <nav aria-label="Page navigation example" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>
@@ -26,23 +27,27 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         <?php endif ?>
     </nav>
     </ul>
-    <div class="table-responsive w-100">
-      <table class="table">
-        <thead>
+    <div class="table-responsive w-100 rounded" id="partners-table">
+      <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Név</th>
-            <th scope="col">Létrehozva</th>
-            <th scope="col">Müveletek</th>
+            <th>Név</th>
+            <th>Létrehozva</th>
+            <th>Müveletek</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($partners as $partner) : ?>
             <?php $current_partner = $partner["name"]; ?>
-
             <tr>
-              <th scope="row"><img src="/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>" alt="" style="width: 60px; height: 60px" class="rounded-circle" /></th>
-              <td><?= $partner["name"] ?></td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <img src="/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1"> <?= $partner["name"] ?> </p>
+                  </div>
+                </div>
+              </td>
               <td>
                 <?= $partner["createdAt"] ?>
               </td>

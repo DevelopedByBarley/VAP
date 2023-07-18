@@ -10,4 +10,7 @@
 @import './dashboard.css';
 @import './admin/volunteers/volunteers.css';
 @import './admin/partners/partners.css';
+@import './admin/questions/questions.css';
+@import './admin/documents/documents.css';
+@import './admin/links/links.css';
 @import './admin/registrations/registrations.css';

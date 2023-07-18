@@ -5,14 +5,14 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 ?>
 
-<div id="admin-links" class="d-flex align-items-center justify-content-center flex-column">
+<div id="admin-links" class="d-flex align-items-center justify-content-center flex-column w-100">
   <?php if (!isset($links) || count($links) === 0) : ?>
     <div id="no-links" class="text-center">
       <h1 class="display-3 mb-3">Jelenleg nincs egy link sem!</h1>
       <a href="/admin/links/new" class="btn btn-lg btn-outline-primary">Link hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Linkek listája</h1>
+    <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Linkek</h1>
     <nav aria-label="Page navigation example" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>
@@ -26,7 +26,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         <?php endif ?>
     </nav>
     </ul>
-    <div class="table-responsive w-100">
+    <div class="table-responsive" id="links-table">
       <table class="table">
         <thead>
           <tr>

@@ -51,7 +51,7 @@ class AuthService
 
         $_SESSION["adminId"] = $admin["adminId"];
 
-        header("Location: /admin/dashboard");
+        header("Location: /admin/registrations");
     }
 
     public function logoutAdmin()

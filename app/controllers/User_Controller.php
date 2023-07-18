@@ -100,6 +100,7 @@ class UserController
     ]);
     if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
+  
   public function resetPasswordForm()
   {
     $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");

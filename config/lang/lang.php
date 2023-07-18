@@ -453,7 +453,44 @@ define("LANGS", [
         "sp" => ""
       ],
     ]
+  ],
+
+  "faq" => [
+    "En" => "Frequently asked Questions",
+    "Hu" => "Gyakori kérdések",
+    "Sp" => ""
+  ],
+  "partners" => [
+    "title" => [
+      "En" => "Partners",
+      "Hu" => "Partnereink",
+      "Sp" => ""
+    ],
+    "partner-btn" => [
+      "En" => "More partners",
+      "Hu" => "További partnerek",
+      "Sp" => ""
+    ]
+  ],
+  "edu" => [
+    "title" => [
+      "En" => "Edu",
+      "Hu" => "Edu",
+      "Sp" => ""
+    ],
+    "useful_documents" => [
+      "En" => "Useful documents",
+      "Hu" => "Hasznos anyagok",
+      "Sp" => ""
+    ],
+    "useful_links" => [
+      "En" => "Useful links",
+      "Hu" => "Hasznos linkek",
+      "Sp" => ""
+    ],
   ]
+
+
 
 
 

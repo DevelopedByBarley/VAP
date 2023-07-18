@@ -88,7 +88,7 @@ $links = $params["links"];
 
     <div class="row mt-5" id="faq">
         <div class="col-xs-12 col-lg-6">
-            <h1 class="display-4 text-center mt-5 mb-5">Gyakori kérdések</h1>
+            <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["faq"][$lang] ?? 'Kapcsolat' ?></h1>
             <div class="accordion mt-5 mb-5" id="accordionExample">
                 <?php foreach ($questions as $index => $question) : ?>
                     <div class="accordion-item mt-2">
@@ -110,7 +110,7 @@ $links = $params["links"];
     </div>
     <div class="row" id="partners">
         <div class="col-xs-12">
-            <h1 class="display-4 text-center mt-5 mb-5">Partnereink</h1>
+            <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["partners"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
             <div class="row mb-5">
                 <?php $counter = 0; ?>
                 <?php foreach ($partners as $index => $partner) : ?>
@@ -130,21 +130,21 @@ $links = $params["links"];
                     <?php endif; ?>
                 <?php endforeach ?>
                 <div class="text-center">
-                    <a href="#" class="btn btn-outline-primary mt-5">További partnerek</a>
+                    <a href="#" class="btn btn-outline-primary mt-5"><?= $langs["partners"]["partner-btn"][$lang] ?? 'Kapcsolat' ?></a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row" id="edu">
-        <h1 class="text-center display-4 mt-5 mb-5">Edu</h1>
+        <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
-            <h1 class="text-center display-4 mt-5 mb-5">Haszos dokumentumok</h1>
+            <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($documents as $index => $document) : ?>
                 <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
             <?php endforeach ?>
         </div>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
-            <h1 class="text-center display-4 mt-5 mb-5">Haszos linkek</h1>
+            <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_links"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($links as $index => $link) : ?>
                 <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"    ><?= $link[$nameInLang] ?></a></p>
             <?php endforeach ?>

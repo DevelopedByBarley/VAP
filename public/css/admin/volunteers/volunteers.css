@@ -3,11 +3,10 @@
   margin-top: 75px;
 }
 
-#admin-volunteers #volunteer-list {
-  width: 100%;
-}
 #volunteers-list {
- width: 100%;
+ width: 95%;
+ margin: 0 auto;
+ box-shadow: var(--shadow);
 }
 
 @media(min-width: 768px) {
@@ -17,7 +16,7 @@
   }
 
   #volunteers-list {
-    width: 60%;
+    width: 80%;
    }
 }
 @media(min-width: 1200px) {
@@ -27,6 +26,6 @@
   }
 
   #volunteers-list {
-    width: 30%;
+    width: 60%;
    }
 }

@@ -56,23 +56,12 @@ class AdminController
     $this->authService->logoutAdmin();
   }
 
-  public function adminDashboard()
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $admin = $this->adminModel->admin();
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/Dashboard.php", [
-        "admin" => $admin ?? null
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
 
   public function adminLoginPage()
   {
     session_start();
     if (isset($_SESSION["adminId"])) {
-      header("Location: /admin/dashboard");
+      header("Location: /admin/registrations");
       return;
     }
 

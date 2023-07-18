@@ -10,7 +10,8 @@ $volunteers = $params["volunteers"] ?? null;
       <a href="/admin/volunteers/new" class="btn btn-lg btn-outline-primary">Önkéntes hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Önkéntesek listája</h1>
+    <h1 class="text-center display-4 mb-2">Önkéntesek</h1>
+    <hr class="w-100 mb-5">
     <ul class="list-group list-group-light mt-5" id="volunteers-list">
       <?php foreach ($volunteers as $volunteer) : ?>
         <li class="list-group-item d-flex justify-content-between align-items-center bg-light">

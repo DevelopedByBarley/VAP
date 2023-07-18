@@ -9,9 +9,9 @@ $questions = $params["questions"] ?? null;
       <a href="/admin/questions/new" class="btn btn-lg btn-outline-primary">Kérdés hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-5">Kérdések listája</h1>
+    <h1 class="text-center display-4 mb-5" style="margin-top: 100px;">Gyakori kérdések</h1>
 
-    <div class="accordion w-100" id="accordionExample">
+    <div class="accordion w-100" id="questions-list">
       <?php foreach ($questions as $index => $question) : ?>
         <div class="accordion-item">
 
@@ -24,7 +24,7 @@ $questions = $params["questions"] ?? null;
           <div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body d-flex justify-content-between align-items-center">
               <?= $question["answerInHu"] ?>
-              <div class="p-1">
+              <div class="btn-group" role="group" aria-label="Basic example">
                 <a href="/admin/questions/update/<?= $question["q_id"] ?>" class="btn btn-warning rounded-pill badge-success text-light" style="margin-left: 1rem;"><i class="bi bi-arrow-clockwise"></i></a>
                 <span class="btn btn-danger rounded-pill badge-success" style="margin-left: .5rem; margin-right: .5rem;" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $question["q_id"] ?>"><i class="bi bi-trash"></i></span>
               </div>

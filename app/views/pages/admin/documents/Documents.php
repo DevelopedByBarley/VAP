@@ -5,14 +5,14 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 ?>
 
-<div id="admin-documents" class="d-flex align-items-center justify-content-center flex-column">
+<div id="admin-documents" class="d-flex align-items-center justify-content-center flex-column w-100">
   <?php if (!isset($documents) || count($documents) === 0) : ?>
     <div id="no-documents" class="text-center">
       <h1 class="display-3 mb-3">Jelenleg nincs egy dokument sem!</h1>
       <a href="/admin/documents/new" class="btn btn-lg btn-outline-primary">Dokumentum hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Dokumentumok listája</h1>
+    <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Dokumentumok</h1>
     <nav aria-label="Page navigation example" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>
@@ -26,7 +26,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         <?php endif ?>
     </nav>
     </ul>
-    <div class="table-responsive w-100">
+    <div class="table-responsive" id="documents-table">
       <table class="table">
         <thead>
           <tr>
