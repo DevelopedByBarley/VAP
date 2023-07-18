@@ -83,8 +83,37 @@ class UserModel
     // INSERT parancs végrehajtása
     $isSuccess = $stmt->execute();
 
-    if($isSuccess) {
+    if ($isSuccess) {
       header('Location: /user/dashboard');
     }
+  }
+
+
+  public function resetPw($body)
+  {
+    $userId = $_SESSION["userId"] ?? null;
+    $old_pw = filter_var($body["old_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $new_pw = filter_var($body["new_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $confirm_pw = filter_var($body["confirm_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $hashed = password_hash($new_pw, PASSWORD_DEFAULT);
+    $user = self::getMe();
+
+    $isVerified = password_verify($old_pw, $user["password"]);
+    $compared = $confirm_pw === $new_pw;
+    
+
+    if (!$isVerified && !$compared) {
+      var_dump("Valami nem ok!");
+      exit;
+      header('Location: /user/dashboard');
+      return;
+    }
+    
+    $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
+    $stmt->bindParam(":password", $hashed);
+    $stmt->bindParam(":userId", $userId);
+    $stmt->execute();
+    
+    header('Location: /user/dashboard');
   }
 }

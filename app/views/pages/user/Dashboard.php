@@ -66,7 +66,7 @@ $langs = LANGS;
           <div class="form-outline mb-4">
             <label class="form-label required" for="password"><b><?= $langs["registration"]["form"]["password"][$lang] ?? 'Név' ?></b></label>
             <div>
-              <a href="#" class="btn btn-outline-danger"> <?= $langs["profile"]["profile_settings"]["change_password_btn"][$lang] ?? 'Név' ?></a>
+              <a href="/user/password-reset" class="btn btn-outline-danger"> <?= $langs["profile"]["profile_settings"]["change_password_btn"][$lang] ?? 'Név' ?></a>
             </div>
           </div>
         </div>

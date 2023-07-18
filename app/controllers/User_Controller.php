@@ -25,7 +25,7 @@ class UserController
   public function loginForm()
   {
     session_start();
-    if(isset($_SESSION["userId"])) {
+    if (isset($_SESSION["userId"])) {
       header("Location: /user/dashboard");
       return;
     }
@@ -36,7 +36,8 @@ class UserController
   }
 
 
-  public function updateUser() {
+  public function updateUser()
+  {
     $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
     $this->userModel->update($_POST);
   }
@@ -70,8 +71,14 @@ class UserController
   }
 
 
-  public function logout() {
+  public function logout()
+  {
     $this->authService->logoutUser();
+  }
+
+  public function resetPassword() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
+    $this->userModel->resetPw($_POST);
   }
 
   public function dashboard()
@@ -80,6 +87,16 @@ class UserController
     $user =  $this->userModel->getMe();
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
+        "user" => $user ?? null
+      ])
+    ]);
+  }
+  public function resetPasswordForm()
+  {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
         "user" => $user ?? null
       ])
     ]);

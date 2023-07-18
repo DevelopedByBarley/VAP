@@ -44,7 +44,7 @@ class AuthService
         $isVerified = password_verify($pw, $admin["password"]);
 
 
-        if(!$isVerified) {
+        if (!$isVerified) {
             header("Location: /admin");
             exit;
         }
@@ -79,17 +79,11 @@ class AuthService
 
 
 
-
-
-
-
-
-
     public function registerUser($body)
     {
-        
+
         $userId = uniqid();
-        $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_EMAIL);
+        $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
         $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
         $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -105,14 +99,14 @@ class AuthService
         $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
         $task = filter_var(TASK_AREAS[$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on' ) ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
+        $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
         $createdAt = time();
 
 
 
         $isUserExist = self::checkIsUserExist($email);
 
-        if($isUserExist) {
+        if ($isUserExist) {
             echo "User exist";
         }
 
@@ -185,9 +179,9 @@ class AuthService
             header("Location: /login");
             return;
         }
-        
+
         $isVerified = password_verify($pw, $user["password"]);
-        
+
         if (!$isVerified) {
             header("Location: /login");
             return;
@@ -211,6 +205,9 @@ class AuthService
         header("Location: /");
     }
 
+
+
+
     private  function checkIsUserExist($email)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
@@ -219,7 +216,7 @@ class AuthService
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($user && !empty($user)) {
+        if ($user && !empty($user)) {
             return true;
         }
 
