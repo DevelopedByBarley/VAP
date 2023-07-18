@@ -100,20 +100,24 @@ class UserModel
 
     $isVerified = password_verify($old_pw, $user["password"]);
     $compared = $confirm_pw === $new_pw;
-    
 
-    if (!$isVerified && !$compared) {
-      var_dump("Valami nem ok!");
-      exit;
-      header('Location: /user/dashboard');
+    if (!$isVerified || !$compared) {
+      $_SESSION["alert"] = [
+        "message" => "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
+        "bg" => "red"
+      ];
+      header('Location: /user/password-reset');
       return;
     }
-    
+
     $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
     $stmt->bindParam(":password", $hashed);
     $stmt->bindParam(":userId", $userId);
     $stmt->execute();
-    
+    $_SESSION["alert"] = [
+      "message" => "Jelszó megváltoztatása sikeres!",
+      "bg" => "green"
+    ];
     header('Location: /user/dashboard');
   }
 }

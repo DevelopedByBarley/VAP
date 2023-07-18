@@ -5,6 +5,15 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
 
+
+<?php echo $params["alertContent"]; ?>
+
+
+
+
+
+
+
 <div id="dashboard" class="w-100">
   <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light">
     <div class="text-center">

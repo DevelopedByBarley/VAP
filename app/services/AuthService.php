@@ -176,6 +176,12 @@ class AuthService
 
 
         if (!$user || count($user) === 0) {
+            $_SESSION["alert"] = [
+                "bg" => "red",
+                "message" => "Hibás email vagy jelszó!"
+            ];
+        
+            
             header("Location: /login");
             return;
         }
@@ -183,10 +189,13 @@ class AuthService
         $isVerified = password_verify($pw, $user["password"]);
 
         if (!$isVerified) {
+            $_SESSION["alert"] = [
+                "bg" => "red",
+                "message" => "Hibás email vagy jelszó!"
+            ];
             header("Location: /login");
             return;
         }
-
 
         $_SESSION["userId"] = $user["userId"];
 

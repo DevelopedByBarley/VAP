@@ -31,8 +31,12 @@ class UserController
     }
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Login.php", [])
+      "content" => $this->renderer->render("/pages/user/Login.php", [
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
     ]);
+
+    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
 
 
@@ -76,7 +80,8 @@ class UserController
     $this->authService->logoutUser();
   }
 
-  public function resetPassword() {
+  public function resetPassword()
+  {
     $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
     $this->userModel->resetPw($_POST);
   }
@@ -85,11 +90,15 @@ class UserController
   {
     $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
+
+
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
-        "user" => $user ?? null
-      ])
+        "user" => $user ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
     ]);
+    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
   public function resetPasswordForm()
   {
@@ -97,8 +106,11 @@ class UserController
     $user =  $this->userModel->getMe();
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
-        "user" => $user ?? null
-      ])
+        "user" => $user ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
     ]);
+
+    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
 }

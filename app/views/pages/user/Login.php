@@ -2,6 +2,7 @@
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
+<?= $params["alertContent"] ?>
 
 <form action="/user/login" method="POST" id="login">
   <h1 class="display-4 text-center">

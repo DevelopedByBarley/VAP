@@ -1,3 +1,7 @@
+
+<?php echo $params["alertContent"]; ?>
+
+
 <form id="password-reset-form" action="/user/password-reset" method="POST">
   <h1 class="display-1 text-center mb-5 mt-5">Jelszó megváltoztatása</h1>
   <div class="mb-3">
