@@ -24,7 +24,7 @@ class UserModel
   public function update($body)
   {
     $userId = $_SESSION["userId"] ?? null;
-    $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_EMAIL);
+    $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
     $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -119,5 +119,21 @@ class UserModel
       "bg" => "green"
     ];
     header('Location: /user/dashboard');
+  }
+
+  public function delete($body)
+  {
+    $userId = $_SESSION["userId"] ?? null;
+    $idForDelete = $body["idForDelete"] ?? null;
+
+    if ($userId === $idForDelete) {
+      $stmt = $this->pdo->prepare("DELETE FROM `users` where `userId` = :id");
+      $stmt->bindParam(":id", $userId);
+      $isSuccess = $stmt->execute();
+
+      if ($isSuccess) {
+        header("Location: /");
+      }
+    }
   }
 }

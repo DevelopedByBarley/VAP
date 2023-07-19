@@ -295,9 +295,54 @@ $langs = LANGS;
 
 
       <div class="text-center">
-        <button type="submit" class="btn btn-outline-warning"> <?= $langs["profile"]["profile_settings"]["update_profile_button"][$lang] ?? 'Név' ?></button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-warning"> <?= $langs["profile"]["profile_settings"]["update_profile_button"][$lang] ?? 'Profil frissitése' ?></button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-danger"> <?= $langs["profile"]["profile_settings"]["delete_profile_button"][$lang] ?? 'Profil törlése' ?></button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Profil frissitése</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Biztosan frissited a profilodat?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kilépés</button>
+              <button type="submit" class="btn btn-primary">Mentés</button>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
 
+  </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profil törlése</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/user/delete" method="POST">
+        <div class="modal-body">
+          Profil törléséhez ija be a következőt <b class="text-danger border border-danger p-1 rounded"><?= $user["userId"] ?></b>.
+          <br>
+          <b class="text-danger">A profil törlése végleges!</b>
+
+          <div class="mb-3 mt-3">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="idForDelete" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kilépés</button>
+          <button type="submit" class="btn btn-primary">Mentés</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

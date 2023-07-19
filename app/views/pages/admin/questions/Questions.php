@@ -9,8 +9,8 @@ $questions = $params["questions"] ?? null;
       <a href="/admin/questions/new" class="btn btn-lg btn-outline-primary">Kérdés hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-5" style="margin-top: 100px;">Gyakori kérdések</h1>
-
+    <h1 class="text-center display-5" style="margin-top: 100px;">Gyakori kérdések</h1>
+    <hr class="mb-5 w-100">
     <div class="accordion w-100" id="questions-list">
       <?php foreach ($questions as $index => $question) : ?>
         <div class="accordion-item">

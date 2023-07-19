@@ -13,6 +13,8 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
     </div>
   <?php else : ?>
     <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Linkek</h1>
+    <hr class="w-100 mb-5">
+
     <nav aria-label="Page navigation example" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>

@@ -452,6 +452,11 @@ define("LANGS", [
         "Hu" => "Profil frissitése",
         "sp" => ""
       ],
+      "delete_profile_button" => [
+        "En" => "Delete profile",
+        "Hu" => "Profil törlése",
+        "sp" => ""
+      ],
     ]
   ],
 

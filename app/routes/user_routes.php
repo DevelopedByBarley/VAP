@@ -16,3 +16,4 @@ $r->addRoute('POST', '/user/register', [UserController::class, 'registration']);
 $r->addRoute('POST', '/user/login', [UserController::class, 'login']);
 $r->addRoute('POST', '/user/update', [UserController::class, 'updateUser']);
 $r->addRoute('POST', '/user/password-reset', [UserController::class, 'resetPassword']);
+$r->addRoute('POST', '/user/delete', [UserController::class, 'deleteUser']);

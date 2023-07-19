@@ -86,6 +86,13 @@ class UserController
     $this->userModel->resetPw($_POST);
   }
 
+  public function deleteUser() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->delete($_POST);
+    $this->authService->logoutUser();
+
+  }
+
   public function dashboard()
   {
     $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
