@@ -17,12 +17,18 @@ class AdminModel
     $offset = $_GET["offset"] ?? 1;
     $limit = 10; // Az oldalanként megjelenített rekordok száma
     $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
-    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
+    $name = $_GET["search"] ?? '';
+    $searched = "%" . $name . "%";
+
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE `name` LIKE :searched");
+    $stmt->bindParam(":searched", $searched);
     $stmt->execute();
     $countOfRecords = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
     $numOfPage = ceil($countOfRecords / $limit); // A lapozó lapok számának kiszámítása
 
-    $stmt = $this->pdo->prepare("SELECT * FROM `users` LIMIT $limit OFFSET $calculated");
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `name` LIKE :searched LIMIT $limit OFFSET $calculated");
+    $stmt->bindParam(":searched", $searched);
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

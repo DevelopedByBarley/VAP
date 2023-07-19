@@ -30,17 +30,20 @@ $links = $params["links"];
                 </a>
             </div>
             <div id="secondary-header-list">
-                <a href="#about-me" class="nav-link mt-2">
+                <a href="#about-us" class="nav-link mt-2">
                     <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
                 </a>
-                <a href="" class="nav-link mt-2">
+                <a href="#volunteers" class="nav-link mt-2">
                     <?= $langs["components"]["navbar"]["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
                 </a>
-                <a href="" class="nav-link mt-2">
+                <a href="#edu" class="nav-link mt-2">
                     <?= $langs["components"]["navbar"]["edu"][$lang] ?? 'Edu' ?>
                 </a>
-                <a href="" class="nav-link mt-2">
+                <a href="#partners" class="nav-link mt-2">
                     <?= $langs["components"]["navbar"]["partners"][$lang] ?? 'Partner Oldalak' ?>
+                </a>
+                <a href="#faq" class="nav-link mt-2">
+                    <?= $langs["components"]["navbar"]["faq"][$lang] ?? 'Gyakori kérdések' ?>
                 </a>
                 <a href="" class="nav-link mt-2">
                     <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'Blog' ?>
@@ -136,7 +139,6 @@ $links = $params["links"];
         </div>
     </div>
     <div class="row" id="edu">
-        <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($documents as $index => $document) : ?>
