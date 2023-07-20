@@ -56,7 +56,11 @@ class UserController
   {
     $this->languageService->switch($vars["lang"]);
   }
-
+  public function registration()
+  {
+    $this->authService->registerUser($_FILES, $_POST);
+  }
+  
   public function registerForm()
   {
     echo $this->renderer->render("Layout.php", [
@@ -64,10 +68,6 @@ class UserController
     ]);
   }
 
-  public function registration()
-  {
-    $this->authService->registerUser($_POST);
-  }
 
   public function login()
   {

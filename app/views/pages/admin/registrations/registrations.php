@@ -46,7 +46,7 @@ $searchValue = $_GET["search"] ?? '';
           <tr>
             <td>
               <div class="d-flex align-items-center">
-                <img src="/public/assets/icons/bear.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
                 <div class="ms-3">
                   <p class="fw-bold mb-1"> <?= $user["name"] ?></p>
                   <p class="text-muted mb-0"> <?= $user["email"] ?></p>

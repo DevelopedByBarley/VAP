@@ -16,12 +16,12 @@ define('PROFESSIONS', [
 define('PROGRAMS', [
   "program_1" => [
     "En" => "Intern (minimum 1 month of office preparation work before and during the fair)",
-    "Hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
+    "Hu" => "Önkéntes gyakornok (hosszabb időtartamú, folyamatos elfoglaltság)",
     "Sp" => ""
   ],
   "program_2" => [
     "En" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
-    "Hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
+    "Hu" => "Önkéntesség (rövidebb, időszakos elfoglaltság)",
     "Sp" => ""
   ],
   "program_3" => [
@@ -34,7 +34,7 @@ define('PROGRAMS', [
 define('TASK_AREAS', [
   "1" => [
     "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
-    "Hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+    "Hu" => "Kiállítói és galéria asszisztens",
     "Sp" => ""
   ],
   "2" => [
@@ -44,7 +44,7 @@ define('TASK_AREAS', [
   ],
   "3" => [
     "En" => "Registration (Galleries and VIP guests)",
-    "Hu" => "Regisztráció (Galériák és VIP vendégek)",
+    "Hu" => "Program koordinátor",
     "Sp" => ""
   ],
   "4" => [
@@ -58,11 +58,16 @@ define('TASK_AREAS', [
     "Sp" => ""
   ],
   "6" => [
-    "En" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
-    "Hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+    "En" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+    "Hu" => "Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)",
     "Sp" => ""
   ],
   "7" => [
+    "En" => "",
+    "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
+    "sp" => ""
+  ],
+  "8" => [
     "En" => "I am interested in every task",
     "Hu" => "Mindegyik feladat érdekel",
     "Sp" => ""

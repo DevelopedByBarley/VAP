@@ -127,9 +127,15 @@ class UserModel
     $idForDelete = $body["idForDelete"] ?? null;
 
     if ($userId === $idForDelete) {
+
+      $fileNameForDelete = self::getMe($userId)["fileName"];
+      unlink("./public/assets/uploads/images/users/$fileNameForDelete");
+
       $stmt = $this->pdo->prepare("DELETE FROM `users` where `userId` = :id");
       $stmt->bindParam(":id", $userId);
       $isSuccess = $stmt->execute();
+
+
 
       if ($isSuccess) {
         header("Location: /");

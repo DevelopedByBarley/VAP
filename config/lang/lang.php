@@ -159,24 +159,24 @@ define("LANGS", [
 
       "edu_institution" => [
         "En" => "If you are still a student, please write the name of the educational institution here.",
-        "Hu" => "Ha diák vagy még, kérjük írd ide az oktatási intézmény nevét.",
+        "Hu" => "Ha diák vagy, kérjük írd be az oktatási intézmény nevét.",
         "Sp" => ""
       ],
 
       "programs" => [
         "title" => [
-          "En" => "Which program are you interested in?",
+          "En" => "Melyik lehetőség érdekel?",
           "Hu" => "Melyik program érdekel?",
           "Sp" => ""
         ],
         "program_1" => [
           "En" => "Intern (minimum 1 month of office preparation work before and during the fair)",
-          "Hu" => "Gyakornok (minimum 1 hónapos irodai előkészítő feladatot jelent a vásár előtt és alatt)",
+          "Hu" => "Önkéntes gyakornok (hosszabb időtartamú, folyamatos elfoglaltság)",
           "Sp" => ""
         ],
         "program_2" => [
           "En" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
-          "Hu" => "Önkéntes (1 hetes elfoglaltság a vásár alatt és helyszínén: a Bálna Budapest)",
+          "Hu" => "Önkéntesség (rövidebb, időszakos elfoglaltság)",
           "Sp" => ""
         ],
         "program_3" => [
@@ -285,22 +285,22 @@ define("LANGS", [
         "areas" => [
           "1" => [
             "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
-            "Hu" => "Standasszisztens (kiállító galériáknál, helyszíni asszisztencia biztosítása)",
+            "Hu" => "Kiállítói és galéria asszisztens",
             "sp" => ""
           ],
           "2" => [
             "En" => "Administration, event organizer assistant",
-            "Hu" => "Ügyintézés, rendezvényszervező asszisztens",
+            "Hu" => "Ügyintéző, rendezvényszervező asszisztens",
             "sp" => ""
           ],
           "3" => [
             "En" => "Registration (Galleries and VIP guests)",
-            "Hu" => "Regisztráció (Galériák és VIP vendégek)",
+            "Hu" => "Program koordinátor",
             "sp" => ""
           ],
           "4" => [
             "En" => "Worker at the information desk",
-            "Hu" => "Információs pultban munkatárs",
+            "Hu" => "Információs pultban munkatárs            ",
             "sp" => ""
           ],
           "5" => [
@@ -309,11 +309,16 @@ define("LANGS", [
             "sp" => ""
           ],
           "6" => [
-            "En" => "Hostess feladatok (vendégek kísérésre, VIP Lounge felügyelet)",
-            "Hu" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+            "En" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+            "Hu" => "Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)",
             "sp" => ""
           ],
           "7" => [
+            "En" => "",
+            "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
+            "sp" => ""
+          ],
+          "8" => [
             "En" => "I am interested in every task",
             "Hu" => "Mindegyik feladat érdekel",
             "sp" => ""
@@ -362,8 +367,7 @@ define("LANGS", [
       "email_permission" => [
         "En" => "Can we be included in the AMB volunteer database for the following years,
         to be the first to hear about Art Market news?",
-        "Hu" => "Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban,
-        hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?",
+        "Hu" => "Regisztrációddal hozzájárulsz, hogy az önkéntes és gyakornok lehetőségekről emailen értesítést küldjünk",
         "sp" => ""
       ],
 

@@ -2,11 +2,13 @@
 class AuthService
 {
     private $pdo;
+    private $fileSaver;
 
     public function __construct()
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
+        $this->fileSaver = new FileSaver();
     }
 
 
@@ -79,8 +81,9 @@ class AuthService
 
 
 
-    public function registerUser($body)
+    public function registerUser($files, $body)
     {
+        $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null);
 
         $userId = uniqid();
         $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -132,6 +135,7 @@ class AuthService
         :tasks, 
         :informedBy, 
         :permission, 
+        :fileName, 
         :createdAt)");
 
         // Paraméterek kötése
@@ -153,6 +157,7 @@ class AuthService
         $stmt->bindParam(':tasks', $task);
         $stmt->bindParam(':informedBy', $informedBy);
         $stmt->bindParam(':permission', $permission);
+        $stmt->bindParam(':fileName', $fileName);
         $stmt->bindParam(':createdAt', $createdAt);
 
         // INSERT parancs végrehajtása

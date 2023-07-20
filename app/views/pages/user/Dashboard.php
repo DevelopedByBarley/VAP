@@ -11,13 +11,10 @@ $langs = LANGS;
 
 
 
-
-
-
 <div id="dashboard" class="w-100">
   <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light">
     <div class="text-center">
-      <img src="/public/assets/icons/profile.png" style="height: 150px; width: 150px;" />
+      <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" />
     </div>
 
     <h1 class="text-center display-6"><?= $user["name"] ?></h1>
