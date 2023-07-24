@@ -92,7 +92,7 @@ $links = $params["links"];
     <div class="row mt-5" id="faq">
         <div class="col-xs-12 col-lg-6">
             <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["faq"][$lang] ?? 'Kapcsolat' ?></h1>
-            <div class="accordion mt-5 mb-5" id="accordionExample">
+            <div class="accordion mt-5 mb-5" id="questionAccordion">
                 <?php foreach ($questions as $index => $question) : ?>
                     <div class="accordion-item mt-2">
                         <h2 class="accordion-header" id="headingOne">
@@ -100,7 +100,7 @@ $links = $params["links"];
                                 <?= $question[$questionInLang] ?>
                             </button>
                         </h2>
-                        <div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#questionAccordion">
                             <div class="accordion-body">
                                 <?= $question[$answerInLang] ?>
                             </div>
@@ -142,7 +142,7 @@ $links = $params["links"];
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($documents as $index => $document) : ?>
-                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
             <?php endforeach ?>
         </div>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">

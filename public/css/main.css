@@ -1,17 +1,29 @@
+/* BASIC-SECTION */
+
 @import './initial/variables.css';
 @import './initial/basic.css';
+@import './content.css';
+
+/* COMPONENTS-SECTION */
+
 @import './components//navbar.css';
 @import './components//languange_modal.css';
 
+/* ADMIN-SECTION */
 
-@import './admin_login_form.css';
-@import './content.css';
-@import './register.css';
-@import './login.css';
-@import './dashboard.css';
-@import './admin/volunteers/volunteers.css';
-@import './admin/partners/partners.css';
-@import './admin/questions/questions.css';
-@import './admin/documents/documents.css';
-@import './admin/links/links.css';
-@import './admin/registrations/registrations.css';
+@import './admin/admin_login_form.css';
+@import './admin/volunteers.css';
+@import './admin/partners.css';
+@import './admin/questions.css';
+@import './admin/documents.css';
+@import './admin/registrations.css';
+@import './admin/links.css';
+
+
+/* USER-SECTION */
+@import './user/dashboard.css';
+@import './user/documents.css';
+@import './user/login.css';
+@import './user/register.css';
+
+

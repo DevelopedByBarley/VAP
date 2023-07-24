@@ -35,6 +35,8 @@ class AdminController
     $admin = $this->adminModel->admin();
     $usersData = $this->adminModel->index();
 
+
+
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/registrations/Registrations.php", [
         "admin" => $admin ?? null,

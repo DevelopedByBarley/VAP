@@ -31,6 +31,7 @@
 
     </div>
     <script src="/public/js/Navbar.js"></script>
+    <script src="/public/js/Registration.js"></script>
 </body>
 
 </html>

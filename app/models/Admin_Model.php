@@ -42,6 +42,7 @@ class AdminModel
   public function admin()
   {
     $adminId = $_SESSION["adminId"] ?? null;
+
     $stmt = $this->pdo->prepare("SELECT * FROM `admins` WHERE `adminId` = :adminId");
     $stmt->bindParam(":adminId", $adminId);
     $stmt->execute();

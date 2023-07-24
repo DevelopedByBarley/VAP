@@ -99,22 +99,6 @@ class VolunteerModel extends AdminModel
     header("Location:  /admin/volunteers");
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   private  function getPrevImageByVolunteer($id)
   {
 

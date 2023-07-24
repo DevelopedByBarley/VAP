@@ -15,7 +15,7 @@
   <div class="form-outline mb-4">
     <div class="mb-3">
       <label for="formFile" class="form-label">Fájl feltöltése</label>
-      <input class="form-control" type="file" id="formFile" name="file" required>
+      <input class="form-control" type="file" id="formFile" name="document" required>
     </div>
   </div>
 

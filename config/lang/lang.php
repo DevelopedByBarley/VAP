@@ -1,6 +1,7 @@
 <?php
 define("LANGS", [
   "components" => [
+
     "navbar" => [
       "aboutMe" => [
         "En" => "About us",
@@ -42,8 +43,55 @@ define("LANGS", [
         "Hu" => "Kijelentkezés",
         "Sp" => ""
       ],
+      "faq" => [
+        "En" => "Frequently asked Questions",
+        "Hu" => "Gyakori kérdések",
+        "Sp" => ""
+      ],
     ]
   ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   "content" => [
     "aboutUs" => [
@@ -98,6 +146,37 @@ define("LANGS", [
       ]
     ]
   ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   "registration" =>  [
     "title" => [
@@ -314,7 +393,7 @@ define("LANGS", [
             "sp" => ""
           ],
           "7" => [
-            "En" => "",
+            "En" => "Pre-event administration tasks (eg: information collection, database cleaning, text verification, etc.)",
             "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
             "sp" => ""
           ],
@@ -371,6 +450,30 @@ define("LANGS", [
         "sp" => ""
       ],
 
+
+      "upload_documents" => [
+        "title" => [
+          "En" => "Upload documents (CV, Cover letter)",
+          "Hu" => "Dokumentum feltöltése (Önéletrajz, Motivációs levél)",
+          "sp" => ""
+        ],
+        "1" => [
+          "En" => "Cover letter",
+          "Hu" => "Motivációs levél",
+          "sp" => ""
+        ],
+        "2" => [
+          "En" => "CV",
+          "Hu" => "Önéletrajz",
+          "sp" => ""
+        ],
+        "3" => [
+          "En" => "Other",
+          "Hu" => "Egyéb",
+          "sp" => ""
+        ]
+      ],
+
       "registrationBtn" => [
         "En" => "Registration",
         "Hu" => "Regisztráció",
@@ -380,6 +483,51 @@ define("LANGS", [
     ],
 
   ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
 
 
 

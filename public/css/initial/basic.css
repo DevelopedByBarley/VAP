@@ -20,3 +20,18 @@
     margin: 0 auto;
   }
 }
+
+.head {
+  background-color: var(--sc-color);
+  color: var(--pr-background);
+  box-shadow: var(--shadow);
+}
+
+.box {
+  background-color: var(--pr-color);
+  color: var(--pr-background);
+  box-shadow: var(--shadow);
+}
+.shadow {
+  box-shadow: var(--shadow);
+}

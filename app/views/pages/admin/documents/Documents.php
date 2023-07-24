@@ -14,7 +14,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
   <?php else : ?>
     <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Dokumentumok</h1>
     <hr class="w-100 mb-5">
-    <nav aria-label="Page navigation example" class="mt-5 mb-5">
+    <nav aria-label="Page navigation" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>
           <li class="page-item"><a class="page-link" href="/admin/documents?offset=<?= $active_page - 1 ?>">Előző</a></li>
@@ -54,16 +54,16 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
               <td>
                 <div>
                   <a href="/admin/documents/update/<?= $document["id"] ?>" class="btn m-2 btn-warning rounded-pill badge-success text-light"><i class="bi bi-arrow-clockwise"></i></a>
-                  <span class="btn m-2 btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#exampleModal2<?= $document["id"] ?>"><i class="bi bi-trash"></i></span>
+                  <span class="btn m-2 btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#documentModal<?= $document["id"] ?>"><i class="bi bi-trash"></i></span>
                 </div>
               </td>
             </tr>
 
-            <div class="modal fade" id="exampleModal2<?= $document["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="documentModal<?= $document["id"] ?>" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Figyelem!</h5>
+                    <h5 class="modal-title" id="documentModalLabel">Figyelem!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -80,7 +80,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         </tbody>
       </table>
     </div>
-    <nav aria-label="Page navigation example" class="mt-5 mb-5">
+    <nav aria-label="Page navigation" class="mt-5 mb-5">
       <ul class="pagination">
         <?php if ($active_page > 1) : ?>
           <li class="page-item"><a class="page-link" href="/admin/documents?offset=<?= $active_page - 1 ?>">Előző</a></li>

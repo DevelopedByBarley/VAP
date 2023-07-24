@@ -12,12 +12,12 @@
   </div>
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="form4Example3">Rövid leirás</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="description" required><?= $volunteer["descriptionInHu"] ?></textarea>
+    <label class="form-label" for="descriptionHu">Rövid leirás</label>
+    <textarea class="form-control" id="descriptionHu" rows="4" name="description" required><?= $volunteer["descriptionInHu"] ?></textarea>
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label" for="form4Example3">Rövid leirás angolul</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="descriptionInEn" required><?= $volunteer["descriptionInEn"] ?></textarea>
+    <label class="form-label" for="descriptionEn">Rövid leirás angolul</label>
+    <textarea class="form-control" id="descriptionEn" rows="4" name="descriptionInEn" required><?= $volunteer["descriptionInEn"] ?></textarea>
   </div>
   <div class="form-outline mb-4">
     <div class="mb-3">

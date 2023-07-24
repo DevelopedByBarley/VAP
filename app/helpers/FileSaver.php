@@ -18,6 +18,7 @@ class FileSaver
 
     if (empty($files["name"])) return false;;
     if (is_array($files["name"])) {
+
       return $this->saveMultipleFiles($files, $path);
     }
     return $this->save($files, $path);
@@ -27,6 +28,7 @@ class FileSaver
   {
     $ret = [];
     $fileNames = [];
+
 
     foreach ($files as $fieldName => $fields) {
 
@@ -40,18 +42,34 @@ class FileSaver
       $fileNames[] = $fileName;
     }
 
+
     return $fileNames;
   }
 
   private function save($file, $path)
   {
 
-    $whiteList = [IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG];
-    if (!in_array(exif_imagetype($file["tmp_name"]), $whiteList)) return false;
+    $whiteList = [
+      IMAGETYPE_JPEG,
+      IMAGETYPE_GIF,
+      IMAGETYPE_PNG,
+      'application/pdf',
+      'application/msword',
+      'image/png',
+      'image/jpeg',
+    ];
+
+
+    $fileType = mime_content_type($file["tmp_name"]);
+
+    if (!in_array($fileType, $whiteList)) {
+      // Fájltípus elutasítva
+      return false;
+    }
 
     $rand = uniqid(rand(), true);
     $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $originalFileName = $rand . '.' . $ext;
+    $originalFileName =  $rand . '.' . $ext;
     $directoryPath = "./public/assets/$path/";
 
     $destination = $directoryPath . $originalFileName;

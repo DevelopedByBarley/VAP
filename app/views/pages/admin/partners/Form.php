@@ -11,12 +11,12 @@
   <!-- Message input -->
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="form4Example3">Rövid leirás</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="descriptionInHu" required placeholder="Partner rövid leirása"></textarea>
+    <label class="form-label" for="descriptionInHu">Rövid leirás</label>
+    <textarea class="form-control" id="descriptionInHu" rows="4" name="descriptionInHu" required placeholder="Partner rövid leirása"></textarea>
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label" for="form4Example3">Rövid leirás angolul</label>
-    <textarea class="form-control" id="form4Example3" rows="4" name="descriptionInEn" required placeholder="Partner rövid leirása angolul"></textarea>
+    <label class="form-label" for="descriptionInEn">Rövid leirás angolul</label>
+    <textarea class="form-control" id="descriptionInEn" rows="4" name="descriptionInEn" required placeholder="Partner rövid leirása angolul"></textarea>
   </div>
   <div class="form-outline mb-4">
     <div class="mb-3">

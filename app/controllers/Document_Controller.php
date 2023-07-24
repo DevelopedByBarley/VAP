@@ -50,6 +50,17 @@ class DocumentController extends AdminController
     $this->documentModel->insertDocument($_FILES, $_POST);
   }
   
+  public function updateDocument($vars) {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->documentModel->update($vars["id"], $_FILES, $_POST);
+  }
+  
+  public function deleteDocument($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->documentModel->delete($vars["id"]);
+  }
+
   public function updateForm($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -62,16 +73,5 @@ class DocumentController extends AdminController
       ]),
       "admin" => $admin ?? null
     ]);
-  }
-  
-  public function updateDocument($vars) {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $this->documentModel->update($vars["id"], $_FILES, $_POST);
-  }
-
-  public function deleteDocument($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $this->documentModel->delete($vars["id"]);
   }
 }

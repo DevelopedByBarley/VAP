@@ -23,9 +23,9 @@ class DocumentModel extends AdminModel
 
 
     $offset = $_GET["offset"] ?? 1;
-    $limit = 7; // Az oldalanként megjelenített rekordok száma
-    $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
-    $numOfPage = ceil($countOfRecords / $limit); // A lapozó lapok számának kiszámítása
+    $limit = 7;
+    $calculated = ($offset - 1) * $limit;
+    $numOfPage = ceil($countOfRecords / $limit);
 
     $stmt = $this->pdo->prepare("SELECT * FROM `documents` ORDER BY `createdAt` DESC LIMIT $limit OFFSET $calculated");
     $stmt->execute();
@@ -40,44 +40,33 @@ class DocumentModel extends AdminModel
 
   public function insertDocument($files, $body)
   {
-
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $createdAt = time();
-    $file = $files["file"];
-    $tmpFilePath = $file["tmp_name"];
-    $rand = uniqid();
 
-    $fileName = $file["name"];
+    $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null);
+    $extension =  pathinfo($documentName, PATHINFO_EXTENSION);
 
-    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-    $allowedExtensions = ["pdf", "txt", "doc"];
-    if (in_array($fileExtension, $allowedExtensions)) {
-      $directoryPath = "./public/assets/uploads/documents/";
-      $originalFileName = $rand . '.' . $fileExtension;
-      $destination = $directoryPath . $originalFileName;
 
-      move_uploaded_file($tmpFilePath, $destination);
 
-      $stmt = $this->pdo->prepare("INSERT INTO `documents` VALUES (NULL, :nameInHu, :nameInEn, :fileName, :extension, :createdAt)");
-      $stmt->bindParam(":nameInHu", $nameInHu);
-      $stmt->bindParam(":nameInEn", $nameInEn);
-      $stmt->bindParam(":fileName", $originalFileName);
-      $stmt->bindParam(":extension", $fileExtension);
-      $stmt->bindParam(":createdAt", $createdAt);
+    $stmt = $this->pdo->prepare("INSERT INTO `documents` VALUES (NULL, :nameInHu, :nameInEn, :fileName, :extension, :createdAt)");
+    $stmt->bindParam(":nameInHu", $nameInHu);
+    $stmt->bindParam(":nameInEn", $nameInEn);
+    $stmt->bindParam(":fileName", $documentName);
+    $stmt->bindParam(":extension", $extension );
+    $stmt->bindParam(":createdAt", $createdAt);
 
-      $stmt->execute();
+    $stmt->execute();
 
-      if ($this->pdo->lastInsertId()) {
-        header("Location: /admin/documents");
-      }
+    if ($this->pdo->lastInsertId()) {
+      header("Location: /admin/documents");
     }
   }
 
   public function delete($id)
   {
     $fileNameForDelete = self::getDocumentById($id)["fileName"];
-    unlink("./public/assets/uploads/documents/$fileNameForDelete");
+    unlink("./public/assets/uploads/documents/admin/$fileNameForDelete");
 
     $stmt = $this->pdo->prepare("DELETE FROM `documents` WHERE `id` = :id");
     $stmt->bindParam(":id", $id);
@@ -86,38 +75,23 @@ class DocumentModel extends AdminModel
     header("Location:  /admin/documents");
   }
 
+
   public function update($id, $files, $body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-
     $prevImage = self::getDocumentById($id)["fileName"];
-    $fileName = '';
-    $fileExtension = '';
+    $documentName = '';
+    $extension = '';
 
-    if ($files["file"]["name"] !== '') {
-      unlink("./public/assets/uploads/documents/$prevImage");
-      $file = $files["file"];
-      $tmpFilePath = $file["tmp_name"];
-      $rand = uniqid();
-
-      $newFileName = $file["name"];
-
-      $fileExtension = pathinfo($newFileName, PATHINFO_EXTENSION);
-      $allowedExtensions = ["pdf", "txt", "doc"];
-      if (in_array($fileExtension, $allowedExtensions)) {
-        $directoryPath = "./public/assets/uploads/documents/";
-        $originalFileName = $rand . '.' . $fileExtension;
-        $destination = $directoryPath . $originalFileName;
-
-        move_uploaded_file($tmpFilePath, $destination);
-
-        $fileName = $originalFileName;
-      }
+    if(!empty($files["document"]["name"])) {
+      $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", $prevImage);
     } else {
-      $fileName = $prevImage;
-      $fileExtension = self::getDocumentById($id)["extension"];
+      $documentName = $prevImage;
     }
+    
+    $extension = pathinfo($documentName, PATHINFO_EXTENSION);
+
 
     $stmt = $this->pdo->prepare("UPDATE `documents` SET 
     `nameInHu` = :nameInHu, 
@@ -128,13 +102,15 @@ class DocumentModel extends AdminModel
 
     $stmt->bindParam(":nameInHu", $nameInHu);
     $stmt->bindParam(":nameInEn", $nameInEn);
-    $stmt->bindParam(":fileName", $fileName);
-    $stmt->bindParam(":extension", $fileExtension);
+    $stmt->bindParam(":fileName", $documentName);
+    $stmt->bindParam(":extension", $extension);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
     header("Location:  /admin/documents");
   }
+
+
 
   public function getDocumentById($id)
   {

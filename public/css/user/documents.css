@@ -1,0 +1,15 @@
+#user-documents {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+@media(min-width: 1200px) {
+  #user-documents {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 100px;
+
+  }
+
+}

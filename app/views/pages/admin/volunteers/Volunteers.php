@@ -23,16 +23,16 @@ $volunteers = $params["volunteers"] ?? null;
           </div>
           <div>
             <a href="/admin/volunteers/update/<?= $volunteer["id"] ?>" class="btn m-2 btn-warning rounded-pill badge-success text-light"><i class="bi bi-arrow-clockwise"></i></a>
-            <span class="btn m-2 btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $volunteer["id"] ?>"><i class="bi bi-trash"></i></span>
+            <span class="btn m-2 btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#volunteerModal<?= $volunteer["id"] ?>"><i class="bi bi-trash"></i></span>
           </div>
         </li>
 
-        <div class="modal fade" id="exampleModal<?= $volunteer["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="volunteerModal<?= $volunteer["id"] ?>" tabindex="-1" aria-labelledby="volunteerModalLabel" aria-hidden="true">
           <?php $current_volunteer = $volunteer["name"]; ?>
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Figyelem!</h5>
+                <h5 class="modal-title" id="volunteerModalLabel ">Figyelem!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">

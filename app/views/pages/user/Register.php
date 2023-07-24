@@ -4,15 +4,15 @@ $langs = LANGS;
 
 ?>
 
-<form class="p-3" id="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
-  <h1 class="text-center display-5"><?= $langs["registration"]["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
+<form class="border shadow p-3" id="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
+  <h1 class="text-center display-5 mt-5"><?= $langs["registration"]["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
   <div class="row mb-4 mt-5">
 
-    <div class="jumbotron border bg-light mb-5 p-3">
-      
+    <div class="jumbotron border bg-light mb-5 p-5 ">
+
       <p class="lead">Ha érdekel az önkéntesség hozd létre a saját fiókodat és értesítést kapsz azokról a művészeti eseményekről, projektekről, galériákról, intézetekről, ahol önkéntes feladatokat tudsz vállalni. Töltsd ki a következő formot.</p>
       <hr class="my-4">
-      <p>Regisztrációt követően és a megadott adatokkal való bejelentkezés után az eseményekre lehet jelentkezni (Erre majd valami értelmeset kitalálunk).</p>   
+      <p>Regisztrációt követően és a megadott adatokkal való bejelentkezés után az eseményekre lehet jelentkezni (Erre majd valami értelmeset kitalálunk).</p>
     </div>
 
 
@@ -306,10 +306,17 @@ $langs = LANGS;
     </div>
 
 
-    <div class="col-xs-12 col-sm-6 mt-3">
+    <div class="col-xs-12 mt-3">
       <div class="mb-3">
         <label for="formFileMultiple" class="form-label"><b>Fénykép feltöltése</b></label>
         <input class="form-control" type="file" name="file" />
+      </div>
+    </div>
+    <div class="col-xs-12 mt-3 border p-3">
+      <label for="formFileMultiple" class="form-label mb-3"><b><?= $langs["registration"]["form"]["upload_documents"]["title"][$lang] ?? 'Név' ?></b></label>
+      <div id="documents-container"></div>
+      <div class="text-center mt-3 mb-5">
+        <button type="button" class="btn btn-outline-primary" id="add-document">Új dokumentum</button>
       </div>
     </div>
 

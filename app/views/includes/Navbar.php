@@ -19,7 +19,7 @@ $langs = LANGS;
                                 <li class="nav-item m-1 mt-3">
 
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-us' : '#about-us' ?>">
-                                        <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
+                                        <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunkgdfs' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
@@ -44,7 +44,7 @@ $langs = LANGS;
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
-                                        <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'GYIK' ?>
+                                        <?= $langs["components"]["navbar"]["faq"][$lang] ?? 'Gyakori kérdések' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">

@@ -1,5 +1,6 @@
 <?php
 $user = $params["user"];
+$documents = $params["documents"];
 $subscriptions = $params["subscriptions"] ?? null;
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
@@ -12,9 +13,9 @@ $langs = LANGS;
 
 
 <div id="dashboard" class="w-100">
-  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light">
-    <div class="text-center">
-      <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" />
+  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow">
+    <div class="text-center mb-2">
+      <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="shadow" />
     </div>
 
     <h1 class="text-center display-6"><?= $user["name"] ?></h1>
@@ -29,7 +30,7 @@ $langs = LANGS;
     </div>
   </div>
 
-  <div id="subscriptions" class="border mt-3 mb-5 p-2">
+  <div id="subscriptions" class="border mt-3 mb-5 p-4 bg-light">
     <h2 class="text-center mt-5"> <?= $langs["profile"]["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
     <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
@@ -43,7 +44,7 @@ $langs = LANGS;
   </div>
 
 
-  <div id="profile-settings" class="border p-3">
+  <div id="profile-settings" class="border p-4 shadow">
     <form id="update-form" action="/user/update" method="POST">
       <div class="row mb-4 mt-5">
         <h2 class="text-center mb-5"><?= $langs["profile"]["profile_settings"]["title"][$lang] ?? 'Név' ?></h2>
@@ -62,7 +63,7 @@ $langs = LANGS;
         <div class="col-xs-12 col-md-6 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="email"><b><?= $langs["registration"]["form"]["email"][$lang] ?? 'Név' ?></b></label>
-            <input type="email" id="email" name="email" class="form-control" required value="<?= $user["email"] ?? '' ?>" />
+            <input type="email" id="email" name="email" class="form-control"  value="<?= $user["email"] ?>" disabled required/>
           </div>
         </div>
 
@@ -272,11 +273,15 @@ $langs = LANGS;
         </div>
 
 
+        <div class="col-xs-12 border border-rounded-lg p-3 mb-4 shadow">
+          <h1 class="display-6">Feltöltött dokumentumok</h1>
+            <p>Jelenleg <b class="text-info" style="font-size: 1.2rem"><?= count($documents)  ?></b> dokumentum van feltöltve</p>
+            <?php echo count($documents) !== 0 ? '<a href="/user/documents" class="btn btn-outline-primary">Megtekintés</a>' : '<a href="/user/documents/new" class="btn btn-outline-primary">Dokumentum feltöltése</a>'?>
+        </div>
 
 
 
-
-        <div class="col-xs-12 mt-3 d-flex align-items-center justify-content-center border">
+        <div class="col-xs-12 mt-3 d-flex align-items-center justify-content-center border shadow">
           <div class="form-outline mb-4 p-3">
             <div class="form-check form-switch text-center d-flex align-items-center justify-content-center">
               <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" id="flexSwitchCheckDefault" name="permission" value="on" <?php echo (int)$user["permission"] === 1 ? 'checked' :  '' ?>>
@@ -292,16 +297,16 @@ $langs = LANGS;
 
 
       <div class="text-center">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-warning"> <?= $langs["profile"]["profile_settings"]["update_profile_button"][$lang] ?? 'Profil frissitése' ?></button>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-danger"> <?= $langs["profile"]["profile_settings"]["delete_profile_button"][$lang] ?? 'Profil törlése' ?></button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#updateProfileModal" class="btn btn-outline-warning"> <?= $langs["profile"]["profile_settings"]["update_profile_button"][$lang] ?? 'Profil frissitése' ?></button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#deleteProfileModal" class="btn btn-outline-danger"> <?= $langs["profile"]["profile_settings"]["delete_profile_button"][$lang] ?? 'Profil törlése' ?></button>
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Profil frissitése</h5>
+              <h5 class="modal-title" id="updateProfileModalLabel">Profil frissitése</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -318,21 +323,21 @@ $langs = LANGS;
 
   </div>
 </div>
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Profil törlése</h5>
+        <h5 class="modal-title" id="deleteProfileModalLabel">Profil törlése</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="/user/delete" method="POST">
         <div class="modal-body">
-          Profil törléséhez ija be a következőt <b class="text-danger border border-danger p-1 rounded"><?= $user["userId"] ?></b>.
+          Profil törléséhez ija be a következőt <b class="text-danger border border-danger p-1 rounded"><?= "Delete" . "_" . $user["name"] ?></b>.
           <br>
           <b class="text-danger">A profil törlése végleges!</b>
 
           <div class="mb-3 mt-3">
-            <input type="text" class="form-control" id="exampleFormControlInput1" name="idForDelete" required>
+            <input type="text" class="form-control" id="deleteProfileInput" name="idForDelete" required>
           </div>
         </div>
         <div class="modal-footer">

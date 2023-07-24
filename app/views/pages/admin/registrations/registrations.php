@@ -16,7 +16,7 @@ $searchValue = $_GET["search"] ?? '';
       <button type="submit" class="btn btn-outline-primary">Keresés</button>
     </div>
   </form>
-  <nav aria-label="Page navigation example" class="mt-5 mb-5">
+  <nav class="mt-5 mb-5">
     <ul class="pagination">
       <?php if ($active_page > 1) : ?>
         <li class="page-item"><a class="page-link" href="/admin/registrations?offset=<?= $active_page - 1 ?><?= isset($_GET["search"]) && $_GET["search"] !== '' ? '&search=' . $_GET["search"] : '' ?>">Előző</a></li>
@@ -75,7 +75,7 @@ $searchValue = $_GET["search"] ?? '';
       </tbody>
     </table>
   </div>
-  <nav aria-label="Page navigation example" class="mt-5 mb-5">
+  <nav class="mt-5 mb-5">
     <ul class="pagination">
       <?php if ($active_page > 1) : ?>
         <li class="page-item"><a class="page-link" href="/admin/registrations?offset=<?= $active_page - 1 ?><?= isset($_GET["search"]) && $_GET["search"] !== '' ? '&search=' . $_GET["search"] : '' ?>">Előző</a></li>

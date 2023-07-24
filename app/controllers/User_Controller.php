@@ -58,7 +58,7 @@ class UserController
   }
   public function registration()
   {
-    $this->authService->registerUser($_FILES, $_POST);
+    $this->userModel->registerUser($_FILES, $_POST);
   }
   
   public function registerForm()
@@ -67,6 +67,8 @@ class UserController
       "content" => $this->renderer->render("/pages/user/Register.php", [])
     ]);
   }
+
+  
 
 
   public function login()
@@ -90,23 +92,56 @@ class UserController
     $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->delete($_POST);
     $this->authService->logoutUser();
-
   }
+  
+  public function deleteUserDocument($vars) {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->deleteDocument($vars["id"]);
+  }
+
+
+  
+  public function updateUserDocument($vars) {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->updateDocument($vars["id"], $_FILES, $_POST);
+  }
+  
+  public function newDocument() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->addDocument($_FILES, $_POST);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   public function dashboard()
   {
     $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
-
-
+    $documents = $this->userModel->getDocumentsByUser($user["id"]);
+    
+    
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
         "user" => $user ?? null,
+        "documents" => $documents ?? null,
         "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
     if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
+  
+
   
   public function resetPasswordForm()
   {
@@ -120,5 +155,50 @@ class UserController
     ]);
 
     if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
+  }
+
+  public function userDocuments() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    $documents = $this->userModel->getDocumentsByUser($user["id"]);
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Documents.php", [
+        "user" => $user ?? null,
+        "documents" => $documents ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
+    ]);
+  }
+
+  public function updateUserDocumentForm($vars) {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    $document = $this->userModel->getDocumentById($vars["id"]);
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/UpdateDocumentForm.php", [
+        "user" => $user ?? null,
+        "document" => $document ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
+    ]);
+  }
+
+  public function documentForm() {
+    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    $document = $this->userModel->getDocumentsByUser($user["id"]);
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/DocumentForm.php", [
+        "user" => $user ?? null,
+        "document" => $document ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
+    ]);
   }
 }

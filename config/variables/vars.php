@@ -63,7 +63,7 @@ define('TASK_AREAS', [
     "Sp" => ""
   ],
   "7" => [
-    "En" => "",
+    "En" => "Pre-event administration tasks (eg: information collection, database cleaning, text verification, etc.)",
     "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
     "sp" => ""
   ],
@@ -121,4 +121,22 @@ define('LANGUAGE_KNOWLEDGE', [
     1,2,3,4
   ],
 
+]);
+
+define('TYPE_OF_DOCUMENTS', [
+  "1" => [
+    "En" => "Cover letter",
+    "Hu" => "Motivációs levél",
+    "sp" => ""
+  ],
+  "2" => [
+    "En" => "CV",
+    "Hu" => "Önéletrajz",
+    "sp" => ""
+  ],
+  "3" => [
+    "En" => "Other",
+    "Hu" => "Egyéb",
+    "sp" => ""
+  ]
 ]);

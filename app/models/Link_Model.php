@@ -44,6 +44,7 @@ class LinkModel extends AdminModel
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $createdAt = time();
 
     $stmt = $this->pdo->prepare("INSERT INTO `links` VALUES (NULL, :nameInHu, :nameInEn, :link, :createdAt)");
     $stmt->bindParam(":nameInHu", $nameInHu);
@@ -72,7 +73,6 @@ class LinkModel extends AdminModel
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-
 
 
     $stmt = $this->pdo->prepare("UPDATE `links` SET 

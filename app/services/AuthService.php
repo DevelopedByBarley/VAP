@@ -2,13 +2,12 @@
 class AuthService
 {
     private $pdo;
-    private $fileSaver;
+
 
     public function __construct()
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
-        $this->fileSaver = new FileSaver();
     }
 
 
@@ -78,95 +77,7 @@ class AuthService
 
 
 
-
-
-
-    public function registerUser($files, $body)
-    {
-        $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null);
-
-        $userId = uniqid();
-        $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
-        $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
-        $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $programs = filter_var(PROGRAMS[$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $english = filter_var($body["english"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $germany = filter_var($body["germany"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $italy = filter_var($body["italy"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-        $task = filter_var(TASK_AREAS[$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-        $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
-        $createdAt = time();
-
-
-
-        $isUserExist = self::checkIsUserExist($email);
-
-        if ($isUserExist) {
-            echo "User exist";
-        }
-
-
-        // INSERT parancs előkészítése
-        $stmt = $this->pdo->prepare("INSERT INTO users VALUES 
-        (NULL, 
-        :userId, 
-        :name, 
-        :email, 
-        :password, 
-        :address, 
-        :mobile, 
-        :profession, 
-        :schoolName, 
-        :programs, 
-        :english, 
-        :germany, 
-        :italy, 
-        :serbian, 
-        :otherLanguages, 
-        :participation, 
-        :tasks, 
-        :informedBy, 
-        :permission, 
-        :fileName, 
-        :createdAt)");
-
-        // Paraméterek kötése
-        $stmt->bindParam(':userId', $userId);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $pw);
-        $stmt->bindParam(':address', $address);
-        $stmt->bindParam(':mobile', $mobile);
-        $stmt->bindParam(':profession', $profession);
-        $stmt->bindParam(':schoolName', $school_name);
-        $stmt->bindParam(':programs', $programs);
-        $stmt->bindParam(':english', $english);
-        $stmt->bindParam(':germany', $germany);
-        $stmt->bindParam(':italy', $italy);
-        $stmt->bindParam(':serbian', $serbian);
-        $stmt->bindParam(':otherLanguages', $otherLanguages);
-        $stmt->bindParam(':participation', $participation);
-        $stmt->bindParam(':tasks', $task);
-        $stmt->bindParam(':informedBy', $informedBy);
-        $stmt->bindParam(':permission', $permission);
-        $stmt->bindParam(':fileName', $fileName);
-        $stmt->bindParam(':createdAt', $createdAt);
-
-        // INSERT parancs végrehajtása
-        $stmt->execute();
-
-        if ($this->pdo->lastInsertId()) {
-            header("Location: /");
-        }
-    }
+    
 
     public function loginUser($body)
     {
@@ -185,8 +96,8 @@ class AuthService
                 "bg" => "red",
                 "message" => "Hibás email vagy jelszó!"
             ];
-        
-            
+
+
             header("Location: /login");
             return;
         }
@@ -202,7 +113,7 @@ class AuthService
             return;
         }
 
-        $_SESSION["userId"] = $user["userId"];
+        $_SESSION["userId"] = $user["id"];
 
         header("Location: /user/dashboard");
     }
@@ -222,16 +133,17 @@ class AuthService
 
 
 
-    private  function checkIsUserExist($email)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
 
-        $stmt->bindParam(":email", $email);
+
+    private function getUserById($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `id` = :id");
+
+        $stmt->bindParam(":id", $id);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && !empty($user)) {
-            return true;
+            return $user["userId"];
         }
 
         return false;
