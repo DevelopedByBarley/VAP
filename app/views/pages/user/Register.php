@@ -181,6 +181,7 @@ $langs = LANGS;
 
 
 
+
     <div class="col-xs-12 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label" for="other-languages"><b><?= $langs["registration"]["form"]["other_languages"][$lang] ?? 'További nyelvismeret' ?></b></label>

@@ -4,6 +4,7 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	config.ImageBrowser = true ;
-	config.ImageBrowserURL = '/public/filemanager_overlay/index.php' ;
+	// Define changes to default configuration here. For example:
+	// config.language = 'fr';
+	// config.uiColor = '#AADC6E';
 };

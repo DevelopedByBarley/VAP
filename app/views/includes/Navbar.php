@@ -57,23 +57,23 @@ $langs = LANGS;
                                         <button class="btn dropdown-toggle navigation-link" type="button" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 
                                             <?php if (isset($_COOKIE["lang"]) && $_COOKIE["lang"] === "Hu") : ?>
-                                                <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
+                                                <span>Hu</span>
                                             <?php elseif (isset($_COOKIE["lang"]) && $_COOKIE["lang"] === "En") : ?>
-                                                <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                                <span>En</span>
                                             <?php else : ?>
-                                                <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                                <span>Sp</span>
                                             <?php endif ?>
 
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="language-dropdown">
                                             <li>
                                                 <a class="dropdown-item text-center" href="/language/Hu">
-                                                    <img src="/public/assets/icons/hu.png" style="height: 30px; width: 30px;" />
+                                                    Hu
                                                 </a>
                                             </li>
                                             <li>
                                                 <a class="dropdown-item text-center" href="/language/En">
-                                                    <img src="/public/assets/icons/en.png" style="height: 30px; width: 30px;" />
+                                                    En
                                                 </a>
                                             </li>
                                             <!--
@@ -131,6 +131,9 @@ $langs = LANGS;
                         <ul class="list-group">
                             <a href="/admin/registrations" class="nav-link">
                                 <li class="list-group-item bg-primary text-light">Regisztrációk</li>
+                            </a>
+                            <a href="/admin/events" class="nav-link">
+                                <li class="list-group-item bg-primary text-light">Események</li>
                             </a>
                             <a href="/admin/volunteers" class="nav-link">
                                 <li class="list-group-item bg-primary text-light">Önkéntesek</li>

@@ -19,42 +19,6 @@ $links = $params["links"];
 
 
 <div class="container-fluid" disabled>
-    <div class="row" id="page-header">
-        <div class="col-12 col-lg-6" style="min-height: 30vh;" id="secondary-header-nav">
-            <div class="text-center">
-                <img src="/public/assets/icons/VAP.png" style="height: 100px; width: 180px;" />
-            </div>
-            <div class="text-center mb-4 ">
-                <a class="btn btn-lg text-light registration-button" href="/user/registration">
-                    <?= $langs["components"]["navbar"]["registrationBtn"][$lang] ?? 'Regisztráció' ?>
-                </a>
-            </div>
-            <div id="secondary-header-list">
-                <a href="#about-us" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunk' ?>
-                </a>
-                <a href="#volunteers" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
-                </a>
-                <a href="#edu" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["edu"][$lang] ?? 'Edu' ?>
-                </a>
-                <a href="#partners" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["partners"][$lang] ?? 'Partner Oldalak' ?>
-                </a>
-                <a href="#faq" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["faq"][$lang] ?? 'Gyakori kérdések' ?>
-                </a>
-                <a href="" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'Blog' ?>
-                </a>
-                <a href="" class="nav-link mt-2">
-                    <?= $langs["components"]["navbar"]["contact"][$lang] ?? 'Kapcsolat' ?>
-                </a>
-            </div>
-        </div>
-        <div id="header-image" class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center" style="min-height: 100vh;"></div>
-    </div>
     <div class="row mt-5" id="about-us">
         <div class="col-xs-12 col-lg-7 order-lg-2 d-flex align-items-center justify-content-center flex-column text-right mt-5 mb-5">
             <h1> <?= $langs["content"]["aboutUs"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
