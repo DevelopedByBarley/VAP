@@ -36,42 +36,14 @@
 
   <div class="form-outline mb-4">
     <label for="formFile" class="form-label">Választható feladatok hozzáadása</label>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="1" name="task[]">
-      <label class="form-check-label">
-        Kiállítói és galéria asszisztens
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="2" name="task[]">
-      <label class="form-check-label">
-        Ügyintéző, rendezvényszervező asszisztens
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="3" name="task[]">
-      <label class="form-check-label">
-        Program koordinátor
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="4" name="task[]">
-      <label class="form-check-label">
-        Építész, logisztika, raktár felügyelet
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="5" name="task[]">
-      <label class="form-check-label">
-        Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="6" name="task[]">
-      <label class="form-check-label">
-        Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)
-      </label>
-    </div>
+    <?php foreach (REGISTRATION_TASKS as $index => $task) : ?>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="<?= $index ?>" name="task[]">
+        <label class="form-check-label">
+          <?= $task["Hu"] ?>
+        </label>
+      </div>
+    <?php endforeach ?>
   </div>
 
   <div class="form-outline border p-3">

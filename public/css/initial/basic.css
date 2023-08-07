@@ -20,3 +20,7 @@
     margin: 0 auto;
   }
 }
+
+.shadow {
+  box-shadow: var(--shadow);
+}

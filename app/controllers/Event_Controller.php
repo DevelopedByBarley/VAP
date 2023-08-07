@@ -16,8 +16,8 @@ class EventController extends AdminController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $events = $this->eventModel->getEvents();
-    
-    
+
+
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/Events.php", [
         "admin" => $admin ?? null,
@@ -26,19 +26,28 @@ class EventController extends AdminController
       "admin" => $admin ?? null
     ]);
   }
-  
-  
-  public function newEvent() {
+
+
+  public function newEvent()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->eventModel->new($_FILES, $_POST);
   }
-  
-  public function deleteEvent($vars) {
+
+  public function deleteEvent($vars)
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->eventModel->delete($vars["id"]);
   }
 
-  public function eventForm() {
+  public function updateEvent($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->eventModel->update($vars["id"], $_POST, $_FILES);
+  }
+
+  public function eventForm()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
 
@@ -51,4 +60,27 @@ class EventController extends AdminController
     ]);
   }
 
+
+
+  public function updateEventForm($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $event = $this->eventModel->getEventById($vars["id"]);
+    $event_dates = $this->eventModel->getEventDates($vars["id"]);
+    $event_links = $this->eventModel->getEventLinks($vars["id"]);
+    $event_tasks = $this->eventModel->getEventTasks($vars["id"]);
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/events/UpdateForm.php", [
+        "admin" => $admin ?? null,
+        "event" => $event ?? null,
+        "event_dates" => $event_dates ?? null,
+        "event_links" => $event_links ?? null,
+        "event_tasks" => $event_tasks ?? null
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
 }

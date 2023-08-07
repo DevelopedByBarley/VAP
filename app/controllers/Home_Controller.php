@@ -31,12 +31,12 @@ class HomeController
         $partners = $this->partnerModel->partners();
         $documents = $this->documentModel->index();
         $links = $this->linkModel->index();
+        $lang = $_COOKIE["lang"] ?? null;
 
-
-        $nameInLang = "nameIn" . $_COOKIE["lang"];
-        $descriptionInLang = "descriptionIn" . $_COOKIE["lang"];
-        $questionInLang = "questionIn" . $_COOKIE["lang"];
-        $answerInLang = "answerIn" . $_COOKIE["lang"];
+        $nameInLang = "nameIn" . $lang;
+        $descriptionInLang = "descriptionIn" . $lang;
+        $questionInLang = "questionIn" . $lang;
+        $answerInLang = "answerIn" . $lang;
 
 
 
@@ -44,7 +44,7 @@ class HomeController
             "content" => $renderer->render("/pages/Content.php", [
                 "volunteers" => $volunteers ?? null,
                 "descriptionInLang" => $descriptionInLang ?? null,
-                "questions" => $questions,
+                "questions" => $questions ,
                 "questionInLang" => $questionInLang,
                 "answerInLang" => $answerInLang,
                 "partners" => $partners,

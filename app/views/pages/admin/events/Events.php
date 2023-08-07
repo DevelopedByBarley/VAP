@@ -13,8 +13,10 @@ $events = $params["events"] ?? null;
   <?php else : ?>
 
     <div class="col-12 ">
-      <div class="row d-flex align-items-center justify-content-center">
+      <div class="text-center">
         <h1 class="display-5 mb-3 text-center">Események</h1>
+      </div>
+      <div class="row d-flex align-items-center justify-content-center">
         <?php foreach ($events as $event) : ?>
           <?php $current_event = $event["nameInHu"]; ?>
           <div class="card event-card m-1" style="width: 18rem;">
@@ -23,7 +25,7 @@ $events = $params["events"] ?? null;
               <h5 class="card-title"><?= $event["nameInHu"] ?></h5>
               <p class="card-text"><?= $event["date"] ?></p>
               <a href="#" class="btn btn-primary rounded-pill"><i class="bi bi-eye"></i></a>
-              <a href="#" class="btn btn-warning rounded-pill text-light"><i class="bi bi-arrow-clockwise"></i></a>
+              <a href="/admin/events/update/<?= $event["eventId"] ?>" class="btn btn-warning rounded-pill text-light"><i class="bi bi-arrow-clockwise"></i></a>
               <span class="btn btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#partnerModal<?= $event["eventId"] ?>"><i class="bi bi-trash"></i></span>
             </div>
           </div>
@@ -46,6 +48,9 @@ $events = $params["events"] ?? null;
             </div>
           </div>
         <?php endforeach ?>
+      </div>
+      <div class="text-center">
+        <a href="/admin/events/new" class="btn btn-outline-primary mt-5">Esemény hozzáadása</a>
       </div>
     </div>
   <?php endif ?>

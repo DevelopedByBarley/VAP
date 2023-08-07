@@ -1,41 +1,46 @@
-const eventListCon = document.getElementById('event-links-container');
+const eventLinksCon = document.getElementById('event-links-container');
 const addEventLinkBtn = document.getElementById('add-event-link-btn');
-/**
- *   <div class="form-outline mb-4">
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Link URL</label>
-      <input class="form-control" type="text" id="formFile" name="link" required placeholder="URL">
-    </div>
-  </div>F
- */
-console.log(eventListCon);
 
-let eventState = [
-    {
-      id: generateUUID()
-    }
+addEventLinkBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  eventLinksState.push({
+    id: generateUUID()
+  })
+
+  renderLinkEvents();
+});
+
+let prevLinks = eventLinksCon.dataset.content;
+
+let eventLinksState = prevLinks !== undefined ? JSON.parse(prevLinks) : [
+  {
+    id: generateUUID()
+  }
 ]
 
-function renderStateEvents() {
+console.log(eventLinksState);
+
+
+function renderLinkEvents() {
   let temp = ``
 
-  eventState.forEach((document, index) => {
+  eventLinksState.forEach((document, index) => {
     temp += `
     <div class="form-outline mb-4">
       <div class="mb-3">
         <label for="formFile" class="form-label">Link URL</label>
-        <input class="form-control" type="text" id="formFile" name="links[]" required placeholder="URL">
+        <input class="form-control" type="text" id="formFile" name="links[]" required placeholder="URL" value="${document.link !== undefined ? document.link : ''}">
       </div>
-      ${index !== 0 ? '<button class="btn btn-outline-danger delete-event-link-btn" data-id="'+ document.id +'">Törlés</button>' : ''}
+      ${index !== 0 ? '<button class="btn btn-outline-danger delete-event-link-btn" data-id="' + document.id + '">Törlés</button>' : ''}
     </div>
     `
   })
 
-  eventListCon.innerHTML = temp;
+  eventLinksCon.innerHTML = temp;
 
   const deleteEventLinkBtn = document.querySelectorAll('.delete-event-link-btn');
 
-  deleteEventLinkBtn.forEach(btn =>  {
+  deleteEventLinkBtn.forEach(btn => {
     btn.addEventListener('click', deleteEventLink)
   })
 }
@@ -43,22 +48,14 @@ function renderStateEvents() {
 
 function deleteEventLink(e) {
   e.preventDefault();
-  
+
   let id = e.target.dataset.id;
-  let index = eventState.findIndex(event => event.id === id);
-  
-  eventState.splice(index, 1);
-  renderStateEvents();
+  let index = eventLinksState.findIndex(event => event.id === id);
+
+  eventLinksState.splice(index, 1);
+  renderLinkEvents();
 }
 
-addEventLinkBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  eventState.push({
-    id: generateUUID()
-  })
-
-  renderStateEvents();
-})
 
 
-renderStateEvents();
+renderLinkEvents();

@@ -1,7 +1,4 @@
 <?php
-if (!isset($_COOKIE["lang"])) {
-    include 'app/views/components/LanguageModal.php';
-}
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
@@ -18,17 +15,36 @@ $links = $params["links"];
 
 
 
-<div class="container-fluid" disabled>
+<div class="container-fluid" style="margin-top: 100px;">
     <div class="row mt-5" id="about-us">
-        <div class="col-xs-12 col-lg-7 order-lg-2 d-flex align-items-center justify-content-center flex-column text-right mt-5 mb-5">
-            <h1> <?= $langs["content"]["aboutUs"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
+        <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column mt-5 mb-5" id="about-us-content">
+            <h1 class="display-5"> <?= $langs["content"]["aboutUs"]["title"][$lang] ?? '' ?></h1>
             <hr class="line mt-1 mb-5">
             <p id="about-me-dc">
-                <?= $langs["content"]["aboutUs"]["description"][$lang] ?? 'Kapcsolat' ?>
+                <?= $langs["content"]["aboutUs"]["description"][$lang] ?? '' ?>
             </p>
         </div>
-        <div class="col-xs-12 col-lg-5 order-lg-1">
+        <div class="col-xs-12 col-lg-6 order-lg-1">
             <div id="about-me-image" style="min-height: 70vh;"></div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-5" id="intro">
+        <div class="col-xs-12 text-center mt-5 mb-5 d-flex align-items-center justify-content-center flex-column" id="recommend">
+            <div class="p-4">
+                <h1 class="display-5 mb-3">Kiknek ajánljuk?</h1>
+                <p style="width: 70%; margin: 0 auto;" class="mb-5">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In reprehenderit aspernatur dolorem!
+                    Ipsum fuga quam molestiae beatae delectus, minus debitis amet maiores animi possimus recusandae eos perferendis inventore cum cumque.
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Accusantium non id sapiente molestiae error! Voluptatem animi voluptate ut minus.
+                    Aliquam nostrum inventore, voluptates animi blanditiis necessitatibus veniam harum! Tempora, ipsam!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In reprehenderit aspernatur dolorem!
+                    Ipsum fuga quam molestiae beatae delectus, minus debitis amet maiores animi possimus recusandae eos perferendis inventore cum cumque.
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Accusantium non id sapiente molestiae error! Voluptatem animi voluptate ut minus.
+                    Aliquam nostrum inventore, voluptates animi blanditiis necessitatibus veniam harum! Tempora, ipsam!
+                </p>
+            </div>
         </div>
     </div>
     <div class="row" id="volunteers">
@@ -54,7 +70,7 @@ $links = $params["links"];
     </div>
 
     <div class="row mt-5" id="faq">
-        <div class="col-xs-12 col-lg-6">
+        <div class="col-xs-12">
             <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["faq"][$lang] ?? 'Kapcsolat' ?></h1>
             <div class="accordion mt-5 mb-5" id="questionAccordion">
                 <?php foreach ($questions as $index => $question) : ?>
@@ -73,7 +89,6 @@ $links = $params["links"];
                 <?php endforeach ?>
             </div>
         </div>
-        <div id="faq-image" class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center" style="min-height: 80vh;"></div>
     </div>
     <div class="row" id="partners">
         <div class="col-xs-12">
@@ -112,7 +127,7 @@ $links = $params["links"];
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_links"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($links as $index => $link) : ?>
-                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"    ><?= $link[$nameInLang] ?></a></p>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[$nameInLang] ?></a></p>
             <?php endforeach ?>
         </div>
     </div>

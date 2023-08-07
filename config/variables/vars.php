@@ -75,6 +75,44 @@ define('TASK_AREAS', [
 
 ]);
 
+define('REGISTRATION_TASKS', [
+  "1" => [
+    "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
+    "Hu" => "Kiállítói és galéria asszisztens",
+    "Sp" => ""
+  ],
+  "2" => [
+    "En" => "Administration, event organizer assistant",
+    "Hu" => "Ügyintézés, rendezvényszervező asszisztens",
+    "Sp" => ""
+  ],
+  "3" => [
+    "En" => "Registration (Galleries and VIP guests)",
+    "Hu" => "Program koordinátor",
+    "Sp" => ""
+  ],
+  "4" => [
+    "En" => "Worker at the information desk",
+    "Hu" => "Információs pultban munkatárs",
+    "Sp" => ""
+  ],
+  "5" => [
+    "En" => "Architect, logistics, warehouse supervision",
+    "Hu" => "Építész, logisztika, raktár felügyelet",
+    "Sp" => ""
+  ],
+  "6" => [
+    "En" => "Hostess tasks (guest escort, VIP Lounge supervision)",
+    "Hu" => "Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)",
+    "Sp" => ""
+  ],
+  "7" => [
+    "En" => "Pre-event administration tasks (eg: information collection, database cleaning, text verification, etc.)",
+    "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
+    "sp" => ""
+  ],
+]);
+
 
 define('INFORMED_BY',  [
   "1" => [
@@ -109,16 +147,16 @@ define('PARTICIPATIONS', [
 
 define('LANGUAGE_KNOWLEDGE', [
   "English" => [
-    1,2,3,4
+    1, 2, 3, 4
   ],
   "Germany" => [
-    1,2,3,4
+    1, 2, 3, 4
   ],
   "Italy" => [
-    1,2,3,4
+    1, 2, 3, 4
   ],
   "Serbian" => [
-    1,2,3,4
+    1, 2, 3, 4
   ],
 
 ]);

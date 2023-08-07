@@ -4,13 +4,14 @@ class AdminModel
 {
   protected $pdo;
   protected $fileSaver;
-
+  protected $mailer;
 
   public function __construct()
   {
     $db = new Database();
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
+    $this->mailer = new Mailer();
   }
 
   public function index() {

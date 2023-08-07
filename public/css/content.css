@@ -50,7 +50,7 @@
 }
 
 #header-image {
-  background: url("/public/assets/images/header_image.jpg") center center/cover;
+  background: url("/public/assets/images/header.jpg") center center/cover;
 }
 
 
@@ -60,7 +60,7 @@
 /* ABOUT ME SECTION */
 
 #about-me-image {
-  background: url("/public/assets/images/art_2.jpg") center center/cover;
+  background: url("/public/assets/images/header.jpg") center center/cover;
   width: 100%;
 }
 
@@ -72,8 +72,10 @@
 }
 
 
+
+
 #volunteers #volunteers-image {
-  background: url("/public/assets/images/team.jpg") center center/cover;
+  background: url("/public/assets/images/önkéntes_2.jpg") center center/cover;
 }
 
 .volunteer-profile-image {
@@ -93,5 +95,14 @@
 
 
 #faq-image {
-  background: url("/public/assets/images/art_3.jpg") center center/cover;
+  background: url("/public/assets/images/header.jpg") center center/cover;
+}
+
+
+li {
+  list-style-type: none;
+}
+
+#recommend {
+  min-height: 50vh
 }

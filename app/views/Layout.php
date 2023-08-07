@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,20 +13,23 @@
 </head>
 
 <body>
-    <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;" >
-        <?php include 'includes/Navbar.php' ?>
-
-        <div class="container-fluid" style="margin-top: 50px;">
-            <div class="row mb-5">
-                <div class="col-xs-12 p-0 d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh;">
-                    <?= $params["content"] ?? "" ?>
+    <?php if (!isset($_COOKIE["lang"])) : ?>
+        <?php include 'app/views/components/LanguageModal.php'?>
+    <?php else : ?>
+        <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;">
+            <?php include 'includes/Navbar.php' ?>
+            <div class="container-fluid">
+                <div class="row mb-5">
+                    <div class="col-xs-12 p-0 d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh;">
+                        <?= $params["content"] ?? "" ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php //include 'includes/Footer.php' 
-        ?>
+            <?php //include 'includes/Footer.php' 
+            ?>
 
-    </div>
+        </div>
+    <?php endif ?>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/User.Documents.js"></script>
     <script src="/public/js/Event.Links.js"></script>
