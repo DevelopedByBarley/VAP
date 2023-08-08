@@ -7,11 +7,19 @@
 
   public function index()
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM `documents` ORDER BY `createdAt`");
+    $stmt = $this->pdo->prepare("SELECT * FROM `events` ORDER BY `createdAt`");
     $stmt->execute();
-    $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $documents;
+    return $events;
+  }
+
+  public function getLatestEvent() {
+    $stmt = $this->pdo->prepare("SELECT * FROM `events` ORDER BY `createdAt` LIMIT 1");
+    $stmt->execute();
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $event;
   }
 
   public function new($files, $body)

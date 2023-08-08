@@ -2,15 +2,13 @@
   min-height: 100vh;
 }
 
-#dashboard #dashboard-header{
+#dashboard #dashboard-header {
   background-color: var(--pr-color);
   min-height: 400px;
 }
-@media(max-width: 1024px) {
-  #dashboard {
-    margin-top: 80px;
-  }
-}
+
+@media(max-width: 1024px) {}
+
 @media(min-width: 1280px) {
   #profile-settings {
     width: 60%;
@@ -21,8 +19,4 @@
 
 #event-btn {
   background-color: var(--sc-color);
-}
-
-#profile-settings {
-  
 }

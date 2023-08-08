@@ -24,3 +24,8 @@
 .shadow {
   box-shadow: var(--shadow);
 }
+
+.btn-sc {
+  background-color: var(--sc-color);
+  color: white;
+}

@@ -8,6 +8,7 @@ class HomeController
     private $partnerModel;
     private $documentModel;
     private $linkModel;
+    private $eventModel;
 
 
     public function __construct()
@@ -18,13 +19,16 @@ class HomeController
         $this->partnerModel = new PartnerModel;
         $this->documentModel = new DocumentModel();
         $this->linkModel = new LinkModel();
+        $this->eventModel = new EventModel();
 
     }
 
     public function home()
     {
-        $renderer = new Renderer();
         session_start();
+
+
+        $renderer = new Renderer();
         $user = $this->userModel->getMe();
         $volunteers = $this->volunteerModel->getVolunteers();
         $questions = $this->questionModel->questions();
@@ -32,6 +36,7 @@ class HomeController
         $documents = $this->documentModel->index();
         $links = $this->linkModel->index();
         $lang = $_COOKIE["lang"] ?? null;
+        $latestEvent = $this->eventModel->getLatestEvent();
 
         $nameInLang = "nameIn" . $lang;
         $descriptionInLang = "descriptionIn" . $lang;
@@ -39,18 +44,18 @@ class HomeController
         $answerInLang = "answerIn" . $lang;
 
 
-
         echo $renderer->render("Layout.php", [
             "content" => $renderer->render("/pages/Content.php", [
                 "volunteers" => $volunteers ?? null,
                 "descriptionInLang" => $descriptionInLang ?? null,
-                "questions" => $questions ,
+                "links" => $links ?? null,
+                "event" => $latestEvent ?? null,
+                "questions" => $questions ?? null,
                 "questionInLang" => $questionInLang,
                 "answerInLang" => $answerInLang,
                 "partners" => $partners,
                 "documents" => $documents,
                 "nameInLang" => $nameInLang,
-                "links" => $links
             ]),
             "user" => $user ?? null,
         ]);
