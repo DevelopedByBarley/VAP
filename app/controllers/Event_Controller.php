@@ -61,6 +61,28 @@ class EventController extends AdminController
   }
 
 
+  public function userEventForm($vars) {
+    $id = $vars["id"];
+    $event = $this->eventModel->getEventById($id);
+    $dates = $this->eventModel->getEventDates($id);
+    $links = $this->eventModel->getEventLinks($id);
+    $tasks = $this->eventModel->getEventTasks($id);
+
+    $lang = $_COOKIE["lang"] ?? null;
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/events/Form.php", [
+        "event" => $event ?? null,
+        "dates" => $dates ?? null,
+        "links" => $links ?? null,
+        "tasks" => $tasks ?? null,
+        "lang" => $lang,
+        
+      ]),
+    ]);
+  }
+
 
   public function updateEventForm($vars)
   {

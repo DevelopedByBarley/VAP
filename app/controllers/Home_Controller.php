@@ -35,27 +35,18 @@ class HomeController
         $partners = $this->partnerModel->partners();
         $documents = $this->documentModel->index();
         $links = $this->linkModel->index();
-        $lang = $_COOKIE["lang"] ?? null;
         $latestEvent = $this->eventModel->getLatestEvent();
 
-        $nameInLang = "nameIn" . $lang;
-        $descriptionInLang = "descriptionIn" . $lang;
-        $questionInLang = "questionIn" . $lang;
-        $answerInLang = "answerIn" . $lang;
 
 
         echo $renderer->render("Layout.php", [
             "content" => $renderer->render("/pages/Content.php", [
                 "volunteers" => $volunteers ?? null,
-                "descriptionInLang" => $descriptionInLang ?? null,
                 "links" => $links ?? null,
                 "event" => $latestEvent ?? null,
                 "questions" => $questions ?? null,
-                "questionInLang" => $questionInLang,
-                "answerInLang" => $answerInLang,
                 "partners" => $partners,
                 "documents" => $documents,
-                "nameInLang" => $nameInLang,
             ]),
             "user" => $user ?? null,
         ]);

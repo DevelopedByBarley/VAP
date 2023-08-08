@@ -138,32 +138,6 @@
   }
   
   
-  private function updateEventLinks($id, $links)
-  {
-    $stmt = $this->pdo->prepare("DELETE FROM `event_links` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    self::insertLinksOfEvent($id, $links);
-  }
-
-  private function updateEventDates($id, $event_dates)
-  {
-    $stmt = $this->pdo->prepare("DELETE FROM `event_dates` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    self::insertDatesOfEvent($id, $event_dates);
-  }
-
-  private function updateEventTasks($id, $tasks)
-  {
-    $stmt = $this->pdo->prepare("DELETE FROM `event_tasks` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    self::insertTasksOfEvent($id, $tasks);
-  }
 
 
 
@@ -172,51 +146,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   public function getEvents()
   {
     $stmt = $this->pdo->prepare("SELECT * FROM events");
@@ -284,6 +214,33 @@
 
 
 
+  
+  private function updateEventLinks($id, $links)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `event_links` WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    self::insertLinksOfEvent($id, $links);
+  }
+
+  private function updateEventDates($id, $event_dates)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `event_dates` WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    self::insertDatesOfEvent($id, $event_dates);
+  }
+
+  private function updateEventTasks($id, $tasks)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `event_tasks` WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    self::insertTasksOfEvent($id, $tasks);
+  }
 
   private function insertLinksOfEvent($id, $links)
   {

@@ -3,15 +3,13 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
 $volunteers = $params["volunteers"];
-$descriptionInLang = $params["descriptionInLang"];
 $questions = $params["questions"];
 $partners = $params["partners"];
-$questionInLang = $params["questionInLang"];
-$answerInLang = $params["answerInLang"];
-$nameInLang = $params["nameInLang"];
 $documents = $params["documents"];
 $links = $params["links"];
 $event = $params["event"];
+
+
 
 ?>
 
@@ -58,7 +56,7 @@ $event = $params["event"];
 						<div class="card text-light volunteer-card bg-dark" style="width: 21rem;">
 							<img src="/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>" class="card-img-top volunteer-profile-image" alt="...">
 							<div class="card-body volunteer-card-body">
-								<p class="card-text"><?= $volunteer[$descriptionInLang]  ?></p>
+								<p class="card-text"><?= $volunteer[languageSwitcher("descriptionIn")]  ?></p>
 								<i><?= $volunteer["name"] ?></i>
 							</div>
 						</div>
@@ -82,27 +80,29 @@ $event = $params["event"];
 
 
 
-	<div class="row" id="events">
-		<div class="col-xs-12 col-lg-5 d-flex align-items-center justify-content-center flex-column p-5 offset-lg-2">
-			<h1 class="display-3 mb-3">Következő eseményünk!</h1>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sapiente at, maxime saepe, quasi iusto iste reiciendis totam fugit excepturi exercitationem unde! Odit sequi id accusantium sint tempora possimus consequatur?
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sapiente at, maxime saepe, quasi iusto iste reiciendis totam fugit excepturi exercitationem unde! Odit sequi id accusantium sint tempora possimus consequatur?
-			</p>
+	<?php if ($event) : ?>
+		<div class="row" id="events">
+			<div class="col-xs-12 col-lg-5 d-flex align-items-center justify-content-center flex-column p-5 offset-lg-2">
+				<h1 class="display-3 mb-3">Következő eseményünk!</h1>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sapiente at, maxime saepe, quasi iusto iste reiciendis totam fugit excepturi exercitationem unde! Odit sequi id accusantium sint tempora possimus consequatur?
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sapiente at, maxime saepe, quasi iusto iste reiciendis totam fugit excepturi exercitationem unde! Odit sequi id accusantium sint tempora possimus consequatur?
+				</p>
 
-		</div>
-		<div class="col-xs-12 col-lg-3 d-flex align-items-center justify-content-center flex-column p-5">
-			<div class="card p-4 shadow" style="width: 20rem;">
-				<img src="/public/assets/uploads/images/events/<?= $event["fileName"] ?>" class="card-img-top volunteer-profile-image" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><?= $event[$nameInLang]?></h5>
-					<hr>
-					<p class="card-text"><?= substr($event[$descriptionInLang], 0, 200) ?>...</p>
-					<a href="#" class="btn btn-sc">Megtekintés</a>
+			</div>
+			<div class="col-xs-12 col-lg-3 d-flex align-items-center justify-content-center flex-column p-5">
+				<div class="card p-4 shadow" style="width: 20rem;">
+					<img src="/public/assets/uploads/images/events/<?= $event["fileName"] ?>" class="card-img-top volunteer-profile-image" alt="...">
+					<div class="card-body">
+						<h5 class="card-title"><?= $event[languageSwitcher("nameIn")] ?></h5>
+						<hr>
+						<p class="card-text"><?= substr($event[languageSwitcher("descriptionIn")], 0, 200) ?>...</p>
+						<a href="#" class="btn btn-sc">Megtekintés</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<?php endif ?>
 
 
 
@@ -124,12 +124,12 @@ $event = $params["event"];
 					<div class="accordion-item mt-2">
 						<h2 class="accordion-header" id="headingOne">
 							<button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $question["q_id"] ?>" aria-expanded="true" aria-controls="collapseOne">
-								<?= $question[$questionInLang] ?>
+								<?= $question[languageSwitcher("questionIn")] ?>
 							</button>
 						</h2>
 						<div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#questionAccordion">
 							<div class="accordion-body">
-								<?= $question[$answerInLang] ?>
+								<?= $question[languageSwitcher("answerIn")] ?>
 							</div>
 						</div>
 					</div>
@@ -151,7 +151,7 @@ $event = $params["event"];
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><?= $partner["name"] ?></h5>
-									<p class="card-text"><?= $partner[$descriptionInLang] ?></p>
+									<p class="card-text"><?= $partner[languageSwitcher("descriptionIn")] ?></p>
 								</div>
 							</div>
 						</div>
@@ -168,13 +168,13 @@ $event = $params["event"];
 		<div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
 			<h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
 			<?php foreach ($documents as $index => $document) : ?>
-				<p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
+				<p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[languageSwitcher("nameIn")] ?></a></p>
 			<?php endforeach ?>
 		</div>
 		<div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
 			<h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_links"][$lang] ?? 'Kapcsolat' ?></h1>
 			<?php foreach ($links as $index => $link) : ?>
-				<p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[$nameInLang] ?></a></p>
+				<p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[languageSwitcher("nameIn")] ?></a></p>
 			<?php endforeach ?>
 		</div>
 	</div>
