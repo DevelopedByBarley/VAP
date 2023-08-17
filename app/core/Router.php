@@ -1,15 +1,15 @@
 <?php
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-    require 'app/routes/home_routes.php';
-    require 'app/routes/admin_routes.php';
-    require 'app/routes/user_routes.php';
-    require 'app/routes/volunteer_routes.php';
-    require 'app/routes/partner_routes.php';
-    require 'app/routes/question_routes.php';
-    require 'app/routes/document_routes.php';
-    require 'app/routes/link_routes.php';
-    require 'app/routes/event_routes.php';
+    require 'app/routes/public/home_routes.php';
+    require 'app/routes/user/user_routes.php';
+    require 'app/routes/admin/admin_routes.php';
+    require 'app/routes/admin/volunteer_routes.php';
+    require 'app/routes/admin/partner_routes.php';
+    require 'app/routes/admin/question_routes.php';
+    require 'app/routes/admin/document_routes.php';
+    require 'app/routes/admin/link_routes.php';
+    require 'app/routes/admin/event_routes.php';
 });
 
 // Fetch method and URI from somewhere

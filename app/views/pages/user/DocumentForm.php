@@ -19,7 +19,7 @@ $langs = LANGS;
         <?php endforeach ?>
       </select>
       <div class="mb-3" class="document">
-        <input class="form-control" type="file" name="document" id="documents" />
+        <input class="form-control" type="file" name="document" id="documents" required />
       </div>
       <div class="text-center">
         <button type="submit" class="mt-3 btn btn-primary text-light">Hozzáadás</button>

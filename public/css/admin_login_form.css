@@ -1,0 +1,10 @@
+#admin-login-form {
+  width: 100%;
+}
+@media(min-width: 1024px) {
+  #admin-login-form {
+    width: 30%;
+    margin: 0 auto;
+  }
+  
+}

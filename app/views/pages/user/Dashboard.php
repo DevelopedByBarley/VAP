@@ -12,8 +12,8 @@ $langs = LANGS;
 
 
 
-<div id="dashboard" class="w-100 mt-5">
-  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow mt-4">
+<div id="dashboard" class="w-100">
+  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow">
     <div class="text-center mb-2">
       <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="shadow" />
     </div>
