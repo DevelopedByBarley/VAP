@@ -3,12 +3,8 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
 $volunteers = $params["volunteers"];
-$descriptionInLang = $params["descriptionInLang"];
 $questions = $params["questions"];
 $partners = $params["partners"];
-$questionInLang = $params["questionInLang"];
-$answerInLang = $params["answerInLang"];
-$nameInLang = $params["nameInLang"];
 $documents = $params["documents"];
 $links = $params["links"];
 ?>
@@ -56,7 +52,7 @@ $links = $params["links"];
                         <div class="card text-light volunteer-card bg-dark" style="width: 21rem;">
                             <img src="/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>" class="card-img-top volunteer-profile-image" alt="...">
                             <div class="card-body volunteer-card-body">
-                                <p class="card-text"><?= $volunteer[$descriptionInLang]  ?></p>
+                                <p class="card-text"><?= $volunteer[languageSwitcher("description")]  ?></p>
                                 <i><?= $volunteer["name"] ?></i>
                             </div>
                         </div>
@@ -77,12 +73,12 @@ $links = $params["links"];
                     <div class="accordion-item mt-2">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $question["q_id"] ?>" aria-expanded="true" aria-controls="collapseOne">
-                                <?= $question[$questionInLang] ?>
+                                <?= $question[languageSwitcher("question")] ?>
                             </button>
                         </h2>
                         <div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#questionAccordion">
                             <div class="accordion-body">
-                                <?= $question[$answerInLang] ?>
+                                <?= $question[languageSwitcher("answer")] ?>
                             </div>
                         </div>
                     </div>
@@ -104,7 +100,7 @@ $links = $params["links"];
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $partner["name"] ?></h5>
-                                    <p class="card-text"><?= $partner[$descriptionInLang] ?></p>
+                                    <p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -121,13 +117,13 @@ $links = $params["links"];
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($documents as $index => $document) : ?>
-                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[$nameInLang] ?></a></p>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[languageSwitcher("name")] ?></a></p>
             <?php endforeach ?>
         </div>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
             <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_links"][$lang] ?? 'Kapcsolat' ?></h1>
             <?php foreach ($links as $index => $link) : ?>
-                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[$nameInLang] ?></a></p>
+                <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[languageSwitcher("name")] ?></a></p>
             <?php endforeach ?>
         </div>
     </div>
