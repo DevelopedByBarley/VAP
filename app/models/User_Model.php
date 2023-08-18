@@ -22,7 +22,7 @@ class UserModel
 
     return $user;
   }
-
+  
   public function registerUser($files, $body)
   {
 
@@ -36,15 +36,12 @@ class UserModel
     $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $programs = filter_var(PROGRAMS[$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $english = filter_var($body["english"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $germany = filter_var($body["germany"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $italy = filter_var($body["italy"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $programs = filter_var(PROGRAMS["program"][$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+
     $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $task = filter_var(TASK_AREAS[$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $task = filter_var(TASK_AREAS["areas"][$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
     $typeOfDocument = $body["typeOfDocument"] ?? [];
 
@@ -52,7 +49,7 @@ class UserModel
 
 
     $createdAt = time();
-
+    
 
 
 
@@ -77,11 +74,7 @@ class UserModel
         :mobile, 
         :profession, 
         :schoolName, 
-        :programs, 
-        :english, 
-        :germany, 
-        :italy, 
-        :serbian, 
+        :programs,  
         :otherLanguages, 
         :participation, 
         :tasks, 
@@ -99,10 +92,6 @@ class UserModel
     $stmt->bindParam(':profession', $profession);
     $stmt->bindParam(':schoolName', $school_name);
     $stmt->bindParam(':programs', $programs);
-    $stmt->bindParam(':english', $english);
-    $stmt->bindParam(':germany', $germany);
-    $stmt->bindParam(':italy', $italy);
-    $stmt->bindParam(':serbian', $serbian);
     $stmt->bindParam(':otherLanguages', $otherLanguages);
     $stmt->bindParam(':participation', $participation);
     $stmt->bindParam(':tasks', $task);
@@ -129,15 +118,11 @@ class UserModel
     $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $programs = filter_var(PROGRAMS[$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $english = filter_var($body["english"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $germany = filter_var($body["germany"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $italy = filter_var($body["italy"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $serbian = filter_var($body["serbian"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $programs = filter_var(PROGRAMS["program"][$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $task = filter_var(TASK_AREAS[$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $informedBy = filter_var(INFORMED_BY[$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $task = filter_var(TASK_AREAS["areas"][$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
 
 
@@ -149,10 +134,6 @@ class UserModel
         `profession` = :profession, 
         `schoolName` = :schoolName, 
         `programs` = :programs,
-        `english` = :english,
-        `germany` = :germany,
-        `italy` = :italy,
-        `serbian` = :serbian,
         `otherLanguages` = :otherLanguages,
         `participation` = :participation,
         `tasks` = :tasks,
@@ -167,10 +148,6 @@ class UserModel
     $stmt->bindParam(':profession', $profession);
     $stmt->bindParam(':schoolName', $school_name);
     $stmt->bindParam(':programs', $programs);
-    $stmt->bindParam(':english', $english);
-    $stmt->bindParam(':germany', $germany);
-    $stmt->bindParam(':italy', $italy);
-    $stmt->bindParam(':serbian', $serbian);
     $stmt->bindParam(':otherLanguages', $otherLanguages);
     $stmt->bindParam(':participation', $participation);
     $stmt->bindParam(':tasks', $task);

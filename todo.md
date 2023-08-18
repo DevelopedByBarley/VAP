@@ -10,3 +10,9 @@ Zászlók átirásak -->
 Keretek nem kellenek alinkeknek --> done
 
 . 
+
+
+
+
+Nyelv választó
+

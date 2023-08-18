@@ -19,37 +19,37 @@ $langs = LANGS;
                                 <li class="nav-item m-1 mt-3">
 
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-us' : '#about-us' ?>">
-                                        <?= $langs["components"]["navbar"]["aboutMe"][$lang] ?? 'Rólunkgdfs' ?>
+                                        <?= NAVBAR["aboutMe"][$lang] ?? 'Rólunk' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
-                                        <?= $langs["components"]["navbar"]["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
+                                        <?= NAVBAR["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#edu' : '#edu' ?>">
-                                        <?= $langs["components"]["navbar"]["edu"][$lang] ?? 'Edu' ?>
+                                        <?= NAVBAR["edu"][$lang] ?? 'Edu' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#partners' : '#partners' ?>">
-                                        <?= $langs["components"]["navbar"]["partners"][$lang] ?? 'Partner Oldalak' ?>
+                                        <?= NAVBAR["partners"][$lang] ?? 'Partner Oldalak' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">
-                                        <?= $langs["components"]["navbar"]["blog"][$lang] ?? 'Blog' ?>
+                                        <?= NAVBAR["blog"][$lang] ?? 'Blog' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
-                                        <?= $langs["components"]["navbar"]["faq"][$lang] ?? 'Gyakori kérdések' ?>
+                                        <?= NAVBAR["faq"][$lang] ?? 'Gyakori kérdések' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">
-                                        <?= $langs["components"]["navbar"]["contact"][$lang] ?? 'Kapcsolat' ?>
+                                        <?= NAVBAR["contact"][$lang] ?? 'Kapcsolat' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
@@ -106,7 +106,7 @@ $langs = LANGS;
                                 <?php endif ?>
                                 <div class="text-center">
                                     <a href="/user/logout" class="m-1 btn btn-danger text-light" id="user-logout-button">
-                                        <?= $langs["components"]["navbar"]["logoutBtn"][$lang] ?? 'Önkéntes beszámolók' ?>
+                                        <?= NAVBAR["logoutBtn"][$lang] ?? 'Önkéntes beszámolók' ?>
                                     </a>
                                 </div>
                             <?php endif ?>

@@ -13,7 +13,7 @@ $langs = LANGS;
       <h1 class="text-center mt-2 mb-3 ">Dokumentum frissitése</h1>
       <hr class="mb-4 text-light">
       <select class="form-select mb-3" aria-label="Default select example" required name=typeOfDocument>
-        <?php foreach (TYPE_OF_DOCUMENTS as $index => $typeOfDocument) : ?>
+        <?php foreach (UPLOAD_DOCUMENTS["types"] as $index => $typeOfDocument) : ?>
 
           <option value="<?= $index ?>" <?php echo (int)$document["type"] === (int)$index ? 'selected' : '' ?>>
             <?= $typeOfDocument[$lang] ?>

@@ -1,36 +1,7 @@
 <?php
-define('PROFESSIONS', [
-  "student" => [
-    "En" => "Student",
-    "Hu" => "Diák vagyok",
-    "Sp" => ""
-  ],
-  "worker" => [
-    "En" => "I've job",
-    "Hu" => "Dolgozok",
-    "Sp" => ""
 
-  ]
-]);
-
-define('PROGRAMS', [
-  "program_1" => [
-    "En" => "Intern (minimum 1 month of office preparation work before and during the fair)",
-    "Hu" => "Önkéntes gyakornok (hosszabb időtartamú, folyamatos elfoglaltság)",
-    "Sp" => ""
-  ],
-  "program_2" => [
-    "En" => "Volunteer (1 week's work during the fair and at its location: Bálna Budapest)",
-    "Hu" => "Önkéntesség (rövidebb, időszakos elfoglaltság)",
-    "Sp" => ""
-  ],
-  "program_3" => [
-    "En" => "Both",
-    "Hu" => "Mindkettő",
-    "Sp" => ""
-  ],
-]);
-
+/**
+ * 
 define('TASK_AREAS', [
   "1" => [
     "En" => "Stand assistant (at exhibiting galleries, providing on-site assistance)",
@@ -178,3 +149,5 @@ define('TYPE_OF_DOCUMENTS', [
     "sp" => ""
   ]
 ]);
+
+ */

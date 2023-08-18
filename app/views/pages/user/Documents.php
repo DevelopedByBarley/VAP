@@ -16,9 +16,9 @@ $langs = LANGS;
 
   <div class="row mt-5 w-100">
     <?php foreach ($documents as $document) : ?>
-      <?php $current_document =  $langs["registration"]["form"]["upload_documents"][$document["type"]][$lang] ?>
+      <?php $current_document = UPLOAD_DOCUMENTS["types"][$document["type"]][$lang] ?>
       <div class="col-xs-12 col-sm-4 mt-3 m-4 p-4 bg-light rounded shadow">
-        <h5><a href="/public/assets/uploads/documents/users/<?= $document["name"] ?>" download class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: 1.7rem;"><?= $langs["registration"]["form"]["upload_documents"][$document["type"]][$lang] ?> <i class=" m-2 bi bi-cloud-arrow-down-fill"></i> </a></h5>
+        <h5><a href="/public/assets/uploads/documents/users/<?= $document["name"] ?>" download class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: 1.7rem;"><?= UPLOAD_DOCUMENTS["types"][$document["type"]][$lang] ?> <i class=" m-2 bi bi-cloud-arrow-down-fill"></i> </a></h5>
         <p><?= $document["originalFileName"] ?? '' ?></p>
         <hr>
         <div class="btn-group">

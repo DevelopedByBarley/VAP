@@ -32,6 +32,7 @@
     <?php endif ?>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/User.Documents.js"></script>
+    <script src="/public/js/User.Languages.js"></script>
     <script src="/public/js/Event.Links.js"></script>
     <script src="/public/js/Event.Dates.js"></script>
 </body>

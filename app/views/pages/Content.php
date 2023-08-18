@@ -1,6 +1,5 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
 
 $volunteers = $params["volunteers"];
 $questions = $params["questions"];
@@ -14,10 +13,10 @@ $links = $params["links"];
 <div class="container-fluid" style="margin-top: 100px;">
     <div class="row mt-5" id="about-us">
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column mt-5 mb-5" id="about-us-content">
-            <h1 class="display-5"> <?= $langs["content"]["aboutUs"]["title"][$lang] ?? '' ?></h1>
+            <h1 class="display-5"> <?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?></h1>
             <hr class="line mt-1 mb-5">
             <p id="about-me-dc">
-                <?= $langs["content"]["aboutUs"]["description"][$lang] ?? '' ?>
+                <?= CONTENT["aboutUs"]["description"][$lang] ?? '' ?>
             </p>
         </div>
         <div class="col-xs-12 col-lg-6 order-lg-1">
@@ -67,7 +66,7 @@ $links = $params["links"];
 
     <div class="row mt-5" id="faq">
         <div class="col-xs-12">
-            <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["faq"][$lang] ?? 'Kapcsolat' ?></h1>
+            <h1 class="display-4 text-center mt-5 mb-5"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
             <div class="accordion mt-5 mb-5" id="questionAccordion">
                 <?php foreach ($questions as $index => $question) : ?>
                     <div class="accordion-item mt-2">
@@ -88,7 +87,7 @@ $links = $params["links"];
     </div>
     <div class="row" id="partners">
         <div class="col-xs-12">
-            <h1 class="display-4 text-center mt-5 mb-5"><?= $langs["partners"]["title"][$lang] ?? 'Kapcsolat' ?></h1>
+            <h1 class="display-4 text-center mt-5 mb-5"><?= CONTENT["partners"]["title"][$lang] ?? '' ?></h1>
             <div class="row mb-5">
                 <?php $counter = 0; ?>
                 <?php foreach ($partners as $index => $partner) : ?>
@@ -108,20 +107,20 @@ $links = $params["links"];
                     <?php endif; ?>
                 <?php endforeach ?>
                 <div class="text-center">
-                    <a href="#" class="btn btn-outline-primary mt-5"><?= $langs["partners"]["partner-btn"][$lang] ?? 'Kapcsolat' ?></a>
+                    <a href="#" class="btn btn-outline-primary mt-5"><?= CONTENT["partners"]["partner-btn"][$lang] ?? '' ?></a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row" id="edu">
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
-            <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_documents"][$lang] ?? 'Kapcsolat' ?></h1>
+            <h1 class="text-center display-4 mt-5 mb-5"><?= CONTENT["edu"]["useful_documents"][$lang] ?? '' ?></h1>
             <?php foreach ($documents as $index => $document) : ?>
                 <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>"><?= $document[languageSwitcher("name")] ?></a></p>
             <?php endforeach ?>
         </div>
         <div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column">
-            <h1 class="text-center display-4 mt-5 mb-5"><?= $langs["edu"]["useful_links"][$lang] ?? 'Kapcsolat' ?></h1>
+            <h1 class="text-center display-4 mt-5 mb-5"><?= CONTENT["edu"]["useful_links"][$lang] ?? '' ?></h1>
             <?php foreach ($links as $index => $link) : ?>
                 <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="<?= $link["link"] ?>" target="_blank"><?= $link[languageSwitcher("name")] ?></a></p>
             <?php endforeach ?>
