@@ -5,13 +5,23 @@
     parent::__construct();
   }
 
-  public function index()
+  public function getEvents()
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM `documents` ORDER BY `createdAt`");
+    $stmt = $this->pdo->prepare("SELECT * FROM events");
     $stmt->execute();
-    $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $documents;
+    return $events;
+  }
+
+  public function getEventById($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $events = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $events;
   }
 
   public function new($files, $body)
@@ -56,8 +66,6 @@
 
     header("Location: /admin/events");
   }
-
-
 
   public function delete($id)
   {
@@ -128,26 +136,6 @@
     
     header("Location:  /admin/events");
   }
-  
-
-  public function getEvents()
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM events");
-    $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $events;
-  }
-
-  public function getEventById($id)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    $events = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $events;
-  }
 
   public function getEventDates($id)
   {
@@ -178,6 +166,36 @@
 
     return $events;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   private function updateEventLinks($id, $links)
   {

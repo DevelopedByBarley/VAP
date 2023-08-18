@@ -6,7 +6,6 @@ class EventRender extends EventController
   public function __construct()
   {
     parent::__construct();
-    
   }
   public function index()
   {
@@ -40,27 +39,7 @@ class EventRender extends EventController
   }
 
 
-  public function userEventForm($vars) {
-    $id = $vars["id"];
-    $event = $this->eventModel->getEventById($id);
-    $dates = $this->eventModel->getEventDates($id);
-    $links = $this->eventModel->getEventLinks($id);
-    $tasks = $this->eventModel->getEventTasks($id);
 
-    $lang = $_COOKIE["lang"] ?? null;
-
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/events/Form.php", [
-        "event" => $event ?? null,
-        "dates" => $dates ?? null,
-        "links" => $links ?? null,
-        "tasks" => $tasks ?? null,
-        "lang" => $lang,
-        
-      ]),
-    ]);
-  }
 
 
   public function updateEventForm($vars)
@@ -82,6 +61,31 @@ class EventRender extends EventController
         "event_tasks" => $event_tasks ?? null
       ]),
       "admin" => $admin ?? null
+    ]);
+  }
+
+
+  public function registerToEventForm($vars)
+  {
+    session_start();
+    $id = $vars["id"];
+    
+    $event = $this->eventModel->getEventById($id);
+    $dates = $this->eventModel->getEventDates($id);
+    $links = $this->eventModel->getEventLinks($id);
+    $tasks = $this->eventModel->getEventTasks($id);
+    $user = $this->userModel->getMe();
+    $lang = $_COOKIE["lang"] ?? null;
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/events/Register.php", [
+        "user" => $user ?? null,
+        "event" => $event ?? null,
+        "dates" => $dates ?? null,
+        "links" => $links ?? null,
+        "tasks" => $tasks ?? null,
+        "lang" => $lang,
+      ]),
     ]);
   }
 }

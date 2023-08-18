@@ -4,11 +4,13 @@ require 'app/models/Event_Model.php';
 class EventController extends AdminController
 {
   protected $eventModel;
+  protected $userModel;
 
   public function __construct()
   {
     parent::__construct();
     $this->eventModel = new eventModel();
+    $this->userModel = new UserModel();
   }
 
   

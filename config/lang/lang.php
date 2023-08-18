@@ -3,6 +3,8 @@ define("LANGS", [
   "components" => [
 
     "navbar" => [
+
+
       "aboutMe" => [
         "En" => "About us",
         "Hu" => "Rólunk",
@@ -48,6 +50,9 @@ define("LANGS", [
         "Hu" => "Gyakori kérdések",
         "Sp" => ""
       ],
+
+
+      
     ]
   ],
 
