@@ -14,6 +14,11 @@ $r->addRoute('GET', '/admin/events/delete/{id}', [EventController::class, 'delet
 
 $r->addRoute('POST', '/admin/events/new', [EventController::class, 'newEvent']);
 $r->addRoute('POST', '/admin/events/update/{id}', [EventController::class, 'updateEvent']);
+$r->addRoute('POST', '/user/event/register', [EventController::class, 'registerUserToEvent']);
+
+
+
+
 
 
 

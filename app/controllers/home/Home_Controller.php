@@ -9,6 +9,7 @@ class HomeController
     protected $partnerModel;
     protected $documentModel;
     protected $linkModel;
+    protected $eventModel;
 
 
     public function __construct()
@@ -20,6 +21,7 @@ class HomeController
         $this->partnerModel = new PartnerModel;
         $this->documentModel = new DocumentModel();
         $this->linkModel = new LinkModel();
+        $this->eventModel = new EventModel();
 
     }
 }

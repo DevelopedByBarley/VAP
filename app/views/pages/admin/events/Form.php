@@ -36,7 +36,7 @@
 
   <div class="form-outline mb-4">
     <label for="formFile" class="form-label">Választható feladatok hozzáadása</label>
-    <?php foreach (REGISTRATION_TASKS as $index => $task) : ?>
+    <?php foreach (TASK_AREAS["areas"] as $index => $task) : ?>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="<?= $index ?>" name="task[]">
         <label class="form-check-label">

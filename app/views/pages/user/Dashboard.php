@@ -2,6 +2,8 @@
 $user = $params["user"];
 $documents = $params["documents"];
 $subscriptions = $params["subscriptions"] ?? null;
+$userLanguages = $params["userLanguages"];
+
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
@@ -151,13 +153,54 @@ $langs = LANGS;
 
 
 
-        <div class="col-xs-12 mt-3">
+
+        <div class="col-xs-12 mt-3" id="user-languages" data-langs='<?= json_encode($userLanguages) ?>'>
           <div class="form-outline mb-4">
             <label class="form-check-label required" for="languages">
-              <b> <?= $langs["registration"]["form"]["language_knowledge"]["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
+              <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
             </label>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
+              További nyelvek hozzáadása
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="lang-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Nyelv kiválasztása</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="language-modal-container">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
+                        <label class="form-check-label" for="lang_2">
+                          Angol
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
+                        <label class="form-check-label" for="lang_3">
+                          Német
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vissza</button>
+                    <button type="button" class="btn btn-primary" id="language-select-btn">Nyelv hozzáadása</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="language-container">
+
+            </div>
           </div>
         </div>
+
 
 
 

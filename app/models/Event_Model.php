@@ -24,6 +24,15 @@
     return $events;
   }
 
+  public function getLatestEvent()
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY `date` DESC LIMIT 1");
+    $stmt->execute();
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $event;
+  }
+
   public function new($files, $body)
   {
 
@@ -83,7 +92,9 @@
 
   public function update($id, $body, $files)
   {
-    $prevImage = self::getEventById($id)["fileName"];
+    $event = self::getEventById($id);
+    $prevImage = $event["fileName"];
+    $createdAt = $event["createdAt"];
 
 
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -95,7 +106,6 @@
     $event_dates = $body["event_dates"] ?? [];
 
     $tasks = $body["task"] ?? [];
-    $createdAt = time();
 
     $fileName = '';
 
@@ -129,11 +139,11 @@
     $stmt->bindParam(":createdAt", $createdAt);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    
+
     self::updateEventLinks($id, $links);
     self::updateEventDates($id, $event_dates);
     self::updateEventTasks($id, $tasks);
-    
+
     header("Location:  /admin/events");
   }
 
@@ -243,7 +253,7 @@
       $stmt->execute();
     }
   }
-  
+
   private function insertTasksOfEvent($id, $tasks)
   {
     foreach ($tasks as $task) {
@@ -254,14 +264,14 @@
     }
   }
 
-  private function sendMailForRegisteredUsers() {
+  private function sendMailForRegisteredUsers()
+  {
     $stmt = $this->pdo->prepare("SELECT `email` FROM `users`");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach($users as $user) {
+    foreach ($users as $user) {
       $this->mailer->send($user["email"], "Új esemény!", "Hello");
-    
     }
   }
 }

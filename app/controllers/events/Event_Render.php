@@ -64,17 +64,17 @@ class EventRender extends EventController
     ]);
   }
 
-
   public function registerToEventForm($vars)
   {
     session_start();
     $id = $vars["id"];
-    
+
     $event = $this->eventModel->getEventById($id);
     $dates = $this->eventModel->getEventDates($id);
     $links = $this->eventModel->getEventLinks($id);
     $tasks = $this->eventModel->getEventTasks($id);
     $user = $this->userModel->getMe();
+    $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
     $lang = $_COOKIE["lang"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
@@ -84,8 +84,10 @@ class EventRender extends EventController
         "dates" => $dates ?? null,
         "links" => $links ?? null,
         "tasks" => $tasks ?? null,
+        "userLanguages" => $userLanguages ?? null,
         "lang" => $lang,
       ]),
     ]);
   }
+
 }

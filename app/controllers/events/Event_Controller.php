@@ -33,4 +33,7 @@ class EventController extends AdminController
     $this->eventModel->update($vars["id"], $_POST, $_FILES);
   }
 
+  public function registerUserToEvent() {
+    var_dump($_POST);
+  }
 }

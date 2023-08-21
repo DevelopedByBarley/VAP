@@ -120,12 +120,12 @@ $langs = LANGS;
           <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
         </label>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Nyelv kiválasztása
+        <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
+          További nyelvek hozzáadása
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="lang-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -134,12 +134,23 @@ $langs = LANGS;
               </div>
               <div class="modal-body">
                 <div id="language-modal-container">
-
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
+                    <label class="form-check-label" for="lang_2">
+                      Angol
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
+                    <label class="form-check-label" for="lang_3">
+                      Német
+                    </label>
+                  </div>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vissza</button>
-                <button type="button" class="btn btn-primary">Nyelv hozzáadása</button>
+                <button type="button" class="btn btn-primary" id="language-select-btn">Nyelv hozzáadása</button>
               </div>
             </div>
           </div>

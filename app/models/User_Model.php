@@ -22,7 +22,7 @@ class UserModel
 
     return $user;
   }
-  
+
   public function registerUser($files, $body)
   {
 
@@ -44,12 +44,15 @@ class UserModel
     $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
     $typeOfDocument = $body["typeOfDocument"] ?? [];
+    $languages = $body["langs"] ?? [];
+    $levels = $body["levels"] ?? [];
 
     $documents = self::formatDocuments($documentName, $typeOfDocument);
 
 
     $createdAt = time();
-    
+
+
 
 
 
@@ -103,9 +106,33 @@ class UserModel
     // INSERT parancs végrehajtása
     $stmt->execute();
 
-    if ($this->pdo->lastInsertId()) {
-      self::insertDocuments($this->pdo->lastInsertId(), $documents);
+    $lastInsertedId = $this->pdo->lastInsertId();
+
+    if ($lastInsertedId) {
+      self::insertDocuments($lastInsertedId, $documents);
+      self::insertLanguages($lastInsertedId, $languages, $levels);
       header("Location: /");
+    }
+  }
+
+  private function insertLanguages($id, $languages, $levels)
+  {
+    $ret = [];
+
+    for ($i = 0; $i < count($languages); $i++) {
+      $ret[$i] = [
+        "lang" => $languages[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+
+    foreach ($ret as $language) {
+      $stmt = $this->pdo->prepare("INSERT INTO `user_languages` (`id`, `lang`, `level`, `userRefId`) VALUES (NULL, :lang, :level, :userRefId);");
+      $stmt->bindParam(':lang', $language["lang"]);
+      $stmt->bindParam(':level', $language["level"]);
+      $stmt->bindParam(':userRefId', $id);
+      $stmt->execute();
     }
   }
 
@@ -124,7 +151,8 @@ class UserModel
     $task = filter_var(TASK_AREAS["areas"][$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
-
+    $languages = $body["langs"] ?? [];
+    $levels = $body["levels"] ?? [];
 
     $stmt = $this->pdo->prepare("UPDATE `users` 
         SET 
@@ -158,6 +186,7 @@ class UserModel
     $isSuccess = $stmt->execute();
 
     if ($isSuccess) {
+      self::updateUserLanguages($userId, $languages, $levels);
       header('Location: /user/dashboard');
     }
   }
@@ -215,17 +244,16 @@ class UserModel
 
       if ($isSuccess) {
 
-
-        $stmt = $this->pdo->prepare("DELETE FROM `user_documents` where `userRefId` = :id");
+        $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
         $stmt->bindParam(":id", $userId);
-        $isSuccess = $stmt->execute();
+        $stmt->execute();
 
 
 
-        if($isSuccess) {
+        if ($isSuccess) {
 
 
-          foreach($documents as $document) {
+          foreach ($documents as $document) {
             $documentName = $document["name"];
             unlink("./public/assets/uploads/documents/users/$documentName");
           }
@@ -268,8 +296,8 @@ class UserModel
     $stmt->bindParam(':userRefId', $userRefId);
 
     $isSuccesS = $stmt->execute();
-  
-    if($isSuccesS) {
+
+    if ($isSuccesS) {
       header("Location: /user/documents");
     }
   }
@@ -355,6 +383,16 @@ class UserModel
     }
   }
 
+  private function updateUserLanguages($id, $languages, $levels)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    self::insertLanguages($id, $languages, $levels);
+  }
+
+
   public function getDocumentsByUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_documents` WHERE `userRefId` = :id");
@@ -375,5 +413,16 @@ class UserModel
     $document = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $document;
+  }
+
+  public function getLanguagesByUser($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `user_languages` WHERE `userRefId` = :id");
+
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $languages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $languages;
   }
 }
