@@ -1,16 +1,19 @@
 <?php
 require 'app/models/Event_Model.php';
 
-class EventController extends AdminController
+class EventController 
 {
   protected $eventModel;
   protected $userModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
     $this->eventModel = new eventModel();
     $this->userModel = new UserModel();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
   }
 
   
@@ -33,7 +36,4 @@ class EventController extends AdminController
     $this->eventModel->update($vars["id"], $_POST, $_FILES);
   }
 
-  public function registerUserToEvent() {
-    var_dump($_POST);
-  }
 }

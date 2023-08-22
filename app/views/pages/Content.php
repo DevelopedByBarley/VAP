@@ -63,6 +63,7 @@ $latestEvent = $params["latestEvent"];
 		<div class="col-xs-12 col-lg-4" id="volunteers-image" style="min-height: 60vh"></div>
 	</div>
 
+	<!--
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<h1>Következő eseményünk</h1>
@@ -79,6 +80,7 @@ $latestEvent = $params["latestEvent"];
 				</div>
 			</div>
 		</div>
+	-->
 
 
 	<div class="row mt-5" id="faq">

@@ -1,14 +1,17 @@
 <?php
 require 'app/models/Question_Model.php';
 
-class QuestionController extends AdminController
+class QuestionController
 {
   protected $questionModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
     $this->questionModel = new QuestionModel();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
   }
 
   public function newQuestion()

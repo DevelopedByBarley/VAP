@@ -1,14 +1,17 @@
 <?php
 require 'app/models/Link_Model.php';
 
-class LinkController extends AdminController
+class LinkController
 {
   protected $linkModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
     $this->linkModel = new LinkModel();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
   }
 
   public function updateLink($vars) {

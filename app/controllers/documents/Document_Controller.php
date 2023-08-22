@@ -1,14 +1,17 @@
 <?php
 require 'app/models/Document_Model.php';
 
-class DocumentController extends AdminController
+class DocumentController
 {
   protected $documentModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
     $this->documentModel = new DocumentModel();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
   }
 
   public function uploadDocument()

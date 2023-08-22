@@ -1,14 +1,17 @@
 <?php
 require 'app/models/Partner_Model.php';
 
-class PartnerController extends AdminController
+class PartnerController
 {
   protected $partnerModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
     $this->partnerModel = new PartnerModel();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
   }
 
   public function index()

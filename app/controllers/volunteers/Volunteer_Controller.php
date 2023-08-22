@@ -1,13 +1,16 @@
 <?php
 require 'app/models/Volunteer_Model.php';
 
-class VolunteerController extends AdminController
+class VolunteerController
 {
   protected $volunteerModel;
+  protected $renderer;
+  protected $adminModel;
 
   public function __construct()
   {
-    parent::__construct();
+    $this->renderer = new Renderer();
+    $this->adminModel = new AdminModel();
     $this->volunteerModel = new VolunteerModel();
   }
 
