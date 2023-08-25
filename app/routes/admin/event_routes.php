@@ -4,7 +4,8 @@ require 'app/controllers/events/Event_Render.php';
 $r->addRoute('GET', '/admin/events', [EventRender::class, 'index']);
 $r->addRoute('GET', '/admin/events/new', [EventRender::class, 'eventForm']);
 $r->addRoute('GET', '/admin/events/update/{id}', [EventRender::class, 'updateEventForm']);
-$r->addRoute('GET', '/event/register/{id}', [EventRender::class, 'registerToEventForm']);
+$r->addRoute('GET', '/admin/event/{id}', [EventRender::class, 'event']);
+$r->addRoute('GET', '/admin/event/user/{id}', [EventRender::class, 'registeredUser']);
 
 
 

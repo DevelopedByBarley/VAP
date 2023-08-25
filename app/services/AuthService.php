@@ -77,7 +77,7 @@ class AuthService
 
 
 
-    
+
 
     public function loginUser($body)
     {
@@ -126,8 +126,10 @@ class AuthService
         $cookieParams = session_get_cookie_params();
         setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
 
+        $referer = $_SERVER['HTTP_REFERER'];
+        
 
-        header("Location: /");
+        header("Location: " . $referer);
     }
 
 
@@ -135,7 +137,8 @@ class AuthService
 
 
 
-    private function getUserById($id) {
+    private function getUserById($id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `id` = :id");
 
         $stmt->bindParam(":id", $id);

@@ -1,8 +1,16 @@
-<?php class EventModel extends AdminModel
+<?php class EventModel
 {
+
+  private $pdo;
+  private $fileSaver;
+  private $mailer;
+
   public function __construct()
   {
-    parent::__construct();
+    $db = new Database();
+    $this->pdo = $db->getConnect();
+    $this->fileSaver = new FileSaver();
+    $this->mailer = new Mailer();
   }
 
   public function getEvents()
@@ -10,6 +18,13 @@
     $stmt = $this->pdo->prepare("SELECT * FROM events");
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($events as $index => $event) {
+      $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
+      $stmt->bindParam(":id", $event["eventId"]);
+      $stmt->execute();
+      $events[$index]["subscriptions"] = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
+    }
 
     return $events;
   }
@@ -176,6 +191,72 @@
 
     return $events;
   }
+
+  public function getRegistrationsByEvent($eventId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $eventId);
+    $stmt->execute();
+    $subscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $subscriptions;
+  }
+
+
+  public function getRegisteredUser($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_dates WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["dates"] = $dates;
+
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_documents WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["documents"] = $documents;
+
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_tasks WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["tasks"] = $tasks;
+      
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_languages WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["langs"] = $tasks;
+    }
+
+    return $user;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

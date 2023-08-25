@@ -43,7 +43,7 @@ $langs = LANGS;
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
+                                    <a class="navigation-link" href="/faq">
                                         <?= NAVBAR["faq"][$lang] ?? 'Gyakori kérdések' ?>
                                     </a>
                                 </li>

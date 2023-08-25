@@ -10,9 +10,6 @@ class UserRender extends UserController
     parent::__construct();
   }
 
-
-
-
   public function loginForm()
   {
     session_start();
@@ -44,6 +41,7 @@ class UserRender extends UserController
     $user =  $this->userModel->getMe();
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
     $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
+    $subscriptions = $this->userModel->getRegistrationsByUser($user["id"]);
 
 
     echo $this->renderer->render("Layout.php", [
@@ -51,6 +49,7 @@ class UserRender extends UserController
         "user" => $user ?? null,
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
+        "subscriptions" => $subscriptions ?? null,
         "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);

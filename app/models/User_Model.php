@@ -4,12 +4,14 @@ class UserModel
 {
   private $pdo;
   private $fileSaver;
+  private $mailer;
 
   public function __construct()
   {
     $db = new Database();
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
+    $this->mailer = new Mailer();
   }
 
   public function getMe()
@@ -111,8 +113,10 @@ class UserModel
     if ($lastInsertedId) {
       self::insertDocuments($lastInsertedId, $documents);
       self::insertLanguages($lastInsertedId, $languages, $levels);
+      $this->mailer->send($email, "Köszönjük a profil regisztrációt!", "Profil regisztráció!");
       header("Location: /");
     }
+
   }
 
   private function insertLanguages($id, $languages, $levels)
@@ -335,7 +339,7 @@ class UserModel
   }
 
 
-  private  function checkIsUserExist($email)
+  private function checkIsUserExist($email)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
 
@@ -425,4 +429,17 @@ class UserModel
 
     return $languages;
   }
+
+  public function getRegistrationsByUser($userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
+
+    $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $registrations;
+  }
+
+
 }

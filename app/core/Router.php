@@ -3,6 +3,9 @@
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     require 'app/routes/public/home_routes.php';
     require 'app/routes/user/user_routes.php';
+    require 'app/routes/user/event_routes.php';
+
+    
     require 'app/routes/admin/admin_routes.php';
     require 'app/routes/admin/volunteer_routes.php';
     require 'app/routes/admin/partner_routes.php';

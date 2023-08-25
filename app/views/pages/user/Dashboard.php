@@ -42,6 +42,22 @@ $langs = LANGS;
           <?= PROFILE["subscriptions"]["check_subscription_btn"][$lang] ?? 'Név' ?>
         </a>
       </div>
+    <?php else : ?>
+      <div class="row d-flex align-items-center justify-content-center">
+        <?php foreach ($subscriptions as $subscription) : ?>
+          <div class="card m-2" style="width: 18rem;">
+            <div class="text-center">
+              <img src="/public/assets/uploads/images/events/<?= $subscription["fileName"] ?>" class="card-img-top" alt="..." style="width: 150px">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><?= $subscription[languageSwitcher("name")] ?></h5>
+              <p class="card-text"><?= $subscription[languageSwitcher("description")] ?></p>
+              <a href="#" class="btn btn-outline-primary">Megtekintés</a>
+              <a href="#" class="btn btn-outline-danger">Törlés</a>
+            </div>
+          </div>
+        <?php endforeach ?>
+      </div>
     <?php endif ?>
   </div>
 

@@ -24,7 +24,8 @@ $events = $params["events"] ?? null;
             <div class="card-body">
               <h5 class="card-title"><?= $event["nameInHu"] ?></h5>
               <p class="card-text"><?= $event["date"] ?></p>
-              <a href="#" class="btn btn-primary rounded-pill"><i class="bi bi-eye"></i></a>
+              <p><i class="bi bi-person-fill"></i> <?= $event["subscriptions"] ?></p>
+              <a href="/admin/event/<?= $event["eventId"] ?>" class="btn btn-primary rounded-pill"><i class="bi bi-eye"></i></a>
               <a href="/admin/events/update/<?= $event["eventId"] ?>" class="btn btn-warning rounded-pill text-light"><i class="bi bi-arrow-clockwise"></i></a>
               <span class="btn btn-danger rounded-pill badge-success" data-bs-toggle="modal" data-bs-target="#partnerModal<?= $event["eventId"] ?>"><i class="bi bi-trash"></i></span>
             </div>

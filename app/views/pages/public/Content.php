@@ -2,7 +2,6 @@
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
 $volunteers = $params["volunteers"];
-$questions = $params["questions"];
 $partners = $params["partners"];
 $documents = $params["documents"];
 $links = $params["links"];
@@ -11,7 +10,7 @@ $latestEvent = $params["latestEvent"];
 
 
 
-<div class="container-fluid" style="margin-top: 100px;">
+<div class="container-fluid">
 	<div class="row mt-5" id="about-us">
 		<div class="col-xs-12 col-lg-6 d-flex align-items-center justify-content-center flex-column mt-5 mb-5" id="about-us-content">
 			<h1 class="display-5"> <?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?></h1>
@@ -63,47 +62,24 @@ $latestEvent = $params["latestEvent"];
 		<div class="col-xs-12 col-lg-4" id="volunteers-image" style="min-height: 60vh"></div>
 	</div>
 
-	<!--
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
-				<h1>Következő eseményünk</h1>
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<div class="card" style="width: 18rem;">
-					<img src="/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title"><?= $latestEvent[languageSwitcher("name")] ?></h5>
-						<p class="card-text"><b><?= date('Y/m/d', $latestEvent["createdAt"]) ?></b></p>
-						<p class="card-text"><?= $latestEvent[languageSwitcher("description")] ?></p>
-						<a href="/event/register/<?= $latestEvent["eventId"] ?>" class="btn btn-primary">Regisztráció</a>
-					</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 d-flex align-items-center justify-content-center">
+			<h1>Következő eseményünk</h1>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="card" style="width: 18rem;">
+				<img src="/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title"><?= $latestEvent[languageSwitcher("name")] ?></h5>
+					<p class="card-text"><b><?= date('Y/m/d', $latestEvent["createdAt"]) ?></b></p>
+					<p class="card-text"><?= $latestEvent[languageSwitcher("description")] ?></p>
+					<a href="/event/register/<?= $latestEvent["eventId"] ?>" class="btn btn-primary">Regisztráció</a>
 				</div>
 			</div>
 		</div>
-	-->
-
-
-	<div class="row mt-5" id="faq">
-		<div class="col-xs-12">
-			<h1 class="display-4 text-center mt-5 mb-5"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
-			<div class="accordion mt-5 mb-5" id="questionAccordion">
-				<?php foreach ($questions as $index => $question) : ?>
-					<div class="accordion-item mt-2">
-						<h2 class="accordion-header" id="headingOne">
-							<button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $question["q_id"] ?>" aria-expanded="true" aria-controls="collapseOne">
-								<?= $question[languageSwitcher("question")] ?>
-							</button>
-						</h2>
-						<div id="collapse<?= $question["q_id"] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#questionAccordion">
-							<div class="accordion-body">
-								<?= $question[languageSwitcher("answer")] ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach ?>
-			</div>
-		</div>
 	</div>
+
+
 	<div class="row" id="partners">
 		<div class="col-xs-12">
 			<h1 class="display-4 text-center mt-5 mb-5"><?= CONTENT["partners"]["title"][$lang] ?? '' ?></h1>

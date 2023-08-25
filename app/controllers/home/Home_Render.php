@@ -13,7 +13,6 @@ class HomeRender extends HomeController
         session_start();
         $user = $this->userModel->getMe();
         $volunteers = $this->volunteerModel->getVolunteers();
-        $questions = $this->questionModel->questions();
         $partners = $this->partnerModel->partners();
         $documents = $this->documentModel->index();
         $links = $this->linkModel->index();
@@ -22,13 +21,23 @@ class HomeRender extends HomeController
 
 
         echo $this->renderer->render("Layout.php", [
-            "content" => $this->renderer->render("/pages/Content.php", [
+            "content" => $this->renderer->render("/pages/public/Content.php", [
                 "volunteers" => $volunteers ?? null,
-                "questions" => $questions ?? null,
                 "partners" => $partners ?? null,
                 "documents" => $documents ?? null,
                 "links" => $links ?? null,
                 "latestEvent" => $latestEvent ?? null
+            ]),
+            "user" => $user ?? null,
+        ]);
+    }
+
+    public function faq()
+    {
+        $questions = $this->questionModel->questions();
+        echo $this->renderer->render("Layout.php", [
+            "content" => $this->renderer->render("/pages/public/Faq.php", [
+                "questions" => $questions ?? null,
             ]),
             "user" => $user ?? null,
         ]);

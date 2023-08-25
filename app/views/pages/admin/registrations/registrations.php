@@ -88,4 +88,3 @@ $searchValue = $_GET["search"] ?? '';
       <?php endif ?>
   </nav>
 </div>
-</div>

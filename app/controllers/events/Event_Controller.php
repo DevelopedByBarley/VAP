@@ -1,12 +1,14 @@
 <?php
 require 'app/models/Event_Model.php';
+require 'app/models/User_Event_Model.php';
 
-class EventController 
+class EventController
 {
   protected $eventModel;
   protected $userModel;
   protected $renderer;
   protected $adminModel;
+  protected $userEventModel;
 
   public function __construct()
   {
@@ -14,9 +16,10 @@ class EventController
     $this->userModel = new UserModel();
     $this->renderer = new Renderer();
     $this->adminModel = new AdminModel();
+    $this->userEventModel = new UserEventModel;
   }
 
-  
+
 
   public function newEvent()
   {
@@ -36,4 +39,16 @@ class EventController
     $this->eventModel->update($vars["id"], $_POST, $_FILES);
   }
 
+  public function registerUserToEvent($vars)
+  {
+    session_start();
+    $user = $this->userModel->getMe();
+
+    if($user) {
+      $user["documents"] = $this->userModel->getDocumentsByUser($user["id"]);
+      $user["langs"] = $this->userModel->getLanguagesByUser($user["id"]);
+    }
+
+    $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
+  }
 }

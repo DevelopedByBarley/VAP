@@ -486,6 +486,53 @@ define('PROFILE', [
 ]);
 
 
+define('Languages', [
+  0 => [
+    "En" => "Hungarian",
+    "Hu" => "Magyar",
+    "sp" => ""
+  ],
+  1 => [
+    "En" => "English",
+    "Hu" => "Angol",
+    "sp" => ""
+  ],
+  2 => [
+    "En" => "Germany",
+    "Hu" => "Német",
+    "sp" => ""
+  ],
+  3 => [
+    "En" => "Serbian",
+    "Hu" => "Serb",
+    "sp" => ""
+  ],
+]);
+
+define('Levels', [
+  0 => [
+    "En" => "Native level",
+    "Hu" => "Anyanyelvi szint",
+    "sp" => ""
+  ],
+  1 => [
+    "En" => "Basic level",
+    "Hu" => "Alapfok",
+    "sp" => ""
+  ],
+  2 => [
+    "En" => "Intermediate level",
+    "Hu" => "Középfok",
+    "sp" => ""
+  ],
+  3 => [
+    "En" => "Higher level",
+    "Hu" => "Felsőfok",
+    "sp" => ""
+  ],
+]);
+
+
 
 
 

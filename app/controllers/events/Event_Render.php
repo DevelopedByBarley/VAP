@@ -23,6 +23,42 @@ class EventRender extends EventController
     ]);
   }
 
+  public function event($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $eventId = $vars["id"] ?? null;
+    $event = $this->eventModel->getEventById($eventId);
+    $subscriptions = $this->eventModel->getRegistrationsByEvent($eventId);
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/events/Event.php", [
+        "admin" => $admin ?? null,
+        "event" => $event ?? null,
+        "subscriptions" => $subscriptions ?? null,
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
+
+
+  public function registeredUser($vars) {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $eventId = $vars["id"] ?? null;
+    $event = $this->eventModel->getEventById($eventId);
+    $user = $this->eventModel->getRegisteredUser($vars["id"]);
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/events/User.php", [
+        "admin" => $admin ?? null,
+        "event" => $event ?? null,
+        "user" => $user ?? null
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
+
 
   public function eventForm()
   {
@@ -69,7 +105,7 @@ class EventRender extends EventController
   {
     session_start();
     $id = $vars["id"];
-    
+
     $event = $this->eventModel->getEventById($id);
     $dates = $this->eventModel->getEventDates($id);
     $links = $this->eventModel->getEventLinks($id);
@@ -84,6 +120,18 @@ class EventRender extends EventController
         "dates" => $dates ?? null,
         "links" => $links ?? null,
         "tasks" => $tasks ?? null,
+        "lang" => $lang,
+      ]),
+    ]);
+  }
+
+
+  public function success() {
+    session_start();
+    $lang = $_COOKIE["lang"] ?? null;
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/events/Success.php", [
         "lang" => $lang,
       ]),
     ]);
