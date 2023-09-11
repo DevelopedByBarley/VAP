@@ -1,6 +1,6 @@
 <form enctype="multipart/form-data" action="/admin/partners/new" method="POST" class="form">
 
-  <h1 class="display-5">Partner hozzáadása</h1>
+  <h1>Partner hozzáadása</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

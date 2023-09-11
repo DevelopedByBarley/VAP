@@ -6,11 +6,11 @@ $volunteers = $params["volunteers"] ?? null;
 <div id="admin-volunteers" class="d-flex align-items-center justify-content-center flex-column">
   <?php if (!isset($volunteers) || count($volunteers) === 0) : ?>
     <div id="no-volunteers" class="text-center">
-      <h1 class="display-3 mb-3">Jelenleg nincs egy önkéntes sem!</h1>
+      <h1 class="mb-3">Jelenleg nincs egy önkéntes sem!</h1>
       <a href="/admin/volunteers/new" class="btn btn-lg btn-outline-primary">Önkéntes hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2">Önkéntesek</h1>
+    <h1 class="text-center mb-2">Önkéntesek</h1>
     <hr class="w-100 mb-5">
     <ul class="list-group list-group-light mt-5" id="volunteers-list">
       <?php foreach ($volunteers as $volunteer) : ?>

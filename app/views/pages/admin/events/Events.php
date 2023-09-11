@@ -6,7 +6,7 @@ $events = $params["events"] ?? null;
   <?php if (!isset($events) || count($events) === 0) : ?>
     <div class="col-12">
       <div id="no-links" class="text-center">
-        <h1 class="display-3 mb-3">Jelenleg nincs egy esemény sem!</h1>
+        <h1 class="mb-3">Jelenleg nincs egy esemény sem!</h1>
         <a href="/admin/events/new" class="btn btn-lg btn-outline-primary">Esemény hozzáadása</a>
       </div>
     </div>
@@ -14,7 +14,7 @@ $events = $params["events"] ?? null;
 
     <div class="col-12 ">
       <div class="text-center">
-        <h1 class="display-5 mb-3 text-center">Események</h1>
+        <h1 class="mb-3 text-center">Események</h1>
       </div>
       <div class="row d-flex align-items-center justify-content-center">
         <?php foreach ($events as $event) : ?>

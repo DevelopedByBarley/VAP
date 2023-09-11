@@ -20,7 +20,7 @@ $langs = LANGS;
       <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="shadow" />
     </div>
 
-    <h1 class="text-center display-6"><?= $user["name"] ?></h1>
+    <h1 class="text-center"><?= $user["name"] ?></h1>
     <b>
       <p class="text-center"><?= $user["email"] ?></p>
     </b>
@@ -288,7 +288,7 @@ $langs = LANGS;
 
 
         <div class="col-xs-12 border border-rounded-lg p-3 mb-4 shadow">
-          <h1 class="display-6">Feltöltött dokumentumok</h1>
+          <h1>Feltöltött dokumentumok</h1>
           <p>Jelenleg <b class="text-info" style="font-size: 1.2rem"><?= count($documents)  ?></b> dokumentum van feltöltve</p>
           <?php echo count($documents) !== 0 ? '<a href="/user/documents" class="btn btn-outline-primary">Megtekintés</a>' : '<a href="/user/documents/new" class="btn btn-outline-primary">Dokumentum feltöltése</a>' ?>
         </div>

@@ -8,11 +8,11 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 <div id="admin-documents" class="d-flex align-items-center justify-content-center flex-column w-100">
   <?php if (!isset($documents) || count($documents) === 0) : ?>
     <div id="no-documents" class="text-center">
-      <h1 class="display-3 mb-3">Jelenleg nincs egy dokument sem!</h1>
+      <h1 class="mb-3">Jelenleg nincs egy dokument sem!</h1>
       <a href="/admin/documents/new" class="btn btn-lg btn-outline-primary">Dokumentum hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-4 mb-2" style="margin-top: 100px;">Dokumentumok</h1>
+    <h1 class="text-center mb-2" style="margin-top: 100px;">Dokumentumok</h1>
     <hr class="w-100 mb-5">
     <nav aria-label="Page navigation" class="mt-5 mb-5">
       <ul class="pagination">

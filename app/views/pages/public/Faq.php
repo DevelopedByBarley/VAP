@@ -4,7 +4,7 @@ $questions = $params["questions"];
 
 ?>
 
-<h1 class="display-4 text-center mt-5 mb-5"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
+<h1 class="text-center mt-5 mb-5"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
 <div class="container">
   <div class="row mt-5" id="faq">
     <div class="col-xs-12">

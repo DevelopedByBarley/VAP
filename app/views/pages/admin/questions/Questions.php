@@ -5,11 +5,11 @@ $questions = $params["questions"] ?? null;
 <div id="admin-partners" class="d-flex align-items-center justify-content-center flex-column">
   <?php if (!isset($questions) || count($questions) === 0) : ?>
     <div id="no-partners" class="text-center">
-      <h1 class="display-3 mb-3">Jelenleg nincs egy kérdés sem!</h1>
+      <h1 class="mb-3">Jelenleg nincs egy kérdés sem!</h1>
       <a href="/admin/questions/new" class="btn btn-lg btn-outline-primary">Kérdés hozzáadása</a>
     </div>
   <?php else : ?>
-    <h1 class="text-center display-5" style="margin-top: 100px;">Gyakori kérdések</h1>
+    <h1 class="text-center" style="margin-top: 100px;">Gyakori kérdések</h1>
     <hr class="mb-5 w-100">
     <div class="accordion w-100" id="questions-list">
       <?php foreach ($questions as $index => $question) : ?>

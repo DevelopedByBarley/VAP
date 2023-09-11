@@ -7,7 +7,7 @@ $question = $params["question"];
 
 <form action="/admin/questions/update/<?= $question["q_id"] ?>" method="POST" class="form">
 
-  <h1 class="display-5">Gyakori kérdés szerkesztése</h1>
+  <h1>Gyakori kérdés szerkesztése</h1>
   <hr class="mb-5">
 
   <!-- Message input -->

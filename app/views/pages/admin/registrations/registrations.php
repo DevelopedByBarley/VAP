@@ -7,7 +7,7 @@ $searchValue = $_GET["search"] ?? '';
 
 <div id="admin-registrations" class="d-flex align-items-center justify-content-center flex-column">
 
-  <h1 class="text-center display-4 mt-5 mb-2">Regisztrációk</h1>
+  <h1 class="text-center mt-5 mb-2">Regisztrációk</h1>
   <hr class="w-100">
 
   <form class="w-100">

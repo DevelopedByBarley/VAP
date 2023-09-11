@@ -1,6 +1,6 @@
 <form action="/admin/questions/new" method="POST" class="form">
 
-  <h1 class="display-5">Gyakori kérdés hozzáadása</h1>
+  <h1>Gyakori kérdés hozzáadása</h1>
   <hr class="mb-5">
 
   <!-- Message input -->

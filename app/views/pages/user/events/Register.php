@@ -10,7 +10,7 @@ $langs = LANGS;
 
 
 <div class="p-3 shadow" style="margin-top: 100px;">
-  <h1 class="text-center display-4 mb-5 mt-3"><?= $event[languageSwitcher("name")] ?> jelentkezés</h1>
+  <h1 class="text-center mb-5 mt-3"><?= $event[languageSwitcher("name")] ?> jelentkezés</h1>
   <?php if ($user) : ?>
     <div class="row" id="register-profile">
       <div class="col-xs-12 text-center" id="register-profile-header">

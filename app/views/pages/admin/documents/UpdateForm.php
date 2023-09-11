@@ -2,7 +2,7 @@
 
 <form enctype="multipart/form-data" action="/admin/document/update/<?= $document["id"] ?>" method="POST" class="form">
 
-  <h1 class="display-5">Dokumentum frissitése</h1>
+  <h1>Dokumentum frissitése</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

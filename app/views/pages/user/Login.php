@@ -5,7 +5,7 @@ $langs = LANGS;
 <?= $params["alertContent"] ?>
 
 <form action="/user/login" method="POST" id="login">
-  <h1 class="display-4 text-center">
+  <h1 class="text-center">
     <?= $langs["loginForm"]["title"][$lang] ?? 'Bejelentkezés' ?>
   </h1>
   <div class="mb-3 mt-5">

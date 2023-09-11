@@ -1,5 +1,5 @@
 <form enctype="multipart/form-data" action="/admin/volunteers/new" method="POST" class="form mt-5">
-  <h1 class="display-5">Önkéntes hozzáadása</h1>
+  <h1>Önkéntes hozzáadása</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

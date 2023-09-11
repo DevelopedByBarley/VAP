@@ -4,7 +4,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 ?>
 
 <form class="p-5" id="register-form" action="/user/register" method="POST">
-  <h1 class="text-center display-4"><?= $langs["registration"]["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
+  <h1 class="text-center"><?= $langs["registration"]["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
   <div class="row mb-4 mt-5">
 
 

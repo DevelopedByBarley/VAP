@@ -1,6 +1,6 @@
 <form enctype="multipart/form-data" action="/admin/document/new" method="POST" class="form">
 
-  <h1 class="display-5">Dokumentum hozzáadása</h1>
+  <h1>Dokumentum hozzáadása</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

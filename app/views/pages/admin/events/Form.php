@@ -1,6 +1,6 @@
 <form enctype="multipart/form-data" action="/admin/events/new" method="POST" class="form">
 
-  <h1 class="display-5">Esemény hozzáadása</h1>
+  <h1>Esemény hozzáadása</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

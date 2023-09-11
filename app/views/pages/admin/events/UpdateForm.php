@@ -10,7 +10,7 @@ $event_tasks = $params["event_tasks"];
 
 <form enctype="multipart/form-data" action="/admin/events/update/<?= $event["eventId"] ?>" method="POST" class="form">
 
-  <h1 class="display-5">Esemény frissitése</h1>
+  <h1>Esemény frissitése</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">

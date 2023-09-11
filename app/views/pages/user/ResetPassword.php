@@ -3,7 +3,7 @@
 
 
 <form id="password-reset-form" action="/user/password-reset" method="POST">
-  <h1 class="display-1 text-center mb-5 mt-5">Jelszó megváltoztatása</h1>
+  <h1 class="text-center mb-5 mt-5">Jelszó megváltoztatása</h1>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label required">Régi jelszó</label>
     <input type="password" class="form-control" name="old_password" required>

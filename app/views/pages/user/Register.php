@@ -5,7 +5,7 @@ $langs = LANGS;
 ?>
 
 <form class="border shadow p-3" id="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
-  <h1 class="text-center display-5 mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
+  <h1 class="text-center mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
   <div class="row mb-4 mt-5">
 
     <div class="jumbotron border bg-light mb-5 p-5 ">

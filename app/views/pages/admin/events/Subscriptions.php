@@ -5,7 +5,7 @@
 
 <div class="d-flex align-items-center justify-content-center flex-column w-100">
 
-  <h1 class="text-center display-4 mt-5 mb-2">Eseményre regisztrált felhasználók</h1>
+  <h1 class="text-center mt-5 mb-2">Eseményre regisztrált felhasználók</h1>
   <hr class="w-100">
 
   <div class="table-responsive w-100" id="registrations-table">
