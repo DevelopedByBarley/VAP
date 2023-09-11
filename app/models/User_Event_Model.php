@@ -7,7 +7,6 @@ class UserEventModel
   private $pdo;
   private $fileSaver;
   private $mailer;
-  private $body;
 
   public function __construct()
   {
@@ -15,7 +14,6 @@ class UserEventModel
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
-    $this->body = new MailBodies();
   }
 
 
@@ -30,7 +28,7 @@ class UserEventModel
     $dates = $body["dates"] ?? null;
     $lang = $_COOKIE["lang"] ?? null;
 
-    if(!$dates || !$tasks) {
+    if (!$dates || !$tasks) {
       header("Location: /event/register/$eventId");
       exit;
     }
@@ -82,8 +80,11 @@ class UserEventModel
         self::insertTasksOfRegistration($lastInsertedId, $tasks);
       }
 
+      $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $user["lang"] . ".php");
+      $body = str_replace('{{name}}', $user["name"], $body);
+
+      $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Event regisztráció!" : "Event registration");
       header("Location: /event/success");
-      $this->mailer->send($user["email"], $this->body->registrationToEvent(), "Event regisztráció!");
 
       return;
     }
@@ -157,7 +158,10 @@ class UserEventModel
       self::insertDocuments($lastInsertedId, $documents);
     }
 
-    $this->mailer->send($email, $this->body->registrationToEvent(), "Event regisztráció!");
+    $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $lang . ".php");
+    $body = str_replace('{{name}}', $name, $body);
+
+    $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
     header("Location: /event/success");
   }

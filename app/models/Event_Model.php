@@ -54,7 +54,8 @@
     }
 
 
-    self::sendMailForRegisteredUsers();
+    self::sendMailForRegisteredUsers($lastId);
+    exit;
 
 
     header("Location: /admin/events");
@@ -369,15 +370,17 @@
     }
   }
 
-  private function sendMailForRegisteredUsers()
+  private function sendMailForRegisteredUsers($eventId)
   {
-    $stmt = $this->pdo->prepare("SELECT `email` FROM `users`");
+    $stmt = $this->pdo->prepare("SELECT `name`, `email`,`lang` FROM `users`");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $body = file_get_contents("./app/views/templates/EventRegistrationMailTemplate.php");
 
     foreach ($users as $user) {
-      $this->mailer->send($user["email"], $body, "Hello");
+      $body = file_get_contents("./app/views/templates/event_notification/EventNotificationMailTemplate" . $user["lang"] . ".php");
+      $body = str_replace('{{name}}', $user["name"], $body);
+      $body = str_replace('{{id}}', $eventId, $body);
+      $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Új esemény" : "New event!");
     }
   }
 }

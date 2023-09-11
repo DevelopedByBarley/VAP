@@ -115,7 +115,10 @@ class UserModel
     if ($lastInsertedId) {
       self::insertDocuments($lastInsertedId, $documents);
       self::insertLanguages($lastInsertedId, $languages, $levels);
-      $this->mailer->send($email, "Köszönjük a profil regisztrációt!", "Profil regisztráció!");
+      $body = file_get_contents("./app/views/templates/user_registration/UserRegistrationMailTemplate" . $lang . ".php");
+      $body = str_replace('{{name}}', $name, $body);
+
+      $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
       header("Location: /");
     }
   }
