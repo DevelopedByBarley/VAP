@@ -28,8 +28,12 @@ class UserEventModel
     $levels = $body["levels"] ?? [];
     $tasks = $body["tasks"] ?? null;
     $dates = $body["dates"] ?? null;
+    $lang = $_COOKIE["lang"] ?? null;
 
-
+    if(!$dates || !$tasks) {
+      header("Location: /event/register/$eventId");
+      exit;
+    }
 
     if ($user) {
 
@@ -48,7 +52,7 @@ class UserEventModel
 
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
-      (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :fileName, :userRefId, :eventRefId);");
+      (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :fileName, :userRefId, :eventRefId);");
 
       $stmt->bindParam(":name", $user["name"]);
       $stmt->bindParam(":email",  $user["email"]);
@@ -60,8 +64,10 @@ class UserEventModel
       $stmt->bindParam(":participation", $user["participation"]);
       $stmt->bindParam(":informedBy", $user["informedBy"]);
       $stmt->bindParam(":permission", $user["permission"]);
+      $stmt->bindParam(":lang", $lang);
       $stmt->bindParam(":fileName", $user["fileName"]);
       $stmt->bindParam(":userRefId", $user["id"]);
+      $stmt->bindParam(":eventRefId", $eventId);
       $stmt->bindParam(":eventRefId", $eventId);
 
       $stmt->execute();
@@ -123,9 +129,8 @@ class UserEventModel
     }
 
     $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
-    (`id`, `name`, `email`, `address`, `mobile`, `profession`, `schoolName`, `otherLanguages`, `participation`, `informedBy`, `permission`, `userRefId`, `eventRefId`) 
     VALUES 
-    (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, NULL, :eventRefId);");
+    (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, NULL, NULL, :eventRefId);");
 
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":email", $email);
@@ -137,6 +142,7 @@ class UserEventModel
     $stmt->bindParam(":participation", $participation);
     $stmt->bindParam(":informedBy", $informedBy);
     $stmt->bindParam(":permission", $permission);
+    $stmt->bindParam(":lang", $lang);
     $stmt->bindParam(":eventRefId", $eventId);
 
     $stmt->execute();

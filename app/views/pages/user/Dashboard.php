@@ -51,9 +51,6 @@ $langs = LANGS;
             </div>
             <div class="card-body">
               <h5 class="card-title"><?= $subscription[languageSwitcher("name")] ?></h5>
-              <p class="card-text"><?= $subscription[languageSwitcher("description")] ?></p>
-              <a href="#" class="btn btn-outline-primary">Megtekintés</a>
-              <a href="#" class="btn btn-outline-danger">Törlés</a>
             </div>
           </div>
         <?php endforeach ?>

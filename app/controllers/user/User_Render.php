@@ -37,7 +37,7 @@ class UserRender extends UserController
 
   public function dashboard()
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
     $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
@@ -60,7 +60,7 @@ class UserRender extends UserController
 
   public function resetPasswordForm()
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
@@ -74,7 +74,7 @@ class UserRender extends UserController
 
   public function userDocuments()
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
 
@@ -90,7 +90,7 @@ class UserRender extends UserController
 
   public function updateUserDocumentForm($vars)
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     $document = $this->userModel->getDocumentById($vars["id"]);
 
@@ -106,7 +106,7 @@ class UserRender extends UserController
 
   public function documentForm()
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     $document = $this->userModel->getDocumentsByUser($user["id"]);
 

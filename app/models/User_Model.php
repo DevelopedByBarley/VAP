@@ -51,7 +51,7 @@ class UserModel
 
     $documents = self::formatDocuments($documentName, $typeOfDocument);
 
-
+    $lang = $_COOKIE["lang"] ?? null;
     $createdAt = time();
 
 
@@ -85,7 +85,8 @@ class UserModel
         :tasks, 
         :informedBy, 
         :permission, 
-        :fileName, 
+        :lang, 
+        :fileName,
         :createdAt)");
 
     // Paraméterek kötése
@@ -102,6 +103,7 @@ class UserModel
     $stmt->bindParam(':tasks', $task);
     $stmt->bindParam(':informedBy', $informedBy);
     $stmt->bindParam(':permission', $permission);
+    $stmt->bindParam(':lang', $lang);
     $stmt->bindParam(':fileName', $fileName);
     $stmt->bindParam(':createdAt', $createdAt);
 
@@ -116,7 +118,6 @@ class UserModel
       $this->mailer->send($email, "Köszönjük a profil regisztrációt!", "Profil regisztráció!");
       header("Location: /");
     }
-
   }
 
   private function insertLanguages($id, $languages, $levels)
@@ -158,6 +159,10 @@ class UserModel
     $languages = $body["langs"] ?? [];
     $levels = $body["levels"] ?? [];
 
+    $lang = $_COOKIE["lang"] ?? null;
+
+
+
     $stmt = $this->pdo->prepare("UPDATE `users` 
         SET 
         `name` = :name, 
@@ -170,7 +175,8 @@ class UserModel
         `participation` = :participation,
         `tasks` = :tasks,
         `informedBy` = :informedBy,
-        `permission` = :permission
+        `permission` = :permission,
+        `lang` = :lang
          WHERE `users`.`id` = :userId;");
 
     $stmt->bindParam(':userId', $userId);
@@ -185,6 +191,7 @@ class UserModel
     $stmt->bindParam(':tasks', $task);
     $stmt->bindParam(':informedBy', $informedBy);
     $stmt->bindParam(':permission', $permission);
+    $stmt->bindParam(':lang', $lang);
 
     // INSERT parancs végrehajtása
     $isSuccess = $stmt->execute();
@@ -440,6 +447,4 @@ class UserModel
 
     return $registrations;
   }
-
-
 }

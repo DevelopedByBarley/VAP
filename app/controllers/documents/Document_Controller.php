@@ -14,10 +14,10 @@ class DocumentController
     $this->adminModel = new AdminModel();
   }
 
-  public function uploadDocument()
+  public function insertDocument()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $this->documentModel->insertDocument($_FILES, $_POST);
+    $this->documentModel->new($_FILES, $_POST);
   }
   
   public function updateDocument($vars) {

@@ -20,6 +20,8 @@ class EventController
   }
 
 
+  /** PROTECTED */
+
 
   public function newEvent()
   {
@@ -39,16 +41,31 @@ class EventController
     $this->eventModel->update($vars["id"], $_POST, $_FILES);
   }
 
+  public function sendMailsToRegisteredUsers($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
+    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions);
+  }
+
+
+
+
+  /** PUBLIC */
+
+
   public function registerUserToEvent($vars)
   {
     session_start();
     $user = $this->userModel->getMe();
 
-    if($user) {
+    if ($user) {
+      LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
       $user["documents"] = $this->userModel->getDocumentsByUser($user["id"]);
       $user["langs"] = $this->userModel->getLanguagesByUser($user["id"]);
     }
 
     $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
   }
+
 }

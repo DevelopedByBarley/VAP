@@ -6,16 +6,8 @@ class DocumentModel extends AdminModel
     parent::__construct();
   }
 
+
   public function index()
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM `documents` ORDER BY `createdAt`");
-    $stmt->execute();
-    $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $documents;
-  }
-
-  public function documents()
   {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM documents");
     $stmt->execute();
@@ -38,7 +30,7 @@ class DocumentModel extends AdminModel
     ];
   }
 
-  public function insertDocument($files, $body)
+  public function new($files, $body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);

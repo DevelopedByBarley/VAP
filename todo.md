@@ -1,18 +1,10 @@
-Fáliratkozás :
- 1 -> Fénykép
- 2 -> Dátum helyszin stb
- 3 -> Cim
- 4 -> Pár gondolat
- 5 -> feladatkörök hozzá legyenek társitva a feliratkozáshoz
+2023.09.11
 
-navigáció
-Zászlók átirásak -->
-Keretek nem kellenek alinkeknek --> done
-
-. 
-
-
-
-
-Nyelv választó
-
+Basic email-ek kigenerálása
+Profil feilartkozások kezelése
+Adatbázisban való szerepeltetése elfogadása email aszerinti küldése
+Elfelejtett jelszó
+Navigáacio anchor átállitása
+Forditás
+Mindegyik feladat érdekel kitörlése
+Nyelv "nem beszélem" hozzáadása

@@ -23,8 +23,37 @@ class UserController
 
   public function updateUser()
   {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->update($_POST);
+  }
+
+  public function resetPassword()
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->resetPw($_POST);
+  }
+
+  public function deleteUser() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->delete($_POST);
+    $this->authService->logoutUser();
+  }
+  
+  public function deleteUserDocument($vars) {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->deleteDocument($vars["id"]);
+  }
+
+
+  
+  public function updateUserDocument($vars) {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->updateDocument($vars["id"], $_FILES, $_POST);
+  }
+  
+  public function newDocument() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userModel->addDocument($_FILES, $_POST);
   }
 
 
@@ -54,32 +83,4 @@ class UserController
     $this->authService->logoutUser();
   }
 
-  public function resetPassword()
-  {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect('userId', '/login');
-    $this->userModel->resetPw($_POST);
-  }
-
-  public function deleteUser() {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->userModel->delete($_POST);
-    $this->authService->logoutUser();
-  }
-  
-  public function deleteUserDocument($vars) {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->userModel->deleteDocument($vars["id"]);
-  }
-
-
-  
-  public function updateUserDocument($vars) {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->userModel->updateDocument($vars["id"], $_FILES, $_POST);
-  }
-  
-  public function newDocument() {
-    $this->loginChecker->checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->userModel->addDocument($_FILES, $_POST);
-  }
 }

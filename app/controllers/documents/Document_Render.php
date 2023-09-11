@@ -13,7 +13,7 @@ class DocumentRender extends DocumentController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $documentsData = $this->documentModel->documents();
+    $documentsData = $this->documentModel->index();
 
 
     echo $this->renderer->render("Layout.php", [

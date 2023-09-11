@@ -14,7 +14,8 @@ class HomeRender extends HomeController
         $user = $this->userModel->getMe();
         $volunteers = $this->volunteerModel->getVolunteers();
         $partners = $this->partnerModel->partners();
-        $documents = $this->documentModel->index();
+        $documents = $this->documentModel->index()["documents"];
+     
         $links = $this->linkModel->index();
         $latestEvent = $this->eventModel->getLatestEvent();
 

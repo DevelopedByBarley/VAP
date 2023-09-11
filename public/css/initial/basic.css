@@ -1,3 +1,18 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--pr-font);
+  font-weight: bolder;
+}
+
+p {
+  font-family: var(--sc-font);
+}
+
+.r-border {
+  border-radius: 15px;
+}
+
+
+
 .form {
   width: 95%;
   margin: 0 auto;
@@ -24,3 +39,16 @@
 .shadow {
   box-shadow: var(--shadow);
 }
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all .8s ease-in-out;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+

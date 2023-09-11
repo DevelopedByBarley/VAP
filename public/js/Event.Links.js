@@ -1,15 +1,5 @@
 const eventLinksCon = document.getElementById('event-links-container');
 const addEventLinkBtn = document.getElementById('add-event-link-btn');
-
-addEventLinkBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  eventLinksState.push({
-    id: generateUUID()
-  })
-
-  renderLinkEvents();
-});
-
 let prevLinks = eventLinksCon.dataset.content;
 
 let eventLinksState = prevLinks !== undefined ? JSON.parse(prevLinks) : [
@@ -17,6 +7,18 @@ let eventLinksState = prevLinks !== undefined ? JSON.parse(prevLinks) : [
     id: generateUUID()
   }
 ]
+
+addEventLinkBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  eventLinksState.push({
+    id: generateUUID()
+  })
+
+  localStorage.setItem("links",JSON.stringify(eventLinksState))
+
+  renderLinkEvents();
+});
+
 
 console.log(eventLinksState);
 

@@ -1,13 +1,13 @@
-@import './initial/variables.css';
 @import './initial/basic.css';
+@import './initial/variables.css';
 @import './components//navbar.css';
 @import './components//languange_modal.css';
 
 
-@import './content.css';
 @import './register.css';
 @import './login.css';
 @import './dashboard.css';
+@import './content.css';
 
 
 @import './admin/admin_login_form.css';

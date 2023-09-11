@@ -16,6 +16,8 @@ class AdminController
     $this->adminModel = new AdminModel();
     $this->authService = new AuthService();
   }
+
+  
   public function getUsers()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -23,10 +25,12 @@ class AdminController
     $this->adminModel->index();
   }
 
+  /**
   public function registerAdmin()
-  {
-    $this->authService->registerAdmin($_POST);
-  }
+    {
+      $this->authService->registerAdmin($_POST);
+    }
+   */
 
   public function loginAdmin()
   {
@@ -37,5 +41,4 @@ class AdminController
   {
     $this->authService->logoutAdmin();
   }
-
 }

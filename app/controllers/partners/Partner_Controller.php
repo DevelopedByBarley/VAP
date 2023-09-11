@@ -35,6 +35,7 @@ class PartnerController
 
   public function newPartner()
   {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->partnerModel->insert($_FILES, $_POST);
   }
 

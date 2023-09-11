@@ -13,41 +13,6 @@
     $this->mailer = new Mailer();
   }
 
-  public function getEvents()
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM events");
-    $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($events as $index => $event) {
-      $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
-      $stmt->bindParam(":id", $event["eventId"]);
-      $stmt->execute();
-      $events[$index]["subscriptions"] = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
-    }
-
-    return $events;
-  }
-
-  public function getEventById($id)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    $events = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $events;
-  }
-
-  public function getLatestEvent()
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY `date` DESC LIMIT 1");
-    $stmt->execute();
-    $event = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $event;
-  }
-
   public function new($files, $body)
   {
 
@@ -57,6 +22,8 @@
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $date = filter_var($body["date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $end_date = filter_var($body["end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
 
@@ -66,12 +33,14 @@
 
     $createdAt = time();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :fileName, :createdAt)");
+    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :fileName, :createdAt)");
     $stmt->bindParam(":nameInHu", $nameInHu);
     $stmt->bindParam(":nameInEn", $nameInEn);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
     $stmt->bindParam(":descriptionInEn", $descriptionInEn);
     $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":end_date", $end_date);
+    $stmt->bindParam(":reg_end_date", $reg_end_date);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
 
@@ -117,6 +86,8 @@
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $date = filter_var($body["date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $end_date = filter_var($body["end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
 
@@ -141,6 +112,8 @@
     `descriptionInHu` = :descriptionInHu, 
     `descriptionInEn` = :descriptionInEn, 
     `date` = :date, 
+    `end_date` = :end_date, 
+    `reg_end_date` = :reg_end_date, 
     `fileName` = :fileName, 
     `createdAt` = :createdAt 
     WHERE `events`.`eventId` = :id");
@@ -150,6 +123,8 @@
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
     $stmt->bindParam(":descriptionInEn", $descriptionInEn);
     $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":end_date", $end_date);
+    $stmt->bindParam(":reg_end_date", $reg_end_date);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
     $stmt->bindParam(":id", $id);
@@ -161,6 +136,43 @@
 
     header("Location:  /admin/events");
   }
+
+  public function index()
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events");
+    $stmt->execute();
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($events as $index => $event) {
+      $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
+      $stmt->bindParam(":id", $event["eventId"]);
+      $stmt->execute();
+      $events[$index]["subscriptions"] = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
+    }
+
+    return $events;
+  }
+
+  public function getEventById($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $events = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $events;
+  }
+
+  public function getLatestEvent()
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY `date` DESC LIMIT 1");
+    $stmt->execute();
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $event;
+  }
+
+
 
   public function getEventDates($id)
   {
@@ -231,7 +243,7 @@
       $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       $user["tasks"] = $tasks;
-      
+
       $stmt = $this->pdo->prepare("SELECT * FROM registration_languages WHERE registerRefId = :id");
       $stmt->bindParam(":id", $user["id"]);
       $stmt->execute();
@@ -241,6 +253,18 @@
     }
 
     return $user;
+  }
+
+  public function sendEmailToRegisteredUsers($body, $subscriptions)
+  {
+
+    foreach ($subscriptions as $subscription) {
+      if ($subscription["lang"] === "Hu") {
+        $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Hello");
+      } else if ($subscription["lang"] === "En") {
+        $this->mailer->send($subscription["email"], $body["mail-body-En"], "Hello");
+      }
+    }
   }
 
 
@@ -350,9 +374,10 @@
     $stmt = $this->pdo->prepare("SELECT `email` FROM `users`");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $body = file_get_contents("./app/views/templates/EventRegistrationMailTemplate.php");
 
     foreach ($users as $user) {
-      $this->mailer->send($user["email"], "Új esemény!", "Hello");
+      $this->mailer->send($user["email"], $body, "Hello");
     }
   }
 }

@@ -13,9 +13,19 @@
   </div>
 
   <div class="form-outline mb-4">
-    <label class="form-label">Esemény dátuma</label>
+    <label class="form-label">Esemény Kezdő dátuma</label>
     <br>
-    <input type="date" name="date" class="mt-1" required />
+    <input type="date" name="date" id="start-date" class="mt-1" min="<?= date('Y-m-d')?>" required />
+  </div>
+  <div class="form-outline mb-4">
+    <label class="form-label">Esemény záró dátuma</label>
+    <br>
+    <input type="date" name="end_date" id="end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
+  </div>
+  <div class="form-outline mb-4">
+    <label class="form-label">Regisztráció lezárásának dátuma</label>
+    <br>
+    <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
   </div>
 
   <div class="form-outline mb-4">

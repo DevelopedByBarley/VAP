@@ -14,6 +14,9 @@ class AdminModel
     $this->mailer = new Mailer();
   }
 
+
+
+
   public function index() {
     $offset = $_GET["offset"] ?? 1;
     $limit = 10; // Az oldalanként megjelenített rekordok száma
@@ -39,6 +42,8 @@ class AdminModel
       "limit" => $limit
     ];
   }
+
+  
 
   public function admin()
   {

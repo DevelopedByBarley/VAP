@@ -19,9 +19,10 @@ class VolunteerController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");
     $this->volunteerModel->addVolunteer($_FILES, $_POST);
   }
-
+  
   public function updateVolunteer($vars)
   {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");
     $this->volunteerModel->update($_FILES, $vars["id"], $_POST);
   }
 

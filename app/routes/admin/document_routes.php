@@ -9,7 +9,7 @@ $r->addRoute('GET', '/admin/documents/update/{id}', [DocumentRender::class, 'upd
 $r->addRoute('GET', '/admin/documents/delete/{id}', [DocumentController::class, 'deleteDocument']);
 
 
-$r->addRoute('POST', '/admin/document/new', [DocumentController::class, 'uploadDocument']);
+$r->addRoute('POST', '/admin/document/new', [DocumentController::class, 'insertDocument']);
 $r->addRoute('POST', '/admin/document/update/{id}', [DocumentController::class, 'updateDocument']);
 
 

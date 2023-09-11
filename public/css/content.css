@@ -3,6 +3,7 @@
   margin: 0 auto
 }
 
+
 @media(max-width: 1200px) {
   #secondary-header-nav {
     margin-top: 100px;
@@ -15,13 +16,11 @@
 
 }
 
-@media(min-width: 1024px) {
-  #secondary-header-nav {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
+.char {
+  transform: translateY(315px);
+  transition: transform .5s;
 }
+
 
 
 
@@ -42,16 +41,120 @@
   background-color: var(--pr-color);
 }
 
-.registration-button {
+.registration-btn {
   background-color: var(--sc-color);
   border: none;
   margin-top: 2rem;
   text-align: center;
 }
 
-#header-image {
-  background: url("/public/assets/images/header.jpg") center center/cover;
+
+
+
+
+
+@media(min-width: 1200px) {
+  #header h1 {
+    font-size: 3rem;
+  }
 }
+
+#header-intro {
+  min-height: 90vh;
+  position: relative;
+}
+
+#header-image {
+  background: url('/public/assets/images/header.jpg') center center/cover;
+  filter: grayscale(100);
+  transition: all .4s ease-in-out;
+}
+
+#header-image:hover {
+  filter: grayscale(0);
+}
+
+#go-down {
+  position: absolute;
+  bottom: 80px;
+  font-size: 2rem;
+  left: 50%;
+  transform: translate(-50%);
+  color: black;
+}
+
+
+#header-intro h1 {
+  font-size: 4rem;
+}
+
+#recommendation {
+  min-height: 50vh;
+  background-color: var(--pr-color);
+}
+
+
+
+#advantages {
+  min-height: 50vh;
+  background-color: var(--sc-color);
+}
+
+#typical-tasks {
+  min-height: 80vh;
+}
+
+.letters:nth-child(1) {
+  color: var(--pr-color);
+}
+
+.letters:nth-child(2) {
+  color: var(--sc-color);
+}
+
+.letters:nth-child(3) {
+  color: yellow;
+}
+
+.list-component {
+  border-radius: 15px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.list-component .list-group-item {
+  border: none !important;
+}
+
+
+
+
+
+
+
+/* EVENT SECTION   */
+
+#latest-event{
+  min-height: 70vh;
+}
+
+@media(min-width: 1200px) {
+  #latest-event{
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,9 +162,9 @@
 
 /* ABOUT ME SECTION */
 
-#about-me-image {
-  background: url("/public/assets/images/header.jpg") center center/cover;
-  width: 100%;
+#about-us {
+  min-height: 50vh;
+  width: 100;
 }
 
 @media(min-width: 1024px) {
@@ -69,27 +172,40 @@
     width: 80%;
     margin: 0 auto;
   }
+  #about-us-content {
+    width: 65% ;
+    margin: 0 auto;
+  }
 }
 
 
 
+#volunteers-header {
+  width: 75%;
+  margin: 0 auto;
+}
 
-#volunteers #volunteers-image {
-  background: url("/public/assets/images/önkéntes_2.jpg") center center/cover;
+
+
+.volunteer-card {
+  border: none !important;
+  min-height: 500px;
 }
 
 .volunteer-profile-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 100%;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
+  height: 140px;
+  width: 140px;
+  border-radius: 100%;;
+  margin: 0 auto;
+  transition: all .4s ease-in-out;
 }
 
-.volunteer-card {
-  border: none;
+.volunteer-card:hover .volunteer-profile-image {
+  transform: scale(1.020);
+
+  
 }
+
 
 
 
@@ -105,4 +221,25 @@ li {
 
 #recommend {
   min-height: 50vh
+}
+
+#parallax-wrapper {
+  height: 40vh;
+  width: 100%;
+  position: relative;
+}
+#parallax-filter {
+  height: 40vh;
+  width: 100%;
+  background-color: rgba(0, 168, 157, 0.30);
+  position: absolute;
+  top: 45px;
+}
+
+#parallax {
+  height: 100%;
+  width: 100%;
+  background: url("/public/assets/images/parallax.jpg") center center/cover;
+  object-fit: cover;
+  background-attachment: fixed;
 }

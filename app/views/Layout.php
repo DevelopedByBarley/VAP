@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +11,13 @@
     <link rel="stylesheet" href="/public/css/main.css?v=<?php echo time() ?>" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="/public/bootstrap/js/bootstrap.js"></script>
+    <script src="/public/ckeditor5/ckeditor.js"></script>
     <title>VAP</title>
 </head>
 
 <body>
     <?php if (!isset($_COOKIE["lang"])) : ?>
-        <?php include 'app/views/components/LanguageModal.php'?>
+        <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>
         <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;">
             <?php include 'includes/Navbar.php' ?>
@@ -30,11 +33,13 @@
 
         </div>
     <?php endif ?>
+    <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/User.Documents.js"></script>
     <script src="/public/js/User.Languages.js"></script>
     <script src="/public/js/Event.Links.js"></script>
     <script src="/public/js/Event.Dates.js"></script>
+    <script src="/public/js/AOS.js"></script>
 </body>
 
 </html>
