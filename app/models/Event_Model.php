@@ -372,7 +372,7 @@
 
   private function sendMailForRegisteredUsers($eventId)
   {
-    $stmt = $this->pdo->prepare("SELECT `name`, `email`,`lang` FROM `users`");
+    $stmt = $this->pdo->prepare("SELECT `name`, `email`,`lang` FROM `users` WHERE `permission` = 1");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

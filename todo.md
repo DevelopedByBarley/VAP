@@ -1,10 +1,10 @@
 2023.09.15
 
-1. Regisztrációs oldal nyelvek hozzáadása, "nem beszálem" hozzáadása
-2. Regisztráció permission alapján új event értesitő mail küldése
+1. Regisztrációs oldal nyelvek hozzáadása, "nem beszálem" hozzáadása  *DONE*
+2. Regisztráció permission alapján új event értesitő mail küldése *DONE*
+5. Dashboard form külön lapra rakása *DONE*
 3. Regisztráció adatvédelem elfogadása check
 4. További események oldal
-5. Dashboard form külön lapra rakása
 6. Feltöltési formátumok meghatározása
 7. Visszajelző alert
 8. Event single Design update

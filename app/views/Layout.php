@@ -28,9 +28,6 @@
                     </div>
                 </div>
             </div>
-            <?php //include 'includes/Footer.php' 
-            ?>
-
         </div>
     <?php endif ?>
     <script src="/public/js/CkEditor.js"></script>

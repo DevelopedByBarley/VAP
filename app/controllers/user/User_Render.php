@@ -148,5 +148,22 @@ class UserRender extends UserController
     ]);
   }
 
+  public function profileSettingsForm() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $user =  $this->userModel->getMe();
+    $documents = $this->userModel->getDocumentsByUser($user["id"]);
+    $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Profile_Settings.php", [
+        "user" => $user ?? null,
+        "documents" => $documents ?? null,
+        "userLanguages" => $userLanguages ?? null,
+        "alertContent" => $this->renderer->render("/components/Alert.php", [])
+      ]),
+    ]);
+  }
+
 
 }

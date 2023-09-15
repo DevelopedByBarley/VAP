@@ -43,12 +43,32 @@ let langs = [
     En: "Germany",
     Sp: ""
   },
+  {
+    Hu: "Szerb",
+    En: "Serbian",
+    Sp: ""
+  },
+  {
+    Hu: "Spanyol",
+    En: "Spain",
+    Sp: ""
+  },
+  {
+    Hu: "Japán",
+    En: "Japan",
+    Sp: ""
+  }
 ];
 
 
 
 
 let levels = [
+  {
+    Hu: "Nem beszélem",
+    En: "I don't speak",
+    Sp: ""
+  },
   {
     Hu: "Anyanyelvi szint",
     En: "Native level",

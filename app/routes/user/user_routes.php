@@ -5,6 +5,7 @@ require 'app/controllers/user/User_Render.php';
 $r->addRoute('GET', '/login', [UserRender::class, 'loginForm']);
 $r->addRoute('GET', '/user/registration', [UserRender::class, 'registerForm']);
 $r->addRoute('GET', '/user/dashboard', [UserRender::class, 'dashboard']);
+$r->addRoute('GET', '/user/settings', [UserRender::class, 'profileSettingsForm']);
 $r->addRoute('GET', '/user/password-reset', [UserRender::class, 'resetPasswordForm']);
 $r->addRoute('GET', '/user/documents/new', [UserRender::class, 'documentForm']);
 $r->addRoute('GET', '/user/documents/update/{id}', [UserRender::class, 'updateUserDocumentForm']);

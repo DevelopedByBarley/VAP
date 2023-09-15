@@ -1,0 +1,7 @@
+@media(min-width: 1280px) {
+  #profile-settings {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+}

@@ -4,20 +4,9 @@
 
 #dashboard #dashboard-header{
   background-color: var(--pr-color);
-  min-height: 400px;
+  min-height: 40vh;
 }
-@media(max-width: 1024px) {
-  #dashboard {
-    margin-top: 80px;
-  }
-}
-@media(min-width: 1280px) {
-  #profile-settings {
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 50px;
-  }
-}
+
 
 #event-btn {
   background-color: var(--pr-color);
@@ -25,4 +14,5 @@
 
 #subscriptions {
   background-color: var(--sc-color);
+  min-height: 50vh;
 }

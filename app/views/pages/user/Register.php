@@ -136,17 +136,49 @@ $langs = LANGS;
               </div>
               <div class="modal-body">
                 <div id="language-modal-container">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
-                    <label class="form-check-label" for="lang_2">
-                      Angol
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
-                    <label class="form-check-label" for="lang_3">
-                      Német
-                    </label>
+                  <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                      <div class="col-3 border p-2 m-1">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
+                          <label class="form-check-label" for="lang_2">
+                            Angol
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3 border p-2  m-1">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
+                          <label class="form-check-label" for="lang_3">
+                            Német
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3 border p-2  m-1">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="lang" id="lang_4" value="3">
+                          <label class="form-check-label" for="lang_3">
+                            Szerb
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3 border p-2  m-1">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="lang" id="lang_5" value="4">
+                          <label class="form-check-label" for="lang_3">
+                            Spanyol
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-3 border p-2 m-1">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="lang" id="lang_6" value="5">
+                          <label class="form-check-label" for="lang_3">
+                            Japán
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
