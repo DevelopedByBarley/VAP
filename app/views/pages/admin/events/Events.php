@@ -1,10 +1,13 @@
+<link rel="stylesheet" href="/public/css/admin/events.css?v=<?= time() ?>">
+
+
 <?php
 $events = $params["events"] ?? null;
 ?>
 
-<div class="row">
+<div class="row h-100">
   <?php if (!isset($events) || count($events) === 0) : ?>
-    <div class="col-12">
+    <div class="col-12 h-100 d-flex align-items-center justify-content-center flex-column">
       <div id="no-links" class="text-center">
         <h1 class="mb-3">Jelenleg nincs egy esemény sem!</h1>
         <a href="/admin/events/new" class="btn btn-lg btn-outline-primary">Esemény hozzáadása</a>
@@ -12,7 +15,7 @@ $events = $params["events"] ?? null;
     </div>
   <?php else : ?>
 
-    <div class="col-12 ">
+    <div class="col-12 h-100 d-flex align-items-center justify-content-center flex-column">
       <div class="text-center">
         <h1 class="mb-3 text-center">Események</h1>
       </div>

@@ -20,9 +20,9 @@
 }
 
 #event-btn {
-  background-color: var(--sc-color);
+  background-color: var(--pr-color);
 }
 
-#profile-settings {
-  
+#subscriptions {
+  background-color: var(--sc-color);
 }

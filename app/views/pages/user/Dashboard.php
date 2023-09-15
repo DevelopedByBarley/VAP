@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/public/css/user/dashboard.css?v=<?php echo time() ?>">
+
 <?php
 $user = $params["user"];
 $documents = $params["documents"];
@@ -32,28 +34,55 @@ $langs = LANGS;
     </div>
   </div>
 
-  <div id="subscriptions" class="border mt-3 mb-5 p-4 bg-light">
-    <h2 class="text-center mt-5"> <?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
+  <div id="subscriptions" class="border mb-5 p-4 sc-color">
+    <h2 class="text-center mt-3 mb-5 text-light"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
     <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
-      <h5 class="text-center"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
+      <h5 class="text-center text-light"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
       <div class="text-center">
         <a href="/asd" class="m-1 btn text-light" id="event-btn">
           <?= PROFILE["subscriptions"]["check_subscription_btn"][$lang] ?? 'Név' ?>
         </a>
       </div>
     <?php else : ?>
-      <div class="row d-flex align-items-center justify-content-center">
-        <?php foreach ($subscriptions as $subscription) : ?>
-          <div class="card m-2" style="width: 18rem;">
-            <div class="text-center">
-              <img src="/public/assets/uploads/images/events/<?= $subscription["fileName"] ?>" class="card-img-top" alt="..." style="width: 150px">
+      <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+          <?php foreach ($subscriptions as $subscription) : ?>
+            <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
+              <div class="card r-border shadow" style="width: 21rem; min-height: 220px">
+                <div class="card-body">
+                  <h4><?= $subscription[languageSwitcher("name")] ?></h4>
+                  <p class="card-text"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $subscription["date"] ?> </b></p>
+                  <hr>
+                  <div class="text-center">
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#subModal<?= $subscription["eventId"] ?>">
+                      Jelentkezés törlése
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              <h5 class="card-title"><?= $subscription[languageSwitcher("name")] ?></h5>
+
+            <!-- Modális ablak egyedi ID-vel -->
+            <div class="modal fade" id="subModal<?= $subscription["eventId"] ?>" tabindex="-1" aria-labelledby="subModalLabel<?= $subscription["eventId"] ?>" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="subModalLabel<?= $subscription["eventId"] ?>">Regisztráció törlése</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Biztosan törlöd az <span class="border border-danger p-1 text-danger mt-1 d-inline-block"><?= $subscription[languageSwitcher("name")] ?></span> nevű regisztrációdat?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégsem</button>
+                    <a href="/event/registration/delete/<?= $subscription["eventId"] ?>" type="button" class="btn btn-primary">Regisztráció törlése</a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        <?php endforeach ?>
+          <?php endforeach ?>
+        </div>
       </div>
     <?php endif ?>
   </div>

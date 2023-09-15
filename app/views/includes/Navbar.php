@@ -4,8 +4,8 @@ $langs = LANGS;
 
 ?>
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid w-100">
+    <div class="row no-gutters">
         <div class="col">
             <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">

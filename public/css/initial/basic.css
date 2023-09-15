@@ -1,4 +1,14 @@
-h1, h2, h3, h4, h5, h6 {
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--pr-font);
   font-weight: bolder;
 }
@@ -40,6 +50,10 @@ p {
   box-shadow: var(--shadow);
 }
 
+.shadow-light {
+  box-shadow: var(--shadow-light);
+}
+
 .reveal {
   position: relative;
   transform: translateY(150px);
@@ -52,3 +66,14 @@ p {
   opacity: 1;
 }
 
+.sc-color {
+  background-color: var(--sc-color);
+}
+
+.pr-color {
+  background-color: var(--pr-color);
+}
+
+.gradient {
+  background: linear-gradient(308deg, rgba(236,6,119,1) 0%, rgba(0,167,156,0.41780462184873945) 100%);
+}

@@ -8,8 +8,8 @@ $links = $params["links"];
 $tasks = $params["tasks"];
 ?>
 
-<section style="background-color: #eee; margin-top: 100px; width: 95%; margin: 0 auto; border-radius: 12px mb-5" class="shadow">
-  <div class="container py-5">
+<div class="d-flex align-items-center justify-content-center" style="height: 95vh;">
+  <div class="container py-5 shadow rounded m-margin" style="background-color: white;">
 
     <div class="row">
       <div class="col-lg-4">
@@ -65,4 +65,4 @@ $tasks = $params["tasks"];
       </div>
     </div>
   </div>
-</section>
+</div>

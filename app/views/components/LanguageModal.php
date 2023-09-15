@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/public/css/components/language_modal.css?v=<?php echo time() ?>">
+
 <div id="lang-modal-container">
   <div id="language-modal">
     <form action="/language" method="POST" id="language-form" class="d-flex align-items-center justify-content-center flex-column">

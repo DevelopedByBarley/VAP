@@ -13,7 +13,7 @@
       <div class="space-y-3">
         <p class="text-gray-700"></p>
         <p class="text-gray-700">
-          Cancellation at the following link <a href="https://vap.max.hu/subscription/delete">https://vap.max.hu/subscription/delete</a>.
+          Cancellation at the following link <a href="https://vap.max.hu/subscription/delete/{{id}}">https://vap.max.hu/subscription/delete/{{id}}</a>.
         </p>
       </div>
     </div>

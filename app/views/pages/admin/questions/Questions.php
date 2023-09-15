@@ -1,8 +1,11 @@
+<link rel="stylesheet" href="/public/css/admin/questions.css?v=<?= time() ?>">
+
+
 <?php
 $questions = $params["questions"] ?? null;
 ?>
 
-<div id="admin-partners" class="d-flex align-items-center justify-content-center flex-column">
+<div id="admin-partners" class="d-flex align-items-center justify-content-center flex-column h-100">
   <?php if (!isset($questions) || count($questions) === 0) : ?>
     <div id="no-partners" class="text-center">
       <h1 class="mb-3">Jelenleg nincs egy kérdés sem!</h1>

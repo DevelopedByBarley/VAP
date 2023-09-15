@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/public/css/admin/volunteers.css?v=<?= time() ?>">
+
 <?php
 $volunteers = $params["volunteers"] ?? null;
 

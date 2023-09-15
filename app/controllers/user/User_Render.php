@@ -1,9 +1,8 @@
 <?php
-
+require 'app/helpers/ResetPw.php';
 
 class UserRender extends UserController
 {
-
 
   public function __construct()
   {
@@ -119,4 +118,35 @@ class UserRender extends UserController
       ]),
     ]);
   }
+
+  public function forgotPwForm()
+  {
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", []),
+    ]);
+  }
+
+
+  public function resetPwForm()
+  {
+    $token = $_GET["token"] ?? null;
+    $expires = $_GET["expires"] ?? null;
+    $emailByToken = $this->resetPwService->checkTokenData($token, $expires);
+
+    if (!$emailByToken) {
+      echo "Token nem lejárt vagy nem létezik!";
+      return;
+    }
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/Reset_Pw_Form.php", [
+        "emailByToken" => $emailByToken,
+        "token" => $token
+      ]),
+
+    ]);
+  }
+
+
 }

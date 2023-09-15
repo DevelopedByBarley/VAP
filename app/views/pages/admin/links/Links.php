@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/public/css/admin/links.css?v=<?= time() ?>">
+
+
 <?php
 $links = $params["links"];
 $num_of_page = (int)$params["numOfPage"];
@@ -5,7 +8,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 ?>
 
-<div id="admin-links" class="d-flex align-items-center justify-content-center flex-column w-100">
+<div id="admin-links" class="d-flex align-items-center justify-content-center flex-column w-100 h-100">
   <?php if (!isset($links) || count($links) === 0) : ?>
     <div id="no-links" class="text-center">
       <h1 class="mb-3">Jelenleg nincs egy link sem!</h1>

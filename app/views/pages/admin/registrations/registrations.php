@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/public/css/admin/registrations.css?v=<?= time() ?>">
+
+
 <?php
 $users = $params["users"] ?? null;
 $num_of_page = (int)$params["numOfPage"];

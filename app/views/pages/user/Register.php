@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/public/css/register.css?v=<?php echo time() ?>">
+
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;

@@ -1,3 +1,6 @@
+
+
+
 <?php
 $event = $params["event"];
 $dates = $params["dates"];

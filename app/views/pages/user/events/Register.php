@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/public/css/user/register.css">
+
 <?php
 $event = $params["event"];
 $dates = $params["dates"];
@@ -9,60 +11,60 @@ $langs = LANGS;
 ?>
 
 
-<div class="p-3 shadow" style="margin-top: 100px;">
-  <h1 class="text-center mb-5 mt-3"><?= $event[languageSwitcher("name")] ?> jelentkezés</h1>
-  <?php if ($user) : ?>
-    <div class="row" id="register-profile">
-      <div class="col-xs-12 text-center" id="register-profile-header">
-        <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
-        <h3><?= $user["name"] ?? '' ?></h3>
-        <p><?= $user["email"] ?? '' ?></p>
-        <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
+  <div class="p-3 r-border " id="register-form">
+    <h1 class="text-center mb-5 mt-3"><?= $event[languageSwitcher("name")] ?> jelentkezés</h1>
+    <?php if ($user) : ?>
+      <div class="row" id="register-profile">
+        <div class="col-xs-12 text-center" id="register-profile-header">
+          <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
+          <h3><?= $user["name"] ?? '' ?></h3>
+          <p><?= $user["email"] ?? '' ?></p>
+          <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
+        </div>
+        <div class="text-center mb-5">
+          <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
+        </div>
       </div>
-      <div class="text-center mb-5">
-        <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
-          <div class="mb-4">
-            <div class="mb-3">
-              <b>Válassza ki az önnek megfelelő időpontot</b>
+      <div class="row">
+        <div class="col-xs-12">
+          <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
+            <div class="mb-4">
+              <div class="mb-3">
+                <b>Válassza ki az önnek megfelelő időpontot</b>
+              </div>
+              <div class="btn-group">
+                <?php foreach ($dates as $index => $date) : ?>
+                  <input type="checkbox" class="btn-check" id="date-<?= $index ?>" autocomplete="off" name="dates[]" value="<?= $date["date"] ?>">
+                  <label class="btn btn-outline-primary" for="date-<?= $index ?>"><?= $date["date"] ?></label><br>
+                <?php endforeach ?>
+              </div>
             </div>
-            <div class="btn-group">
-              <?php foreach ($dates as $index => $date) : ?>
-                <input type="checkbox" class="btn-check" id="date-<?= $index ?>" autocomplete="off" name="dates[]" value="<?= $date["date"] ?>">
-                <label class="btn btn-outline-primary" for="date-<?= $index ?>"><?= $date["date"] ?></label><br>
+            <div class="mb-4">
+              <div class="mb-3">
+                <b>Válassza ki az ön számára megfelelő feladatokat</b>
+              </div>
+              <?php foreach ($tasks as $index => $task) : ?>
+                <div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="task<?= $index ?>" value="<?= $task["task"] ?>" name="tasks[<?= $index ?>]">
+                    <label class="form-check-label" id="task<?= $index ?>"><?= TASK_AREAS["areas"][$task["task"]][$lang] ?></label>
+                  </div>
+                </div>
               <?php endforeach ?>
             </div>
-          </div>
-          <div class="mb-4">
-            <div class="mb-3">
-              <b>Válassza ki az ön számára megfelelő feladatokat</b>
+
+
+
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
             </div>
-            <?php foreach ($tasks as $index => $task) : ?>
-              <div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="task<?= $index ?>" value="<?= $task["task"] ?>" name="tasks[<?= $index ?>]">
-                  <label class="form-check-label" id="task<?= $index ?>"><?= TASK_AREAS["areas"][$task["task"]][$lang] ?></label>
-                </div>
-              </div>
-            <?php endforeach ?>
-          </div>
 
-
-
-
-          <div class="text-center">
-            <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
-          </div>
-
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-</div>
+  </div>
 <?php else : ?>
 
 
@@ -100,7 +102,7 @@ $langs = LANGS;
 
 
 
-  <form class="border shadow p-3" id="register-form" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+  <form class="border shadow p-3" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
     <div class="row mb-4 mt-5">
 
 
@@ -317,7 +319,7 @@ $langs = LANGS;
           <b>Válassza ki az ön számára megfelelő feladatokat</b>
         </div>
         <?php foreach ($tasks as $index => $task) : ?>
-          <?php $index += 1?>
+          <?php $index += 1 ?>
           <div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="task<?= $index ?>" value="<?= $task["task"] ?>" name="tasks[<?= $index ?>]">

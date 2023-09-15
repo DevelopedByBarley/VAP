@@ -47,6 +47,15 @@ class EventController
     $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
     $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions);
   }
+  
+  public function deleteRegistration($vars) {
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->userEventModel->delete($vars["id"]);
+  }
+
+  public function deleteRegistrationFromMail($vars){
+    $this->userEventModel->deleteRegistrationFromMailUrl($vars["id"]);
+  }
 
 
 

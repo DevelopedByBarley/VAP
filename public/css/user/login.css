@@ -14,3 +14,17 @@
     width: 35%;
   }
 }
+
+#login-logo {
+  height: 370px;
+  width: 370px;
+  border-radius: 100%;
+}
+
+
+
+@media(max-width: 1200px) {
+  #login-col {
+    display: none !important;
+  }
+}

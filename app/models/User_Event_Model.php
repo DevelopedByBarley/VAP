@@ -15,7 +15,20 @@ class UserEventModel
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
   }
+  function uuid($data = null)
+  {
+    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+    $data = $data ?? random_bytes(16);
+    assert(strlen($data) == 16);
 
+    // Set version to 0100
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    // Set bits 6-7 to 10
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+    // Output the 36 character UUID.
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+  }
 
 
 
@@ -27,17 +40,23 @@ class UserEventModel
     $tasks = $body["tasks"] ?? null;
     $dates = $body["dates"] ?? null;
     $lang = $_COOKIE["lang"] ?? null;
+    $rand = self::uuid();
+
+
+
 
     if (!$dates || !$tasks) {
       header("Location: /event/register/$eventId");
       exit;
     }
 
-    if ($user) {
+    // CHECK USER IS EXIST
 
-      $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email");
+    if ($user) {
+      $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email AND `eventRefId` = :eventId");
       $stmt->bindParam(":name", $user["name"]);
       $stmt->bindParam(":email", $user["email"]);
+      $stmt->bindParam(":eventId", $eventId);
       $stmt->execute();
       $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -47,12 +66,14 @@ class UserEventModel
       }
 
 
+      // INSERT IF  USER
 
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
-      (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :fileName, :userRefId, :eventRefId);");
+      (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :fileName, :userRefId, :eventRefId);");
 
       $stmt->bindParam(":name", $user["name"]);
+      $stmt->bindParam(":registrationId", $rand);
       $stmt->bindParam(":email",  $user["email"]);
       $stmt->bindParam(":address", $user["address"]);
       $stmt->bindParam(":mobile", $user["mobile"]);
@@ -82,6 +103,8 @@ class UserEventModel
 
       $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $user["lang"] . ".php");
       $body = str_replace('{{name}}', $user["name"], $body);
+      $body = str_replace('{{id}}', $rand, $body);
+
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Event regisztráció!" : "Event registration");
       header("Location: /event/success");
@@ -131,9 +154,10 @@ class UserEventModel
 
     $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
     VALUES 
-    (NULL, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, NULL, NULL, :eventRefId);");
+    (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, NULL, NULL, :eventRefId);");
 
     $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":registrationId", $rand);
     $stmt->bindParam(":email", $email);
     $stmt->bindParam(":address", $address);
     $stmt->bindParam(":mobile", $mobile);
@@ -160,11 +184,61 @@ class UserEventModel
 
     $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $lang . ".php");
     $body = str_replace('{{name}}', $name, $body);
+    $body = str_replace('{{id}}', $rand, $body);
 
     $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
     header("Location: /event/success");
   }
+
+
+
+
+  public function delete($eventId)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
+    $stmt->bindParam(":eventId", $eventId);
+    $stmt->execute();
+
+    header("Location: /user/dashboard");
+  }
+
+  public function deleteRegistrationFromMailUrl($id)
+  {
+
+    $stmt = $this->pdo->prepare("SELECT  `registrationId` FROM `registrations` WHERE `registrationId` = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!$isSubExist) {
+      echo "Ilyen regisztráció nem létezik!";
+      exit;
+    }
+
+
+    $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   private function insertLanguages($registerId, $languages, $levels)
   {

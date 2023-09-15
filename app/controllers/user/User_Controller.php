@@ -9,6 +9,7 @@ class UserController
   protected $authService;
   protected $renderer;
   protected $loginChecker;
+  protected $resetPwService;
 
   public function __construct()
   {
@@ -17,6 +18,7 @@ class UserController
     $this->authService = new AuthService();
     $this->renderer = new Renderer();
     $this->loginChecker = new LoginChecker();
+    $this->resetPwService = new ResetPw();
   }
 
 
@@ -81,6 +83,14 @@ class UserController
   public function logout()
   {
     $this->authService->logoutUser();
+  }
+
+  public function newPwRequest() {
+    $this->resetPwService->pwRequest($_POST);
+  }
+
+  public function setNewPw() {
+    $this->resetPwService->newPw($_POST);
   }
 
 }

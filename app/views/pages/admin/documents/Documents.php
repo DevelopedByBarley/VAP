@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/public/css/admin/documents.css?v=<?= time() ?>">
+
+
 <?php
 $documents = $params["documents"] ?? null;
 $num_of_page = (int)$params["numOfPage"];
@@ -5,7 +8,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 ?>
 
-<div id="admin-documents" class="d-flex align-items-center justify-content-center flex-column w-100">
+<div id="admin-documents" class="d-flex align-items-center justify-content-center flex-column w-100 h-100">
   <?php if (!isset($documents) || count($documents) === 0) : ?>
     <div id="no-documents" class="text-center">
       <h1 class="mb-3">Jelenleg nincs egy dokument sem!</h1>

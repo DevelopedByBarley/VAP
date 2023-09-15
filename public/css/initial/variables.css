@@ -4,6 +4,7 @@
   --pr-background: white;
   --sc-background: black;
   --shadow: 1px -3px 56px 19px rgba(0, 0, 0, 0.05);
+  --shadow-light: 1px -3px 56px 19px rgba(255, 255, 255, 0.111);
   --pr-font: 'Anton', sans-serif;
   --sc-font: 'Quicksand', sans-serif;
 }

@@ -1,12 +1,9 @@
-#register-form {
-  margin-top: 150px;
-}
+
 
 @media(min-width: 1280px) {
   #register-form {
     width: 60%;
     margin: 0 auto;
-    margin-top: 150px;
   }
 }
 

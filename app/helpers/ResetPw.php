@@ -1,7 +1,6 @@
 <?php
 class ResetPw
 {
-    private $renderer;
     private $pdo;
     private $mailer;
 
@@ -9,62 +8,22 @@ class ResetPw
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
-        $this->renderer = new Renderer();
         $this->mailer = new Mailer();
     }
 
-    public function forgotPwForm()
-    {
-
-        echo $this->renderer->render("Layout.php", [
-            "content" => $this->renderer->render("/pages/public/user/reset_pw/Forgot_Pw_Form.php", []),
-            "currentStepId" =>  $_COOKIE["currentStepId"] ?? 0
-        ]);
-    }
-
-    public function newPwRequest()
-    {
-
-        $this->pwRequest($_POST);
-    }
-
-    public function resetPwForm()
-    {
-        $token = $_GET["token"] ?? null;
-        $expires = $_GET["expires"] ?? null;
-        $emailByToken = $this->checkTokenData($token, $expires);
-        if (!$emailByToken) {
-            echo "Token nem lejárt vagy nem létezik!";
-            return;
-        }
-
-
-        echo $this->renderer->render("Layout.php", [
-            "content" => $this->renderer->render("/pages/public/user/reset_pw/Reset_Pw_Form.php", [
-                "emailByToken" => $emailByToken,
-                "token" => $token
-            ]),
-            "currentStepId" =>  $_COOKIE["currentStepId"] ?? 0,
-
-        ]);
-    }
-
-    public function setNewPw()
-    {
-        $this->newPw($_POST);
-    }
-
-
-
-
-
-    private function pwRequest($body)
+    public function pwRequest($body)
     {
         $email = $body["email"];
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            echo "Something went wrong";
+            exit;
+        }
+
         $token = uniqid();
         $current_time = time();
         $expires = date('Y-m-d H:i:s', strtotime('+10 minutes', $current_time));
@@ -93,7 +52,7 @@ class ResetPw
         $stmt->bindParam(':expires', $expires);
 
         $stmt->execute();
-        $body = $_SERVER["TOKEN_ADD"] . "/reset_pw?token=" . $token . "&expires=" . strtotime($expires);
+        $body = $_SERVER["TOKEN_ADD"] . "user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
 
@@ -101,7 +60,7 @@ class ResetPw
     }
 
 
-    private function checkTokenData($token)
+    public function checkTokenData($token)
     {
 
 
@@ -127,14 +86,14 @@ class ResetPw
         return $token["email"];
     }
 
-    private function newPw($body)
+    public function newPw($body)
     {
         $password = $body["password"];
-        $password_again = $body["password_again"];
+        $password_repeat = $body["password-repeat"];
         $email = $body["email"];
         $token = $body["token"];
 
-        if ($password !== $password_again) {
+        if ($password !== $password_repeat) {
             header("Location: " . $_SERVER['HTTP_REFERER'] . "&pwVerifyProblem=1");
             exit;
         }

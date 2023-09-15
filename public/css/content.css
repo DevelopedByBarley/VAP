@@ -44,7 +44,6 @@
 .registration-btn {
   background-color: var(--sc-color);
   border: none;
-  margin-top: 2rem;
   text-align: center;
 }
 
@@ -74,12 +73,15 @@
   filter: grayscale(0);
 }
 
-#go-down {
+#header-nav {
   position: absolute;
-  bottom: 80px;
-  font-size: 2rem;
+  bottom: -10px;
   left: 50%;
   transform: translate(-50%);
+}
+
+#go-down {
+  font-size: 2rem;
   color: black;
 }
 
@@ -89,14 +91,14 @@
 }
 
 #recommendation {
-  min-height: 50vh;
+  min-height: 30vh;
   background-color: var(--pr-color);
 }
 
 
 
 #advantages {
-  min-height: 50vh;
+  min-height: 30vh;
   background-color: var(--sc-color);
 }
 
@@ -134,16 +136,16 @@
 
 /* EVENT SECTION   */
 
-#latest-event{
-  min-height: 70vh;
+#latest-event-container {
+  width: 100%;
 }
 
-@media(min-width: 1200px) {
-  #latest-event{
-    width: 70%;
-    margin: 0 auto;
-    border-radius: 15px;
-  }
+#event-card {
+  transition: all .4s ease-in-out;
+}
+
+#event-card:hover {
+  transform: scale(1.02);
 }
 
 
@@ -228,12 +230,13 @@ li {
   width: 100%;
   position: relative;
 }
+
 #parallax-filter {
   height: 40vh;
   width: 100%;
   background-color: rgba(0, 168, 157, 0.30);
   position: absolute;
-  top: 45px;
+  top: 0;
 }
 
 #parallax {
@@ -242,4 +245,21 @@ li {
   background: url("/public/assets/images/parallax.jpg") center center/cover;
   object-fit: cover;
   background-attachment: fixed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#footer {
+  min-height: 50vh;
 }
