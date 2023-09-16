@@ -296,6 +296,16 @@ $langs = LANGS;
         </label>
       </div>
     </div>
+    <div class="col-xs-12 mt-3 d-flex align-items-center justify-content-center border">
+      <div class="form-outline mb-4 p-3">
+        <div class="form-check form-switch text-center d-flex align-items-center justify-content-center">
+          <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" id="flexSwitchCheckDefault" name="privacy_statement" value="on" required>
+        </div>
+        <label class="form-check-label mt-2 text-center" for="flexSwitchCheckDefault">
+          Elfogadom az <a href="#">adatvédelmi nyilatkozatot</a>
+        </label>
+      </div>
+    </div>
 
   </div>
 

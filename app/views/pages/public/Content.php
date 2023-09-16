@@ -255,9 +255,9 @@ $questions = $params["questions"];
 
 
 
-<div class="container shadow d-flex align-items-center justify-content-center flex-column border r-border reveal mb-5">
+<div class="container shadow d-flex align-items-center justify-content-center flex-column border r-border reveal mb-5" id="faq">
 	<h1 class="text-center mt-5 mb-2 reveal"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
-	<div class="row w-100" id="faq">
+	<div class="row w-100">
 		<div class="col-xs-12 mb-5 reveal d-flex align-items-center justify-content-center flex-column" style="min-height: 40vh;">
 			<div class="accordion mb-5" id="questionAccordion">
 				<?php foreach ($questions as $index => $question) : ?>
@@ -294,7 +294,7 @@ $questions = $params["questions"];
 
 
 
-<div class="row mt-5 align-items-center justify-content-center bg-dark text-light">
+<div class="row mt-5 align-items-center justify-content-center bg-dark text-light" id="edu">
 	<div class="col-12 col-sm-7 p-3 d-flex align-items-center justify-content-center flex-column reveal" style="min-height: 60vh">
 		<h1 class="text-center mb-2">További dokumentumok</h1>
 		<p class="text-center" style="width: 75%; margin: 0 auto">
@@ -326,7 +326,7 @@ $questions = $params["questions"];
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">Hasznos anyagaink</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<?php if (count($documents) === 0) : ?>
