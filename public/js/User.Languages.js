@@ -8,9 +8,12 @@ const userLanguages = document.getElementById('user-languages');
 let prevUserLangData;
 
 
+
+
 if(userLanguages) {
    prevUserLangData = JSON.parse(userLanguages.dataset.langs);
-}
+  console.log(prevUserLangData);
+  }
 
 if (prevUserLangData && prevUserLangData.length !== 0) {
   localStorage.setItem('langs', JSON.stringify(prevUserLangData));

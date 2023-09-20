@@ -28,8 +28,14 @@ class UserRender extends UserController
 
   public function registerForm()
   {
+    session_start();
+
+    $prev = $_SESSION["prevRegisterContent"] ?? null;
+
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Register.php", [])
+      "content" => $this->renderer->render("/pages/user/Register.php", [
+        "prev" => $prev ?? null
+      ])
     ]);
   }
 

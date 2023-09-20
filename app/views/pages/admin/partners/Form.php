@@ -4,19 +4,19 @@
   <hr class="mb-5">
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="name">Név</label>
-    <input type="text" id="name" class="form-control" name="name" required placeholder="Partner neve"/>
+    <label class="form-label" for="name"><b>N;</b></label>
+    <input type="text" id="name" class="form-control" name="name" required placeholder="Partner neve" value="<?= $prev["name"]  ?? '' ?>" />
   </div>
 
   <!-- Message input -->
 
   <div class="form-outline mb-4">
     <label class="form-label" for="descriptionInHu">Rövid leirás</label>
-    <textarea class="form-control" id="descriptionInHu" rows="4" name="descriptionInHu" required placeholder="Partner rövid leirása"></textarea>
+    <textarea class="form-control" id="descriptionInHu" rows="4" name="descriptionInHu" required placeholder="Partner rövid leirása"><?= $prev["descriptionInHu"]  ?? '' ?></textarea>
   </div>
   <div class="form-outline mb-4">
     <label class="form-label" for="descriptionInEn">Rövid leirás angolul</label>
-    <textarea class="form-control" id="descriptionInEn" rows="4" name="descriptionInEn" required placeholder="Partner rövid leirása angolul"></textarea>
+    <textarea class="form-control" id="descriptionInEn" rows="4" name="descriptionInEn" required placeholder="Partner rövid leirása angolul"><?= $prev["descriptionInEn"]  ?? '' ?></textarea>
   </div>
   <div class="form-outline mb-4">
     <div class="mb-3">

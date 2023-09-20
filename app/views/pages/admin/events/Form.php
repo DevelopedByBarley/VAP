@@ -1,43 +1,45 @@
+
 <form enctype="multipart/form-data" action="/admin/events/new" method="POST" class="form">
 
   <h1>Esemény hozzáadása</h1>
   <hr class="mb-5">
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="nameInHu">Név</label>
+    <label class="form-label" for="nameInHu"><b>Név</b></label>
     <input type="text" id="name" class="form-control" name="nameInHu" required placeholder="Esemény neve magyarul" />
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label" for="nameInEn">Név angolul</label>
+    <label class="form-label" for="nameInEn"><b>Név angolul</b></label>
     <input type="text" id="name" class="form-control" name="nameInEn" required placeholder="Esemény neve angolul" />
   </div>
 
   <div class="form-outline mb-4">
-    <label class="form-label">Esemény Kezdő dátuma</label>
+    <label class="form-label"><b>Esemény Kezdő dátuma</b></label>
     <br>
     <input type="date" name="date" id="start-date" class="mt-1" min="<?= date('Y-m-d')?>" required />
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label">Esemény záró dátuma</label>
+    <label class="form-label"><b>Esemény záró dátuma</b></label>
     <br>
     <input type="date" name="end_date" id="end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label">Regisztráció lezárásának dátuma</label>
+    <label class="form-label"><b>Regisztráció lezárásának dátuma</b></label>
     <br>
     <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
   </div>
 
   <div class="form-outline mb-4">
-    <label class="form-label" for="descriptionHu">Rövid leirás</label>
+    <label class="form-label" for="descriptionHu"><b>Rövid leirás</b></label>
     <textarea class="form-control" id="descriptionHu" rows="4" name="descriptionInHu" required placeholder="Esemény rövid leirása"></textarea>
   </div>
   <div class="form-outline mb-4">
-    <label class="form-label" for="descriptionEn">Rövid leirás angolul</label>
+    <label class="form-label" for="descriptionEn"><b>Rövid leirás angolul</b></label>
     <textarea class="form-control" id="descriptionEn" rows="4" name="descriptionInEn" required placeholder="Esemény rövid leirása angolul"></textarea>
   </div>
 
   <div class="form-outline border p-3">
+    <label for="formFile" class="form-label mt-3"><b>Kapcsolódó linkek hozzáadása</b></label>
     <div id="event-links-container">
 
     </div>
@@ -45,7 +47,7 @@
   </div>
 
   <div class="form-outline mb-4">
-    <label for="formFile" class="form-label">Választható feladatok hozzáadása</label>
+    <label for="formFile" class="form-label mt-3"><b>Választható feladatok hozzáadása</b></label>
     <?php foreach (TASK_AREAS["areas"] as $index => $task) : ?>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="<?= $index ?>" name="task[]">
@@ -66,7 +68,7 @@
 
   <div class="form-outline mb-4">
     <div class="mb-3 mt-3">
-      <label for="formFile" class="form-label">Fénykép feltöltése</label>
+      <label for="formFile" class="form-label"><b>Fénykép feltöltése</b> <i>(jpg, png)</i></label>
       <input class="form-control" type="file" id="formFile" name="image" required>
     </div>
   </div>

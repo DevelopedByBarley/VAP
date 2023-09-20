@@ -1,10 +1,12 @@
+
 <link rel="stylesheet" href="/public/css/admin/partners.css?v=<?= time() ?>">
+
+
 
 <?php
 $partners = $params["partners"] ?? null;
 $num_of_page = (int)$params["numOfPage"];
 $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
-
 ?>
 
 <div id="admin-partners" class="d-flex align-items-center justify-content-center flex-column h-100">

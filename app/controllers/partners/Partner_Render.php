@@ -1,10 +1,10 @@
 <?php
-class PartnerRender extends PartnerController{
+class PartnerRender extends PartnerController
+{
 
   public function __construct()
   {
     parent::__construct();
-   
   }
 
   public function index()
@@ -32,7 +32,7 @@ class PartnerRender extends PartnerController{
     $admin = $this->adminModel->admin();
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/partners/Form.php", [
-        "admin" => $admin ?? null
+        "admin" => $admin ?? null,
       ]),
       "admin" => $admin ?? null
     ]);

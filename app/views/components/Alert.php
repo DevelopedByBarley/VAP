@@ -1,23 +1,25 @@
-<?php $alert = $_SESSION["alert"] ?? null;
-$bg = $alert["bg"] ?? null; 
-$message = $alert["message"] ?? null  ; 
+<?php
+$alert = $_COOKIE["alert_message"] ?? null;
+$bg = $_COOKIE["alert_bg"] ?? null;
+
+
 ?>
 
-
 <?php if (isset($alert)) : ?>
-  <div id="alert-modal" class="alert text-light text-center" style="position: fixed; width: 100%; top: 0; left: 0; background: <?= $bg ?>">
-    <b><?php echo $message; ?></b>
+  <div id="toast-modal" class="toast align-items-center text-white bg-<?= $bg ?> border-0 show" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; bottom: 20px; right: 50%; z-index: 100; transform: translate(50%)">
+    <div class="d-flex">
+      <div class="toast-body">
+        <b><?php echo $alert; ?></b>
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
   </div>
 <?php endif; ?>
 
-
-
-
 <script>
-  const alert = document.querySelector("#alert-modal");
+  const toast = document.querySelector("#toast-modal");
   setTimeout(() => {
-    alert.style.display = "none";
-  }, 2000)
-
-  console.log(alert);
+    toast.style.display = "none";
+  }, 5000)
 </script>
+

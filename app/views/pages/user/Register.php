@@ -1,12 +1,14 @@
 <link rel="stylesheet" href="/public/css/register.css?v=<?php echo time() ?>">
-
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
+$prev = $params["prev"];
+$userLanguages = $prev["userLanguages"] ?? null;
+
 ?>
 
-<form class="border shadow p-3" id="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
+<form class="border shadow p-3 mb-5" id="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
   <h1 class="text-center mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h1>
   <div class="row mb-4 mt-5">
 
@@ -22,7 +24,7 @@ $langs = LANGS;
     <div class="col-xs-12">
       <div class="form-outline">
         <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'Név' ?></b></label>
-        <input type="text" id="name" name="name" class="form-control" required />
+        <input type="text" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required />
       </div>
     </div>
 
@@ -32,7 +34,7 @@ $langs = LANGS;
     <div class="col-xs-12 col-md-6 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label required" for="email"><b><?= REGISTRATION["form"]["email"][$lang] ?? 'Név' ?></b></label>
-        <input type="email" id="email" name="email" class="form-control" required />
+        <input type="email" id="email" name="email" class="form-control" required value="<?= $prev["email"] ?? '' ?>" />
       </div>
     </div>
 
@@ -41,7 +43,7 @@ $langs = LANGS;
     <div class="col-xs-12 col-md-6 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label required" for="password"><b><?= REGISTRATION["form"]["password"][$lang] ?? 'Név' ?></b></label>
-        <input type="password" id="password" name="password" class="form-control" required />
+        <input type="password" id="password" name="password" class="form-control" required value="<?= $prev["name"] ?? "" ?>" />
       </div>
     </div>
 
@@ -49,7 +51,7 @@ $langs = LANGS;
     <div class="col-xs-12 col-md-6 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label required" for="city"><b><?= REGISTRATION["form"]["address"][$lang] ?? 'Név' ?></b></label>
-        <input type="text" id="address" name="address" class="form-control" required />
+        <input type="text" id="address" name="address" class="form-control" required value="<?= $prev["address"] ?? '' ?>" />
       </div>
     </div>
 
@@ -59,7 +61,7 @@ $langs = LANGS;
     <div class="col-xs-12 col-md-6 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'Név' ?></b></label>
-        <input type="text" id="phone" name="mobile" class="form-control" />
+        <input type="text" id="phone" name="mobile" class="form-control" value="<?= $prev["mobile"] ?? '' ?>" />
       </div>
     </div>
 
@@ -71,15 +73,12 @@ $langs = LANGS;
       <div class="form-outline mb-4 text-center">
         <label class="form-label mb-3 required"><b><?= PROFESSIONS["title"][$lang] ?? '' ?></b></label>
         <br>
-        <input type="radio" class="btn-check" name="profession" id="profession_1" value="<?= PROFESSIONS["profession"]["student"]['Hu'] ?>" autocomplete="off" required>
-        <label class="btn btn-outline-primary" for="profession_1">
-          <?= PROFESSIONS["profession"]["student"][$lang] ?? 'Diák vagyok' ?>
-        </label>
-
-        <input type="radio" class="btn-check" name="profession" id="profession_2" value="<?= PROFESSIONS["profession"]["student"]['Hu'] ?>" autocomplete="off">
-        <label class="btn btn-outline-primary" for="profession_2">
-          <?= PROFESSIONS["profession"]["worker"][$lang] ?? 'Dolgozok' ?>
-        </label>
+        <?php foreach (PROFESSIONS["profession"] as $index => $profession) : ?>
+          <input type="radio" class="btn-check" name="profession" id="profession_<?= $index ?>" value="<?= $profession['Hu'] ?>" <?= isset($prev) && $prev["profession"] === $profession["Hu"] ? 'checked' : '' ?> autocomplete="off" required>
+          <label class="btn btn-outline-primary" for="profession_<?= $index ?>">
+            <?= $profession[$lang] ?? 'Diák vagyok' ?>
+          </label>
+        <?php endforeach ?>
       </div>
     </div>
 
@@ -91,7 +90,7 @@ $langs = LANGS;
         <label class="form-label" for="school-name"><b>
             <?= EDU_INSTITUTION[$lang] ?? 'Név' ?>
           </b></label>
-        <input type="text" id="school-name" name="school_name" class="form-control" />
+        <input type="text" id="school-name" name="school_name" class="form-control" value="<?= $prev["school_name"] ?? '' ?>" />
       </div>
     </div>
 
@@ -102,8 +101,9 @@ $langs = LANGS;
       <div class="form-outline mb-4">
         <label class="form-label required" for="programs"><b> <?= PROGRAMS["title"][$lang] ?? '' ?></b></label>
         <?php foreach (PROGRAMS["program"] as $index => $program) : ?>
+
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="programs" id="program-<?= $index ?>" value="<?= $index ?>" required>
+            <input class="form-check-input" type="radio" name="programs" id="program-<?= $index ?>" value="<?= $index ?>" required <?= isset($prev) && PROGRAMS["program"][$prev["programs"]]["Hu"] === $program["Hu"] ? 'checked' : '' ?>>
             <label class="form-check-label" for="program-<?= $index ?>">
               <?= $program[$lang] ?? '' ?>
             </label>
@@ -116,7 +116,7 @@ $langs = LANGS;
 
 
 
-    <div class="col-xs-12 mt-3">
+    <div class="col-xs-12 mt-3" id="<?= isset($prev) ? 'user-languages' : '' ?>" <?= isset($prev) ? "data-langs='" . (isset($prev) ? json_encode($userLanguages) : null) . "'" : '' ?>>
       <div class="form-outline mb-4">
         <label class="form-check-label required" for="languages">
           <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
@@ -203,7 +203,7 @@ $langs = LANGS;
     <div class="col-xs-12 mt-3">
       <div class="form-outline mb-4">
         <label class="form-label" for="other-languages"><b><?= OTHER_LANGUAGES[$lang] ?? '' ?></b></label>
-        <input type="text" id="other-languages" name="other_languages" class="form-control" />
+        <input type="text" id="other-languages" name="other_languages" class="form-control" value="<?= $prev["other_languages"] ?? '' ?>" />
       </div>
     </div>
 
@@ -212,18 +212,16 @@ $langs = LANGS;
         <label class="form-label required" for="participation"><b>
             <?= PARTICIPATION["title"][$lang] ?? '' ?>
           </b></label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="participation" id="participation-1" value="1" required>
-          <label class="form-check-label" for="program-1">
-            <?= PARTICIPATION["participations"]["1"][$lang] ?? '' ?>
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="participation" id="participation-2" value="2">
-          <label class="form-check-label" for="program-2">
-            <?= PARTICIPATION["participations"]["2"][$lang] ?? '' ?>
-          </label>
-        </div>
+
+        <?php foreach (PARTICIPATION["participations"] as $index => $participation) : ?>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="participation" id="participation-<?= $index ?>" value="1"  <?= isset($prev) && PARTICIPATION["participations"][$prev["participation"]]["Hu"] === $participation["Hu"] ? 'checked' : '' ?> required>
+            <label class="form-check-label" for="participation-<?= $index ?>">
+              <?= $participation[$lang] ?? '' ?>
+            </label>
+          </div>
+        <?php endforeach ?>
+
       </div>
     </div>
 
@@ -238,7 +236,7 @@ $langs = LANGS;
 
         <?php foreach (TASK_AREAS["areas"] as $index => $area) : ?>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="tasks" id="task-<?= $index ?>" value="<?= $index ?>" required>
+            <input class="form-check-input" type="radio" name="tasks" id="task-<?= $index ?>" value="<?= $index ?>" <?= isset($prev) && TASK_AREAS["areas"][$prev["tasks"]]["Hu"] === $area["Hu"] ? 'checked' : '' ?> required>
             <label class="form-check-label" for="task-1">
               <td><?= $area[$lang] ?? 'Név' ?>
             </label>
@@ -261,7 +259,7 @@ $langs = LANGS;
           </b></label>
         <?php foreach (INFORMED_BY["inform"] as $index => $info) : ?>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="informed_by" id="program_<?= $index ?>" value="<?= $index ?>" required>
+            <input class="form-check-input" type="radio" name="informed_by" id="program_<?= $index ?>" value="<?= $index ?>" <?= isset($prev) && INFORMED_BY["inform"][$prev["informed_by"]]["Hu"] === $info["Hu"] ? 'checked' : '' ?> required>
             <label class="form-check-label" for="program-<?= $index ?>">
               <?= $info[$lang] ?? 'Név' ?>
             </label>

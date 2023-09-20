@@ -16,7 +16,10 @@
   public function new($files, $body)
   {
 
-    $fileName = $this->fileSaver->saver($files["image"], "/uploads/images/events", null);
+    $fileName = $this->fileSaver->saver($files["image"], "/uploads/images/events", null, [
+      'image/png',
+      'image/jpeg',
+    ]);
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -100,7 +103,10 @@
 
     if ($files["image"]["name"] !== '') {
       unlink("./public/assets/uploads/images/events/$prevImage");
-      $fileName = $this->fileSaver->saver($files["image"], "/uploads/images/events", null);
+      $fileName = $this->fileSaver->saver($files["image"], "/uploads/images/events", null, [
+        'image/png',
+        'image/jpeg',
+      ]);
     } else {
       $fileName = $prevImage;
     }

@@ -69,27 +69,25 @@ $questions = $params["questions"];
 	</div>
 </div>
 
-<div class="container">
 
-	<div class="row reveal mt-5 r-border" id="volunteers">
-		<div class="col-xs-12">
-			<div id="volunteers-header" class="mb-5">
-				<h1 class="text-center mt-5 mb-4"><?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
-			</div>
-			<div class="row d-flex align-items-center justify-content-center" id="v-cards" style="min-height: 60vh">
-				<?php foreach ($volunteers as $volunteer) : ?>
-					<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center mt-2">
-						<div class="card p-4 volunteer-card r-border" style="width: 25rem;">
-							<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
-							<div class="card-body volunteer-card-body mt-3">
-								<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
-								<hr>
-								<i><?= $volunteer["name"] ?></i>
-							</div>
+<div class="row reveal mt-5 r-border" id="volunteers">
+	<div class="col-xs-12">
+		<div id="volunteers-header" class="mb-5">
+			<h1 class="text-center mt-5 mb-4"><?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
+		</div>
+		<div class="row d-flex align-items-center justify-content-center" id="v-cards" style="min-height: 60vh">
+			<?php foreach ($volunteers as $volunteer) : ?>
+				<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center mt-2">
+					<div class="card p-4 volunteer-card r-border" style="width: 25rem;">
+						<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
+						<div class="card-body volunteer-card-body mt-3">
+							<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
+							<hr>
+							<i><?= $volunteer["name"] ?></i>
 						</div>
 					</div>
-				<?php endforeach ?>
-			</div>
+				</div>
+			<?php endforeach ?>
 		</div>
 	</div>
 </div>
@@ -184,7 +182,7 @@ $questions = $params["questions"];
 		<div class="col-12 col-lg-5 p-4 reveal rounded" id="latest-event-title">
 			<h1 class="mt-5 mb-2 text-light">Következő eseményünk</h1>
 			<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
-			<a href="#" class="btn btn-outline-light">További eseményeink</a>
+			<a href="/events" class="btn btn-outline-light">További eseményeink</a>
 		</div>
 		<div class="col-12 col-lg-5 p-5 d-flex align-items-center justify-content-center text-dark reveal rounded">
 			<a href="/event/<?= $latestEvent["eventId"] ?>" class="text-dark" style="text-decoration: none;">
@@ -311,12 +309,121 @@ $questions = $params["questions"];
 
 
 
-<div id="footer" class="row sc-color">
-	<div class="col-12 d-flex align-items-center justify-content-center">
-		<h1 class="text-light">Footer</h1>
-	</div>
-</div>
+<footer class="text-center text-lg-start text-white sc-color">
+	<!-- Grid container -->
+	<div class="container p-4 pb-0">
+		<!-- Section: Links -->
+		<section class="">
+			<!--Grid row-->
+			<div class="row reveal">
+				<!-- Grid column -->
+				<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+					<h6 class="text-uppercase mb-4 font-weight-bold">
+					volunteer Art Programs
+				</h6>
+					<p>
+						Here you can use rows and columns to organize your footer
+						content. Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit.
+					</p>
+				</div>
+				<!-- Grid column -->
 
+				<hr class="w-100 clearfix d-md-none" />
+
+				<!-- Grid column -->
+				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+					<h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+					<p>
+						<a class="text-white">MDBootstrap</a>
+					</p>
+					<p>
+						<a class="text-white">MDWordPress</a>
+					</p>
+					<p>
+						<a class="text-white">BrandFlow</a>
+					</p>
+					<p>
+						<a class="text-white">Bootstrap Angular</a>
+					</p>
+				</div>
+				<!-- Grid column -->
+
+				<hr class="w-100 clearfix d-md-none" />
+
+				<!-- Grid column -->
+				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+					<h6 class="text-uppercase mb-4 font-weight-bold">
+						Useful links
+					</h6>
+					<p>
+						<a class="text-white">Your Account</a>
+					</p>
+					<p>
+						<a class="text-white">Become an Affiliate</a>
+					</p>
+					<p>
+						<a class="text-white">Shipping Rates</a>
+					</p>
+					<p>
+						<a class="text-white">Help</a>
+					</p>
+				</div>
+
+				<!-- Grid column -->
+				<hr class="w-100 clearfix d-md-none" />
+
+				<!-- Grid column -->
+				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+					<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+					<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+					<p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+					<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+					<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+				</div>
+				<!-- Grid column -->
+			</div>
+			<!--Grid row-->
+		</section>
+		<!-- Section: Links -->
+
+		<hr class="my-3">
+
+		<!-- Section: Copyright -->
+		<section class="p-3 pt-0">
+			<div class="row d-flex align-items-center">
+				<!-- Grid column -->
+				<div class="col-md-7 col-lg-8 text-center text-md-start">
+					<!-- Copyright -->
+					<div class="p-3">
+						© 2020 Copyright:
+						<a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+					</div>
+					<!-- Copyright -->
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+					<!-- Facebook -->
+					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-facebook"></i></a>
+
+					<!-- Twitter -->
+					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-twitter"></i></a>
+
+					<!-- Google -->
+					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-messenger"></i></a>
+
+					<!-- Instagram -->
+					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-instagram"></i></a>
+				</div>
+				<!-- Grid column -->
+			</div>
+		</section>
+		<!-- Section: Copyright -->
+	</div>
+	<!-- Grid container -->
+</footer>
 
 
 
@@ -326,7 +433,7 @@ $questions = $params["questions"];
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">Hasznos anyagaink</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<?php if (count($documents) === 0) : ?>

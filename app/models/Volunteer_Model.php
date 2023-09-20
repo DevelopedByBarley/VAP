@@ -20,7 +20,10 @@ class VolunteerModel extends AdminModel
 
   public function addVolunteer($files, $body)
   {
-    $fileName = $this->fileSaver->saver($files["v_image"], "/uploads/images/volunteers", null);
+    $fileName = $this->fileSaver->saver($files["v_image"], "/uploads/images/volunteers", null, [
+      'image/png',
+      'image/jpeg',
+    ]);
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["description"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -65,7 +68,7 @@ class VolunteerModel extends AdminModel
   public function update($files, $id, $body)
   {
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    
+
     $descriptionInHu = filter_var($body["description"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $prevImage = self::getPrevImageByVolunteer($id)["fileName"];
@@ -75,7 +78,10 @@ class VolunteerModel extends AdminModel
 
     if ($files["v_image"]["name"] !== '') {
       unlink("./public/assets/uploads/images/volunteers/$prevImage");
-      $fileName = $this->fileSaver->saver($files["v_image"], "/uploads/images/volunteers", null);
+      $fileName = $this->fileSaver->saver($files["v_image"], "/uploads/images/volunteers", null, [
+        'image/png',
+        'image/jpeg',
+      ]);
     } else {
       $fileName = $prevImage;
     }
@@ -88,7 +94,7 @@ class VolunteerModel extends AdminModel
     `descriptionInEn` = :descriptionInEn, 
     `fileName` = :fileName 
     WHERE `volunteers`.`id` = :id");
-    
+
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
     $stmt->bindParam(":descriptionInEn", $descriptionInEn);

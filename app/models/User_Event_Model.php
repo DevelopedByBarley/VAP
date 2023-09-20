@@ -114,7 +114,10 @@ class UserEventModel
 
 
 
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null);
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, [
+      'application/pdf',
+      'application/msword',
+    ]);
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);

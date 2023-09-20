@@ -36,7 +36,10 @@ class DocumentModel extends AdminModel
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $createdAt = time();
 
-    $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null);
+    $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null, [
+      'application/pdf',
+      'application/msword',
+    ]);
     $extension =  pathinfo($documentName, PATHINFO_EXTENSION);
 
 
@@ -45,7 +48,7 @@ class DocumentModel extends AdminModel
     $stmt->bindParam(":nameInHu", $nameInHu);
     $stmt->bindParam(":nameInEn", $nameInEn);
     $stmt->bindParam(":fileName", $documentName);
-    $stmt->bindParam(":extension", $extension );
+    $stmt->bindParam(":extension", $extension);
     $stmt->bindParam(":createdAt", $createdAt);
 
     $stmt->execute();
@@ -76,12 +79,15 @@ class DocumentModel extends AdminModel
     $documentName = '';
     $extension = '';
 
-    if(!empty($files["document"]["name"])) {
-      $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", $prevImage);
+    if (!empty($files["document"]["name"])) {
+      $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", $prevImage, [
+        'application/pdf',
+        'application/msword',
+      ]);
     } else {
       $documentName = $prevImage;
     }
-    
+
     $extension = pathinfo($documentName, PATHINFO_EXTENSION);
 
 

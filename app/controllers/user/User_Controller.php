@@ -70,6 +70,7 @@ class UserController
   }
   public function registration()
   {
+    session_start();
     $this->userModel->registerUser($_FILES, $_POST);
   }
   

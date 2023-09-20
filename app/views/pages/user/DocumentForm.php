@@ -7,7 +7,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
 ?>
-<div class="sc-color d-flex align-items-center flex-column justify-content-center vh-100">
+<div class="d-flex align-items-center flex-column justify-content-center vh-100">
 
   <div id="user-documents" class="shadow bg-light">
     <form action="/user/documents/new" method="POST" enctype="multipart/form-data" class="head">

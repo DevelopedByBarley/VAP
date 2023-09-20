@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,11 +18,12 @@
         <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>
         <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;">
+            <?php include 'app/views/components/Alert.php' ?>
             <?php include 'includes/Navbar.php' ?>
             <div class="container-fluid" style="margin-top: 80px">
-                <div class="row mb-5">
+                <div class="row">
                     <div class="col-xs-12 p-0" style="min-height: 79vh;">
-                        <?= $params["content"] ?? "" ?>
+                        <?= $params["content"] ?>
                     </div>
                 </div>
             </div>

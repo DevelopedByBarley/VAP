@@ -9,7 +9,10 @@ class PartnerModel extends AdminModel
 
   public function insert($files, $body)
   {
-    $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null);
+    $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null, [
+      'image/png',
+      'image/jpeg',
+    ]);
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -86,7 +89,10 @@ class PartnerModel extends AdminModel
 
     if ($files["p_image"]["name"] !== '') {
       unlink("./public/assets/uploads/images/partners/$prevImage");
-      $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null);
+      $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null, [
+        'image/png',
+        'image/jpeg',
+      ]);
     } else {
       $fileName = $prevImage;
     }

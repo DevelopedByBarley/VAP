@@ -25,11 +25,30 @@ class UserModel
     return $user;
   }
 
+
+
   public function registerUser($files, $body)
   {
 
-    $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null);
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null);
+    $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null, [
+      'image/png',
+      'image/jpeg',
+    ]);
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, [
+      'application/pdf',
+      'application/msword',
+    ]);
+
+
+    if (!$fileName || in_array(false, $documentName)) {
+      self::setPrevContent();
+      setcookie("alert_message", "File típus elutasítva", time() + 2, "/");
+      setcookie("alert_bg", "danger", time() + 5, "/");
+
+
+      header('Location: /user/registration');
+      return;
+    }
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
@@ -62,7 +81,11 @@ class UserModel
     $isUserExist = self::checkIsUserExist($email);
 
     if ($isUserExist) {
-      echo "User exist";
+      self::setPrevContent();
+
+      setcookie("alert_message", "Ez a felhasználó már létezik!", time() + 2, "/");
+      setcookie("alert_bg", "danger", time() + 5, "/");
+      header('Location: /user/registration');
       exit;
     }
 
@@ -119,6 +142,8 @@ class UserModel
       $body = str_replace('{{name}}', $name, $body);
 
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
+
+      if (isset($_SESSION["prevRegisterContent"])) unset($_SESSION["prevRegisterContent"]);
       header("Location: /");
     }
   }
@@ -298,7 +323,10 @@ class UserModel
   public function addDocument($files, $body)
   {
     $userRefId = $_SESSION["userId"] ?? null;
-    $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", null);
+    $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", null, [
+      'application/pdf',
+      'application/msword',
+    ]);
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
 
     $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
@@ -323,7 +351,10 @@ class UserModel
     $prevImage = $this->getDocumentById($id)["name"];
     $fileName = '';
     if ($files["document"]["name"] !== '') {
-      $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", $prevImage);
+      $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", $prevImage, [
+        'application/pdf',
+        'application/msword',
+      ]);
     } else {
       $fileName = $prevImage;
     }
@@ -363,6 +394,24 @@ class UserModel
 
     return false;
   }
+
+  private function setPrevContent() {
+    $langs = $_POST["langs"];
+    $levels = $_POST["levels"];
+    $userLanguages = [];
+
+    // POST langs átalakítása a megfelelő formátumra!
+    for ($i = 0; $i < count($langs); $i++) {
+      $userLanguages[] = [
+        "lang" => $langs[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+    $_POST["userLanguages"] = $userLanguages;
+    $_SESSION["prevRegisterContent"] = $_POST;
+  }
+
 
   private function formatDocuments($documentName, $typeOfDocument)
   {

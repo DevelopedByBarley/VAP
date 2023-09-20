@@ -29,6 +29,18 @@ class EventRender extends EventController
   }
 
 
+  public function events()
+  {
+    $events = $this->eventModel->index();
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/events/Events.php", [
+        "events" => $events ?? null
+      ]),
+    ]);
+  }
+
+
   public function adminEvent($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -101,11 +113,12 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-
+    $prev = $_SESSION["prevEventContent"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/Form.php", [
         "admin" => $admin ?? null,
+        "prev" => $prev ?? null
       ]),
       "admin" => $admin ?? null
     ]);
@@ -175,7 +188,8 @@ class EventRender extends EventController
 
 
 
-  public function event($vars) {
+  public function event($vars)
+  {
     session_start();
     $eventId = $vars["id"] ?? null;
     $event = $this->eventModel->getEventById($eventId);
@@ -232,5 +246,4 @@ class EventRender extends EventController
       ]),
     ]);
   }
-
 }

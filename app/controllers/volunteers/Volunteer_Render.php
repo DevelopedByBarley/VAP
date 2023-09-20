@@ -30,8 +30,11 @@ class VolunteerRender extends VolunteerController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");
     $admin = $this->adminModel->admin();
 
+
+
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/volunteers/Form.php", []),
+      "content" => $this->renderer->render("/pages/admin/volunteers/Form.php", [
+      ]),
       "admin" => $admin
     ]);
   }
