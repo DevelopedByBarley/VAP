@@ -13,7 +13,8 @@ class DocumentController
     $this->renderer = new Renderer();
     $this->adminModel = new AdminModel();
   }
-
+  //PROTECTED
+  
   public function insertDocument()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");

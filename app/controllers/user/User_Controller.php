@@ -22,6 +22,7 @@ class UserController
   }
 
 
+  // PROTECTED
 
   public function updateUser()
   {
@@ -35,30 +36,37 @@ class UserController
     $this->userModel->resetPw($_POST);
   }
 
-  public function deleteUser() {
+  public function deleteUser()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->delete($_POST);
     $this->authService->logoutUser();
   }
-  
-  public function deleteUserDocument($vars) {
+
+  public function deleteUserDocument($vars)
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->deleteDocument($vars["id"]);
   }
 
 
-  
-  public function updateUserDocument($vars) {
+
+  public function updateUserDocument($vars)
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->updateDocument($vars["id"], $_FILES, $_POST);
   }
-  
-  public function newDocument() {
+
+  public function newDocument()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userModel->addDocument($_FILES, $_POST);
   }
 
 
+
+
+  // PUBLIC
   public function setLanguage()
   {
     $this->languageService->language($_POST);
@@ -73,7 +81,7 @@ class UserController
     session_start();
     $this->userModel->registerUser($_FILES, $_POST);
   }
-  
+
 
   public function login()
   {
@@ -86,12 +94,13 @@ class UserController
     $this->authService->logoutUser();
   }
 
-  public function newPwRequest() {
+  public function newPwRequest()
+  {
     $this->resetPwService->pwRequest($_POST);
   }
 
-  public function setNewPw() {
+  public function setNewPw()
+  {
     $this->resetPwService->newPw($_POST);
   }
-
 }

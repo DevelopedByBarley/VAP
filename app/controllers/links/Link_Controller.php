@@ -14,6 +14,8 @@ class LinkController
     $this->adminModel = new AdminModel();
   }
 
+  //PROTECTED
+
   public function updateLink($vars) {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->linkModel->update($vars["id"], $_POST);

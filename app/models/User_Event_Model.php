@@ -1,5 +1,6 @@
 <?php
 require 'app/helpers/MailBodies.php';
+require 'app/helpers/UUID.php';
 
 
 class UserEventModel
@@ -7,6 +8,7 @@ class UserEventModel
   private $pdo;
   private $fileSaver;
   private $mailer;
+  private $uuid;
 
   public function __construct()
   {
@@ -14,20 +16,7 @@ class UserEventModel
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
-  }
-  function uuid($data = null)
-  {
-    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
-    $data = $data ?? random_bytes(16);
-    assert(strlen($data) == 16);
-
-    // Set version to 0100
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-    // Set bits 6-7 to 10
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-
-    // Output the 36 character UUID.
-    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    $this->uuid = new UUID();
   }
 
 
@@ -40,7 +29,7 @@ class UserEventModel
     $tasks = $body["tasks"] ?? null;
     $dates = $body["dates"] ?? null;
     $lang = $_COOKIE["lang"] ?? null;
-    $rand = self::uuid();
+    $rand = $this->uuid->generateUUID();
 
 
 
@@ -194,9 +183,6 @@ class UserEventModel
     header("Location: /event/success");
   }
 
-
-
-
   public function delete($eventId)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
@@ -206,6 +192,7 @@ class UserEventModel
     header("Location: /user/dashboard");
   }
 
+
   public function deleteRegistrationFromMailUrl($id)
   {
 
@@ -214,7 +201,7 @@ class UserEventModel
     $stmt->execute();
     $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if(!$isSubExist) {
+    if (!$isSubExist) {
       echo "Ilyen regisztráció nem létezik!";
       exit;
     }
@@ -223,25 +210,9 @@ class UserEventModel
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // LANGUAGES
 
   private function insertLanguages($registerId, $languages, $levels)
   {
@@ -265,6 +236,19 @@ class UserEventModel
     }
   }
 
+  private function copyLanguagesFromUserToRegister($registerId, $lanugages)
+  {
+    foreach ($lanugages as $language) {
+      $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
+      $stmt->bindParam(':lang', $language["lang"]);
+      $stmt->bindParam(':level', $language["level"]);
+      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->execute();
+    }
+  }
+
+
+  // DATES
 
   private function insertDatesOfRegistration($registerId, $registration_dates)
   {
@@ -277,6 +261,9 @@ class UserEventModel
     }
   }
 
+  // TASKS
+
+
   private function insertTasksOfRegistration($registerId, $tasks)
   {
     foreach ($tasks as $task) {
@@ -287,6 +274,8 @@ class UserEventModel
     }
   }
 
+
+  // DOCUMENTS
 
   private function insertDocuments($registerId, $documents)
   {
@@ -305,7 +294,6 @@ class UserEventModel
     }
   }
 
-
   private function copyDocumentFromUserToRegister($registerId, $documents)
   {
     foreach ($documents as $document) {
@@ -319,19 +307,8 @@ class UserEventModel
       $stmt->execute();
     }
   }
-  private function copyLanguagesFromUserToRegister($registerId, $lanugages)
-  {
-    foreach ($lanugages as $language) {
-      $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
-      $stmt->bindParam(':lang', $language["lang"]);
-      $stmt->bindParam(':level', $language["level"]);
-      $stmt->bindParam(':registerRefId', $registerId);
-      $stmt->execute();
-    }
-  }
 
-
-
+  
   private function formatDocuments($documentName, $typeOfDocument)
   {
 
@@ -348,4 +325,14 @@ class UserEventModel
 
     return $ret;
   }
+
+
+
+
+
+
+
+
+
+
 }

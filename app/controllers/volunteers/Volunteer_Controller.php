@@ -14,6 +14,8 @@ class VolunteerController
     $this->volunteerModel = new VolunteerModel();
   }
 
+  // PROTECTED
+
   public function newVolunteer()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/administrator");

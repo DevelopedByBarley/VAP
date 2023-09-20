@@ -14,6 +14,19 @@ class UserModel
     $this->mailer = new Mailer();
   }
 
+  // BASIC
+
+  public function getRegistrationsByUser($userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
+
+    $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $registrations;
+  }
+
   public function getMe()
   {
     $userId = $_SESSION["userId"] ?? null;
@@ -24,8 +37,6 @@ class UserModel
 
     return $user;
   }
-
-
 
   public function registerUser($files, $body)
   {
@@ -148,27 +159,6 @@ class UserModel
     }
   }
 
-  private function insertLanguages($id, $languages, $levels)
-  {
-    $ret = [];
-
-    for ($i = 0; $i < count($languages); $i++) {
-      $ret[$i] = [
-        "lang" => $languages[$i],
-        "level" => $levels[$i]
-      ];
-    }
-
-
-    foreach ($ret as $language) {
-      $stmt = $this->pdo->prepare("INSERT INTO `user_languages` (`id`, `lang`, `level`, `userRefId`) VALUES (NULL, :lang, :level, :userRefId);");
-      $stmt->bindParam(':lang', $language["lang"]);
-      $stmt->bindParam(':level', $language["level"]);
-      $stmt->bindParam(':userRefId', $id);
-      $stmt->execute();
-    }
-  }
-
 
   public function update($body)
   {
@@ -230,39 +220,6 @@ class UserModel
     }
   }
 
-
-  public function resetPw($body)
-  {
-    $userId = $_SESSION["userId"] ?? null;
-    $old_pw = filter_var($body["old_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $new_pw = filter_var($body["new_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $confirm_pw = filter_var($body["confirm_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
-    $hashed = password_hash($new_pw, PASSWORD_DEFAULT);
-    $user = self::getMe();
-
-    $isVerified = password_verify($old_pw, $user["password"]);
-    $compared = $confirm_pw === $new_pw;
-
-    if (!$isVerified || !$compared) {
-      $_SESSION["alert"] = [
-        "message" => "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
-        "bg" => "red"
-      ];
-      header('Location: /user/password-reset');
-      return;
-    }
-
-    $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
-    $stmt->bindParam(":password", $hashed);
-    $stmt->bindParam(":userId", $userId);
-    $stmt->execute();
-    $_SESSION["alert"] = [
-      "message" => "Jelszó megváltoztatása sikeres!",
-      "bg" => "green"
-    ];
-    header('Location: /user/dashboard');
-  }
-
   public function delete($body)
   {
     $userId = $_SESSION["userId"] ?? null;
@@ -302,6 +259,57 @@ class UserModel
       }
     }
   }
+
+  private function checkIsUserExist($email)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && !empty($user)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private function setPrevContent()
+  {
+    $langs = $_POST["langs"];
+    $levels = $_POST["levels"];
+    $userLanguages = [];
+
+    // POST langs átalakítása a megfelelő formátumra!
+    for ($i = 0; $i < count($langs); $i++) {
+      $userLanguages[] = [
+        "lang" => $langs[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+    $_POST["userLanguages"] = $userLanguages;
+    $_SESSION["prevRegisterContent"] = $_POST;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // DOCUMENTS
 
   public function deleteDocument($id)
   {
@@ -379,83 +387,6 @@ class UserModel
     if ($isSuccess) header("Location: /user/documents");
   }
 
-
-  private function checkIsUserExist($email)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
-
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && !empty($user)) {
-      return true;
-    }
-
-    return false;
-  }
-
-  private function setPrevContent() {
-    $langs = $_POST["langs"];
-    $levels = $_POST["levels"];
-    $userLanguages = [];
-
-    // POST langs átalakítása a megfelelő formátumra!
-    for ($i = 0; $i < count($langs); $i++) {
-      $userLanguages[] = [
-        "lang" => $langs[$i],
-        "level" => $levels[$i]
-      ];
-    }
-
-    $_POST["userLanguages"] = $userLanguages;
-    $_SESSION["prevRegisterContent"] = $_POST;
-  }
-
-
-  private function formatDocuments($documentName, $typeOfDocument)
-  {
-
-    $ret = [];
-
-
-    for ($i = 0; $i < count($documentName); $i++) {
-      $ret[] = array(
-        'file' => $documentName[$i],
-        'type' => $typeOfDocument[$i]
-      );
-    }
-
-
-    return $ret;
-  }
-  private function insertDocuments($id, $documents)
-  {
-
-    foreach ($documents as $document) {
-      $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
-      $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
-      // Paraméterek kötése
-      $stmt->bindParam(':name', $document["file"]);
-      $stmt->bindParam(':type', $document["type"]);
-      $stmt->bindParam(':extension',  $extension);
-      $stmt->bindParam(':userRefId', $id);
-
-      // INSERT parancs végrehajtása
-      $stmt->execute();
-    }
-  }
-
-  private function updateUserLanguages($id, $languages, $levels)
-  {
-    $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    self::insertLanguages($id, $languages, $levels);
-  }
-
-
   public function getDocumentsByUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_documents` WHERE `userRefId` = :id");
@@ -478,6 +409,51 @@ class UserModel
     return $document;
   }
 
+  private function insertDocuments($id, $documents)
+  {
+
+    foreach ($documents as $document) {
+      $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
+      $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
+      // Paraméterek kötése
+      $stmt->bindParam(':name', $document["file"]);
+      $stmt->bindParam(':type', $document["type"]);
+      $stmt->bindParam(':extension',  $extension);
+      $stmt->bindParam(':userRefId', $id);
+
+      // INSERT parancs végrehajtása
+      $stmt->execute();
+    }
+  }
+
+  private function formatDocuments($documentName, $typeOfDocument)
+  {
+
+    $ret = [];
+
+
+    for ($i = 0; $i < count($documentName); $i++) {
+      $ret[] = array(
+        'file' => $documentName[$i],
+        'type' => $typeOfDocument[$i]
+      );
+    }
+
+
+    return $ret;
+  }
+
+
+
+
+
+
+
+
+
+
+  // LANGUAGES
+
   public function getLanguagesByUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_languages` WHERE `userRefId` = :id");
@@ -489,14 +465,72 @@ class UserModel
     return $languages;
   }
 
-  public function getRegistrationsByUser($userId)
+
+  private function insertLanguages($id, $languages, $levels)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
+    $ret = [];
 
-    $stmt->bindParam(":id", $userId);
+    for ($i = 0; $i < count($languages); $i++) {
+      $ret[$i] = [
+        "lang" => $languages[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+
+    foreach ($ret as $language) {
+      $stmt = $this->pdo->prepare("INSERT INTO `user_languages` (`id`, `lang`, `level`, `userRefId`) VALUES (NULL, :lang, :level, :userRefId);");
+      $stmt->bindParam(':lang', $language["lang"]);
+      $stmt->bindParam(':level', $language["level"]);
+      $stmt->bindParam(':userRefId', $id);
+      $stmt->execute();
+    }
+  }
+
+  private function updateUserLanguages($id, $languages, $levels)
+  {
+    $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
+    $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $registrations;
+    self::insertLanguages($id, $languages, $levels);
+  }
+
+
+
+
+
+  // RESET PW
+
+  public function resetPw($body)
+  {
+    $userId = $_SESSION["userId"] ?? null;
+    $old_pw = filter_var($body["old_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $new_pw = filter_var($body["new_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $confirm_pw = filter_var($body["confirm_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $hashed = password_hash($new_pw, PASSWORD_DEFAULT);
+    $user = self::getMe();
+
+    $isVerified = password_verify($old_pw, $user["password"]);
+    $compared = $confirm_pw === $new_pw;
+
+    if (!$isVerified || !$compared) {
+      $_SESSION["alert"] = [
+        "message" => "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
+        "bg" => "red"
+      ];
+      header('Location: /user/password-reset');
+      return;
+    }
+
+    $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
+    $stmt->bindParam(":password", $hashed);
+    $stmt->bindParam(":userId", $userId);
+    $stmt->execute();
+    $_SESSION["alert"] = [
+      "message" => "Jelszó megváltoztatása sikeres!",
+      "bg" => "green"
+    ];
+    header('Location: /user/dashboard');
   }
 }

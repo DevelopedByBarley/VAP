@@ -17,7 +17,7 @@ class AdminController
     $this->authService = new AuthService();
   }
 
-  
+  // PROTECTED
   public function getUsers()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -32,6 +32,9 @@ class AdminController
     }
    */
 
+
+  // PUBLIC
+  
   public function loginAdmin()
   {
     $this->authService->loginAdmin($_POST);

@@ -14,6 +14,8 @@ class QuestionController
     $this->adminModel = new AdminModel();
   }
 
+  //PROTECTED
+
   public function newQuestion()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
