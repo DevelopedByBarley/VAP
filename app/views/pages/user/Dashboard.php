@@ -14,7 +14,7 @@ $langs = LANGS;
 
 <div id="dashboard" class="w-100">
   <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow">
-    <div class="text-center mb-2">
+    <div class="text-center mb-2 mt-5">
       <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="shadow" />
     </div>
 
@@ -33,13 +33,13 @@ $langs = LANGS;
     </div>
   </div>
 
-  <div id="subscriptions" class="border mb-5 p-4 sc-color d-flex align-items-center justify-content-center flex-column">
+  <div id="subscriptions" class="border p-4 sc-color d-flex align-items-center justify-content-center flex-column">
     <h2 class="text-center mt-3 mb-5 text-light"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
     <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
       <h5 class="text-center text-light"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
       <div class="text-center">
-        <a href="/asd" class="m-1 btn text-light" id="event-btn">
+        <a href="/events" class="m-1 btn text-light" id="event-btn">
           <?= PROFILE["subscriptions"]["check_subscription_btn"][$lang] ?? 'Név' ?>
         </a>
       </div>

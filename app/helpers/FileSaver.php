@@ -62,6 +62,7 @@ class FileSaver
 
     if (!in_array($fileType, $whiteList)) {
       return false;
+      exit;
     }
 
     

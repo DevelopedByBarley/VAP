@@ -35,12 +35,14 @@ class UserEventModel
 
 
     if (!$dates || !$tasks) {
+      setcookie("alert_message", "Minden mező kitöltése kötelező!", time() + 2, "/");
+      setcookie("alert_bg", "danger", time() + 5, "/");
       header("Location: /event/register/$eventId");
       exit;
     }
-
+    
     // CHECK USER IS EXIST
-
+    
     if ($user) {
       $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email AND `eventRefId` = :eventId");
       $stmt->bindParam(":name", $user["name"]);
@@ -48,9 +50,11 @@ class UserEventModel
       $stmt->bindParam(":eventId", $eventId);
       $stmt->execute();
       $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
-
+      
       if (!empty($isUserExist)) {
-        echo "Ezzel a profillal már regisztráltál erre az eseményre";
+        setcookie("alert_message", "Ezzel a profillal már regisztráltál erre az eseményre!", time() + 2, "/");
+        setcookie("alert_bg", "danger", time() + 5, "/");
+        header("Location: /event/register/$eventId");
         exit;
       }
 
@@ -96,7 +100,7 @@ class UserEventModel
 
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Event regisztráció!" : "Event registration");
-      header("Location: /event/success");
+      header("Location: /success");
 
       return;
     }
@@ -180,7 +184,7 @@ class UserEventModel
 
     $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
-    header("Location: /event/success");
+    header("Location: /success");
   }
 
   public function delete($eventId)

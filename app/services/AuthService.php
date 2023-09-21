@@ -92,10 +92,8 @@ class AuthService
 
 
         if (!$user || count($user) === 0) {
-            $_SESSION["alert"] = [
-                "bg" => "red",
-                "message" => "Hibás email vagy jelszó!"
-            ];
+            setcookie("alert_message", "Hibás email vagy jelszó", time() + 2, "/");
+            setcookie("alert_bg", "danger", time() + 5, "/");
 
 
             header("Location: /login");

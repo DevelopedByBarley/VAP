@@ -10,7 +10,7 @@ $langs = LANGS;
 
 ?>
 
-<div class="sc-color d-flex align-items-center flex-column justify-content-center vh-100">
+<div class="d-flex align-items-center flex-column justify-content-center vh-100">
 
   <div class="row bg-light d-flex align-items-center flex-column shadow r-border p-3" id="user-documents">
     <div class="head p-3 text-center">

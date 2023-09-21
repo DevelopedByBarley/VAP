@@ -23,7 +23,7 @@ $tasks = $params["tasks"];
               <p class="text-muted mb-1"><?= $event["end_date"] ?></p>
             </div>
             <div class="border p-3">
-              <?php if (strtotime($event["end_date"]) < strtotime('today')) : ?>
+              <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
                 <span class="badge p-3 bg-danger">Regisztráció lezárult</span>
               <?php else : ?>
                 <a href="/event/register/<?= $event["eventId"] ?>" class="btn btn-outline-primary">Regisztráció</a>

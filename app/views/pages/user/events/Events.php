@@ -6,11 +6,11 @@ $events = $params["events"];
 ?>
 
 
-<div class="container mt-5 p-5 shadow r-border" style="min-height: 75vh">
+<div class="container mt-5 p-5 shadow r-border bg-light" style="min-height: 75vh">
   <div class="row">
     <h1 class="text-center mb-5">További eseményeink</h1>
     <?php foreach ($events as $event) : ?>
-      <div class="card mt-4">
+      <div class="card mt-4 shadow pt-3">
         <i class="card-header"><?= date("j", time() - $event["createdAt"])?> nappal ezelőtt</i>
         <div class="card-body">
           <h5 class="card-title"><?= $event[languageSwitcher("name")]?></h5>

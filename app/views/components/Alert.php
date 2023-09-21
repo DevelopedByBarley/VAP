@@ -20,6 +20,6 @@ $bg = $_COOKIE["alert_bg"] ?? null;
   const toast = document.querySelector("#toast-modal");
   setTimeout(() => {
     toast.style.display = "none";
-  }, 5000)
+  }, 2000)
 </script>
 

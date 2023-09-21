@@ -34,4 +34,18 @@ class HomeRender extends HomeController
             "user" => $user ?? null,
         ]);
     }
+
+    public function success()
+    {
+      session_start();
+      $lang = $_COOKIE["lang"] ?? null;
+  
+      echo $this->renderer->render("Layout.php", [
+        "content" => $this->renderer->render("/pages/public/Success.php", [
+          "lang" => $lang,
+          "title" => "Köszönjük a regisztrációdat!",
+          "message" => "A regisztráció sikerességéről e-mailt küldtünk"
+        ]),
+      ]);
+    }
 }

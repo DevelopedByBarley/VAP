@@ -45,10 +45,7 @@ class UserModel
       'image/png',
       'image/jpeg',
     ]);
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, [
-      'application/pdf',
-      'application/msword',
-    ]);
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
 
 
     if (!$fileName || in_array(false, $documentName)) {
@@ -331,10 +328,7 @@ class UserModel
   public function addDocument($files, $body)
   {
     $userRefId = $_SESSION["userId"] ?? null;
-    $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", null, [
-      'application/pdf',
-      'application/msword',
-    ]);
+    $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", null, null);
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
 
     $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
@@ -359,10 +353,7 @@ class UserModel
     $prevImage = $this->getDocumentById($id)["name"];
     $fileName = '';
     if ($files["document"]["name"] !== '') {
-      $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", $prevImage, [
-        'application/pdf',
-        'application/msword',
-      ]);
+      $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", $prevImage, null);
     } else {
       $fileName = $prevImage;
     }

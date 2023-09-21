@@ -234,16 +234,4 @@ class EventRender extends EventController
     ]);
   }
 
-
-  public function success()
-  {
-    session_start();
-    $lang = $_COOKIE["lang"] ?? null;
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/events/Success.php", [
-        "lang" => $lang,
-      ]),
-    ]);
-  }
 }
