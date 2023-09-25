@@ -51,7 +51,7 @@ $event_tasks = $params["event_tasks"];
     <div id="event-links-container" data-content='<?= json_encode($event_links) ?>'>
 
     </div>
-    <button class="btn btn-outline-primary mb-3" id="add-event-link-btn"><b>Online felületek hozzáadása</b></button>
+    <button class="btn btn-outline-primary mb-3" id="add-event-link-btn">Online felületek hozzáadása</button>
   </div>
 
   <div class="form-outline mb-4">
@@ -72,7 +72,7 @@ $event_tasks = $params["event_tasks"];
     <div id="event-dates-container" data-content='<?= json_encode($event_dates) ?>'>
 
     </div>
-    <button class="btn btn-outline-primary mb-3" id="add-event-date-btn"><b>Választható dátum hozzáadása</b></button>
+    <button class="btn btn-outline-primary mb-3" id="add-event-date-btn">Választható dátum hozzáadása</button>
   </div>
 
 

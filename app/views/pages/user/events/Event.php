@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/public/css/user/event.css?v=<?php echo time() ?>">
+
+
 <?php
 $lang = $_COOKIE["lang"] ?? null;
 
@@ -8,19 +11,17 @@ $links = $params["links"];
 $tasks = $params["tasks"];
 ?>
 
-<div class="d-flex align-items-center justify-content-center" style="height: 95vh;">
-  <div class="container py-5 shadow rounded m-margin" style="background-color: white;">
+<div class="d-flex align-items-center justify-content-center pr-color" style="height: 91vh;" id="public-event">
+  <div class="container py-5 shadow rounded bg-light">
 
     <div class="row">
       <div class="col-lg-4">
-        <div class="card shadow">
+        <div class="card bg-light">
           <div class="card-body text-center">
             <img src="<?= isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png' ?>" alt="avatar" class="rounded-circle img-fluid shadow" style="height: 150px;width: 150px;">
             <h5 class="my-3"><?= $event["nameInHu"] ?></h5>
-
             <div>
-              <p class="text-muted mb-1"><?= $event["date"] ?></p>
-              <p class="text-muted mb-1"><?= $event["end_date"] ?></p>
+              <p class="text-muted mb-3">Regisztráció vége: <?= $event["reg_end_date"] ?></p>
             </div>
             <div class="border p-3">
               <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
@@ -37,8 +38,8 @@ $tasks = $params["tasks"];
 
       </div>
 
-      <div class="col-lg-8">
-        <div class="card mb-4">
+      <div class="col-lg-8 ">
+        <div class="card mb-4 bg-light">
 
           <div class="card-body">
             <p class="mb-4"><span class="text-primary font-italic me-1">Választható feladatok</span></p>
@@ -52,13 +53,13 @@ $tasks = $params["tasks"];
             <?php endforeach ?>
           </div>
         </div>
-        <div class="card mb-4">
+        <div class="card mb-4 bg-light">
 
           <div class="card-body">
-            <p class="mb-4"><span class="text-primary font-italic me-1">Választható dátumok</span></p>
+            <p class="mb-1"><span class="text-primary font-italic me-1">Választható dátumok</span></p>
 
             <?php foreach ($dates as $date) : ?>
-              <button type="button" class="btn btn-primary mt-3"><?= $date["date"] ?></button>
+              <button type="button" class="btn btn-info text-light mt-3"><?= $date["date"] ?></button>
             <?php endforeach ?>
           </div>
         </div>

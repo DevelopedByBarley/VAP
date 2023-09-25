@@ -103,10 +103,8 @@ class AuthService
         $isVerified = password_verify($pw, $user["password"]);
 
         if (!$isVerified) {
-            $_SESSION["alert"] = [
-                "bg" => "red",
-                "message" => "Hibás email vagy jelszó!"
-            ];
+            setcookie("alert_message", "Hibás email vagy jelszó", time() + 2, "/");
+            setcookie("alert_bg", "danger", time() + 5, "/");
             header("Location: /login");
             return;
         }
@@ -125,7 +123,7 @@ class AuthService
         setcookie(session_name(), "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
 
         $referer = $_SERVER['HTTP_REFERER'];
-        
+
 
         header("Location: " . $referer);
     }

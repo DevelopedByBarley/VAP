@@ -8,7 +8,7 @@ $langs = LANGS;
 <?= $params["alertContent"] ?>
 
 
-<div class="login-wrapper d-flex align-items-center justify-content-center" style="min-height: 90vh;">
+<div class="login-wrapper d-flex align-items-center justify-content-center pr-color" style="min-height: 90vh;">
   <div class="container d-flex align-items-center justify-content-center bg-light rounded" style="min-height: 70vh" id="user-login-con">
     <div class="row w-100 d-flex align-items-center justify-content-center">
       <div class="col-xs-12 col-lg-5 d-flex align-items-center justify-content-center" id="login-col">

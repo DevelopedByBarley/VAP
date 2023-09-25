@@ -10,7 +10,7 @@ $documents = $params["documents"];
 $userLanguages = $params["userLanguages"]; 
 ?>
 
-<div id="profile-settings" class="border p-4 shadow">
+<div class="border p-4 bg-light container shadow">
   <form id="update-form" action="/user/update" method="POST">
     <div class="row mb-4 mt-5">
       <h2 class="text-center mb-5"><?= PROFILE["profile_settings"]["title"][$lang] ?? 'Név' ?></h2>

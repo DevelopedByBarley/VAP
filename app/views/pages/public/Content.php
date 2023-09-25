@@ -13,7 +13,7 @@ $questions = $params["questions"];
 ?>
 
 
-<header id="header">
+<header id="header"vv>
 	<div class="row">
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-4" id="header-intro">
 			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
@@ -175,30 +175,30 @@ $questions = $params["questions"];
 </div>
 
 
-
-
-<div class="container">
-	<div class="row	mt-5 text-dark shadow d-flex align-items-center justify-content-center bg-dark r-border" id="latest-event">
-		<div class="col-12 col-lg-5 p-4 reveal rounded" id="latest-event-title">
-			<h1 class="mt-5 mb-2 text-light">Következő eseményünk</h1>
-			<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
-			<a href="/events" class="btn btn-outline-light">További eseményeink</a>
-		</div>
-		<div class="col-12 col-lg-5 p-5 d-flex align-items-center justify-content-center text-dark reveal rounded">
-			<a href="/event/<?= $latestEvent["eventId"] ?>" class="text-dark" style="text-decoration: none;">
-				<div class="card border-light r-border shadow-light" id="event-card" style="width: 21rem;">
-					<div class="card-img-top r-border" style="height: 200px; width: 100%; background: url('/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>') center center/cover;"></div>
-					<div class="card-body">
-						<h4><?= $latestEvent[languageSwitcher("name")] ?></h4>
-						<p class="card-text"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $latestEvent["date"] ?> </b></p>
-						<hr style="border: 2px solid white">
-						<p class="card-text"><?= $latestEvent[languageSwitcher("description")] ?></p>
+<?php if ($latestEvent) : ?>
+	<div class="container">
+		<div class="row	mt-5 text-dark shadow d-flex align-items-center justify-content-center bg-dark r-border" id="latest-event">
+			<div class="col-12 col-lg-5 p-4 reveal rounded" id="latest-event-title">
+				<h1 class="mt-5 mb-2 text-light">Következő eseményünk</h1>
+				<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
+				<a href="/events" class="btn btn-outline-light">További eseményeink</a>
+			</div>
+			<div class="col-12 col-lg-5 p-5 d-flex align-items-center justify-content-center text-dark reveal rounded">
+				<a href="/event/<?= $latestEvent["eventId"] ?>" class="text-dark" style="text-decoration: none;">
+					<div class="card border-light r-border shadow-light" id="event-card" style="width: 21rem;">
+						<div class="card-img-top r-border" style="height: 200px; width: 100%; background: url('/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>') center center/cover;"></div>
+						<div class="card-body">
+							<h4><?= $latestEvent[languageSwitcher("name")] ?></h4>
+							<p class="card-text"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $latestEvent["date"] ?> </b></p>
+							<hr style="border: 2px solid white">
+							<p class="card-text"><?= $latestEvent[languageSwitcher("description")] ?></p>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
+			</div>
 		</div>
 	</div>
-</div>
+<?php endif ?>
 
 
 
@@ -292,7 +292,7 @@ $questions = $params["questions"];
 
 
 
-<div class="row mt-5 align-items-center justify-content-center bg-dark text-light" id="edu">
+<div class="row mt-5 align-items-center justify-content-center bg-dark text-light" id="footer">
 	<div class="col-12 col-sm-7 p-3 d-flex align-items-center justify-content-center flex-column reveal" style="min-height: 60vh">
 		<h1 class="text-center mb-2">További dokumentumok</h1>
 		<p class="text-center" style="width: 75%; margin: 0 auto">
@@ -309,122 +309,7 @@ $questions = $params["questions"];
 
 
 
-<footer class="text-center text-lg-start text-white sc-color">
-	<!-- Grid container -->
-	<div class="container p-4 pb-0">
-		<!-- Section: Links -->
-		<section class="">
-			<!--Grid row-->
-			<div class="row reveal">
-				<!-- Grid column -->
-				<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">
-					volunteer Art Programs
-				</h6>
-					<p>
-						Here you can use rows and columns to organize your footer
-						content. Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.
-					</p>
-				</div>
-				<!-- Grid column -->
-
-				<hr class="w-100 clearfix d-md-none" />
-
-				<!-- Grid column -->
-				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-					<p>
-						<a class="text-white">MDBootstrap</a>
-					</p>
-					<p>
-						<a class="text-white">MDWordPress</a>
-					</p>
-					<p>
-						<a class="text-white">BrandFlow</a>
-					</p>
-					<p>
-						<a class="text-white">Bootstrap Angular</a>
-					</p>
-				</div>
-				<!-- Grid column -->
-
-				<hr class="w-100 clearfix d-md-none" />
-
-				<!-- Grid column -->
-				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">
-						Useful links
-					</h6>
-					<p>
-						<a class="text-white">Your Account</a>
-					</p>
-					<p>
-						<a class="text-white">Become an Affiliate</a>
-					</p>
-					<p>
-						<a class="text-white">Shipping Rates</a>
-					</p>
-					<p>
-						<a class="text-white">Help</a>
-					</p>
-				</div>
-
-				<!-- Grid column -->
-				<hr class="w-100 clearfix d-md-none" />
-
-				<!-- Grid column -->
-				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-					<p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-					<p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-					<p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-					<p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-				</div>
-				<!-- Grid column -->
-			</div>
-			<!--Grid row-->
-		</section>
-		<!-- Section: Links -->
-
-		<hr class="my-3">
-
-		<!-- Section: Copyright -->
-		<section class="p-3 pt-0">
-			<div class="row d-flex align-items-center">
-				<!-- Grid column -->
-				<div class="col-md-7 col-lg-8 text-center text-md-start">
-					<!-- Copyright -->
-					<div class="p-3">
-						© 2020 Copyright:
-						<a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-					</div>
-					<!-- Copyright -->
-				</div>
-				<!-- Grid column -->
-
-				<!-- Grid column -->
-				<div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-					<!-- Facebook -->
-					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-facebook"></i></a>
-
-					<!-- Twitter -->
-					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-twitter"></i></a>
-
-					<!-- Google -->
-					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-messenger"></i></a>
-
-					<!-- Instagram -->
-					<a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i class="bi bi-instagram"></i></a>
-				</div>
-				<!-- Grid column -->
-			</div>
-		</section>
-		<!-- Section: Copyright -->
-	</div>
-	<!-- Grid container -->
-</footer>
-
+<?php include './app/views/includes/Footer.php'?>
 
 
 

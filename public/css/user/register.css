@@ -1,11 +1,5 @@
 
 
-@media(min-width: 1280px) {
-  #register-form {
-    width: 60%;
-    margin: 0 auto;
-  }
-}
 
 .required::after {
   content: " *";

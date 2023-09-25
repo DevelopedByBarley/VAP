@@ -104,7 +104,7 @@ $langs = LANGS;
                                 <?php if ($_SERVER['REQUEST_URI'] !== '/user/dashboard') : ?>
                                     <div class="text-center">
                                         <a class="m-1" href="/user/dashboard">
-                                            <img src="/public/assets/icons/user.png" style="height: 40px; width: 40px;" />
+                                            <img src="/public/assets/icons/bear.png" style="height: 40px; width: 40px;" />
                                         </a>
                                     </div>
                                 <?php endif ?>
@@ -120,7 +120,11 @@ $langs = LANGS;
             <?php else : ?>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                     <div class="container-fluid">
-                        <div class="navbar-brand"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><i style="font-size: 1.2rem;" class="bi bi-list"></i></button></div>
+                        <div class="navbar-brand">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+                                <i style="font-size: 1.2rem;" class="bi bi-list"></i>
+                            </button>
+                        </div>
                         <span class="navbar-text">
                             <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
                         </span>

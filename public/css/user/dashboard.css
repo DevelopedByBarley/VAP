@@ -11,6 +11,5 @@
 }
 
 #subscriptions {
-  background-color: var(--sc-color);
-  min-height: 50vh;
+  min-height: 45vh;
 }

@@ -32,7 +32,7 @@ $searchValue = $_GET["search"] ?? '';
       <?php endif ?>
   </nav>
   </ul>
-  <div class="table-responsive w-100" id="registrations-table">
+  <div class="table-responsive w-100 shadow" id="registrations-table">
     <table class="table bg-white">
       <thead class="bg-light">
         <tr>

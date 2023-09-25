@@ -12,18 +12,18 @@ $langs = LANGS;
 
 
 
-<div id="dashboard" class="w-100">
-  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow">
+<div id="dashboard">
+  <div id="dashboard-header" class="w-100 d-flex align-items-center justify-content-center flex-column text-light shadow p-3">
     <div class="text-center mb-2 mt-5">
       <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" style="height: 150px; width: 150px; border-radius: 100%;" class="shadow" />
     </div>
 
-    <h1 class="text-center"><?= $user["name"] ?></h1>
-    <b>
-      <p class="text-center"><?= $user["email"] ?></p>
-    </b>
+    <h3 class="text-center mt-3"><?= $user["name"] ?></h3>
+
+    <p class="text-center"><?= $user["email"] ?></p>
+
     <p class="text-center"><?= PROFILE["header"]["createdAt"][$lang] ?? '' ?>: <?= date("y-d-m h:i", $user["createdAt"]) ?></p>
-    <div class="text-center">
+    <div class="text-center mb-5">
       <a href="/user/logout" class="m-1 btn btn-danger text-light" id="user-logout-button">
         <?= PROFILE["header"]["logoutBtn"][$lang] ?? 'Név' ?>
       </a>
@@ -33,11 +33,11 @@ $langs = LANGS;
     </div>
   </div>
 
-  <div id="subscriptions" class="border p-4 sc-color d-flex align-items-center justify-content-center flex-column">
-    <h2 class="text-center mt-3 mb-5 text-light"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
+  <div id="subscriptions" class="border p-2 d-flex align-items-center justify-content-center flex-column">
+    <h2 class="text-center mb-5"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
     <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
-      <h5 class="text-center text-light"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
+      <h5 class="text-center"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
       <div class="text-center">
         <a href="/events" class="m-1 btn text-light" id="event-btn">
           <?= PROFILE["subscriptions"]["check_subscription_btn"][$lang] ?? 'Név' ?>
@@ -47,17 +47,15 @@ $langs = LANGS;
       <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
           <?php foreach ($subscriptions as $subscription) : ?>
-            <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
-              <div class="card r-border shadow" style="width: 21rem; min-height: 220px">
+
+            <div class="col-12 col-lg-8 mt-3">
+              <div class="card">
+                <h5 class="card-header"><?= $subscription[languageSwitcher("name")] ?></h5>
                 <div class="card-body">
-                  <h4><?= $subscription[languageSwitcher("name")] ?></h4>
-                  <p class="card-text"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $subscription["date"] ?> </b></p>
-                  <hr>
-                  <div class="text-center">
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#subModal<?= $subscription["eventId"] ?>">
-                      Jelentkezés törlése
-                    </button>
-                  </div>
+                  <p class="card-text"><?= $subscription[languageSwitcher("description")] ?></p>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#subModal<?= $subscription["eventId"] ?>">
+                    Jelentkezés törlése
+                  </button>
                 </div>
               </div>
             </div>
@@ -85,6 +83,3 @@ $langs = LANGS;
       </div>
     <?php endif ?>
   </div>
-
-
-  

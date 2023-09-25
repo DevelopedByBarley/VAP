@@ -10,24 +10,26 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
 
+<div class="container-fluid pr-color">
 
-  <div class="p-3 r-border " id="register-form">
-    <h1 class="text-center mb-5 mt-3"><?= $event[languageSwitcher("name")] ?> jelentkezés</h1>
+  <div class="p-3 container d-flex align-items-center justify-content-center p-3" id="register-form" style="min-height: 91vh;">
     <?php if ($user) : ?>
-      <div class="row" id="register-profile">
-        <div class="col-xs-12 text-center" id="register-profile-header">
+      <div class="row shadow border r-border p-3 bg-light shadow" id="register-profile" style="min-height: 70vh;">
+        <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
+        <div class="col-xs-12 col-lg-6 text-center" id="register-profile-header">
           <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
           <h3><?= $user["name"] ?? '' ?></h3>
-          <p><?= $user["email"] ?? '' ?></p>
-          <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
-        </div>
-        <div class="text-center mb-5">
-          <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
-        </div>
-      </div>
+          <div class="mb-3">
+            <small><?= $user["email"] ?? '' ?></small>
+          </div>
 
-      <div class="row">
-        <div class="col-xs-12">
+          <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
+          <hr>
+          <div class="text-center mb-5">
+            <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
           <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
             <div class="mb-4">
               <div class="mb-3">
@@ -57,14 +59,14 @@ $langs = LANGS;
 
 
 
-            <div class="text-center">
-              <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
-            </div>
+            <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
+
 
           </form>
         </div>
       </div>
   </div>
+</div>
 <?php else : ?>
 
 
@@ -102,7 +104,9 @@ $langs = LANGS;
 
 
 
-  <form class="border shadow p-3" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+  <form class="p-3" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+    <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
+
     <div class="row mb-4 mt-5">
 
 
