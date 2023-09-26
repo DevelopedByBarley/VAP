@@ -13,7 +13,7 @@
     <title>VAP</title>
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
     <?php if (!isset($_COOKIE["lang"])) : ?>
         <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>

@@ -1,6 +1,3 @@
-
-
-
 <?php
 $event = $params["event"];
 $dates = $params["dates"];
@@ -21,23 +18,36 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
           <div class="card-body text-center">
             <img src="<?= isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png' ?>" alt="avatar" class="rounded-circle img-fluid shadow" style="height: 150px;width: 150px;">
             <h5 class="my-3"><?= $event["nameInHu"] ?></h5>
+            <div class="mt-3 mb-3">
+              <button class="btn <?= (int)$event["isPublic"] === 1 ? 'bg-success' : 'bg-danger' ?> text-light" checked>
+                <b> <?= (int)$event["isPublic"] === 1 ? 'Publikus' : 'Privát' ?></b>
+              </button>
+            </div>
+
+
             <?php if (strtotime($event["end_date"]) < strtotime('today')) : ?>
               <button class="btn btn-danger">Lezárult</button>
             <?php endif ?>
-            <div>
-              <p class="text-muted mb-1"><?= $event["date"] ?></p>
-              <p class="text-muted mb-1"><?= $event["end_date"] ?></p>
+            <div class="bg-secondary p-3">
+              <p class="text-light mb-1">Esemény kezdete: <?= $event["date"] ?></p>
+              <p class="text-light mb-1">Esemény vége: <?= $event["end_date"] ?></p>
             </div>
             <div class="border p-3">
               <b class="text-muted">Regisztráltak száma: <?= $countOfRegistrations ?></b>
               <br>
               <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-outline-secondary mt-2">Áttekintés</a>
               <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-outline-secondary mt-2">Email küldése</a>
+            </div>
 
+            <div class="btn-group text-center mb-3 mt-3">
+              <a class="btn btn-outline-primary" href="/admin/event/state/<?= $event["eventId"] ?>?state=<?= (int)$event["isPublic"] === 1 ? '0' : '1' ?>"><?= (int)$event["isPublic"] === 1 ? 'Legyen Privát' : 'Legyen Publikus' ?></a>
             </div>
           </div>
         </div>
 
+      </div>
+
+      <div class="col-lg-8">
 
         <div class="card mb-4 shadow">
           <div class="card-body">
@@ -52,9 +62,6 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
           </div>
         </div>
 
-      </div>
-
-      <div class="col-lg-8">
         <div class="card mb-4">
 
           <div class="card-body">
@@ -71,12 +78,10 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
         </div>
 
         <div class="card shadow">
-          <div class="card-body text-center">
+          <div class="card-body">
+            <p class="mb-1"><span class="text-primary font-italic me-1">Választható Dátumok</span></p>
             <div class="row">
               <div class="col-sm-12">
-                <p class="mb-0">Választható dátumok</p>
-              </div>
-              <div class="col-sm-12 mt-3">
                 <?php foreach ($dates as $date) : ?>
                   <button type="button" class="btn btn-primary mt-3"><?= $date["date"] ?></button>
                 <?php endforeach ?>
@@ -86,16 +91,15 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
         </div>
 
         <div class="card shadow mt-2">
-          <div class="card-body text-center">
+          <div class="card-body">
+            <p class="mb-1"><span class="text-primary font-italic me-1">Választható Dátumok</span></p>
+
             <div class="row">
-              <div class="col-sm-12">
-                <p class="mb-0">Hozzáadott linkek</p>
-              </div>
               <div class="col-sm-12 mt-3">
                 <?php foreach ($links as $link) : ?>
                   <div class="row">
                     <div class="col-12">
-                      <a href="<?= $link["link"] ?>" class="mb-0"><?= $link["link"] ?></a>
+                      <a href="<?= $link["link"] ?>" class="mb-0 text-info"><?= $link["link"] ?></a>
                       <hr>
                     </div>
                   </div>

@@ -16,7 +16,7 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $events = $this->eventModel->index();
+    $events = $this->eventModel->index($admin);
 
 
     echo $this->renderer->render("Layout.php", [
@@ -31,10 +31,14 @@ class EventRender extends EventController
 
   public function events()
   {
+    session_start();
+
     $events = $this->eventModel->index();
+    $user = $this->userModel->getMe();
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/events/Events.php", [
+        "user" => $user ?? null,
         "events" => $events ?? null
       ]),
     ]);
@@ -46,7 +50,7 @@ class EventRender extends EventController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $eventId = $vars["id"] ?? null;
-    $event = $this->eventModel->getEventById($eventId);
+    $event = $this->eventModel->getEventById($eventId, $admin);
     $dates = $this->eventModel->getEventDates($eventId);
     $tasks = $this->eventModel->getEventTasks($eventId);
     $links = $this->eventModel->getEventLinks($eventId);
@@ -193,6 +197,11 @@ class EventRender extends EventController
     session_start();
     $eventId = $vars["id"] ?? null;
     $event = $this->eventModel->getEventById($eventId);
+    
+    if(!$event) {
+      header("Location: /");
+      exit;
+    }
 
     $dates = $this->eventModel->getEventDates($eventId);
     $tasks = $this->eventModel->getEventTasks($eventId);
@@ -215,7 +224,13 @@ class EventRender extends EventController
     session_start();
     $id = $vars["id"];
 
+
     $event = $this->eventModel->getEventById($id);
+
+    if(!$event) {
+      header("Location: /");
+      exit;
+    }
     $dates = $this->eventModel->getEventDates($id);
     $links = $this->eventModel->getEventLinks($id);
     $tasks = $this->eventModel->getEventTasks($id);

@@ -13,25 +13,23 @@ $questions = $params["questions"];
 ?>
 
 
-<header id="header"vv>
-	<div class="row">
-		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-4" id="header-intro">
-			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum voluptas nulla asperiores esse? Molestiae sapiente, quidem deserunt fuga</p>
-			<a href="/user/registration" class="btn registration-btn btn text-light">Önkéntes regisztráció</a>
+<div class="row">
+	<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column vh-100" id="header-intro">
+		<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum voluptas nulla asperiores esse? Molestiae sapiente, quidem deserunt fuga</p>
+		<a href="/user/registration" class="btn registration-btn btn text-light">Önkéntes regisztráció</a>
 
-			<div id="header-nav" class="text-center">
-				<span>Regisztrálj következő eseményünkre</span>
-				<br>
-				<a href="#latest-event"><i class="bi bi-arrow-down-circle" id="go-down"></i></a>
+		<div id="header-nav" class="text-center">
+			<span>Regisztrálj következő eseményünkre</span>
+			<br>
+			<a href="#latest-event"><i class="bi bi-arrow-down-circle" id="go-down"></i></a>
 
-			</div>
 		</div>
-		<div class="col-12 col-lg-4 d-flex align-items-center justify-content-center flex-column" id="header-image"></div>
 	</div>
-</header>
+	<div class="col-12 col-lg-4 d-flex align-items-center justify-content-center flex-column" id="header-image"></div>
+</div>
 
-<div class="row mt-5 bg-dark text-light" id="about-us">
+<div class="row bg-dark text-light" id="about-us">
 	<div class="col-12 d-flex align-items-center justify-content-center flex-column mt-5 mb-5 p-4" id="about-us-content">
 		<h1 class="reveal"> <?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?></h1>
 		<hr class="line mt-1 mb-5 reveal">
@@ -309,7 +307,7 @@ $questions = $params["questions"];
 
 
 
-<?php include './app/views/includes/Footer.php'?>
+<?php include './app/views/includes/Footer.php' ?>
 
 
 

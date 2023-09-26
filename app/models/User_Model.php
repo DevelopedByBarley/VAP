@@ -152,7 +152,13 @@ class UserModel
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
 
       if (isset($_SESSION["prevRegisterContent"])) unset($_SESSION["prevRegisterContent"]);
-      header("Location: /");
+      $_SESSION["success"] = [
+        "title" => "Sikeres regisztráció!",
+        "message" => "Regisztráció sikerességéről visszaigazoló e-mailt küldtünk! ",
+        "button_message" => "Tovább a bejelentkezéshez",
+        "path" => "/login",
+      ];
+      header("Location: /success");
     }
   }
 

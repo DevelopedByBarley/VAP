@@ -14,7 +14,7 @@ $langs = LANGS;
 
   <div class="p-3 container d-flex align-items-center justify-content-center p-3" id="register-form" style="min-height: 91vh;">
     <?php if ($user) : ?>
-      <div class="row shadow border r-border p-3 bg-light shadow" id="register-profile" style="min-height: 70vh;">
+      <div class="row shadow border r-border p-3shadow" id="register-profile" style="min-height: 70vh; background: white;">
         <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
         <div class="col-xs-12 col-lg-6 text-center" id="register-profile-header">
           <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
@@ -104,7 +104,7 @@ $langs = LANGS;
 
 
 
-  <form class="p-3" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+  <form class="p-3 r-border shadow" style="background-color: white;;" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
     <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
 
     <div class="row mb-4 mt-5">

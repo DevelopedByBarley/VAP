@@ -14,6 +14,29 @@
   }
 
 
+  public function state($id, $state)
+  {
+
+
+    $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = :state WHERE `events`.`eventId` = :id");
+    $stmt->bindParam(":state", $state);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    header("Location: /admin/event/$id");
+  }
+
+  public function public($id)
+  {
+
+    var_dump("Public");
+    exit;
+    $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = '1' WHERE `events`.`eventId` = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    header("Location: /admin/event/$id");
+  }
 
 
   // EVENTS
@@ -33,14 +56,14 @@
     $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
-
+    $isPublic = 0;
     $tasks = $body["task"] ?? [];
     $createdAt = time();
 
 
     $createdAt = time();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :fileName, :createdAt)");
+    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :isPublic, :fileName, :createdAt)");
     $stmt->bindParam(":nameInHu", $nameInHu);
     $stmt->bindParam(":nameInEn", $nameInEn);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
@@ -48,6 +71,7 @@
     $stmt->bindParam(":date", $date);
     $stmt->bindParam(":end_date", $end_date);
     $stmt->bindParam(":reg_end_date", $reg_end_date);
+    $stmt->bindParam(":isPublic", $isPublic);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
 
@@ -148,11 +172,21 @@
     header("Location:  /admin/events");
   }
 
-  public function index()
+  public function index($admin = null)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM events");
-    $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $events = [];
+
+    if ($admin) {
+      $stmt = $this->pdo->prepare("SELECT * FROM events");
+      $stmt->execute();
+      $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+      $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1'");
+      $stmt->execute();
+      $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     foreach ($events as $index => $event) {
       $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
@@ -164,20 +198,29 @@
     return $events;
   }
 
-  public function getEventById($id)
+  public function getEventById($id, $admin = null)
   {
+
+    if (!$admin || !isset($admin)) {
+      $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id AND `isPublic` = '1'");
+      $stmt->bindParam(":id", $id);
+      $stmt->execute();
+      $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      return $event;
+    }
+
     $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $events = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $events;
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $event;
   }
 
 
   public function getLatestEvent()
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM events ORDER BY `date` DESC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' ORDER BY `date` DESC LIMIT 1");
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -248,7 +291,7 @@
       }
     }
   }
-  
+
 
   private function sendMailForRegisteredUsers($eventId)
   {
@@ -360,57 +403,4 @@
       $stmt->execute();
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

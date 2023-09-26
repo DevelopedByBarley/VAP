@@ -33,9 +33,11 @@ startDate.addEventListener('change', (event) => {
   }
 
   let reset = eventDateState.slice(0, 1);
+  reset[0].date = ''
   eventDateState = reset;
+
   renderDatesOfEvent();
-  
+
 })
 
 
@@ -50,6 +52,7 @@ endDate.addEventListener('change', (event) => {
   }
 
   let reset = eventDateState.slice(0, 1);
+  reset[0].date = ''
   eventDateState = reset;
   renderDatesOfEvent();
 

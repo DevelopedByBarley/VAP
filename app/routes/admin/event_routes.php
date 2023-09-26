@@ -14,6 +14,9 @@ $r->addRoute('GET', '/admin/event/email/{id}', [EventRender::class, 'mailForm'])
 
 
 $r->addRoute('GET', '/admin/events/delete/{id}', [EventController::class, 'deleteEvent']);
+$r->addRoute('GET', '/admin/event/state/{id}', [EventController::class, 'setEventState']);
+
+
 
 
 

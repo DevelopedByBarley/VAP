@@ -41,19 +41,30 @@ class EventController
     $this->eventModel->update($vars["id"], $_POST, $_FILES);
   }
 
+  public function setEventState($vars)
+  {
+
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $state = $_GET["state"] ?? '';
+    $this->eventModel->state($vars["id"], $state);
+  }
+
+
   public function sendMailsToRegisteredUsers($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
     $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions);
   }
-  
-  public function deleteRegistration($vars) {
+
+  public function deleteRegistration($vars)
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userEventModel->delete($vars["id"]);
   }
 
-  public function deleteRegistrationFromMail($vars){
+  public function deleteRegistrationFromMail($vars)
+  {
     $this->userEventModel->deleteRegistrationFromMailUrl($vars["id"]);
   }
 
@@ -76,5 +87,4 @@ class EventController
 
     $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
   }
-
 }
