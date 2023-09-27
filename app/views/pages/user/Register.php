@@ -9,7 +9,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
 ?>
 
 <div class="container-fluid pr-color">
-  <div class="container shadow p-3" style="background-color: white;">
+  <div class="container shadow" style="background-color: white;">
     <form class="p-3 mb-5" action="/user/register" method="POST" enctype="multipart/form-data">
       <h2 class="text-center mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h2>
       <div class="row mb-4 mt-5">

@@ -13,22 +13,18 @@
     <title>VAP</title>
 </head>
 
-<body style="overflow-x: hidden;">
+<body>
+    <?php include 'app/views/components/Alert.php' ?>
+
+
     <?php if (!isset($_COOKIE["lang"])) : ?>
         <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>
-        <div id="VAP-app" style="max-width: 3500px; margin: 0 auto;">
-            <?php include 'app/views/components/Alert.php' ?>
-            <?php include 'includes/Navbar.php' ?>
-            <div class="container-fluid" style="margin-top: 80px">
-                <div class="row">
-                    <div class="col-xs-12 p-0" style="min-height: 79vh;">
-                        <?= $params["content"] ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php include 'includes/Navbar.php' ?>
+        <?= $params["content"] ?>
     <?php endif ?>
+
+    
     <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/User.Documents.js"></script>

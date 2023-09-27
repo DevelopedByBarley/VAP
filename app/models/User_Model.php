@@ -219,7 +219,9 @@ class UserModel
 
     if ($isSuccess) {
       self::updateUserLanguages($userId, $languages, $levels);
-      header('Location: /user/dashboard');
+      setcookie("alert_message", "Profil frissítése sikeres!", time() + 2, "/");
+      setcookie("alert_bg", "success", time() + 5, "/");
+      header('Location: /user/settings');
     }
   }
 
@@ -256,7 +258,8 @@ class UserModel
             $documentName = $document["name"];
             unlink("./public/assets/uploads/documents/users/$documentName");
           }
-
+          setcookie("alert_message", "Felhasználó törlése sikeres!", time() + 2, "/");
+          setcookie("alert_bg", "success", time() + 5, "/");
           header("Location: /");
         }
       }

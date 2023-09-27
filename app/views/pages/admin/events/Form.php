@@ -1,4 +1,3 @@
-
 <form enctype="multipart/form-data" action="/admin/events/new" method="POST" class="form">
 
   <h1>Esemény hozzáadása</h1>
@@ -16,17 +15,17 @@
   <div class="form-outline mb-4">
     <label class="form-label"><b>Esemény Kezdő dátuma</b></label>
     <br>
-    <input type="date" name="date" id="start-date" class="mt-1" min="<?= date('Y-m-d')?>" required />
+    <input type="date" name="date" id="start-date" class="mt-1" min="<?= date('Y-m-d') ?>" required />
   </div>
   <div class="form-outline mb-4">
     <label class="form-label"><b>Esemény záró dátuma</b></label>
     <br>
-    <input type="date" name="end_date" id="end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
+    <input type="date" name="end_date" id="end-date" class="mt-1" min="<?= date('Y-m-d') ?>" required />
   </div>
   <div class="form-outline mb-4">
     <label class="form-label"><b>Regisztráció lezárásának dátuma</b></label>
     <br>
-    <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1"  min="<?= date('Y-m-d')?>" required />
+    <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1" min="<?= date('Y-m-d') ?>" required />
   </div>
 
   <div class="form-outline mb-4">
@@ -60,10 +59,20 @@
 
   <div class="form-outline border p-3">
     <div id="event-dates-container">
-
     </div>
     <button class="btn btn-outline-primary mb-3" id="add-event-date-btn">Választható dátum hozzáadása</button>
   </div>
+  <div class="form-outline border p-3">
+    <label class="form-check-label">
+      <span><b>Időzítő beállítása</b> <i> (Az esemény csak a beállított időpont után lesz publikus!)</i></span>
+    </label>
+    <div class="mt-3">
+      <input type="datetime-local" id="meeting-time" name="timer" />
+    </div>
+  </div>
+
+
+
 
 
   <div class="form-outline mb-4">

@@ -56,7 +56,7 @@
     $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
-    $isPublic = 0;
+    $isPublic = 1;
     $tasks = $body["task"] ?? [];
     $createdAt = time();
 
@@ -220,7 +220,7 @@
 
   public function getLatestEvent()
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' ORDER BY `date` DESC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' ORDER BY `date` ASC LIMIT 1");
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
