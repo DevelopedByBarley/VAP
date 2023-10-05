@@ -13,6 +13,17 @@
     $this->mailer = new Mailer();
   }
 
+  // Set event isPublic = 0 if it expired
+  public function setEventsPrivateIfExpired() {
+    $today = date("Y-m-d");
+
+
+    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` < :today OR `reg_end_date` < :today)");
+    $stmt->bindParam(":today", $today);
+    $stmt->execute();
+
+
+  }
 
   // Set event state by $_GET parameter
   public function state($id, $state)
