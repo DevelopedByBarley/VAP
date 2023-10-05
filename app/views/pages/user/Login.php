@@ -8,7 +8,7 @@ $langs = LANGS;
 <?= $params["alertContent"] ?>
 
 
-<div class="login-wrapper d-flex align-items-center justify-content-center pr-color" style="min-height: 90vh;">
+<div class="login-wrapper d-flex align-items-center justify-content-center vh-100">
   <div class="container d-flex align-items-center justify-content-center rounded" style="min-height: 70vh; background: white;" id="user-login-con">
     <div class="row w-100 d-flex align-items-center justify-content-center">
       <div class="col-xs-12 col-lg-5 d-flex align-items-center justify-content-center" id="login-col">
@@ -28,7 +28,7 @@ $langs = LANGS;
             <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
           </div>
           <div class="text-center mt-5">
-            <button type="submit" class="btn btn-primary"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
+            <button type="submit" class="btn reg-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
             <p class="mt-3">Forgot <a href="/user/forgot-pw">Password?</a></p>
           </div>
           <div class="mt-5 text-center">

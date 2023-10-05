@@ -21,10 +21,12 @@
         <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>
         <?php include 'includes/Navbar.php' ?>
-        <?= $params["content"] ?>
+        <div class="mt-5">
+            <?= $params["content"] ?>
+        </div>
     <?php endif ?>
 
-    
+
     <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/User.Documents.js"></script>

@@ -11,8 +11,8 @@ $links = $params["links"];
 $tasks = $params["tasks"];
 ?>
 
-<div class="d-flex align-items-center justify-content-center pr-color" style="height: 91vh;" id="public-event">
-  <div class="container py-5 shadow rounded" style="background-color: white;">
+<div class="d-flex align-items-center justify-content-center" style="height: 91vh;" id="public-event">
+  <div class="container py-5" style="background-color: white;">
 
     <div class="row">
       <div class="col-lg-4">

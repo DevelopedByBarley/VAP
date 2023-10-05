@@ -14,10 +14,9 @@
   }
 
 
+  // Set event state by $_GET parameter
   public function state($id, $state)
   {
-
-
     $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = :state WHERE `events`.`eventId` = :id");
     $stmt->bindParam(":state", $state);
     $stmt->bindParam(":id", $id);
@@ -26,20 +25,9 @@
     header("Location: /admin/event/$id");
   }
 
-  public function public($id)
-  {
-
-    var_dump("Public");
-    exit;
-    $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = '1' WHERE `events`.`eventId` = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    header("Location: /admin/event/$id");
-  }
 
 
-  // EVENTS
+  // Add new event
   public function new($files, $body)
   {
 
@@ -58,9 +46,6 @@
     $event_dates = $body["event_dates"] ?? [];
     $isPublic = 1;
     $tasks = $body["task"] ?? [];
-    $createdAt = time();
-
-
     $createdAt = time();
 
     $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :isPublic, :fileName, :createdAt)");
@@ -92,6 +77,9 @@
     header("Location: /admin/events");
   }
 
+
+  // Delete event
+
   public function delete($id)
   {
     $fileNameForDelete = self::getEventById($id)["fileName"];
@@ -105,6 +93,10 @@
 
     header("Location:  /admin/events");
   }
+
+
+
+  // Update event
 
   public function update($id, $body, $files)
   {
@@ -172,6 +164,11 @@
     header("Location:  /admin/events");
   }
 
+
+
+
+
+  // Get events by admin or user
   public function index($admin = null)
   {
 
@@ -198,6 +195,9 @@
     return $events;
   }
 
+
+  // Get event by id if admin or user
+
   public function getEventById($id, $admin = null)
   {
 
@@ -218,9 +218,14 @@
   }
 
 
+
+  // Get latest event if it current
   public function getLatestEvent()
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' ORDER BY `date` ASC LIMIT 1");
+    $today = date("Y-m-d");
+
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' AND `date` > :today OR `reg_end_date` > :today ORDER BY `date` ASC LIMIT 1");
+    $stmt->bindParam(":today", $today);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -228,6 +233,9 @@
   }
 
   // REGISTRATIONS
+
+
+  // Get all registration by event
 
   public function getRegistrationsByEvent($eventId)
   {
@@ -239,7 +247,7 @@
     return $subscriptions;
   }
 
-
+  // Get registered users by event
   public function getRegisteredUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
@@ -280,6 +288,10 @@
     return $user;
   }
 
+
+
+
+  // Send email to registered users public function!
   public function sendEmailToRegisteredUsers($body, $subscriptions)
   {
 
@@ -292,6 +304,51 @@
     }
   }
 
+
+
+
+
+  // DATES 
+  public function getEventDates($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $events;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Send email to registered users private function!
 
   private function sendMailForRegisteredUsers($eventId)
   {
@@ -309,16 +366,8 @@
 
 
 
-  // DATES 
-  public function getEventDates($id)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $events;
-  }
+  // Update event dates
 
   private function updateEventDates($id, $event_dates)
   {
@@ -328,6 +377,9 @@
 
     self::insertDatesOfEvent($id, $event_dates);
   }
+
+  // Insert event dates
+
 
   private function insertDatesOfEvent($id, $event_dates)
   {
@@ -340,7 +392,7 @@
     }
   }
 
-  // LINKS
+  // Get event links
 
   public function getEventLinks($id)
   {
@@ -352,6 +404,8 @@
     return $events;
   }
 
+  // Update event links
+
   private function updateEventLinks($id, $links)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `event_links` WHERE eventRefId = :id");
@@ -360,6 +414,8 @@
 
     self::insertLinksOfEvent($id, $links);
   }
+
+  // Insert event links
 
   private function insertLinksOfEvent($id, $links)
   {
@@ -374,6 +430,8 @@
 
   // TASKS
 
+  // Get tasks of event
+
   public function getEventTasks($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM event_tasks WHERE eventRefId = :id");
@@ -384,6 +442,8 @@
     return $events;
   }
 
+  // Update event tasks
+
   private function updateEventTasks($id, $tasks)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `event_tasks` WHERE eventRefId = :id");
@@ -393,7 +453,7 @@
     self::insertTasksOfEvent($id, $tasks);
   }
 
-
+  // Insert event tasks
   private function insertTasksOfEvent($id, $tasks)
   {
     foreach ($tasks as $task) {

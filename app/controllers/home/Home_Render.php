@@ -19,6 +19,7 @@ class HomeRender extends HomeController
 
 		$links = $this->linkModel->index();
 		$latestEvent = $this->eventModel->getLatestEvent();
+		$this->eventModel->setEventsPrivateIfExpired();
 
 
 

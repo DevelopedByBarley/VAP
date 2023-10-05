@@ -3,6 +3,17 @@
   margin-right: 0;
 }
 
+input {
+  border: 1px solid !important;
+  border-radius: 0 !important;
+  border-radius: none !important;
+}
+
+input:focus {
+  border: 2px solid black !important;
+  box-shadow: none !important;
+}
+
 h1,
 h2,
 h3,
@@ -26,9 +37,7 @@ p {
 .form {
   width: 95%;
   margin: 0 auto;
-  box-shadow: var(--shadow);
   padding: 2rem;
-  border-radius: 15px;
   margin-top: 120px !important;
 }
 
@@ -50,9 +59,7 @@ p {
   box-shadow: var(--shadow);
 }
 
-.shadow-light {
-  box-shadow: var(--shadow-light);
-}
+
 
 .reveal {
   position: relative;
@@ -74,7 +81,9 @@ p {
   background-color: var(--pr-color);
 }
 
-.gradient {
-  background: linear-gradient(308deg, rgba(236,6,119,1) 0%, rgba(0,167,156,0.41780462184873945) 100%);
+.reg-btn {
+  border-radius: 0px !important;
+  background-color: var(--sc-color);
+  color: white;
+  padding: .7rem;
 }
-

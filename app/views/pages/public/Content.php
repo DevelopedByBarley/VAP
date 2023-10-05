@@ -16,11 +16,12 @@ $questions = $params["questions"];
 <div class="container-fluid">
 
 	<!-- HEADER ROW -->
+
 	<div class="row">
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
 			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum voluptas nulla asperiores esse? Molestiae sapiente, quidem deserunt fuga</p>
-			<a href="/user/registration" class="btn registration-btn btn text-light">Önkéntes regisztráció</a>
+			<a href="/user/registration" class="btn pr-color btn text-light">Önkéntes regisztráció</a>
 
 
 		</div>
@@ -42,7 +43,7 @@ $questions = $params["questions"];
 
 	<!-- RECOMMENDATION ROW-->
 
-	<div class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center reveal" id="recommendation">
+	<div class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center" id="recommendation">
 		<div class="col-12 col-lg-7 reveal p-5 text-center" id="recommendation-content">
 			<h1 class="text-light mb-3">Kiknek ajánljuk a programot?</h1>
 			<h6 class="text-light mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>

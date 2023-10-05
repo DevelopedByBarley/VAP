@@ -8,8 +8,8 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
 ?>
 
-<div class="container-fluid pr-color">
-  <div class="container shadow" style="background-color: white;">
+<div class="container-fluid">
+  <div class="container" style="background-color: white;">
     <form class="p-3 mb-5" action="/user/register" method="POST" enctype="multipart/form-data">
       <h2 class="text-center mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h2>
       <div class="row mb-4 mt-5">
@@ -313,7 +313,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
 
       <div class="text-center">
-        <button type="submit" class="btn btn-outline-success"> <?= REGISTRATION["form"]["registrationBtn"][$lang] ?? '' ?></button>
+        <button type="submit" class="btn reg-btn"> <?= REGISTRATION["form"]["registrationBtn"][$lang] ?? '' ?></button>
       </div>
     </form>
   </div>
