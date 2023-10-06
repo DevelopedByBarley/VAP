@@ -16,7 +16,7 @@ $tasks = $params["tasks"];
 
     <div class="row">
       <div class="col-lg-4">
-        <div class="card bg-light">
+        <div class="card">
           <div class="card-body text-center">
             <img src="<?= isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png' ?>" alt="avatar" class="rounded-circle img-fluid shadow" style="height: 150px;width: 150px;">
             <h5 class="my-3"><?= $event["nameInHu"] ?></h5>
@@ -39,7 +39,7 @@ $tasks = $params["tasks"];
       </div>
 
       <div class="col-lg-8 ">
-        <div class="card mb-4 bg-light">
+        <div class="card mb-4">
 
           <div class="card-body">
             <p class="mb-4"><span class="text-primary font-italic me-1">Választható feladatok</span></p>
@@ -53,7 +53,7 @@ $tasks = $params["tasks"];
             <?php endforeach ?>
           </div>
         </div>
-        <div class="card mb-4 bg-light">
+        <div class="card mb-4">
 
           <div class="card-body">
             <p class="mb-1"><span class="text-primary font-italic me-1">Választható dátumok</span></p>

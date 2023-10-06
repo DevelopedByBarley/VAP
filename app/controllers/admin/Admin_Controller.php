@@ -24,6 +24,12 @@ class AdminController
 
     $this->adminModel->index();
   }
+  public function banUser($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+
+    $this->adminModel->ban($vars["id"]);
+  }
 
   /**
   public function registerAdmin()

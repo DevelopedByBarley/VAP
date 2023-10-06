@@ -9,6 +9,22 @@ class AdminRender extends AdminController
     parent::__construct();
   }
 
+  public function registeredUser($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $userId = $vars["id"] ?? null;
+
+    $admin = $this->adminModel->admin();
+    $user = $this->adminModel->user($userId);
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/events/User.php", [
+        "admin" => $admin ?? null,
+        "user" => $user ?? null
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
   public function registrations()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");

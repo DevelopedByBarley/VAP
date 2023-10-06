@@ -10,13 +10,13 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
 
-<div class="container-fluid pr-color">
+<div class="container-fluid">
 
   <div class="p-3 container d-flex align-items-center justify-content-center p-3" id="register-form" style="min-height: 91vh;">
     <?php if ($user) : ?>
-      <div class="row shadow border r-border p-3shadow" id="register-profile" style="min-height: 70vh; background: white;">
+      <div class="row p-3" id="register-profile" style="min-height: 70vh; background: white;">
         <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
-        <div class="col-xs-12 col-lg-6 text-center" id="register-profile-header">
+        <div class="col-xs-12 text-center" id="register-profile-header">
           <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
           <h3><?= $user["name"] ?? '' ?></h3>
           <div class="mb-3">
@@ -24,12 +24,12 @@ $langs = LANGS;
           </div>
 
           <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
-          <hr>
           <div class="text-center mb-5">
             <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
           </div>
         </div>
-        <div class="col-xs-12 col-lg-6">
+        <hr>
+        <div class="col-xs-12 text-center">
           <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
             <div class="mb-4">
               <div class="mb-3">
@@ -59,7 +59,7 @@ $langs = LANGS;
 
 
 
-            <button type="submit" class="btn btn-outline-primary">Regisztráció</button>
+            <button type="submit" class="btn reg-btn">Regisztráció</button>
 
 
           </form>
@@ -104,8 +104,8 @@ $langs = LANGS;
 
 
 
-  <form class="p-3 r-border shadow" style="background-color: white;;" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
-    <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
+  <form class="p-3" style="background-color: white;;" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+    <h3 class="text-center mb-5 mt-5">Jelentkezés kitöltése</h3>
 
     <div class="row mb-4 mt-5">
 

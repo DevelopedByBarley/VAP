@@ -38,7 +38,8 @@ class EventController
   public function updateEvent($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $this->eventModel->update($vars["id"], $_POST, $_FILES);
+    $admin = $_SESSION["adminId"] ?? null;
+    $this->eventModel->update($vars["id"], $_POST, $_FILES, $admin);
   }
 
   public function setEventState($vars)

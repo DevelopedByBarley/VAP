@@ -35,8 +35,8 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
             <div class="border p-3">
               <b class="text-muted">Regisztráltak száma: <?= $countOfRegistrations ?></b>
               <br>
-              <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-outline-secondary mt-2">Áttekintés</a>
-              <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-outline-secondary mt-2">Email küldése</a>
+              <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-primary mt-2">Áttekintés</a>
+              <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : ''?>" >Email küldése</a>
             </div>
 
             <div class="btn-group text-center mb-3 mt-3">

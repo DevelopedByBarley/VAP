@@ -14,7 +14,40 @@ class AdminModel
     $this->mailer = new Mailer();
   }
 
+  public function user($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM users WHERE `id` LIKE :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+ if ($user) {
+
+      $stmt = $this->pdo->prepare("SELECT * FROM user_documents WHERE userRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["documents"] = $documents;
+
+
+      $stmt = $this->pdo->prepare("SELECT * FROM user_languages WHERE userRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["langs"] = $tasks;
+    }
+
+    return $user;
+  }
+
+  public function ban($id) {
+    $stmt = $this->pdo->prepare("DELETE FROM users WHERE `id` LIKE :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    header('Location: /admin/registrations');
+  }
 
 
   public function index() {

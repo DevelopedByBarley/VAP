@@ -16,33 +16,18 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $events = $this->eventModel->index($admin);
-
+    $eventsData = $this->eventModel->index($admin);
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/Events.php", [
         "admin" => $admin ?? null,
-        "events" => $events ?? null
+        "events" => $eventsData["events"] ?? null,
+        "numOfPage" => (int)$eventsData["numOfPage"] ?? 1
       ]),
       "admin" => $admin ?? null
     ]);
   }
 
-
-  public function events()
-  {
-    session_start();
-
-    $events = $this->eventModel->index();
-    $user = $this->userModel->getMe();
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/events/Events.php", [
-        "user" => $user ?? null,
-        "events" => $events ?? null
-      ]),
-    ]);
-  }
 
 
   public function adminEvent($vars)
@@ -136,7 +121,7 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $event = $this->eventModel->getEventById($vars["id"]);
+    $event = $this->eventModel->getEventById($vars["id"], $admin);
     $event_dates = $this->eventModel->getEventDates($vars["id"]);
     $event_links = $this->eventModel->getEventLinks($vars["id"]);
     $event_tasks = $this->eventModel->getEventTasks($vars["id"]);
@@ -189,7 +174,21 @@ class EventRender extends EventController
 
   /** PUBLIC */
 
+  public function events()
+  {
+    session_start();
 
+    $events = $this->eventModel->index();
+
+    $user = $this->userModel->getMe();
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/user/events/Events.php", [
+        "user" => $user ?? null,
+        "events" => $events ?? null
+      ]),
+    ]);
+  }
 
 
   public function event($vars)

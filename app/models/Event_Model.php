@@ -14,15 +14,14 @@
   }
 
   // Set event isPublic = 0 if it expired
-  public function setEventsPrivateIfExpired() {
+  public function setEventsPrivateIfExpired()
+  {
     $today = date("Y-m-d");
 
 
     $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` < :today OR `reg_end_date` < :today)");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
-
-
   }
 
   // Set event state by $_GET parameter
@@ -109,9 +108,9 @@
 
   // Update event
 
-  public function update($id, $body, $files)
+  public function update($id, $body, $files, $admin)
   {
-    $event = self::getEventById($id);
+    $event = self::getEventById($id, $admin);
     $prevImage = $event["fileName"];
     $createdAt = $event["createdAt"];
 
@@ -182,12 +181,20 @@
   // Get events by admin or user
   public function index($admin = null)
   {
+    $offset = $_GET["offset"] ?? 1;
+    $limit = 4; // Az oldalanként megjelenített rekordok száma
+    $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
+
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `events`");
+    $stmt->execute();
+    $countOfRecords = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
+    $numOfPage = ceil($countOfRecords / $limit); // A lapozó lapok számának kiszámítása
 
 
     $events = [];
 
     if ($admin) {
-      $stmt = $this->pdo->prepare("SELECT * FROM events");
+      $stmt = $this->pdo->prepare("SELECT * FROM events LIMIT $limit OFFSET $calculated");
       $stmt->execute();
       $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
@@ -196,6 +203,7 @@
       $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     foreach ($events as $index => $event) {
       $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
       $stmt->bindParam(":id", $event["eventId"]);
@@ -203,11 +211,16 @@
       $events[$index]["subscriptions"] = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
     }
 
-    return $events;
+    return $admin ?  [
+      "numOfPage" => $numOfPage,
+      "events" => $events
+    ] : $events;
   }
 
 
   // Get event by id if admin or user
+
+
 
   public function getEventById($id, $admin = null)
   {
@@ -305,7 +318,6 @@
   // Send email to registered users public function!
   public function sendEmailToRegisteredUsers($body, $subscriptions)
   {
-
     foreach ($subscriptions as $subscription) {
       if ($subscription["lang"] === "Hu") {
         $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Hello");

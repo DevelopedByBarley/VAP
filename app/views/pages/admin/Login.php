@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/public/css/admin_login_form.css?v=<?= time() ?>">
 
-<div class="container h-100 d-flex align-items-center justify-content-center flex-column">
+<div class="container vh-100 d-flex align-items-center justify-content-center flex-column">
   <div class="row w-100">
     <form class="border p-5" id="admin-login-form" action="/admin/login" method="POST">
       <div class="mb-3">
