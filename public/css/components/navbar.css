@@ -26,6 +26,10 @@
   }
 }
 
+#navbar-dropdown:focus {
+  box-shadow: none !important;
+}
+
 
 
 #language-dropdown {

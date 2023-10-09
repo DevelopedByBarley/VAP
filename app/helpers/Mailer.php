@@ -14,8 +14,8 @@ class Mailer
             $mail->setFrom("underdev@bybarley.hu", "VAP");
             $mail->addAddress($address);
             $mail->Username = "underdev@bybarley.hu";
-            $mail->Password = $_SERVER["MAILER_PW"];
-            $mail->Host = $_SERVER["MAILER_HOST"];
+            $mail->Password = "j6pH&+rE-4W4l@AcH1zl";
+            $mail->Host = "smtp.rackhost.hu";
             $mail->CharSet = 'UTF-8';
             $mail->Subject = $subject;
             $mail->Body = $body;

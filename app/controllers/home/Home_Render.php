@@ -25,6 +25,7 @@ class HomeRender extends HomeController
 
 		echo $this->renderer->render("Layout.php", [
 			"content" => $this->renderer->render("/pages/public/Content.php", [
+				"user" => $user ?? null,
 				"volunteers" => $volunteers ?? null,
 				"partners" => $partners ?? null,
 				"documents" => $documents ?? null,

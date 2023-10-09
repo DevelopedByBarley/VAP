@@ -10,6 +10,7 @@ $links = $params["links"];
 $latestEvent = $params["latestEvent"];
 $questions = $params["questions"];
 
+$user = $params["user"];
 ?>
 
 
@@ -21,7 +22,9 @@ $questions = $params["questions"];
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
 			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum voluptas nulla asperiores esse? Molestiae sapiente, quidem deserunt fuga</p>
-			<a href="/user/registration" class="btn pr-color btn text-light">Önkéntes regisztráció</a>
+			<?php if (!$user) : ?>
+				<a href="/user/registration" class="btn pr-color btn text-light">Önkéntes regisztráció</a>
+			<?php endif ?>
 
 
 		</div>
@@ -80,24 +83,26 @@ $questions = $params["questions"];
 	<!-- VOLUNTEERS ROW -->
 
 
-	<div class="row reveal mt-5 r-border" id="volunteers">
-		<div class="col-xs-12">
-			<div id="volunteers-header" class="mb-5">
-				<h1 class="text-center mt-5 mb-4"><?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
-			</div>
-			<div class="row d-flex align-items-center justify-content-center" id="v-cards" style="min-height: 60vh">
-				<?php foreach ($volunteers as $volunteer) : ?>
-					<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center mt-2">
-						<div class="card p-4 volunteer-card r-border" style="width: 25rem;">
-							<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
-							<div class="card-body volunteer-card-body mt-3">
-								<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
-								<hr>
-								<i><?= $volunteer["name"] ?></i>
+	<div class="container">
+		<div class="row reveal mt-5 r-border" id="volunteers">
+			<div class="col-xs-12">
+				<div id="volunteers-header" class="mb-5">
+					<h1 class="text-center mt-5 mb-4"><?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
+				</div>
+				<div class="row d-flex align-items-center justify-content-center" id="v-cards" style="min-height: 60vh">
+					<?php foreach ($volunteers as $volunteer) : ?>
+						<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center mt-2">
+							<div class="card p-4 volunteer-card r-border" style="width: 25rem;">
+								<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
+								<div class="card-body volunteer-card-body mt-3">
+									<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
+									<hr>
+									<i><?= $volunteer["name"] ?></i>
+								</div>
 							</div>
 						</div>
-					</div>
-				<?php endforeach ?>
+					<?php endforeach ?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -29,7 +29,12 @@ class UserRender extends UserController
   public function registerForm()
   {
     session_start();
+    $user = $this->userModel->getMe();
 
+    if($user) {
+      header('Location: /');
+      exit;
+    }
     $prev = $_SESSION["prevRegisterContent"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
@@ -50,6 +55,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
         "user" => $user ?? null,
         "documents" => $documents ?? null,
@@ -162,6 +168,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user ?? null,
       "content" => $this->renderer->render("/pages/user/Profile_Settings.php", [
         "user" => $user ?? null,
         "documents" => $documents ?? null,

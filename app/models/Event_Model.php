@@ -248,7 +248,7 @@
   {
     $today = date("Y-m-d");
 
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE `isPublic` = '1' AND `date` > :today OR `reg_end_date` > :today ORDER BY `date` ASC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 1");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);

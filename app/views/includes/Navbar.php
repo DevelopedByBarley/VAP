@@ -1,7 +1,8 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
-
+/** @var TYPE_NAME $params */
+$user = $params["user"];
 ?>
 
 <div class="container-fluid w-100">
@@ -102,69 +103,73 @@ $langs = LANGS;
                                 </div>
                             <?php else : ?>
                                 <?php if ($_SERVER['REQUEST_URI'] !== '/user/dashboard') : ?>
-                                    <div class="text-center">
-                                        <a class="m-1" href="/user/dashboard">
-                                            <img src="/public/assets/icons/bear.png" style="height: 40px; width: 40px;" />
-                                        </a>
+                                    <div class="btn-group dropstart" id="profile-dropdown">
+                                        <button type="button" class="btn dropdown-toggle p-2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/user/dashboard">Profil</a></li>
+                                            <li><a class="dropdown-item" href="/user/settings">Profil szerkesztése</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a class="dropdown-item" href="/user/logout">Kijelentkezés</a></li>
+                                        </ul>
                                     </div>
                                 <?php endif ?>
-                                <div class="text-center">
-                                    <a href="/user/logout" class="m-1 btn btn-danger text-light" id="user-logout-button">
-                                        <?= NAVBAR["logoutBtn"][$lang] ?? 'Önkéntes beszámolók' ?>
-                                    </a>
-                                </div>
-                            <?php endif ?>
                         </div>
-                    </div>
-                </nav>
-            <?php else : ?>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                    <div class="container-fluid">
-                        <div class="navbar-brand">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
-                                <i style="font-size: 1.2rem;" class="bi bi-list"></i>
-                            </button>
-                        </div>
-                        <span class="navbar-text">
-                            <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
-                        </span>
-                    </div>
-                </nav>
-                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"><?= $params["admin"]["name"] ?></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="list-group">
-                            <a href="/admin/registrations" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Regisztrációk</li>
-                            </a>
-                            <a href="/admin/events" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Események</li>
-                            </a>
-                            <a href="/admin/volunteers" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Önkéntesek</li>
-                            </a>
-                            <a href="/admin/partners" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Partnerek</li>
-                            </a>
-                            <a href="#" class="nav-link">
-                                <li class="list-group-item bg-danger text-light">Blog</li>
-                            </a>
-                            <a href="/admin/questions" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Gyakori kérdések</li>
-                            </a>
-                            <a href="/admin/documents" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Hasznos anyagok</li>
-                            </a>
-                            <a href="/admin/links" class="nav-link">
-                                <li class="list-group-item bg-primary text-light">Hasznos linkek</li>
-                            </a>
-                        </ul>
-                    </div>
+                    <?php endif ?>
                 </div>
-            <?php endif ?>
+            </div>
+        </nav>
+    <?php else : ?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+                        <i style="font-size: 1.2rem;" class="bi bi-list"></i>
+                    </button>
+                </div>
+                <span class="navbar-text">
+                    <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
+                </span>
+            </div>
+        </nav>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"><?= $params["admin"]["name"] ?></h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="list-group">
+                    <a href="/admin/registrations" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Regisztrációk</li>
+                    </a>
+                    <a href="/admin/events" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Események</li>
+                    </a>
+                    <a href="/admin/volunteers" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Önkéntesek</li>
+                    </a>
+                    <a href="/admin/partners" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Partnerek</li>
+                    </a>
+                    <a href="#" class="nav-link">
+                        <li class="list-group-item bg-danger text-light">Blog</li>
+                    </a>
+                    <a href="/admin/questions" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Gyakori kérdések</li>
+                    </a>
+                    <a href="/admin/documents" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Hasznos anyagok</li>
+                    </a>
+                    <a href="/admin/links" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Hasznos linkek</li>
+                    </a>
+                </ul>
+            </div>
         </div>
+    <?php endif ?>
     </div>
+</div>
 </div>

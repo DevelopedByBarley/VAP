@@ -87,3 +87,7 @@ p {
   color: white;
   padding: .7rem;
 }
+
+.gradient {
+  background: var(--gradient);
+}
