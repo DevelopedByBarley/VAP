@@ -3,12 +3,14 @@ class ResetPw
 {
     private $pdo;
     private $mailer;
+    private $alert;
 
     public function __construct()
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
         $this->mailer = new Mailer();
+        $this->alert = new Alert();
     }
 
     public function pwRequest($body)
@@ -56,7 +58,8 @@ class ResetPw
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
 
-        header("Location: /user/login?isEmailSent=1");
+
+        $this->alert->set("A jelszó megváltoztatásához szükséges linket az e-mail címére küldtük!", "success", "/login");
     }
 
 
@@ -110,6 +113,7 @@ class ResetPw
         $stmt->bindParam(':token', $token);
         $stmt->execute();
 
-        header("Location: /user/login?isPwUpdated=1");
+        $this->alert->set("Jelszó megváltoztatása sikeres!", "success", "/login");
+
     }
 }

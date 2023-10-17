@@ -12,6 +12,9 @@ $userLanguages = $params["userLanguages"];
 
 <div class="container-fluid">
   <div class="p-4 container">
+    <div class="col-12 my-5">
+      <a href="/user/dashboard">Vissza a irányítópultba</a>
+    </div>
     <form id="update-form" action="/user/update" method="POST">
       <div class="row mb-4 mt-5">
         <h2 class="text-center mb-5"><?= PROFILE["profile_settings"]["title"][$lang] ?? 'Név' ?></h2>

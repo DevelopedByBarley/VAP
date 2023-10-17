@@ -119,9 +119,7 @@
   min-height: 50vh;
 }
 
-#typical-tasks {
-  min-height: 80vh;
-}
+
 
 .letters:nth-child(1) {
   color: var(--pr-color);

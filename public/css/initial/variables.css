@@ -1,12 +1,10 @@
 :root {
   --pr-color: #00a79c;
+  --pr-color-hover:#005b55;
   --sc-color: #ec0677;
-  --pr-background: white;
-  --sc-background: black;
+  --sc-color-hover: #A10451;
   --shadow: 1px -3px 56px 19px rgba(0, 0, 0, 0.05);
   --shadow-light: 1px -3px 56px 19px rgba(255, 255, 255, 0.111);
   --pr-font: 'Anton', sans-serif;
   --sc-font: 'Quicksand', sans-serif;
-  --gradient: linear-gradient(320deg, rgba(236,6,119,0.5158438375350141) 0%, rgba(236,6,119,1) 100%);
-
 }

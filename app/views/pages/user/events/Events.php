@@ -7,6 +7,9 @@ $events = $params["events"];
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: 95vh;">
   <div class="container p-3" style="min-height: 75vh">
+    <div class="col-12 my-5">
+      <a href="/">Vissza a főoldalra</a>
+    </div>
     <?php if (count($events) === 0) : ?>
       <div class="row">
         <h1 class="text-center mb-5">Jelenleg nincs egyetlen eseményünk sem!</h1>

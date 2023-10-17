@@ -36,7 +36,7 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
               <b class="text-muted">Regisztráltak száma: <?= $countOfRegistrations ?></b>
               <br>
               <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-primary mt-2">Áttekintés</a>
-              <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : ''?>" >Email küldése</a>
+              <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Email küldése</a>
             </div>
 
             <div class="btn-group text-center mb-3 mt-3">
@@ -92,7 +92,7 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
 
         <div class="card shadow mt-2">
           <div class="card-body">
-            <p class="mb-1"><span class="text-primary font-italic me-1">Választható Dátumok</span></p>
+            <p class="mb-1"><span class="text-primary font-italic me-1">Hozzátartozó linkek</span></p>
 
             <div class="row">
               <div class="col-sm-12 mt-3">

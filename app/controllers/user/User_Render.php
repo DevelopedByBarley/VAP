@@ -18,12 +18,8 @@ class UserRender extends UserController
     }
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Login.php", [
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
-      ]),
+      "content" => $this->renderer->render("/pages/user/Login.php", []),
     ]);
-
-    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
 
   public function registerForm()
@@ -131,8 +127,37 @@ class UserRender extends UserController
     ]);
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   public function forgotPwForm()
   {
+    session_start();
+    $user = $_SESSION["userId"] ?? null;
+
+    if ($user) header("Location: /user/dashboard");
+
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", []),
     ]);
@@ -141,6 +166,11 @@ class UserRender extends UserController
 
   public function resetPwForm()
   {
+
+    session_start();
+    $user = $_SESSION["userId"] ?? null;
+
+    if ($user) header("Location: /user/dashboard");
     $token = $_GET["token"] ?? null;
     $expires = $_GET["expires"] ?? null;
     $emailByToken = $this->resetPwService->checkTokenData($token, $expires);

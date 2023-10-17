@@ -1,13 +1,16 @@
 <?php
+require 'app/helpers/Alert.php';
+
 class AuthService
 {
     private $pdo;
-
+    private $alert;
 
     public function __construct()
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
+        $this->alert = new Alert();
     }
 
 
@@ -81,7 +84,7 @@ class AuthService
 
     public function loginUser($body)
     {
-        session_start();
+
         $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
         $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -92,24 +95,21 @@ class AuthService
 
 
         if (!$user || count($user) === 0) {
-            setcookie("alert_message", "Hibás email vagy jelszó", time() + 2, "/");
-            setcookie("alert_bg", "danger", time() + 5, "/");
-
-
-            header("Location: /login");
+            $this->alert->set("Hibás email vagy jelszó", "danger", "/login");
             return;
         }
 
         $isVerified = password_verify($pw, $user["password"]);
 
         if (!$isVerified) {
-            setcookie("alert_message", "Hibás email vagy jelszó", time() + 2, "/");
-            setcookie("alert_bg", "danger", time() + 5, "/");
-            header("Location: /login");
+            $this->alert->set("Hibás email vagy jelszó", "danger", "/login");
             return;
         }
 
+        session_start();
+
         $_SESSION["userId"] = $user["id"];
+
 
         header("Location: /user/dashboard");
     }
@@ -126,25 +126,5 @@ class AuthService
 
 
         header("Location: " . $referer);
-    }
-
-
-
-
-
-
-    private function getUserById($id)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `id` = :id");
-
-        $stmt->bindParam(":id", $id);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && !empty($user)) {
-            return $user["userId"];
-        }
-
-        return false;
     }
 }

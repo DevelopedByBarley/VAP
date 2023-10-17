@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,16 +10,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="/public/bootstrap/js/bootstrap.js"></script>
     <script src="/public/ckeditor5/ckeditor.js"></script>
-    <title>VAP</title>
+    <title>Voluntary Art Programs</title>
 </head>
 
 <body>
-    <?php include 'app/views/components/Alert.php' ?>
 
 
     <?php if (!isset($_COOKIE["lang"])) : ?>
         <?php include 'app/views/components/LanguageModal.php' ?>
     <?php else : ?>
+        <?php include 'app/views/components/Alert.php' ?>
         <?php include 'includes/Navbar.php' ?>
         <div class="mt-5">
             <?= $params["content"] ?>

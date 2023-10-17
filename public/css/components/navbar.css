@@ -3,6 +3,10 @@
   border: none;
 }
 
+.navbar #user-registration-button:hover {
+  background-color: var(--sc-color-hover);
+}
+
 .navbar .navigation-link {
   color: var(--pr-color);
   padding: .5rem 1rem;
@@ -41,4 +45,9 @@
   border: none;
   margin-top: 2rem;
   text-align: center;
+}
+
+#user-login-button:hover {
+  background-color: var(--pr-color-hover);
+
 }

@@ -5,6 +5,8 @@ class UserModel
   private $pdo;
   private $fileSaver;
   private $mailer;
+  private $alert;
+
 
   public function __construct()
   {
@@ -12,6 +14,7 @@ class UserModel
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
+    $this->alert = new Alert();
   }
 
   // BASIC
@@ -50,11 +53,7 @@ class UserModel
 
     if (!$fileName || in_array(false, $documentName)) {
       self::setPrevContent();
-      setcookie("alert_message", "File típus elutasítva", time() + 2, "/");
-      setcookie("alert_bg", "danger", time() + 5, "/");
-
-
-      header('Location: /user/registration');
+      $this->alert->set("File típus elutasítva", "danger", "/user/registration");
       return;
     }
 

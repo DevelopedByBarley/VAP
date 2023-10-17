@@ -8,6 +8,7 @@ $partners = $params["partners"];
 $documents = $params["documents"];
 $links = $params["links"];
 $latestEvent = $params["latestEvent"];
+
 $questions = $params["questions"];
 
 $user = $params["user"];
@@ -48,13 +49,10 @@ $user = $params["user"];
 
 	<div class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center" id="recommendation">
 		<div class="col-12 col-lg-7 reveal p-5 text-center" id="recommendation-content">
-			<h1 class="text-light mb-3">Kiknek ajánljuk a programot?</h1>
-			<h6 class="text-light mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
-			<h6 class="text-light mt-2">Suspendisse ornare odio posuere, egestas justo sit amet, malesuada arcu.</h6>
-			<h6 class="text-light mt-2">Ut tempus nulla sed maximus viverra asdassd asd.</h6>
-			<h6 class="text-light mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h6>
-			<h6 class="text-light mt-2">Suspendisse ornare odio posuere, egestas justo sit amet, malesuada arcu.</h6>
-			<h6 class="text-light mt-2">Ut tempus nulla sed maximus viverra.</h6>
+			<h1 class="text-light mb-1">Kiknek ajánljuk a programot?</h1>
+			<p class="text-light text-center text-lg-end px-lg-5">
+				Minden művészet rajongónak, de kiemeltem NEKED, ha a kulturális szférában, azon belül képzőművészeti területen tanulsz vagy itt képzeled el a karriered és tapasztalatot, kapcsolatot szeretnél építeni intézmények, galériák képviselőivel, kulturális szakemberekkel, művészekkel.
+			</p>
 		</div>
 		<div class="col-12 col-lg-5" id="recommendation-bg"></div>
 	</div>
@@ -67,13 +65,18 @@ $user = $params["user"];
 		<div class="col-12 col-lg-5" id="advantages-bg"> </div>
 		<div class="col-12 col-lg-7 reveal d-flex justify-content-center flex-column p-4 text-center">
 			<h1 class="text-light">Jellemző feladatok</h1>
-			<h6 class="text-light mt-1">Kiállítói és galéria asszisztens</h6>
-			<h6 class="text-light mt-1">Ügyintéző, rendezvényszervező asszisztens</h6>
-			<h6 class="text-light mt-1">Program koordinátor</h6>
-			<h6 class="text-light mt-1">Információs pultban munkatárs</h6>
-			<h6 class="text-light mt-1">Építész, logisztika, raktár felügyelet</h6>
-			<h6 class="text-light mt-1">Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)</h6>
-			<h6 class="text-light mt-1">Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)</h6>
+			<h6 class="text-light mt-2">
+				Eseményenként (kiállítás, vásár, fesztivál, galériában gyakornok) változnak a meghirdetett önkéntes pozíciók és feladatok, minden rendezvény előtt részletes leírást küldünk.
+			</h6>
+			<div class="text-start px-lg-5 mt-4 mt-lg-1">
+				<p class="text-light">&#x2022; Kiállítói és galéria asszisztens</p>
+				<p class="text-light">&#x2022; Ügyintéző, rendezvényszervező asszisztens</p>
+				<p class="text-light">&#x2022; Program koordinátor</p>
+				<p class="text-light">&#x2022; Információs pultban munkatárs</p>
+				<p class="text-light">&#x2022; Építész, logisztika, raktár felügyelet</p>
+				<p class="text-light">&#x2022; Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)</p>
+				<p class="text-light">&#x2022; Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)</p>
+			</div>
 		</div>
 	</div>
 
@@ -113,7 +116,7 @@ $user = $params["user"];
 
 
 
-	<div class="container">
+	<div class="container mt-5">
 		<div class="row d-flex align-items-center justify-content-center" id="typical-tasks">
 			<div class="col-12 mb-5 reveal">
 				<h1 class="text-center mb-3">Önkéntesség előnyei</h1>
@@ -121,46 +124,24 @@ $user = $params["user"];
 			</div>
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="col-12 col-lg-4 col-sm-6 d-flex align-items-center justify-content-center reveal">
-					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem;">
-						<div class="card-header text-center">
-							<img src="/public/assets/icons/1.png" style="width: 80px;" alt="">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-lg-4 col-sm-6 d-flex align-items-center justify-content-center reveal">
-					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem;">
+					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem; min-height: 310px;">
 						<div class="card-header text-center">
 							<img src="/public/assets/icons/2.png" style="width: 80px;" alt="">
 						</div>
 						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<h5 class="card-title text-center">Izgalmas programok</h5>
+							<p class="card-text">Önkéntesként színvonalas művészeti eseményekhez kötődő, izgalmas programokon vehetsz részt, amely élményszerűvé teszi a munkát.</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-12 col-lg-4 col-sm-6 d-flex align-items-center justify-content-center reveal">
-					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem;">
+					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem; min-height: 310px;">
 						<div class="card-header text-center">
-							<img src="/public/assets/icons/3.png" style="width: 80px;" alt="">
+							<img src="/public/assets/icons/7.png" style="width: 80px;" alt="">
 						</div>
 						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-lg-4 col-sm-6 d-flex align-items-center justify-content-center reveal">
-					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem;">
-						<div class="card-header text-center">
-							<img src="/public/assets/icons/4.png" style="width: 80px;" alt="">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<h5 class="card-title text-center ">Betekintés</h5>
+							<p class="card-text">Betekinthetsz a művészeti intézmények, galériák háttérmunkájába, művészek műtermébe.</p>
 						</div>
 					</div>
 				</div>
@@ -170,19 +151,8 @@ $user = $params["user"];
 							<img src="/public/assets/icons/5.png" style="width: 80px;" alt="">
 						</div>
 						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-lg-4 col-sm-6 d-flex align-items-center justify-content-center reveal">
-					<div class="card text-dark bg-light mb-5 shadow" style="max-width: 18rem;">
-						<div class="card-header text-center">
-							<img src="/public/assets/icons/6.png" style="width: 80px;" alt="">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Light card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<h5 class="card-title text-center">Tanulás mellett</h5>
+							<p class="card-text"> Évente több önkéntes lehetőséget kínálunk, ezek alkalmanként rövid távú tevékenységek, amelyek nem akadályoznak tanulmányaid vagy további elfoglaltságod elvégzésében.</p>
 						</div>
 					</div>
 				</div>
@@ -209,18 +179,18 @@ $user = $params["user"];
 	<?php if ($latestEvent) : ?>
 		<div class="container">
 			<div class="row	mt-5 text-dark shadow d-flex align-items-center justify-content-center bg-dark r-border" id="latest-event">
-				<div class="col-12 col-lg-5 p-4 reveal rounded" id="latest-event-title">
+				<div class="col-12 col-lg-6 offset-1 p-4 reveal rounded" id="latest-event-title">
 					<h1 class="mt-5 mb-2 text-light">Következő eseményünk</h1>
 					<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
 					<a href="/events" class="btn btn-outline-light">További eseményeink</a>
 				</div>
 				<div class="col-12 col-lg-5 p-5 d-flex align-items-center justify-content-center text-dark reveal rounded">
-					<a href="/event/<?= $latestEvent["eventId"] ?>" class="text-dark" style="text-decoration: none;">
-						<div class="card border-light r-border shadow-light" id="event-card" style="width: 21rem;">
+					<a href="/event/<?= $latestEvent["eventId"] ?>" style="text-decoration: none;">
+						<div class="card shadow-light bg-dark text-light" id="event-card" style="width: 23rem;">
 							<div class="card-img-top r-border" style="height: 200px; width: 100%; background: url('/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>') center center/cover;"></div>
 							<div class="card-body">
-								<h4><?= $latestEvent[languageSwitcher("name")] ?></h4>
-								<p class="card-text"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $latestEvent["date"] ?> </b></p>
+								<h4 class="text-center"><?= $latestEvent[languageSwitcher("name")] ?></h4>
+								<p class="card-text text-center"><i style="font-size: 1.5rem;" class="bi bi-calendar-check"></i> <b><?= $latestEvent["date"] ?> </b></p>
 								<hr style="border: 2px solid white">
 								<p class="card-text"><?= $latestEvent[languageSwitcher("description")] ?></p>
 							</div>

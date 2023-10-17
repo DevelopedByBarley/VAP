@@ -4,6 +4,7 @@
   private $pdo;
   private $fileSaver;
   private $mailer;
+  private $alert;
 
   public function __construct()
   {
@@ -11,6 +12,7 @@
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
+    $this->alert = new Alert();
   }
 
   // Set event isPublic = 0 if it expired
@@ -81,8 +83,6 @@
 
 
     self::sendMailForRegisteredUsers($lastId);
-    exit;
-
 
     header("Location: /admin/events");
   }
@@ -248,10 +248,11 @@
   {
     $today = date("Y-m-d");
 
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` >= :today OR `reg_end_date` >= :today) ORDER BY `date` ASC LIMIT 1");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
     return $event;
   }
@@ -316,7 +317,7 @@
 
 
   // Send email to registered users public function!
-  public function sendEmailToRegisteredUsers($body, $subscriptions)
+  public function sendEmailToRegisteredUsers($body, $subscriptions, $eventId)
   {
     foreach ($subscriptions as $subscription) {
       if ($subscription["lang"] === "Hu") {
@@ -325,6 +326,8 @@
         $this->mailer->send($subscription["email"], $body["mail-body-En"], "Hello");
       }
     }
+
+    $this->alert->set("Emailek sikeresen ki küldve!","success","/admin/event/$eventId");
   }
 
 

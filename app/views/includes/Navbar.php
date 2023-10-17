@@ -1,8 +1,7 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
-/** @var TYPE_NAME $params */
-$user = $params["user"];
+$user = $params["user"] ?? null;
 ?>
 
 <div class="container-fluid w-100">
@@ -11,7 +10,7 @@ $user = $params["user"];
             <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
                 <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#"><img src="/public/assets/icons/VAP.png" style="height: 50px; width: 100px;" /></a>
+                        <a class="navbar-brand" href="/"><img src="/public/assets/icons/logo.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

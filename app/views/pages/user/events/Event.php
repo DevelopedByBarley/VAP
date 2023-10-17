@@ -15,6 +15,10 @@ $tasks = $params["tasks"];
   <div class="container py-5" style="background-color: white;">
 
     <div class="row">
+
+      <div class="col-12 my-5">
+        <a href="/">Vissza a főoldalra</a>
+      </div>
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body text-center">

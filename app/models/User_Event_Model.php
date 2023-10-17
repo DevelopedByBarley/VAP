@@ -1,5 +1,4 @@
 <?php
-require 'app/helpers/MailBodies.php';
 require 'app/helpers/UUID.php';
 
 
@@ -9,6 +8,8 @@ class UserEventModel
   private $fileSaver;
   private $mailer;
   private $uuid;
+  private $alert;
+  private $eventModel;
 
   public function __construct()
   {
@@ -17,8 +18,9 @@ class UserEventModel
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
     $this->uuid = new UUID();
+    $this->alert = new Alert();
+    $this->eventModel = new EventModel();
   }
-
 
 
 
@@ -30,15 +32,19 @@ class UserEventModel
     $dates = $body["dates"] ?? null;
     $lang = $_COOKIE["lang"] ?? null;
     $rand = $this->uuid->generateUUID();
+    $event = $this->eventModel->getEventById($eventId);
+    $tasksInLang = [];
 
 
+    // CONVERT TASK TO STRING FOR MAIL
+    foreach ($tasks as $index => $task) {
+      $tasksInLang[$index] = TASK_AREAS["areas"][$task][$lang];
+    }
 
+    $tasksInString = implode(",<br>", $tasksInLang);
 
     if (!$dates || !$tasks) {
-      setcookie("alert_message", "Minden mező kitöltése kötelező!", time() + 2, "/");
-      setcookie("alert_bg", "danger", time() + 5, "/");
-      header("Location: /event/register/$eventId");
-      exit;
+      $this->alert->set("Minden mező kitöltése kötelező!", "danger", "/event/register/$eventId");
     }
 
     // CHECK USER IS EXIST
@@ -52,14 +58,11 @@ class UserEventModel
       $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if (!empty($isUserExist)) {
-        setcookie("alert_message", "Ezzel a profillal már regisztráltál erre az eseményre!", time() + 2, "/");
-        setcookie("alert_bg", "danger", time() + 5, "/");
-        header("Location: /event/register/$eventId");
-        exit;
+        $this->alert->set("Ezzel a profillal már regisztráltál erre az eseményre!", "danger", "/event/register/$eventId");
       }
 
 
-      // INSERT IF  USER
+      // INSERT USER IF USER EXIST
 
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
@@ -94,13 +97,27 @@ class UserEventModel
         self::insertTasksOfRegistration($lastInsertedId, $tasks);
       }
 
+
+
+      // GENERATE MAIL FORM AND SEND IF USER EXIST
       $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $user["lang"] . ".php");
       $body = str_replace('{{name}}', $user["name"], $body);
+      $body = str_replace('{{email}}', $user["email"], $body);
+      $body = str_replace('{{address}}', $user["address"], $body);
+      $body = str_replace('{{mobile}}', $user["email"], $body);
+      $body = str_replace('{{dates}}', implode(", ", $dates), $body);
+      $body = str_replace('{{event_name}}', $event["nameIn" . $user["lang"]], $body);
+      $body = str_replace('{{start_date}}', $event["date"], $body);
+      $body = str_replace('{{end_date}}', $event["end_date"], $body);
+      $body = str_replace('{{tasks}}', $tasksInString, $body);
       $body = str_replace('{{id}}', $rand, $body);
 
 
-      $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Event regisztráció!" : "Event registration");
+      $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Esemény regisztráció!" : "Event registration");
 
+
+
+      // Redirect to success!
       $_SESSION["success"] = [
         "title" => "Köszönjük a regisztrációdat!",
         "message" => "Az eseményre való regisztráció megtörtént! Az e-mail címére visszaigazoló levelet küldtünk!",
@@ -114,6 +131,7 @@ class UserEventModel
     }
 
 
+    // IF USER DOESN'T EXIST
 
     $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, [
       'application/pdf',
@@ -188,18 +206,34 @@ class UserEventModel
 
     $body = file_get_contents("./app/views/templates/event_subscription/EventSubscriptionMailTemplate" . $lang . ".php");
     $body = str_replace('{{name}}', $name, $body);
+    $body = str_replace('{{email}}', $email, $body);
+    $body = str_replace('{{address}}', $address, $body);
+    $body = str_replace('{{mobile}}', $email, $body);
+    $body = str_replace('{{dates}}', implode(", ", $dates), $body);
+    $body = str_replace('{{event_name}}', $event["nameIn" . $lang], $body);
+    $body = str_replace('{{start_date}}', $event["date"], $body);
+    $body = str_replace('{{end_date}}', $event["end_date"], $body);
+    $body = str_replace('{{tasks}}', $tasksInString, $body);
     $body = str_replace('{{id}}', $rand, $body);
 
     $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
+    $_SESSION["success"] = [
+      "title" => "Köszönjük a regisztrációdat!",
+      "message" => "Az eseményre való regisztráció megtörtént! Az e-mail címére visszaigazoló levelet küldtünk!",
+      "button_message" => "Vissza a főoldalra",
+      "path" => "/",
+    ];
     header("Location: /success");
   }
 
   public function delete($eventId)
   {
+
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
     $stmt->bindParam(":eventId", $eventId);
     $stmt->execute();
+
 
     header("Location: /user/dashboard");
   }

@@ -5,13 +5,19 @@
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 ?>
-<?= $params["alertContent"] ?>
 
 
-<div class="login-wrapper d-flex align-items-center justify-content-center vh-100">
-  <div class="container d-flex align-items-center justify-content-center rounded" style="min-height: 70vh; background: white;" id="user-login-con">
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mt-5">
+      <a href="/">Vissza a kezdőoldalra</a>
+    </div>
+  </div>
+</div>
+<div class="login-wrapper d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+  <div class="container d-flex align-items-center justify-content-center flex-column rounded" style="min-height: 70vh; background: white;" id="user-login-con">
     <div class="row w-100 d-flex align-items-center justify-content-center">
-      <div class="col-xs-12 col-lg-5 d-flex align-items-center justify-content-center" id="login-col">
+      <div class="col-12 col-lg-5 d-flex align-items-center justify-content-center" id="login-col">
         <img src="/public/assets/icons/login.jpg" id="login-logo" />
       </div>
       <div class="col-xs-12 col-lg-5 rounded">
