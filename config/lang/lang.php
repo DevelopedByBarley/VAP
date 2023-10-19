@@ -566,3 +566,56 @@ define("LANGS", [
   ],
 
 ]);
+
+
+
+define('MONTHS_IN_LANGUAGE', [
+  1 => [
+    "Hu" => 'January',
+    "En" => 'Január'
+  ],
+  2 => [
+    "Hu" => 'Február',
+    "En" => 'February'
+  ],
+  3 => [
+    "Hu" => 'Március',
+    "En" => 'March'
+  ],
+  4 => [
+    "Hu" => 'Április',
+    "En" => 'April'
+  ],
+  5 => [
+    "Hu" => 'Május',
+    "En" => 'May'
+  ],
+  6 => [
+    "Hu" => 'Június',
+    "En" => 'June'
+  ],
+  7 => [
+    "Hu" => 'Július',
+    "En" => 'July'
+  ],
+  8 => [
+    "Hu" => 'Augusztus',
+    "En" => 'August'
+  ],
+  9 => [
+    "Hu" => 'Szeptember',
+    "En" => 'September'
+  ],
+  10 => [
+    "Hu" => 'Október',
+    "En" => 'October'
+  ],
+  11 => [
+    "Hu" => 'November',
+    "En" => 'November'
+  ],
+  12 => [
+    "Hu" => 'December',
+    "En" => 'December'
+  ],
+]);

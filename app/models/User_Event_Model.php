@@ -33,6 +33,7 @@ class UserEventModel
     $lang = $_COOKIE["lang"] ?? null;
     $rand = $this->uuid->generateUUID();
     $event = $this->eventModel->getEventById($eventId);
+    $isAccepted = 0;
     $tasksInLang = [];
 
 
@@ -66,7 +67,7 @@ class UserEventModel
 
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
-      (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :fileName, :userRefId, :eventRefId);");
+      (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :isAccepted ,:fileName, :userRefId, :eventRefId);");
 
       $stmt->bindParam(":name", $user["name"]);
       $stmt->bindParam(":registrationId", $rand);
@@ -80,6 +81,7 @@ class UserEventModel
       $stmt->bindParam(":informedBy", $user["informedBy"]);
       $stmt->bindParam(":permission", $user["permission"]);
       $stmt->bindParam(":lang", $lang);
+      $stmt->bindParam(":isAccepted", $isAccepted);
       $stmt->bindParam(":fileName", $user["fileName"]);
       $stmt->bindParam(":userRefId", $user["id"]);
       $stmt->bindParam(":eventRefId", $eventId);
@@ -226,6 +228,11 @@ class UserEventModel
     ];
     header("Location: /success");
   }
+
+  public function accept($id) {
+
+  }
+
 
   public function delete($eventId)
   {

@@ -55,15 +55,33 @@ p {
   background-color: var(--pr-color);
 }
 
-.reg-btn {
+.primary-btn {
+  border-radius: 0px !important;
+  background-color: var(--pr-color);
+  color: white;
+  padding: .7rem;
+}
+.primary-btn:hover {
+  border-radius: 0px !important;
+  background-color: var(--pr-color-hover);
+  color: white;
+  padding: .7rem;
+}
+
+
+.secondary-btn {
   border-radius: 0px !important;
   background-color: var(--sc-color);
   color: white;
   padding: .7rem;
 }
 
-.reg-btn:hover {
+.secondary-btn:hover {
   background-color: var(--sc-color-hover);
   color: white;
+}
+
+.mt-b {
+  margin-top: 93px;
 }
 

@@ -9,7 +9,7 @@
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold">
-                            volunteer Art Programs
+                            Volunteer Art Programs
                         </h6>
                         <p>
                             Here you can use rows and columns to organize your footer
@@ -49,11 +49,10 @@
 
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                        <p><i class="fas fa-home mr-3"></i>Budapest, 1148 Budapest utca 2, HU</p>
-                        <p><i class="fas fa-envelope mr-3"></i> info.vap@gmail.com</p>
-                        <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                        <p><b>ArtNESZ Képzőművészeti Ügynökség Kft.</b></p>
+                        <p><a class="d-block text-light" href="mailto:hello@artnesz.hu">E-mail: hello@artnesz.hu</a></p>
+                        <p>Cím: 2030 Érd Murányi utca 20</p>
+                        <p>Cégjegyzékszám: 13-09-197718</p>
                     </div>
                     <!-- Grid column -->
                 </div>

@@ -1,6 +1,5 @@
 <?php
 $subscriptions = $params["subscriptions"];
-
 ?>
 
 <div class="container">
@@ -18,6 +17,7 @@ $subscriptions = $params["subscriptions"];
               <th>Foglalkozás</th>
               <th>Telefonszám</th>
               <th>Profil</th>
+              <th>Jelentkezés státusz</th>
               <th>Műveletek</th>
             </tr>
           </thead>
@@ -43,6 +43,9 @@ $subscriptions = $params["subscriptions"];
                 </td>
                 <td>
                   <?= $user["userRefId"] ? '<i class="bi bi-check-circle-fill"></i>' : '<i class="bi bi-x-circle-fill"></i>' ?>
+                </td>
+                <td>
+                  <?= (int)$user["isAccepted"] === 1 ? '<span class="badge bg-success p-2"><b>ELFOGADVA</b></span>' : '<span class="badge bg-secondary p-2"><b>ELFOGADÁSRA VÁR</b></span>' ?>
                 </td>
                 <td>
                   <a href="/admin/event/user/<?= $user["id"] ?>" class="btn btn-outline-primary">Megtekintés</a>

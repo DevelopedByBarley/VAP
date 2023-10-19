@@ -22,7 +22,7 @@ $user = $params["user"];
 	<div class="row">
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
 			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum voluptas nulla asperiores esse? Molestiae sapiente, quidem deserunt fuga</p>
+			<p class="text-center">Volunteering in Art Programs is a platform where if you are interested in the visual arts, you can volunteer for multiple art projects and events with a single registration.</p>
 			<?php if (!$user) : ?>
 				<a href="/user/registration" class="btn pr-color btn text-light">Önkéntes regisztráció</a>
 			<?php endif ?>
@@ -50,7 +50,7 @@ $user = $params["user"];
 	<div class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center" id="recommendation">
 		<div class="col-12 col-lg-7 reveal p-5 text-center" id="recommendation-content">
 			<h1 class="text-light mb-1">Kiknek ajánljuk a programot?</h1>
-			<p class="text-light text-center text-lg-end px-lg-5">
+			<p class="text-light text-center text-lg-end px-lg-5 mt-4">
 				Minden művészet rajongónak, de kiemeltem NEKED, ha a kulturális szférában, azon belül képzőművészeti területen tanulsz vagy itt képzeled el a karriered és tapasztalatot, kapcsolatot szeretnél építeni intézmények, galériák képviselőivel, kulturális szakemberekkel, művészekkel.
 			</p>
 		</div>
@@ -65,17 +65,14 @@ $user = $params["user"];
 		<div class="col-12 col-lg-5" id="advantages-bg"> </div>
 		<div class="col-12 col-lg-7 reveal d-flex justify-content-center flex-column p-4 text-center">
 			<h1 class="text-light">Jellemző feladatok</h1>
-			<h6 class="text-light mt-2">
+			<h5 class="text-light px-2">
 				Eseményenként (kiállítás, vásár, fesztivál, galériában gyakornok) változnak a meghirdetett önkéntes pozíciók és feladatok, minden rendezvény előtt részletes leírást küldünk.
-			</h6>
-			<div class="text-start px-lg-5 mt-4 mt-lg-1">
-				<p class="text-light">&#x2022; Kiállítói és galéria asszisztens</p>
-				<p class="text-light">&#x2022; Ügyintéző, rendezvényszervező asszisztens</p>
-				<p class="text-light">&#x2022; Program koordinátor</p>
-				<p class="text-light">&#x2022; Információs pultban munkatárs</p>
-				<p class="text-light">&#x2022; Építész, logisztika, raktár felügyelet</p>
-				<p class="text-light">&#x2022; Hostess feladatok (vendégek kísérésre, VIP események felügyelete, vendégregisztráció)</p>
-				<p class="text-light">&#x2022; Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)</p>
+			</h5>
+			<div class="text-start px-lg-5 mt-4 mt-lg-4">
+				<p class="text-light">&#x2022; <b><u>Előkészítési feladatokban segítségnyújtás</u></b>: kiállításépítés; csomag összeállítás; helyszínekre szóróanyag kivitel; </p>
+				<p class="text-light">&#x2022; <b><u>Rendezvényszervező asszisztens</u></b>: eseményeken ez előkészületekben részvétel, pl. helyszín dekoráció; vendégfogadás, regisztráció; ruhatár üzemeltetés; </p>
+				<p class="text-light">&#x2022; <b><u>Programkoordinátor, túra kísérő önkéntes</u></b>: vendégek fogadása, regisztrációja és végig kísérése az útvonalon</p>
+				<p class="text-light">&#x2022; <b><u>Kiállítás felügyelet</u></b></p>
 			</div>
 		</div>
 	</div>
@@ -179,14 +176,14 @@ $user = $params["user"];
 	<?php if ($latestEvent) : ?>
 		<div class="container">
 			<div class="row	mt-5 text-dark shadow d-flex align-items-center justify-content-center bg-dark r-border" id="latest-event">
-				<div class="col-12 col-lg-6 offset-1 p-4 reveal rounded" id="latest-event-title">
+				<div class="col-12 col-sm-9 col-lg-7 p-4 reveal rounded" id="latest-event-title">
 					<h1 class="mt-5 mb-2 text-light">Következő eseményünk</h1>
 					<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
 					<a href="/events" class="btn btn-outline-light">További eseményeink</a>
 				</div>
-				<div class="col-12 col-lg-5 p-5 d-flex align-items-center justify-content-center text-dark reveal rounded">
+				<div class="col-12 col-sm-6 col-lg-4 p-3 d-flex align-items-center justify-content-center text-dark reveal rounded">
 					<a href="/event/<?= $latestEvent["eventId"] ?>" style="text-decoration: none;">
-						<div class="card shadow-light bg-dark text-light" id="event-card" style="width: 23rem;">
+						<div class="card shadow-light bg-dark text-light" id="event-card" style="width: 100%;">
 							<div class="card-img-top r-border" style="height: 200px; width: 100%; background: url('/public/assets/uploads/images/events/<?= $latestEvent["fileName"] ?>') center center/cover;"></div>
 							<div class="card-body">
 								<h4 class="text-center"><?= $latestEvent[languageSwitcher("name")] ?></h4>

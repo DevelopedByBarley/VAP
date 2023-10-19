@@ -34,7 +34,7 @@ $langs = LANGS;
             <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
           </div>
           <div class="text-center mt-5">
-            <button type="submit" class="btn reg-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
+            <button type="submit" class="btn secondary-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
             <p class="mt-3">Forgot <a href="/user/forgot-pw">Password?</a></p>
           </div>
           <div class="mt-5 text-center">

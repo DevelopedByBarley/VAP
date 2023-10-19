@@ -21,7 +21,7 @@
     $today = date("Y-m-d");
 
 
-    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` < :today OR `reg_end_date` < :today)");
+    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` <= :today OR `reg_end_date` <= :today)");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
   }
@@ -225,6 +225,7 @@
   public function getEventById($id, $admin = null)
   {
 
+
     if (!$admin || !isset($admin)) {
       $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id AND `isPublic` = '1'");
       $stmt->bindParam(":id", $id);
@@ -238,6 +239,7 @@
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
     return $event;
   }
 
@@ -248,7 +250,7 @@
   {
     $today = date("Y-m-d");
 
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` >= :today OR `reg_end_date` >= :today) ORDER BY `date` ASC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 1");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -260,7 +262,14 @@
   // REGISTRATIONS
 
 
+
+
+
+
   // Get all registration by event
+
+
+
 
   public function getRegistrationsByEvent($eventId)
   {
@@ -327,7 +336,7 @@
       }
     }
 
-    $this->alert->set("Emailek sikeresen ki küldve!","success","/admin/event/$eventId");
+    $this->alert->set("Emailek sikeresen ki küldve!", "success", "/admin/event/$eventId");
   }
 
 
@@ -337,13 +346,14 @@
   // DATES 
   public function getEventDates($id)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
+    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id ORDER BY date ASC");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $events;
   }
+
 
 
 
@@ -463,9 +473,9 @@
     $stmt = $this->pdo->prepare("SELECT * FROM event_tasks WHERE eventRefId = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $events;
+    return $tasks;
   }
 
   // Update event tasks
