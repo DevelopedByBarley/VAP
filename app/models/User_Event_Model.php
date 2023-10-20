@@ -178,7 +178,7 @@ class UserEventModel
 
     $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
     VALUES 
-    (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, NULL, NULL, :eventRefId);");
+    (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :isAccepted, NULL, NULL, :eventRefId);");
 
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":registrationId", $rand);
@@ -192,6 +192,7 @@ class UserEventModel
     $stmt->bindParam(":informedBy", $informedBy);
     $stmt->bindParam(":permission", $permission);
     $stmt->bindParam(":lang", $lang);
+    $stmt->bindParam(":isAccepted", $isAccepted);
     $stmt->bindParam(":eventRefId", $eventId);
 
     $stmt->execute();

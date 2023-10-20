@@ -12,6 +12,7 @@ class EventRender extends EventController
   /** PROTECTED */
 
 
+  // GET ALL EVENTS FOR ADMIN
   public function index()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -29,7 +30,7 @@ class EventRender extends EventController
   }
 
 
-
+  // GET SINGLE EVENT BY ID FOR ADMIN
   public function adminEvent($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -57,12 +58,12 @@ class EventRender extends EventController
     ]);
   }
 
+  // GET ALL SUBSCRIPTIONS FOR ADMIN
   public function subscriptions($vars)
   {;
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $eventId = $vars["id"];
-    $admin = $this->adminModel->admin();
     $eventId = $vars["id"] ?? null;
+    $admin = $this->adminModel->admin();
     $event = $this->eventModel->getEventById($eventId);
 
     $subscriptions = $this->eventModel->getRegistrationsByEvent($eventId);
@@ -78,7 +79,7 @@ class EventRender extends EventController
     ]);
   }
 
-
+  // RENDER SINGLE SUBSCRIBER FOR ADMIN
   public function registeredUser($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -97,7 +98,7 @@ class EventRender extends EventController
     ]);
   }
 
-
+  // RENDER EVENT REGISTRATION FORM FOR ADMIN
   public function eventForm()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -116,7 +117,7 @@ class EventRender extends EventController
 
 
 
-
+  // RENDER EVENT UPDATE FORM FOR ADMIN
   public function updateEventForm($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -139,6 +140,7 @@ class EventRender extends EventController
     ]);
   }
 
+  // RENDER MAIL FORM FOR ADMIN WITH CK EDITOR  FOR ADMIN
   public function mailForm($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -155,25 +157,12 @@ class EventRender extends EventController
     ]);
   }
 
-  public function emails()
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $admin = $this->adminModel->admin();
-
-
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/Emails.php", [
-        "admin" => $admin ?? null,
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
 
 
 
   /** PUBLIC */
 
+  // RENDER EVENTS FOR USERS
   public function events()
   {
     session_start();
@@ -190,14 +179,14 @@ class EventRender extends EventController
     ]);
   }
 
-
+  // RENDER EVENT FOR USER
   public function event($vars)
   {
     session_start();
     $eventId = $vars["id"] ?? null;
     $event = $this->eventModel->getEventById($eventId);
-    
-    if(!$event) {
+
+    if (!$event) {
       header("Location: /");
       exit;
     }
@@ -217,7 +206,7 @@ class EventRender extends EventController
   }
 
 
-
+  // RENDER REGISTER TO EVENT FORM FOR USERS
   public function registerToEventForm($vars)
   {
     session_start();
@@ -226,7 +215,7 @@ class EventRender extends EventController
 
     $event = $this->eventModel->getEventById($id);
 
-    if(!$event) {
+    if (!$event) {
       header("Location: /");
       exit;
     }
@@ -247,5 +236,4 @@ class EventRender extends EventController
       ]),
     ]);
   }
-
 }

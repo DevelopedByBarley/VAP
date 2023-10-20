@@ -9,6 +9,8 @@ class AdminRender extends AdminController
     parent::__construct();
   }
 
+
+  // RENDER SINGLE REGISTERED USER DATA
   public function registeredUser($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
@@ -25,14 +27,14 @@ class AdminRender extends AdminController
       "admin" => $admin ?? null
     ]);
   }
+
+  // RENDER OF REGISTERED USERS
   public function registrations()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
     $admin = $this->adminModel->admin();
     $usersData = $this->adminModel->index();
-
-
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/registrations/Registrations.php", [
@@ -45,6 +47,8 @@ class AdminRender extends AdminController
     ]);
   }
 
+
+  // RENDER ADMIN LOGIN PAGE
   public function adminLoginPage()
   {
     session_start();

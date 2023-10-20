@@ -18,36 +18,37 @@ class AdminController
   }
 
   // PROTECTED
+
+  // GET ALL OF USERS  
   public function getUsers()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
     $this->adminModel->index();
   }
+
+  // BAN USER /// MEG KELL CSINÁLNI MINDEN USER ADAT TÖRLÉSÉT!
   public function banUser($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-
+    
     $this->adminModel->ban($vars["id"]);
   }
-
-  /**
-  public function registerAdmin()
+  
+    // LOGOUT ADMIN
+    public function logoutAdmin()
     {
-      $this->authService->registerAdmin($_POST);
+      LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+      $this->authService->logoutAdmin();
     }
-   */
-
-
+  
   // PUBLIC
+  
+  // LOGIN ADMIN
   
   public function loginAdmin()
   {
     $this->authService->loginAdmin($_POST);
   }
 
-  public function logoutAdmin()
-  {
-    $this->authService->logoutAdmin();
-  }
 }

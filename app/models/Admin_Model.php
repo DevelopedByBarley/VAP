@@ -1,10 +1,14 @@
 <?php
 
+require_once 'app/models/User_Model.php';
+
+
 class AdminModel
 {
   protected $pdo;
   protected $fileSaver;
   protected $mailer;
+  private $userModel;
 
   public function __construct()
   {
@@ -12,7 +16,10 @@ class AdminModel
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
+    $this->userModel = new UserModel();
   }
+
+  // GET USER BY SESSION
 
   public function user($id) {
     $stmt = $this->pdo->prepare("SELECT * FROM users WHERE `id` LIKE :id");
@@ -21,26 +28,18 @@ class AdminModel
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
  if ($user) {
-
-      $stmt = $this->pdo->prepare("SELECT * FROM user_documents WHERE userRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+      $documents = $this->userModel->getDocumentsByUser($user["id"]);
+      $langs = $this->userModel->getLanguagesByUser($user["id"]);
+      
       $user["documents"] = $documents;
-
-
-      $stmt = $this->pdo->prepare("SELECT * FROM user_languages WHERE userRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $user["langs"] = $tasks;
+      $user["langs"] = $langs;
     }
 
     return $user;
   }
 
+
+  // BAN REGISTERED USER // MEG KELL CSINÁLNI AZ ÖSSZES ADAT TÖRLÉSÉT!
   public function ban($id) {
     $stmt = $this->pdo->prepare("DELETE FROM users WHERE `id` LIKE :id");
     $stmt->bindParam(":id", $id);
@@ -49,7 +48,7 @@ class AdminModel
     header('Location: /admin/registrations');
   }
 
-
+  // GET ALL OF USERS WHO REGISTERED
   public function index() {
     $offset = $_GET["offset"] ?? 1;
     $limit = 10; // Az oldalanként megjelenített rekordok száma
@@ -78,6 +77,7 @@ class AdminModel
 
   
 
+  // GET ADMIN BY SESSION 
   public function admin()
   {
     $adminId = $_SESSION["adminId"] ?? null;

@@ -30,11 +30,14 @@ class HomeController
     }
 
     // PUBLIC
+
+    // SET LANGUAGE WITH MODAL
     public function setLanguage()
     {
         $this->languageService->language($_POST);
     }
 
+    // SWITCH LANGUAGE
     public function switchLanguage($vars)
     {
         $this->languageService->switch($vars["lang"]);

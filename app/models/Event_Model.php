@@ -13,7 +13,7 @@
     $this->mailer = new Mailer();
   }
 
-  // Set event isPublic = 0 if it expired
+  // SET EVENT PRIVATE WHEN IT IS EXPIRED
   public function setEventsPrivateIfExpired()
   {
     $today = date("Y-m-d");
@@ -24,7 +24,7 @@
     $stmt->execute();
   }
 
-  // Set event state by $_GET parameter
+  // SET EVENT STATE BY $_GET PARAMETER / PUBLIC | PRIVATE
   public function state($id, $state)
   {
     $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = :state WHERE `events`.`eventId` = :id");
@@ -37,7 +37,7 @@
 
 
 
-  // Add new event
+  // ADD NEW EVENT
   public function new($files, $body)
   {
 
@@ -88,7 +88,7 @@
   }
 
 
-  // Delete event
+  // DELETE EVENT
 
   public function delete($id)
   {
@@ -106,7 +106,7 @@
 
 
 
-  // Update event
+  // UPDATE EVENT
 
   public function update($id, $body, $files, $admin)
   {
@@ -178,7 +178,7 @@
 
 
 
-  // Get events by admin or user
+  // GET EVENTS ADMIN OR USER
   public function index($admin = null)
   {
     $offset = $_GET["offset"] ?? 1;
@@ -218,7 +218,7 @@
   }
 
 
-  // Get event by id if admin or user
+  // GET EVENT BY ID IF ADMIN | USER
 
 
 
@@ -243,7 +243,7 @@
 
 
 
-  // Get latest event if it current
+  // GET LATEST EVENT FOR CONTENT PAGE
   public function getLatestEvent()
   {
     $today = date("Y-m-d");
@@ -259,7 +259,7 @@
   // REGISTRATIONS
 
 
-  // Get all registration by event
+  // GET ALL REGISTRATIONS BY EVENT
 
   public function getRegistrationsByEvent($eventId)
   {
@@ -271,7 +271,7 @@
     return $subscriptions;
   }
 
-  // Get registered users by event
+  // GET REGISTERED USER DATA BY ID
   public function getRegisteredUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
@@ -331,7 +331,7 @@
 
 
 
-  // DATES 
+  // GET EVENT DATES BY EVENT ID
   public function getEventDates($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
@@ -371,7 +371,7 @@
 
 
 
-  // Send email to registered users private function!
+  // SEND MAIL TO REGISTERED USER WHO IS ACCEPTED!
 
   private function sendMailForRegisteredUsers($eventId)
   {
@@ -390,7 +390,7 @@
 
 
 
-  // Update event dates
+  // UPDATE EVENT DATES BY EVENT ID
 
   private function updateEventDates($id, $event_dates)
   {
@@ -401,7 +401,7 @@
     self::insertDatesOfEvent($id, $event_dates);
   }
 
-  // Insert event dates
+  // INSERT EVENT DATES
 
 
   private function insertDatesOfEvent($id, $event_dates)
@@ -415,7 +415,7 @@
     }
   }
 
-  // Get event links
+  // GET ALL LINKS OF EVENTS
 
   public function getEventLinks($id)
   {
@@ -427,7 +427,7 @@
     return $events;
   }
 
-  // Update event links
+  // UPDATE EVENT LINKS BY EVENT ID
 
   private function updateEventLinks($id, $links)
   {
@@ -438,7 +438,7 @@
     self::insertLinksOfEvent($id, $links);
   }
 
-  // Insert event links
+  // INSERT EVENT LINKS
 
   private function insertLinksOfEvent($id, $links)
   {
@@ -453,7 +453,7 @@
 
   // TASKS
 
-  // Get tasks of event
+  // GET ALL TASKS OF EVENTS
 
   public function getEventTasks($id)
   {
@@ -465,7 +465,7 @@
     return $events;
   }
 
-  // Update event tasks
+  // UPDATE TASKS BY EVENT
 
   private function updateEventTasks($id, $tasks)
   {
@@ -476,7 +476,7 @@
     self::insertTasksOfEvent($id, $tasks);
   }
 
-  // Insert event tasks
+  // INSERT TASK OF EVENT
   private function insertTasksOfEvent($id, $tasks)
   {
     foreach ($tasks as $task) {

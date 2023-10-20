@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="/public/css/admin_login_form.css?v=<?= time() ?>">
 
 <div class="container vh-100 d-flex align-items-center justify-content-center flex-column">
-  <div class="row w-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 d-flex align-items-center justify-content-center flex-column">
+    <div class="col-4 mb-5 text-center">
+      <img src="/public/assets/icons/logo.png" style="width: 250px;" alt="">
+    </div>
     <div class="col-4">
       <form class="border p-5" id="admin-login-form" action="/admin/login" method="POST">
         <div class="mb-3">

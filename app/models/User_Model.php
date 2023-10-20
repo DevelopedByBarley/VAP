@@ -18,7 +18,7 @@ class UserModel
     $this->alert = new Alert();
   }
 
-  // BASIC
+  // GET ALL EVENT DATA FOR SUBSCRIBER
 
   public function getRegistrationsByUser($userId)
   {
@@ -80,6 +80,7 @@ class UserModel
     $levels = $body["levels"] ?? [];
 
     $documents = self::formatDocuments($documentName, $typeOfDocument);
+    
 
     $lang = $_COOKIE["lang"] ?? null;
     $createdAt = time();
@@ -367,7 +368,8 @@ class UserModel
   {
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
 
-    $prevImage = $this->getDocumentById($id)["name"];
+    //$prevImage = $this->getDocumentById($id)["name"];
+    $prevImage = self::getDocumentById($id)["name"];
     $fileName = '';
     if ($files["document"]["name"] !== '') {
       $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", $prevImage, null);

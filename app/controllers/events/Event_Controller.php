@@ -22,19 +22,21 @@ class EventController
 
   /** PROTECTED */
 
-
+  // ADD NEW EVENT
   public function newEvent()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->eventModel->new($_FILES, $_POST);
   }
 
+  // DELETE EVENT
   public function deleteEvent($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $this->eventModel->delete($vars["id"]);
   }
 
+  // UPDATE EVENT
   public function updateEvent($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");

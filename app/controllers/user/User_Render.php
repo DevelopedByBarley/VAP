@@ -9,6 +9,7 @@ class UserRender extends UserController
     parent::__construct();
   }
 
+  // RENDER LOGIN FORM FOR USERS
   public function loginForm()
   {
     session_start();
@@ -18,17 +19,17 @@ class UserRender extends UserController
     }
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Login.php", [
-      ]),
+      "content" => $this->renderer->render("/pages/user/Login.php", []),
     ]);
   }
 
+  // RENDER REGISTER FORMS FOR USERS
   public function registerForm()
   {
     session_start();
     $user = $this->userModel->getMe();
 
-    if($user) {
+    if ($user) {
       header('Location: /');
       exit;
     }
@@ -41,7 +42,7 @@ class UserRender extends UserController
     ]);
   }
 
-
+  // RENDER DASHBOARD FOR USERS
   public function dashboard()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
@@ -63,7 +64,7 @@ class UserRender extends UserController
   }
 
 
-
+  // RENDER RESET PASSWORD FORM FROM USER SETTINGS
   public function resetPasswordForm()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
@@ -73,9 +74,9 @@ class UserRender extends UserController
         "user" => $user ?? null,
       ]),
     ]);
-
   }
 
+  // RENDER USER DOCUMENTS PAGE FROM USER SETTINGS
   public function userDocuments()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
@@ -91,6 +92,7 @@ class UserRender extends UserController
     ]);
   }
 
+  // RENDER UPDATE USER DOCUMENTS PAGE FROM USER SETTINGS
   public function updateUserDocumentForm($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
@@ -106,6 +108,7 @@ class UserRender extends UserController
     ]);
   }
 
+  // RENDER USER DOCUMENTS FORM FROM USER SETTINGS
   public function documentForm()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
@@ -121,6 +124,8 @@ class UserRender extends UserController
     ]);
   }
 
+
+  // RENDER FORGOT PW FORM FOR USERS
   public function forgotPwForm()
   {
     echo $this->renderer->render("Layout.php", [
@@ -128,7 +133,7 @@ class UserRender extends UserController
     ]);
   }
 
-
+  // RENDER FORGOT PW FORM FOR USERS
   public function resetPwForm()
   {
     $token = $_GET["token"] ?? null;
@@ -150,7 +155,9 @@ class UserRender extends UserController
     ]);
   }
 
-  public function profileSettingsForm() {
+  // RENDER PROFILE SETTINGS FORM FOR USERS
+  public function profileSettingsForm()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
@@ -166,6 +173,4 @@ class UserRender extends UserController
       ]),
     ]);
   }
-
-
 }
