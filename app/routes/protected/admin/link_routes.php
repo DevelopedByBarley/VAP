@@ -1,6 +1,6 @@
 <?php
-require 'app/controllers/links/Link_Controller.php';
-require 'app/controllers/links/Link_Render.php';
+require_once 'app/controllers/links/Link_Controller.php';
+require_once 'app/controllers/links/Link_Render.php';
 
 
 

@@ -11,7 +11,7 @@ class Mailer
             $mail = new PHPMailer();
             $mail->isSMTP();
             //$mail->SMTPDebug = 3;
-            $mail->setFrom("underdev@bybarley.hu", "VAP team");
+            $mail->setFrom("underdev@bybarley.hu", "VAP");
             $mail->addAddress($address);
             $mail->Username = "underdev@bybarley.hu";
             $mail->Password = "j6pH&+rE-4W4l@AcH1zl";

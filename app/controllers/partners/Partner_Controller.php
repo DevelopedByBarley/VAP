@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Partner_Model.php';
+require_once 'app/models/Partner_Model.php';
 
 class PartnerController
 {

@@ -1,6 +1,6 @@
 <?php
 
-$user = $params["user"] ?? null;
+$user = $params["user"];
 
 ?>
 

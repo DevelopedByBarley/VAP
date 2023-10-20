@@ -1,7 +1,7 @@
 <?php
-require 'app/services/AuthService.php';
-require 'app/helpers/LoginChecker.php';
-require 'app/helpers/FileSaver.php';
+require_once 'app/services/AuthService.php';
+require_once 'app/helpers/LoginChecker.php';
+require_once 'app/helpers/FileSaver.php';
 
 class AdminController
 {

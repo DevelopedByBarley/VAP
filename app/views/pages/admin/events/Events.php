@@ -72,7 +72,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
                 <?= (int)$event["isPublic"] === 1 ? '<i class="bi bi-check-circle-fill text-success" style="font-size: 1.2rem"></i>' : '<i class="bi bi-lg bi-x-circle-fill text-danger" style="font-size: 1.2rem"></i>' ?>
               </td>
               <td>
-                <?= $event["reg_end_date"] <= date("Y-m-d") || $event["date"] <= date("Y-m-d") ? '<span class="badge bg-secondary p-2"><b>LEJÁRT</b></span>' : '<span class="badge bg-primary p-2"><b>AKTÍV</b></span>' ?>
+                <?= $event["reg_end_date"] < date("Y-m-d") || $event["date"] < date("Y-m-d") ? '<span class="badge bg-secondary p-2"><b>LEJÁRT</b></span>' : '<span class="badge bg-primary p-2"><b>AKTÍV</b></span>' ?>
               </td>
 
               <td>

@@ -1,6 +1,6 @@
 <?php
-require 'app/helpers/UUID.php';
-
+require_once 'app/helpers/UUID.php';
+require_once 'app/helpers/Alert.php';
 
 class UserEventModel
 {
@@ -23,7 +23,7 @@ class UserEventModel
   }
 
 
-
+  // USER REGISTER TO EVENT
   public function register($eventId, $body, $files, $user)
   {
     $languages = $body["langs"] ?? [];
@@ -229,11 +229,7 @@ class UserEventModel
     header("Location: /success");
   }
 
-  public function accept($id) {
-
-  }
-
-
+  // USER DELETE SELF FROM EVENT
   public function delete($eventId)
   {
 
@@ -245,7 +241,7 @@ class UserEventModel
     header("Location: /user/dashboard");
   }
 
-
+  // USER DELETE SELF FROM EVENT WITH MAIL
   public function deleteRegistrationFromMailUrl($id)
   {
 
@@ -265,7 +261,7 @@ class UserEventModel
     $stmt->execute();
   }
 
-  // LANGUAGES
+  // INSERT LANGUAGES WHEN USER REGISTER TO EVENT
 
   private function insertLanguages($registerId, $languages, $levels)
   {
@@ -289,9 +285,10 @@ class UserEventModel
     }
   }
 
-  private function copyLanguagesFromUserToRegister($registerId, $lanugages)
+  // COPY LANGUAGES FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
+  private function copyLanguagesFromUserToRegister($registerId, $languages)
   {
-    foreach ($lanugages as $language) {
+    foreach ($languages as $language) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
       $stmt->bindParam(':lang', $language["lang"]);
       $stmt->bindParam(':level', $language["level"]);
@@ -299,9 +296,24 @@ class UserEventModel
       $stmt->execute();
     }
   }
+ 
 
+   // COPY DOCUMENTS FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
+  private function copyDocumentFromUserToRegister($registerId, $documents)
+  {
+    foreach ($documents as $document) {
+      $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
+      $stmt->bindParam(':name', $document["name"]);
+      $stmt->bindParam(':type', $document["type"]);
+      $stmt->bindParam(':extension',  $document["extension"]);
+      $stmt->bindParam(':registerRefId', $registerId);
 
-  // DATES
+      // INSERT parancs végrehajtása
+      $stmt->execute();
+    }
+  }
+
+  // INSERT DATES WHEN USER REGISTER TO EVENT
 
   private function insertDatesOfRegistration($registerId, $registration_dates)
   {
@@ -314,7 +326,7 @@ class UserEventModel
     }
   }
 
-  // TASKS
+  // INSERT TASKS WHEN USER REGISTER TO EVENT
 
 
   private function insertTasksOfRegistration($registerId, $tasks)
@@ -328,7 +340,7 @@ class UserEventModel
   }
 
 
-  // DOCUMENTS
+  // INSERT DOCUMENTS WHEN USER REGISTER TO EVENT
 
   private function insertDocuments($registerId, $documents)
   {
@@ -347,21 +359,9 @@ class UserEventModel
     }
   }
 
-  private function copyDocumentFromUserToRegister($registerId, $documents)
-  {
-    foreach ($documents as $document) {
-      $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
-      $stmt->bindParam(':name', $document["name"]);
-      $stmt->bindParam(':type', $document["type"]);
-      $stmt->bindParam(':extension',  $document["extension"]);
-      $stmt->bindParam(':registerRefId', $registerId);
-
-      // INSERT parancs végrehajtása
-      $stmt->execute();
-    }
-  }
 
 
+  // FORMAT DOCUMENTS FOR REGISTER TO EVENT
   private function formatDocuments($documentName, $typeOfDocument)
   {
 

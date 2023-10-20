@@ -1,6 +1,7 @@
 <?php
 class Alert
 {
+  // SET ALERT
   public function set($message, $bg, $location)
   {
 

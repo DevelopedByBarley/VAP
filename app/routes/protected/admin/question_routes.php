@@ -1,6 +1,6 @@
 <?php
-require 'app/controllers/questions/Question_Controller.php';
-require 'app/controllers/questions/Question_Render.php';
+require_once 'app/controllers/questions/Question_Controller.php';
+require_once 'app/controllers/questions/Question_Render.php';
 
 
 $r->addRoute('GET', '/admin/questions', [QuestionRender::class, 'index']);

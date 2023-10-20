@@ -312,7 +312,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
 
     <div class="text-center">
-      <button type="submit" class="btn secondary-btn"> <?= REGISTRATION["form"]["registrationBtn"][$lang] ?? '' ?></button>
+      <button type="submit" class="btn reg-btn"> <?= REGISTRATION["form"]["registrationBtn"][$lang] ?? '' ?></button>
     </div>
   </form>
 </div>

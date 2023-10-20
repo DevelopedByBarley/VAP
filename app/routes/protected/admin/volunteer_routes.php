@@ -1,6 +1,6 @@
 <?php
-require  'app/controllers/volunteers/Volunteer_Controller.php';
-require  'app/controllers/volunteers/Volunteer_Render.php';
+require_once  'app/controllers/volunteers/Volunteer_Controller.php';
+require_once  'app/controllers/volunteers/Volunteer_Render.php';
 
 $r->addRoute('GET', '/admin/volunteers', [VolunteerRender::class, 'volunteersPage']);
 $r->addRoute('GET', '/admin/volunteers/new', [VolunteerRender::class, 'volunteersForm']);

@@ -6,7 +6,6 @@ $subscriptions = $params["subscriptions"] ?? null;
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 
-
 ?>
 
 <div class="container py-5">
@@ -17,9 +16,7 @@ $langs = LANGS;
     <div class="col-12 col-sm-4 col-lg-2 d-flex align-items-start justify-content-end flex-column text-light">
       <h5><?= $user["name"] ?></h5>
       <p><?= $user["address"] ?></p>
-
     </div>
-
   </div>
   <div class="row">
     <div class="col-12">
@@ -75,14 +72,12 @@ $langs = LANGS;
                 </div>
               </div>
             </div>
-            <div class="d-flex justify-content-center mb-2">
-              <a href="/user/logout" class="m-1 btn btn-primary text-light" id="user-logout-button">
-                <?= PROFILE["header"]["logoutBtn"][$lang] ?? 'Név' ?>
-              </a>
-              <a href="/user/settings" class="m-1 btn btn-dark text-light" id="user-logout-button">
-                <?= 'Profil szerkesztése' ?? 'Profil' ?>
-              </a>
-            </div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="btn-group">
+            <a href="/user/logout" class="btn btn-outline-danger m-1">Kijelentkezés</a>
+            <a href="/user/settings" class="btn btn-outline-primary m-1">Profil szerkesztése</a>
           </div>
         </div>
       </div>
@@ -106,31 +101,12 @@ $langs = LANGS;
             <?php else : ?>
               <div class="row d-flex align-items-center justify-content-center">
                 <?php foreach ($subscriptions as $subscription) : ?>
-                  <?php
-                  // A mai dátum Unix timestampje
-                  $today = strtotime(date("Y-m-d"));
-                  // A céldátum Unix timestampje
-                  $date = strtotime($subscription["date"]);
 
-                  // Számold ki a hátralévő napok számát
-                  $days_left = ceil(($date - $today) / 86400); // 86400 másodperc egy napban
-
-
-                  ?>
                   <div class="col-12 mt-3">
                     <div class="card">
-                      <div class="card-header">
-                        <span>
-                          <b style="font-size: 1.3rem;;"><?= $subscription[languageSwitcher("name")] ?></b>
-                        </span>
-                        <i>(<?= (int)$days_left === 0 ? 'Ma indult' : ' Nap van hátra'?>)</i>
-                      </div>
-                      </h5>
+                      <h5 class="card-header"><?= $subscription[languageSwitcher("name")] ?></h5>
                       <div class="card-body">
                         <p class="card-text"><?= $subscription[languageSwitcher("description")] ?></p>
-                        <a href="/event/<?= $subscription["eventRefId"] ?>" class="btn btn-outline-primary">
-                          Megtekintés
-                        </a>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#subModal<?= $subscription["eventId"] ?>">
                           Jelentkezés törlése
                         </button>
@@ -138,6 +114,7 @@ $langs = LANGS;
                     </div>
                   </div>
 
+                  <!-- Modális ablak egyedi ID-vel -->
                   <div class="modal fade" id="subModal<?= $subscription["eventId"] ?>" tabindex="-1" aria-labelledby="subModalLabel<?= $subscription["eventId"] ?>" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">

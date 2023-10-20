@@ -1,6 +1,5 @@
 <?php
-require 'app/models/User_Model.php';
-require 'app/services/LanguageService.php';
+require_once 'app/models/User_Model.php';
 
 class UserController
 {
@@ -63,19 +62,15 @@ class UserController
     $this->userModel->addDocument($_FILES, $_POST);
   }
 
-
-
-
-  // PUBLIC
-  public function setLanguage()
+  
+  public function logout()
   {
-    $this->languageService->language($_POST);
+    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+    $this->authService->logoutUser();
   }
 
-  public function switchLanguage($vars)
-  {
-    $this->languageService->switch($vars["lang"]);
-  }
+
+
   public function registration()
   {
     session_start();
@@ -89,10 +84,6 @@ class UserController
   }
 
 
-  public function logout()
-  {
-    $this->authService->logoutUser();
-  }
 
   public function newPwRequest()
   {

@@ -14,7 +14,6 @@ class EventRender extends EventController
 
   public function index()
   {
-
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $eventsData = $this->eventModel->index($admin);
@@ -84,21 +83,14 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $subscriptionId = $vars["id"] ?? null;
-
-    $user = $this->eventModel->getRegisteredUser($subscriptionId);
-    $eventId = (int)$user["eventRefId"];
-    $event = $this->eventModel->getEventById($eventId, $admin);
-
-    $tasks = $this->eventModel->getEventTasks($eventId);
-  
-
+    $eventId = $vars["id"] ?? null;
+    $event = $this->eventModel->getEventById($eventId);
+    $user = $this->eventModel->getRegisteredUser($vars["id"]);
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/User.php", [
         "admin" => $admin ?? null,
         "event" => $event ?? null,
-        "tasks" => $tasks ?? null,
         "user" => $user ?? null
       ]),
       "admin" => $admin ?? null
@@ -204,9 +196,8 @@ class EventRender extends EventController
     session_start();
     $eventId = $vars["id"] ?? null;
     $event = $this->eventModel->getEventById($eventId);
-    $user = $this->userModel->getMe();
-
-    if (!$event) {
+    
+    if(!$event) {
       header("Location: /");
       exit;
     }
@@ -222,7 +213,6 @@ class EventRender extends EventController
         "tasks" => $tasks ?? null,
         "links" => $links ?? null,
       ]),
-      "user" => $user ?? null
     ]);
   }
 
@@ -236,7 +226,7 @@ class EventRender extends EventController
 
     $event = $this->eventModel->getEventById($id);
 
-    if (!$event) {
+    if(!$event) {
       header("Location: /");
       exit;
     }
@@ -247,7 +237,6 @@ class EventRender extends EventController
     $lang = $_COOKIE["lang"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
-      "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Register.php", [
         "user" => $user ?? null,
         "event" => $event ?? null,
@@ -258,4 +247,5 @@ class EventRender extends EventController
       ]),
     ]);
   }
+
 }

@@ -39,10 +39,6 @@ class DocumentModel extends AdminModel
     $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null, [
       'application/pdf',
       'application/msword',
-      'video/mp4', // MP4 format
-      'video/avi', // AVI format
-      'video/x-ms-wmv', // WMV format,
-      'video/x-msvideo'
     ]);
     $extension =  pathinfo($documentName, PATHINFO_EXTENSION);
 

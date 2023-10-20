@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Document_Model.php';
+require_once 'app/models/Document_Model.php';
 
 class DocumentController
 {

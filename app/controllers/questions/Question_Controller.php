@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Question_Model.php';
+require_once 'app/models/Question_Model.php';
 
 class QuestionController
 {

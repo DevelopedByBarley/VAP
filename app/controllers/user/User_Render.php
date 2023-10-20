@@ -1,5 +1,5 @@
 <?php
-require 'app/helpers/ResetPw.php';
+require_once 'app/helpers/ResetPw.php';
 
 class UserRender extends UserController
 {
@@ -18,7 +18,8 @@ class UserRender extends UserController
     }
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Login.php", []),
+      "content" => $this->renderer->render("/pages/user/Login.php", [
+      ]),
     ]);
   }
 
@@ -57,10 +58,8 @@ class UserRender extends UserController
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
         "subscriptions" => $subscriptions ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
-    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
 
 
@@ -72,11 +71,9 @@ class UserRender extends UserController
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
         "user" => $user ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
 
-    if (isset($_SESSION["alert"])) unset($_SESSION["alert"]);
   }
 
   public function userDocuments()
@@ -90,7 +87,6 @@ class UserRender extends UserController
       "content" => $this->renderer->render("/pages/user/Documents.php", [
         "user" => $user ?? null,
         "documents" => $documents ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
   }
@@ -106,7 +102,6 @@ class UserRender extends UserController
       "content" => $this->renderer->render("/pages/user/UpdateDocumentForm.php", [
         "user" => $user ?? null,
         "document" => $document ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
   }
@@ -122,42 +117,12 @@ class UserRender extends UserController
       "content" => $this->renderer->render("/pages/user/DocumentForm.php", [
         "user" => $user ?? null,
         "document" => $document ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   public function forgotPwForm()
   {
-    session_start();
-    $user = $_SESSION["userId"] ?? null;
-
-    if ($user) header("Location: /user/dashboard");
-
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", []),
     ]);
@@ -166,11 +131,6 @@ class UserRender extends UserController
 
   public function resetPwForm()
   {
-
-    session_start();
-    $user = $_SESSION["userId"] ?? null;
-
-    if ($user) header("Location: /user/dashboard");
     $token = $_GET["token"] ?? null;
     $expires = $_GET["expires"] ?? null;
     $emailByToken = $this->resetPwService->checkTokenData($token, $expires);
@@ -203,7 +163,6 @@ class UserRender extends UserController
         "user" => $user ?? null,
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
-        "alertContent" => $this->renderer->render("/components/Alert.php", [])
       ]),
     ]);
   }

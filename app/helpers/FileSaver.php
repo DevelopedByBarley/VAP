@@ -29,8 +29,6 @@ class FileSaver
       return $this->saveMultipleFiles($files, $path, $whiteList, $prevImages);
     }
 
-    
-
     return $this->save($files, $path, $whiteList, $prevImages);
   }
 
@@ -63,7 +61,7 @@ class FileSaver
     $fileType = mime_content_type($file["tmp_name"]);
 
     if (!in_array($fileType, $whiteList)) {
-      var_dump("Hibás file típus");
+      return false;
       exit;
     }
 

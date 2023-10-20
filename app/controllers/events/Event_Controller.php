@@ -1,6 +1,6 @@
 <?php
-require 'app/models/Event_Model.php';
-require 'app/models/User_Event_Model.php';
+require_once 'app/models/Event_Model.php';
+require_once 'app/models/User_Event_Model.php';
 
 class EventController
 {
@@ -55,24 +55,25 @@ class EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
-    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions, $vars["id"]);
+    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions);
   }
-
 
   public function deleteRegistration($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $this->userEventModel->delete($vars["id"]);
   }
-  
 
-
-
-  /** PUBLIC */
   public function deleteRegistrationFromMail($vars)
   {
     $this->userEventModel->deleteRegistrationFromMailUrl($vars["id"]);
   }
+
+
+
+
+  /** PUBLIC */
+
 
   public function registerUserToEvent($vars)
   {

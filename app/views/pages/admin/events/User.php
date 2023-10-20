@@ -1,8 +1,7 @@
 <?php
 
-$user = $params["user"] ?? null;
-$event = $params["event"] ?? null;
-$tasks = $params["tasks"] ?? null;
+$user = $params["user"];
+
 ?>
 
 <div class="container">
@@ -23,12 +22,7 @@ $tasks = $params["tasks"] ?? null;
                   <p class="text-muted mb-1"><?= $user["email"] ?></p>
                   <p class="text-muted mb-4"><?= $user["address"] ?></p>
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-info text-light ms-1">Üzenet küldése</button>
-                    <?= $user["isAccepted"] ?? false === true ?
-                      '<button type="button" class="btn btn-danger ms-1">Visszavonás</button>'
-                      :
-                      '<a href="/subscription/accept/' . $user["id"] . '" type="button" class="btn btn-success ms-1">Jelentkezés elfogadása</a>'
-                    ?>
+                    <button type="button" class="btn btn-outline-primary ms-1">Üzenet küldése</button>
                   </div>
                 </div>
               </div>
@@ -76,15 +70,14 @@ $tasks = $params["tasks"] ?? null;
               </div>
             </div>
             <div class="col-lg-8">
-              <div class="bg-dark p-2">
-                <span class="text-light  me-1"><b>Nyelvek</b></span>
-              </div>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="card bg-light mb-4 mb-md-0 p-2 rounded rounded-lg">
+                  <div class="card mb-4 mb-md-0 p-2 rounded rounded-lg">
                     <div class="card-body">
+                      <p class="mb-4"><span class="text-primary font-italic me-1">Nyelvek</span>
+                      </p>
                       <?php foreach ($user["langs"] as $language) : ?>
-                        <div class="row d-flex align-items-center justify-content-center mt-1 p-1">
+                        <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
                           <div class="col-sm-3"><?= Languages[$language["lang"]]["Hu"] ?></div>
                           <div class="col-sm-3"><?= Levels[$language["level"]]["Hu"] ?></div>
                         </div>
@@ -93,36 +86,28 @@ $tasks = $params["tasks"] ?? null;
                   </div>
                 </div>
                 <div class="col-xs-12 mt-4">
-                  <div class="bg-dark p-2">
-                    <span class="text-light me-1"><b>Érdeklődés</b></span>
-                  </div>
-                  <div class="card mb-4 mb-md-0 bg-light">
+                  <div class="card mb-4 mb-md-0">
                     <div class="card-body">
+                      <p class="mb-4"><span class="text-primary font-italic me-1">Érdkelődés</span>
+                      </p>
                       <h1>Fejlesztés alatt</h1>
                       <?php foreach ($user["tasks"] as $task) : ?>
-                        <?php
-                        $taskValues = array_column($tasks, "task");
-                        $color = in_array($task["task"], $taskValues) ? 'green' : 'red  ';
-
-                        ?>
-                        <div class="row d-flex align-items-center justify-content-center mt-1 p-1 text-light" style="background-color: <?= $color ?>;">
-                          <div class="col-xs-12"><b><?= TASK_AREAS["areas"][$task["task"]]["Hu"] ?></b></div>
+                        <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
+                          <div class="col-xs-12"><?= TASK_AREAS["areas"][$task["task"]]["Hu"] ?></div>
                         </div>
                       <?php endforeach ?>
-
 
                     </div>
                   </div>
                 </div>
 
                 <div class="col-xs-12 mt-4">
-                  <div class="bg-dark p-2">
-                    <span class="text-light  me-1"><b>Dokumentumok</b></span>
-                  </div>
-                  <div class="card bg-light mb-4 mb-md-0">
-                    <div class="card-body r-none ">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p><span class="text-primary font-italic me-1">Dokumentumok</span>
+                      </p>
                       <?php foreach ($user["documents"] as $document) : ?>
-                        <div class="row d-flex align-items-center justify-content-center mt-1 p-1">
+                        <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
                           <div class="col-8">
                             <a href="/public/assets/uploads/documents/users/<?= $document["name"] ?>"> <?= $document["name"] ?></a>
                           </div>

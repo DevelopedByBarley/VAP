@@ -1,6 +1,6 @@
 <?php
-require 'app/controllers/events/Event_Controller.php';
-require 'app/controllers/events/Event_Render.php';
+require_once 'app/controllers/events/Event_Controller.php';
+require_once 'app/controllers/events/Event_Render.php';
 
 
 $r->addRoute('GET', '/admin/events', [EventRender::class, 'index']);

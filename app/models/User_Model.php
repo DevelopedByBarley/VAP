@@ -1,4 +1,6 @@
 <?php
+require_once 'app/helpers/Alert.php';
+
 
 class UserModel
 {
@@ -6,7 +8,6 @@ class UserModel
   private $fileSaver;
   private $mailer;
   private $alert;
-
 
   public function __construct()
   {
@@ -30,6 +31,7 @@ class UserModel
     return $registrations;
   }
 
+  // GET USER BY SESSION
   public function getMe()
   {
     $userId = $_SESSION["userId"] ?? null;
@@ -41,6 +43,8 @@ class UserModel
     return $user;
   }
 
+
+  // REGISTER USER 
   public function registerUser($files, $body)
   {
 
@@ -53,8 +57,8 @@ class UserModel
 
     if (!$fileName || in_array(false, $documentName)) {
       self::setPrevContent();
+
       $this->alert->set("File típus elutasítva", "danger", "/user/registration");
-      return;
     }
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -89,11 +93,7 @@ class UserModel
 
     if ($isUserExist) {
       self::setPrevContent();
-
-      setcookie("alert_message", "Ez a felhasználó már létezik!", time() + 2, "/");
-      setcookie("alert_bg", "danger", time() + 5, "/");
-      header('Location: /user/registration');
-      exit;
+      $this->alert->set("Ez a felhasználó már létezik!", "danger", "/user/registration");
     }
 
 
@@ -161,7 +161,7 @@ class UserModel
     }
   }
 
-
+  // UPDATE USER FROM USER SETTINGS
   public function update($body)
   {
     $userId = $_SESSION["userId"] ?? null;
@@ -224,6 +224,8 @@ class UserModel
     }
   }
 
+  // USER DELETE SELF
+
   public function delete($body)
   {
     $userId = $_SESSION["userId"] ?? null;
@@ -265,6 +267,7 @@ class UserModel
     }
   }
 
+  // CHECK USER EMAIL EXIST INTO THE DB 
   private function checkIsUserExist($email)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
@@ -280,6 +283,8 @@ class UserModel
     return false;
   }
 
+
+  // SET PREV CONTENT BEFORE REDIRECT
   private function setPrevContent()
   {
     $langs = $_POST["langs"];
@@ -316,6 +321,8 @@ class UserModel
 
   // DOCUMENTS
 
+  // DELETE DOCUMENT FROM USER SETTINGS
+
   public function deleteDocument($id)
   {
     $documentName = self::getDocumentById($id)["name"];
@@ -333,6 +340,7 @@ class UserModel
     }
   }
 
+  // ADD DOCUMENT FROM USER SETTINGS
   public function addDocument($files, $body)
   {
     $userRefId = $_SESSION["userId"] ?? null;
@@ -354,6 +362,7 @@ class UserModel
     }
   }
 
+  // UPDATE DOCUMENT FROM USER SETTINGS
   public function updateDocument($id, $files, $body)
   {
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
@@ -386,6 +395,8 @@ class UserModel
     if ($isSuccess) header("Location: /user/documents");
   }
 
+  // GET DOCUMENTS BY USER ID
+
   public function getDocumentsByUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_documents` WHERE `userRefId` = :id");
@@ -396,6 +407,8 @@ class UserModel
 
     return $documents;
   }
+
+  // GET SINGLE DOCUMENT BY USER ID
 
   public function getDocumentById($id)
   {
@@ -408,9 +421,10 @@ class UserModel
     return $document;
   }
 
+  // INSERT DOCUMENT ON USER REGISTRATION!
   private function insertDocuments($id, $documents)
   {
-
+    die('hello');
     foreach ($documents as $document) {
       $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
       $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
@@ -425,6 +439,7 @@ class UserModel
     }
   }
 
+  // FORMAT DOCUMENTS FOR INSERT INTO THE DB
   private function formatDocuments($documentName, $typeOfDocument)
   {
 
@@ -453,6 +468,8 @@ class UserModel
 
   // LANGUAGES
 
+  // GET LANGUAGES BY USER ID
+
   public function getLanguagesByUser($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_languages` WHERE `userRefId` = :id");
@@ -464,6 +481,7 @@ class UserModel
     return $languages;
   }
 
+  // INSERT LANGUAGES
 
   private function insertLanguages($id, $languages, $levels)
   {
@@ -486,6 +504,8 @@ class UserModel
     }
   }
 
+
+  // UPDATE LANGUAGES
   private function updateUserLanguages($id, $languages, $levels)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
@@ -497,9 +517,7 @@ class UserModel
 
 
 
-
-
-  // RESET PW
+  // RESET PW FROM USER SETTINGS PAGE
 
   public function resetPw($body)
   {
@@ -514,27 +532,14 @@ class UserModel
     $compared = $confirm_pw === $new_pw;
 
     if (!$isVerified || !$compared) {
-      $_SESSION["alert"] = [
-        "message" => "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
-        "bg" => "red"
-      ];
-      header('Location: /user/password-reset');
-      return;
+      $this->alert->set("Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!", "danger", "/user/password-reset");
     }
 
     $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
     $stmt->bindParam(":password", $hashed);
     $stmt->bindParam(":userId", $userId);
     $stmt->execute();
-    $_SESSION["alert"] = [
-      "message" => "Jelszó megváltoztatása sikeres!",
-      "bg" => "green"
-    ];
-    header('Location: /user/dashboard');
-  }
 
-
-  private function setAlertMessge() {
-    
+    $this->alert->set("Jelszó megváltoztatása sikeres!", "success", "/user/dashboard");
   }
 }

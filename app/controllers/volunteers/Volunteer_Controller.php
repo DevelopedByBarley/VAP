@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Volunteer_Model.php';
+require_once 'app/models/Volunteer_Model.php';
 
 class VolunteerController
 {

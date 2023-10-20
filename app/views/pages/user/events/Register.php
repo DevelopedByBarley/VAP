@@ -27,7 +27,7 @@ $langs = LANGS;
         </div>
       </div>
 
-    <div class="row p-sm-5">
+      <div class="row p-sm-5">
         <div class="col-12 text-center mt-3">
           <h1>Regisztráció kitöltése</h1>
         </div>

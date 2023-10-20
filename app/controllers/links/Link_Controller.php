@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Link_Model.php';
+require_once 'app/models/Link_Model.php';
 
 class LinkController
 {

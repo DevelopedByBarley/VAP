@@ -1,6 +1,6 @@
 <?php
-require 'app/controllers/partners/Partner_Controller.php';
-require 'app/controllers/partners/Partner_Render.php';
+require_once 'app/controllers/partners/Partner_Controller.php';
+require_once 'app/controllers/partners/Partner_Render.php';
 $r->addRoute('GET', '/admin/partners', [PartnerRender::class, 'index']);
 $r->addRoute('GET', '/admin/partners/new', [PartnerRender::class, 'partnerForm']);
 $r->addRoute('GET', '/admin/partners/update/{id}', [PartnerRender::class, 'updatePartnerForm']);

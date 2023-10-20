@@ -1,5 +1,5 @@
 <?php
-require 'app/models/Admin_Model.php';
+require_once 'app/models/Admin_Model.php';
 class VolunteerModel extends AdminModel
 {
   public function __construct()

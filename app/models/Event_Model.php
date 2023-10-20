@@ -4,7 +4,6 @@
   private $pdo;
   private $fileSaver;
   private $mailer;
-  private $alert;
 
   public function __construct()
   {
@@ -12,7 +11,6 @@
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
-    $this->alert = new Alert();
   }
 
   // Set event isPublic = 0 if it expired
@@ -21,7 +19,7 @@
     $today = date("Y-m-d");
 
 
-    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` <= :today OR `reg_end_date` <= :today)");
+    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` < :today OR `reg_end_date` < :today)");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
   }
@@ -83,6 +81,8 @@
 
 
     self::sendMailForRegisteredUsers($lastId);
+    exit;
+
 
     header("Location: /admin/events");
   }
@@ -225,7 +225,6 @@
   public function getEventById($id, $admin = null)
   {
 
-
     if (!$admin || !isset($admin)) {
       $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id AND `isPublic` = '1'");
       $stmt->bindParam(":id", $id);
@@ -239,7 +238,6 @@
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
-
     return $event;
   }
 
@@ -255,21 +253,13 @@
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
     return $event;
   }
 
   // REGISTRATIONS
 
 
-
-
-
-
   // Get all registration by event
-
-
-
 
   public function getRegistrationsByEvent($eventId)
   {
@@ -326,7 +316,7 @@
 
 
   // Send email to registered users public function!
-  public function sendEmailToRegisteredUsers($body, $subscriptions, $eventId)
+  public function sendEmailToRegisteredUsers($body, $subscriptions)
   {
     foreach ($subscriptions as $subscription) {
       if ($subscription["lang"] === "Hu") {
@@ -335,8 +325,6 @@
         $this->mailer->send($subscription["email"], $body["mail-body-En"], "Hello");
       }
     }
-
-    $this->alert->set("Emailek sikeresen ki küldve!", "success", "/admin/event/$eventId");
   }
 
 
@@ -346,14 +334,13 @@
   // DATES 
   public function getEventDates($id)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id ORDER BY date ASC");
+    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $events;
   }
-
 
 
 
@@ -473,9 +460,9 @@
     $stmt = $this->pdo->prepare("SELECT * FROM event_tasks WHERE eventRefId = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $tasks;
+    return $events;
   }
 
   // Update event tasks
