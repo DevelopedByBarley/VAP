@@ -84,14 +84,16 @@ class EventRender extends EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
-    $eventId = $vars["id"] ?? null;
-    $event = $this->eventModel->getEventById($eventId);
-    $user = $this->eventModel->getRegisteredUser($vars["id"]);
+    $subscriptionId = $vars["id"] ?? null;
+    $user = $this->eventModel->getRegisteredUser($subscriptionId);
+    $eventId = $user["eventRefId"];
+
+    $tasks = $this->eventModel->getEventTasks($eventId);
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/User.php", [
         "admin" => $admin ?? null,
-        "event" => $event ?? null,
+        "tasks" => $tasks ?? null,
         "user" => $user ?? null
       ]),
       "admin" => $admin ?? null
@@ -172,6 +174,7 @@ class EventRender extends EventController
     $user = $this->userModel->getMe();
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Events.php", [
         "user" => $user ?? null,
         "events" => $events ?? null
@@ -182,9 +185,16 @@ class EventRender extends EventController
   // RENDER EVENT FOR USER
   public function event($vars)
   {
+
     session_start();
     $eventId = $vars["id"] ?? null;
     $event = $this->eventModel->getEventById($eventId);
+    $user = $this->userModel->getMe();
+    $isRegistered = null;
+    if($user) {
+      $isRegistered = $this->eventModel->checkIsUserRegisteredToEvent($eventId, $user["id"]);
+    }
+
 
     if (!$event) {
       header("Location: /");
@@ -196,11 +206,14 @@ class EventRender extends EventController
     $links = $this->eventModel->getEventLinks($eventId);
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Event.php", [
         "event" => $event ?? null,
         "dates" => $dates ?? null,
         "tasks" => $tasks ?? null,
         "links" => $links ?? null,
+        "isRegistered" => $isRegistered
+
       ]),
     ]);
   }
@@ -214,6 +227,7 @@ class EventRender extends EventController
 
 
     $event = $this->eventModel->getEventById($id);
+    $user = $this->userModel->getMe();
 
     if (!$event) {
       header("Location: /");
@@ -226,6 +240,7 @@ class EventRender extends EventController
     $lang = $_COOKIE["lang"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Register.php", [
         "user" => $user ?? null,
         "event" => $event ?? null,

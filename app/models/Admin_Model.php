@@ -41,14 +41,21 @@ class AdminModel
 
   // BAN REGISTERED USER // MEG KELL CSINÁLNI AZ ÖSSZES ADAT TÖRLÉSÉT!
   public function ban($id) {
+    $documents = self::user($id)["documents"];
+
     $stmt = $this->pdo->prepare("DELETE FROM users WHERE `id` LIKE :id");
     $stmt->bindParam(":id", $id);
-    $stmt->execute();
+    $isSuccess = $stmt->execute();
+
+    if($isSuccess) {
+      $this->userModel->deleteUserDocuments($documents);
+      $this->userModel->deleteUserLanguages($id);
+    }
 
     header('Location: /admin/registrations');
   }
-
-  // GET ALL OF USERS WHO REGISTERED
+  // ADMIN -> GET
+  // GET ALL OF REGISTERED PROFILES
   public function index() {
     $offset = $_GET["offset"] ?? 1;
     $limit = 10; // Az oldalanként megjelenített rekordok száma
@@ -77,7 +84,8 @@ class AdminModel
 
   
 
-  // GET ADMIN BY SESSION 
+  //ADMIN -> GET
+  //"GET ADMIN BY SESSION"
   public function admin()
   {
     $adminId = $_SESSION["adminId"] ?? null;
@@ -89,6 +97,8 @@ class AdminModel
 
     return $admin;
   }
+
+  
 
 
 

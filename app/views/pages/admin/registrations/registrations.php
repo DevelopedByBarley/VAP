@@ -40,7 +40,6 @@ $searchValue = $_GET["search"] ?? '';
             <thead class="bg-dark text-light">
               <tr>
                 <th>Név</th>
-                <th>Feladat terület</th>
                 <th>Foglalkozás</th>
                 <th>Telefonszám</th>
                 <th>Program érdeklődés</th>
@@ -60,9 +59,6 @@ $searchValue = $_GET["search"] ?? '';
                         <p class="text-muted mb-0"> <?= $user["email"] ?></p>
                       </div>
                     </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1"><?= $user["tasks"] ?></p>
                   </td>
                   <td>
                     <div class="ms-3">

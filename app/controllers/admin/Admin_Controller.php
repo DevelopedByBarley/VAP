@@ -2,12 +2,14 @@
 require_once 'app/services/AuthService.php';
 require_once 'app/helpers/LoginChecker.php';
 require_once 'app/helpers/FileSaver.php';
+require_once 'app/models/User_Model.php';
 
 class AdminController
 {
   protected $renderer;
   protected $authService;
   protected $adminModel;
+  protected $userModel;
 
 
   public function __construct()
@@ -15,6 +17,7 @@ class AdminController
     $this->renderer = new Renderer();
     $this->adminModel = new AdminModel();
     $this->authService = new AuthService();
+    $this->userModel = new UserModel();
   }
 
   // PROTECTED

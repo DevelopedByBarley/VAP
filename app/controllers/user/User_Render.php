@@ -70,6 +70,7 @@ class UserRender extends UserController
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
         "user" => $user ?? null,
       ]),
@@ -162,12 +163,14 @@ class UserRender extends UserController
     $user =  $this->userModel->getMe();
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
     $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
+    $tasks = $this->userModel->getTasksByUser($user["id"]);
 
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user ?? null,
       "content" => $this->renderer->render("/pages/user/Profile_Settings.php", [
         "user" => $user ?? null,
+        "tasks" => $tasks ?? null,
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
       ]),

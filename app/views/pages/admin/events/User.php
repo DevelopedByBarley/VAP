@@ -1,6 +1,7 @@
 <?php
 
 $user = $params["user"];
+$tasks = array_column($params["tasks"], "task");
 
 ?>
 
@@ -23,6 +24,11 @@ $user = $params["user"];
                   <p class="text-muted mb-4"><?= $user["address"] ?></p>
                   <div class="d-flex justify-content-center mb-2">
                     <button type="button" class="btn btn-outline-primary ms-1">Üzenet küldése</button>
+                    <?php if ((int)$user["isAccepted"] === 0) : ?>
+                      <a href="/admin/subscription/accept/<?= $user["id"] ?>" class="btn btn-outline-success ms-1">Jelentkezés elfogadása</a>
+                    <?php else : ?>
+                      <a href="/admin/subscription/delete/<?= $user["id"] ?>" class="btn btn-outline-success ms-1">Visszavonás</a>
+                    <?php endif ?>
                   </div>
                 </div>
               </div>
@@ -90,10 +96,9 @@ $user = $params["user"];
                     <div class="card-body">
                       <p class="mb-4"><span class="text-primary font-italic me-1">Érdkelődés</span>
                       </p>
-                      <h1>Fejlesztés alatt</h1>
-                      <?php foreach ($user["tasks"] as $task) : ?>
+                      <?php foreach ($tasks as $task) : ?>
                         <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
-                          <div class="col-xs-12"><?= TASK_AREAS["areas"][$task["task"]]["Hu"] ?></div>
+                          <div class="col-xs-12"><?= TASK_AREAS["areas"][$task]["Hu"] ?></div>
                         </div>
                       <?php endforeach ?>
 

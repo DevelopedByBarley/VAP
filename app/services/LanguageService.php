@@ -6,6 +6,7 @@ class LanguageService
 
   public function language($body)
   {
+
     $expiration_date = time() + (7 * 24 * 60 * 60);
 
     $cookie_name = "lang";

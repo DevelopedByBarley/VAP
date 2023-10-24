@@ -1,79 +1,42 @@
-<link rel="stylesheet" href="/public/css/user/register.css">
 
-<?php
-$event = $params["event"];
-$dates = $params["dates"];
-$tasks = $params["tasks"];
-$user = $params["user"];
-$lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-
-$langs = LANGS;
-?>
-
-<div class="container-fluid">
-
-  <div class="p-3 container d-flex align-items-center justify-content-center p-3" id="register-form" style="min-height: 91vh;">
-    <?php if ($user) : ?>
-      <div class="row p-3" id="register-profile" style="min-height: 70vh; background: white;">
-        <h3 class="text-center mb-5 mt-3">Jelentkezés kitöltése</h3>
-        <div class="col-xs-12 text-center" id="register-profile-header">
-          <img src="/public/assets/uploads/images/users/<?= $user["fileName"] ?>" alt="" style="height: 150px; width: 150px;" class="mb-3">
-          <h3><?= $user["name"] ?? '' ?></h3>
-          <div class="mb-3">
-            <small><?= $user["email"] ?? '' ?></small>
-          </div>
-
-          <a href="/user/dashboard" class="btn btn-outline-primary">Profil áttekintése</a>
-          <div class="text-center mb-5">
-            <small>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</small>
-          </div>
-        </div>
-        <hr>
-        <div class="col-xs-12 text-center">
-          <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
-            <div class="mb-4">
-              <div class="mb-3">
-                <b>Válassza ki az önnek megfelelő időpontot</b>
-              </div>
-              <div class="btn-group">
-                <?php foreach ($dates as $index => $date) : ?>
-                  <input type="checkbox" class="btn-check" id="date-<?= $index ?>" autocomplete="off" name="dates[]" value="<?= $date["date"] ?>">
-                  <label class="btn btn-outline-primary" for="date-<?= $index ?>"><?= $date["date"] ?></label><br>
-                <?php endforeach ?>
-              </div>
-            </div>
-            <div class="mb-4">
-              <div class="mb-3">
-                <b>Válassza ki az ön számára megfelelő feladatokat</b>
-              </div>
-              <?php foreach ($tasks as $index => $task) : ?>
-                <div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="task<?= $index ?>" value="<?= $task["task"] ?>" name="tasks[<?= $index ?>]">
-                    <label class="form-check-label" id="task<?= $index ?>"><?= TASK_AREAS["areas"][$task["task"]][$lang] ?></label>
-                  </div>
-                </div>
-              <?php endforeach ?>
-            </div>
-
-
-
-
-            <button type="submit" class="btn reg-btn">Regisztráció</button>
-
-
-          </form>
-        </div>
-      </div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mt-5">
+      <a href="/">Vissza a kezdőoldalra</a>
+    </div>
   </div>
 </div>
-<?php else : ?>
-
-
-
-
-
-
+<div class="login-wrapper d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+  <div class="container d-flex align-items-center justify-content-center flex-column rounded" style="min-height: 70vh; background: white;" id="user-login-con">
+    <div class="row w-100 d-flex align-items-center justify-content-center">
+      <div class="col-12 col-lg-5 d-flex align-items-center justify-content-center" id="login-col">
+        <img src="/public/assets/icons/login.jpg" id="login-logo" />
+      </div>
+      <div class="col-xs-12 col-lg-5 rounded">
+        <form action="/user/login" method="POST" id="login" class="w-100">
+          <h1 class="text-center">
+            <?= $langs["loginForm"]["title"][$lang] ?? 'Bejelentkezés' ?>
+          </h1>
+          <div class="mb-3 mt-5">
+            <label for="email" class="form-label"><?= $langs["loginForm"]["email"][$lang] ?? 'Email cim' ?></label>
+            <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= $langs["loginForm"]["email"][$lang] ?? 'Email cim' ?>">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label"><?= $langs["loginForm"]["password"][$lang] ?? 'Jelszó' ?></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
+          </div>
+          <div class="text-center mt-5">
+            <button type="submit" class="btn secondary-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
+            <p class="mt-3">Forgot <a href="/user/forgot-pw">Password?</a></p>
+          </div>
+          <div class="mt-5 text-center">
+            <a href="/user/registration" class="text-info" style="text-decoration: none;">Create your account <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

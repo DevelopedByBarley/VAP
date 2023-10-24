@@ -1,9 +1,15 @@
-<?php class EventModel
+
+<?php 
+require_once 'app/helpers/Alert.php';
+
+
+class EventModel
 {
 
   private $pdo;
   private $fileSaver;
   private $mailer;
+  private $alert;
 
   public function __construct()
   {
@@ -11,6 +17,7 @@
     $this->pdo = $db->getConnect();
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
+    $this->alert = new Alert();
   }
 
   // SET EVENT PRIVATE WHEN IT IS EXPIRED
@@ -19,7 +26,16 @@
     $today = date("Y-m-d");
 
 
-    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` < :today OR `reg_end_date` < :today)");
+    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` <= :today OR `reg_end_date` <= :today)");
+    $stmt->bindParam(":today", $today);
+    $stmt->execute();
+  }
+
+  private function setEventsPublic() {
+    $today = date("Y-m-d");
+
+
+    $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '1' WHERE `isPublic` = '0' AND (`date` > :today OR `reg_end_date` > :today)");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
   }
@@ -170,6 +186,7 @@
     self::updateEventLinks($id, $links);
     self::updateEventDates($id, $event_dates);
     self::updateEventTasks($id, $tasks);
+    self::setEventsPublic();
 
     header("Location:  /admin/events");
   }
@@ -312,6 +329,22 @@
     return $user;
   }
 
+
+
+
+
+  public function checkIsUserRegisteredToEvent($eventId, $userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` WHERE `userRefId` = :userId AND `eventRefId` = :eventId");
+    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":eventId", $eventId);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::PARAM_BOOL);
+
+    $isRegistered = $user ? true : false;
+
+    return $isRegistered;
+  }
 
 
 
@@ -485,5 +518,32 @@
       $stmt->bindParam(':eventRefId', $id);
       $stmt->execute();
     }
+  }
+
+
+  public function acceptUserSubscription($subId) {
+    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
+    $stmt->bindParam(":subId", $subId);
+    $stmt->execute();
+
+    $sub = self::getRegisteredUser($subId);
+
+    $this->mailer->send($sub["email"], "Regisztráció elfogadva!", "Visszaigazolás a regisztrációról!");
+    
+    
+    $this->alert->set('Eseményre való regisztráció elfogadva!', "success", "/admin/event/user/$subId");
+  }
+  
+  public function deleteUserSubscription($subId) {
+    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '0' WHERE `registrations`.`id` = :subId;");
+    $stmt->bindParam(":subId", $subId);
+    $stmt->execute();
+    
+    
+    $sub = self::getRegisteredUser($subId);
+    $this->mailer->send($sub["email"], "Regisztráció visszavonva!", "Visszaigazolás a regisztrációról!");
+
+
+    $this->alert->set('Elfogadott regisztráció visszavonva!', "success", "/admin/event/user/$subId");
   }
 }

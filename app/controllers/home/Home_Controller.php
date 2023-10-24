@@ -42,4 +42,5 @@ class HomeController
     {
         $this->languageService->switch($vars["lang"]);
     }
+    
 }

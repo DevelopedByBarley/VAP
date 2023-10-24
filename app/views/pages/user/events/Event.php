@@ -4,11 +4,12 @@
 <?php
 $lang = $_COOKIE["lang"] ?? null;
 
-$event = $params["event"];
+$event = $params["event"] ?? null;
 
-$dates = $params["dates"];
-$links = $params["links"];
-$tasks = $params["tasks"];
+$dates = $params["dates"] ?? null;
+$links = $params["links"] ?? null;
+$tasks = $params["tasks"] ?? null;
+$isRegistered = $params["isRegistered"] ?? null;
 ?>
 
 <div class="container-fluid mt-b" style="position: relative; z-index: 0;">
@@ -34,7 +35,7 @@ $tasks = $params["tasks"];
       ?>
       <!--
            <div class="col-6 col-lg-1 bg-dark py-4 text-light d-flex justify-content-center align-items-center">
-            <i class="bi bi-calendar2-week-fill text-light" style="font-size: 2.2rem;"></i>
+             <i class="bi bi-calendar2-week-fill text-light" style="font-size: 2.2rem;"></i>
           </div>
          -->
       <div class="col-4 col-lg-1 m-1 py-3 px-5 pr-color text-light d-flex justify-content-center align-items-center flex-column">
@@ -94,19 +95,24 @@ $tasks = $params["tasks"];
   </div>
 
 
-  <div class="row mt-5 mb-5 reveal">
+  <div class="row mt-5 reveal">
     <div class="col-12">
-      <h1 class="text-center text-secondary">Tovább a regisztrációhoz.</h1>
-      <p class="text-secondary text-center"><i>Lépj tovább a regisztrációs felületre vagy kérdezz tőlünk bátran az "Üzenet" küldése gomb segítségével!</i></p>
+      <?php if ($isRegistered) : ?>
+        <h1 class="text-center text-secondary">Erre az eseményre már regisztrált!</h1>
+      <?php else : ?>
+        <h1 class="text-center text-secondary">Tovább a regisztrációhoz.</h1>
+        <p class="text-secondary text-center"><i>Lépj tovább a regisztrációs felületre vagy kérdezz tőlünk bátran az "Üzenet" küldése gomb segítségével!</i></p>
+      <?php endif ?>
+
     </div>
-    <div class="col-12 text-center py-3">
+    <div class="col-12 text-center py-3" style="min-height: 300px;;">
       <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
         <span class="badge p-3 bg-danger">Regisztráció lezárult</span>
       <?php else : ?>
-        <a href="/event/register/<?= $event["eventId"] ?>" class="btn secondary-btn">Regisztráció</a>
+        <?= $isRegistered ? '' : "<a href=\"/event/register/{$event['eventId']}\" class=\"btn secondary-btn\">Regisztráció</a>" ?>
         <button type="button" class="btn primary-btn ms-1">Üzenet küldése</button>
       <?php endif ?>
     </div>
-  </div>w
+  </div>
 
 </div>

@@ -1,5 +1,6 @@
 <?php
 require_once 'app/helpers/Alert.php';
+require_once 'app/services/AuthService.php';
 
 
 class UserModel
@@ -17,6 +18,7 @@ class UserModel
     $this->mailer = new Mailer();
     $this->alert = new Alert();
   }
+
 
   // GET ALL EVENT DATA FOR SUBSCRIBER
 
@@ -47,7 +49,6 @@ class UserModel
   // REGISTER USER 
   public function registerUser($files, $body)
   {
-
     $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null, [
       'image/png',
       'image/jpeg',
@@ -72,7 +73,7 @@ class UserModel
 
     $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $task = filter_var(TASK_AREAS["areas"][$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $tasks = $body["tasks"] ?? null;
     $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
     $typeOfDocument = $body["typeOfDocument"] ?? [];
@@ -80,10 +81,11 @@ class UserModel
     $levels = $body["levels"] ?? [];
 
     $documents = self::formatDocuments($documentName, $typeOfDocument);
-    
+
 
     $lang = $_COOKIE["lang"] ?? null;
     $createdAt = time();
+
 
 
 
@@ -113,7 +115,6 @@ class UserModel
         :programs,  
         :otherLanguages, 
         :participation, 
-        :tasks, 
         :informedBy, 
         :permission, 
         :lang, 
@@ -131,7 +132,6 @@ class UserModel
     $stmt->bindParam(':programs', $programs);
     $stmt->bindParam(':otherLanguages', $otherLanguages);
     $stmt->bindParam(':participation', $participation);
-    $stmt->bindParam(':tasks', $task);
     $stmt->bindParam(':informedBy', $informedBy);
     $stmt->bindParam(':permission', $permission);
     $stmt->bindParam(':lang', $lang);
@@ -146,6 +146,7 @@ class UserModel
     if ($lastInsertedId) {
       self::insertDocuments($lastInsertedId, $documents);
       self::insertLanguages($lastInsertedId, $languages, $levels);
+      self::insertTasks($lastInsertedId, $tasks);
       $body = file_get_contents("./app/views/templates/user_registration/UserRegistrationMailTemplate" . $lang . ".php");
       $body = str_replace('{{name}}', $name, $body);
 
@@ -174,7 +175,7 @@ class UserModel
     $programs = filter_var(PROGRAMS["program"][$body["programs"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $participation = filter_var($body["participation"] ?? '', FILTER_SANITIZE_NUMBER_INT);
-    $task = filter_var(TASK_AREAS["areas"][$body["tasks"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $tasks = $body["tasks"] ?? null;
     $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
     $languages = $body["langs"] ?? [];
@@ -194,7 +195,6 @@ class UserModel
         `programs` = :programs,
         `otherLanguages` = :otherLanguages,
         `participation` = :participation,
-        `tasks` = :tasks,
         `informedBy` = :informedBy,
         `permission` = :permission,
         `lang` = :lang
@@ -209,7 +209,6 @@ class UserModel
     $stmt->bindParam(':programs', $programs);
     $stmt->bindParam(':otherLanguages', $otherLanguages);
     $stmt->bindParam(':participation', $participation);
-    $stmt->bindParam(':tasks', $task);
     $stmt->bindParam(':informedBy', $informedBy);
     $stmt->bindParam(':permission', $permission);
     $stmt->bindParam(':lang', $lang);
@@ -219,6 +218,7 @@ class UserModel
 
     if ($isSuccess) {
       self::updateUserLanguages($userId, $languages, $levels);
+      self::updateTasks($userId, $tasks);
       setcookie("alert_message", "Profil frissítése sikeres!", time() + 2, "/");
       setcookie("alert_bg", "success", time() + 5, "/");
       header('Location: /user/settings');
@@ -251,20 +251,28 @@ class UserModel
         $stmt->bindParam(":id", $userId);
         $stmt->execute();
 
-
-
         if ($isSuccess) {
-
-
-          foreach ($documents as $document) {
-            $documentName = $document["name"];
-            unlink("./public/assets/uploads/documents/users/$documentName");
-          }
-          setcookie("alert_message", "Felhasználó törlése sikeres!", time() + 2, "/");
-          setcookie("alert_bg", "success", time() + 5, "/");
-          header("Location: /");
+          self::deleteUserLanguages($userId);
+          self::deleteUserDocuments($documents);
         }
       }
+    }
+  }
+
+  public function deleteUserLanguages($userId)
+  {
+
+    $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
+    $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+  }
+
+  public function deleteUserDocuments($documents)
+  {
+
+    foreach ($documents as $document) {
+      $documentName = $document["name"];
+      unlink("./public/assets/uploads/documents/users/$documentName");
     }
   }
 
@@ -426,7 +434,6 @@ class UserModel
   // INSERT DOCUMENT ON USER REGISTRATION!
   private function insertDocuments($id, $documents)
   {
-    die('hello');
     foreach ($documents as $document) {
       $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
       $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
@@ -463,8 +470,34 @@ class UserModel
 
 
 
+ // TASKS
 
+  private function updateTasks($id, $tasks) {
+    $stmt = $this->pdo->prepare("DELETE FROM `user_tasks` where `userRefId` = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
+    self::insertTasks($id, $tasks);
+  }
+
+  private function insertTasks($id, $tasks) {
+    foreach($tasks as $task) {
+      $stmt = $this->pdo->prepare("INSERT INTO `user_tasks` VALUES (NULL, :task, :userRefId)");
+      $stmt->bindParam(':task', $task);
+      $stmt->bindParam(':userRefId', $id);
+      $stmt->execute();
+    }
+  }
+
+  public function getTasksByUser($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM `user_tasks` WHERE `userRefId` = :id");
+
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $tasks;
+  }
 
 
 
@@ -524,6 +557,7 @@ class UserModel
   public function resetPw($body)
   {
     $userId = $_SESSION["userId"] ?? null;
+
     $old_pw = filter_var($body["old_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $new_pw = filter_var($body["new_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $confirm_pw = filter_var($body["confirm_password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -537,7 +571,7 @@ class UserModel
       $this->alert->set("Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!", "danger", "/user/password-reset");
     }
 
-    $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`userId` = :userId;");
+    $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`id` = :userId;");
     $stmt->bindParam(":password", $hashed);
     $stmt->bindParam(":userId", $userId);
     $stmt->execute();

@@ -6,6 +6,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
 $user = $params["user"];
 
+$tasks = array_column($params["tasks"], "task");
 $documents = $params["documents"];
 $userLanguages = $params["userLanguages"];
 ?>
@@ -208,11 +209,11 @@ $userLanguages = $params["userLanguages"];
               </b></label>
 
 
-            <?php foreach (TASK_AREAS["areas"] as $index => $task) : ?>
+            <?php foreach (TASK_AREAS["areas"] as $index => $area) : ?>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="tasks" id="task-1" value="<?= $index ?>" required <?php echo $task["Hu"] === $user["tasks"] ? 'checked' :  '' ?>>
-                <label class=" form-check-label" for="task-1">
-                  <td><?= $task[$lang] ?? 'asd' ?>
+                <input class="form-check-input task-check" type="checkbox" name="tasks[]" id="task-<?= $index ?>" value="<?= $index ?>" <?= in_array($index, $tasks) ? 'checked' : '' ?>>
+                <label class="form-check-label" for="task-<?= $index ?>">
+                  <td><?= $area[$lang] ?? 'Név' ?>
                 </label>
               </div>
             <?php endforeach ?>
@@ -318,3 +319,27 @@ $userLanguages = $params["userLanguages"];
   </div>
 </div>
 </div>
+
+
+
+<script>
+  const form = document.getElementById('update-form');
+  form.addEventListener('submit', (e) => {
+    var checkboxes = document.querySelectorAll('.task-check');
+    var checked = false;
+
+    checkboxes.forEach(function(checkbox) {
+
+      console.log(checkbox);
+      if (checkbox.checked) {
+        checked = true;
+      }
+    });
+
+    if (!checked) {
+      e.preventDefault(); // Megakadályozza az űrlap elküldését, ha nincs kiválasztott checkbox.
+      alert('Legalább 1 feladatterület legyen kipipálva!');
+    }
+
+  })
+</script>

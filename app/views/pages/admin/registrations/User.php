@@ -1,7 +1,5 @@
 <?php
-
 $user = $params["user"];
-
 ?>
 
 <section style="background-color: #eee; margin-top: 100px; width: 95%; margin: 0 auto; border-radius: 12px" class="shadow">
@@ -85,6 +83,7 @@ $user = $params["user"];
                 <p class="mb-4"><span class="text-primary font-italic me-1">Érdkelődés</span>
                 </p>
                 <?php foreach ($user["tasks"] as $task) : ?>
+     
                   <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
                     <div class="col-xs-12"><?= TASK_AREAS["areas"][$task["task"]]["Hu"] ?></div>
                   </div>

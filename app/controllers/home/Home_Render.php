@@ -8,6 +8,24 @@ class HomeRender extends HomeController
 		parent::__construct();
 	}
 
+	public function partners()
+	{
+		session_start();
+		$partners = $this->partnerModel->partners();
+		var_dump($partners);
+		exit;
+		$user =  $this->userModel->getMe();
+		echo $this->renderer->render("Layout.php", [
+			"user" => $user,
+			"content" => $this->renderer->render("/pages/public/Partners.php", [
+				"user" => $user ?? null,
+
+				"partners" => $partners ?? null,
+			]),
+			"user" => $user ?? null,
+		]);
+	}
+
 	public function home()
 	{
 		session_start();
@@ -42,8 +60,10 @@ class HomeRender extends HomeController
 		session_start();
 		$lang = $_COOKIE["lang"] ?? null;
 		$success = $_SESSION["success"] ?? null;
+		$user = $this->userModel->getMe();
 
 		echo $this->renderer->render("Layout.php", [
+			"user" => $user,
 			"content" => $this->renderer->render("/pages/public/Success.php", [
 				"lang" => $lang,
 				"title" => $success["title"] ?? '',

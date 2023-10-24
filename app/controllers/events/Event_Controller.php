@@ -22,6 +22,20 @@ class EventController
 
   /** PROTECTED */
 
+  public function acceptSubscription($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $subId = $vars["id"];
+    $this->eventModel->acceptUserSubscription($subId);
+  }
+
+  public function deleteSubscription($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $subId = $vars["id"];
+    $this->eventModel->deleteUserSubscription($subId);
+  }
+
   // ADD NEW EVENT
   public function newEvent()
   {

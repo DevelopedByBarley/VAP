@@ -274,11 +274,6 @@ define('TASK_AREAS', [
       "Hu" => "Esemény előtti adminisztrációs feladatok (pl: információ gyűjtés, adatbázis tisztítás, szöveg ellenőrzés stb.)",
       "sp" => ""
     ],
-    "8" => [
-      "En" => "I am interested in every task",
-      "Hu" => "Mindegyik feladat érdekel",
-      "sp" => ""
-    ],
   ]
 ]);
 

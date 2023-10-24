@@ -18,11 +18,14 @@ class AdminRender extends AdminController
 
     $admin = $this->adminModel->admin();
     $user = $this->adminModel->user($userId);
+    $tasks = $this->userModel->getTasksByUser($userId);
+
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/User.php", [
         "admin" => $admin ?? null,
-        "user" => $user ?? null
+        "user" => $user ?? null,
+        "tasks" => $tasks ?? null
       ]),
       "admin" => $admin ?? null
     ]);
@@ -31,6 +34,7 @@ class AdminRender extends AdminController
   // RENDER OF REGISTERED USERS
   public function registrations()
   {
+
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
     $admin = $this->adminModel->admin();

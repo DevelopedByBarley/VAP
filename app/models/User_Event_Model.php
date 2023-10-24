@@ -2,6 +2,8 @@
 require_once 'app/helpers/UUID.php';
 require_once 'app/helpers/Alert.php';
 
+// ONLY USER NOT ADMIN!
+
 class UserEventModel
 {
   private $pdo;
@@ -21,6 +23,7 @@ class UserEventModel
     $this->alert = new Alert();
     $this->eventModel = new EventModel();
   }
+
 
 
   // USER REGISTER TO EVENT
@@ -339,6 +342,8 @@ class UserEventModel
       $stmt->execute();
     }
   }
+
+  
 
 
   // INSERT DOCUMENTS WHEN USER REGISTER TO EVENT

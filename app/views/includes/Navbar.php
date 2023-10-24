@@ -101,18 +101,20 @@ $user = $params["user"] ?? null;
                                     </a>
                                 </div>
                             <?php else : ?>
-                                <div class="btn-group dropstart" id="profile-dropdown">
-                                    <button type="button" class="btn dropdown-toggle p-2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/user/dashboard">Profil</a></li>
-                                        <li><a class="dropdown-item" href="/user/settings">Profil szerkesztése</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
-                                        <li><a class="dropdown-item" href="/user/logout">Kijelentkezés</a></li>
-                                    </ul>
+                                <div class="text-center">
+                                    <div class="btn-group dropstart" id="profile-dropdown">
+                                        <button type="button" class="btn dropdown-toggle p-2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/user/dashboard">Profil</a></li>
+                                            <li><a class="dropdown-item" href="/user/settings">Profil szerkesztése</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a class="dropdown-item" href="/user/logout">Kijelentkezés</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                         </div>
                     <?php endif ?>

@@ -1,7 +1,8 @@
 <?php
 require_once 'app/controllers/admin/Admin_Controller.php';
 require_once 'app/controllers/admin/Admin_Render.php';
-$r->addRoute('GET', '/admin/registrations', [AdminRender::class, 'registrations']);
+
+$r->addRoute('GET', '/admin/registrations', [AdminRender::class, 'registrations']); // GET PROFILE REGISTRATIONS 
 $r->addRoute('GET', '/admin/user/{id}', [AdminRender::class, 'registeredUser']);
 
 

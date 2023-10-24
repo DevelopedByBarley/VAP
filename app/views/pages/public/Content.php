@@ -227,7 +227,7 @@ $user = $params["user"];
 					<?php endif; ?>
 				<?php endforeach ?>
 				<div class="text-center">
-					<a href="#" class="btn btn-outline-primary mt-5"><?= CONTENT["partners"]["partner-btn"][$lang] ?? '' ?></a>
+					<a href="/partners" class="btn btn-outline-primary mt-5"><?= CONTENT["partners"]["partner-btn"][$lang] ?? '' ?></a>
 				</div>
 			</div>
 		</div>

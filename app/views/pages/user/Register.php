@@ -2,14 +2,14 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
-
 $prev = $params["prev"];
+$tasks = isset($prev) ? array_map('intval', $prev["tasks"]) : [];
 $userLanguages = $prev["userLanguages"] ?? null;
 
 ?>
 
 <div class="container" style="background-color: white;">
-  <form class="p-lg-3 mb-5" action="/user/register" method="POST" enctype="multipart/form-data">
+  <form id="register-form" class="p-lg-3 mb-5" action="/user/register" method="POST" enctype="multipart/form-data">
     <h2 class="text-center mt-5"><?= REGISTRATION["title"][$lang] ?? 'Önkéntes regisztráció' ?></h2>
     <div class="row mb-4 mt-5 m-1">
 
@@ -237,8 +237,8 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
           <?php foreach (TASK_AREAS["areas"] as $index => $area) : ?>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="tasks" id="task-<?= $index ?>" value="<?= $index ?>" <?= isset($prev) && TASK_AREAS["areas"][$prev["tasks"]]["Hu"] === $area["Hu"] ? 'checked' : '' ?> required>
-              <label class="form-check-label" for="task-1">
+              <input class="form-check-input task-check" type="checkbox" name="tasks[]" id="task-<?= $index ?>" value="<?= $index ?>" <?= in_array($index, $tasks) ? 'checked' : '' ?>>
+              <label class="form-check-label" for="task-<?= $index ?>">
                 <td><?= $area[$lang] ?? 'Név' ?>
               </label>
             </div>
@@ -316,3 +316,27 @@ $userLanguages = $prev["userLanguages"] ?? null;
     </div>
   </form>
 </div>
+
+
+
+<script>
+  const form = document.getElementById('register-form');
+  form.addEventListener('submit', (e) => {
+    var checkboxes = document.querySelectorAll('.task-check');
+    var checked = false;
+
+    checkboxes.forEach(function(checkbox) {
+
+      console.log(checkbox);
+      if (checkbox.checked) {
+        checked = true;
+      }
+    });
+
+    if (!checked) {
+      e.preventDefault(); // Megakadályozza az űrlap elküldését, ha nincs kiválasztott checkbox.
+      alert('Legalább 1 feladatterület legyen kipipálva!');
+    }
+
+  })
+</script>

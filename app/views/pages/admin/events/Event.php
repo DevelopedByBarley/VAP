@@ -66,10 +66,10 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
 
           <div class="card-body">
             <p class="mb-4"><span class="text-primary font-italic me-1">Választható feladatok</span></p>
-            <?php foreach ($tasks as $task) : ?>
+            <?php foreach ($tasks as $task_data) : ?>
               <div class="row">
                 <div class="col-12">
-                  <p class="mb-0"><?= TASK_AREAS["areas"][$task["task"]]["Hu"] ?></p>
+                  <p class="mb-0"><?= TASK_AREAS["areas"][$task_data["task"]]["Hu"] ?></p>
                   <hr>
                 </div>
               </div>
