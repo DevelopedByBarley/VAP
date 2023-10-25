@@ -11,18 +11,19 @@ class AdminRender extends AdminController
 
 
   // RENDER SINGLE REGISTERED USER DATA
-  public function registeredUser($vars)
+  public function profile($vars)
   {
+
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $userId = $vars["id"] ?? null;
 
-    $admin = $this->adminModel->admin();
-    $user = $this->adminModel->user($userId);
-    $tasks = $this->userModel->getTasksByUser($userId);
+    $admin = $this->adminModel->admin(); // GET ADMIN BY SESSION
+    $user = $this->adminModel->user($userId); // GET USER BY USER ID
+    $tasks = $this->userModel->getTasksByUser($userId); // GET TASKS BY USERS ID
 
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/User.php", [
+      "content" => $this->renderer->render("/pages/admin/registrations/User.php", [
         "admin" => $admin ?? null,
         "user" => $user ?? null,
         "tasks" => $tasks ?? null
@@ -31,14 +32,15 @@ class AdminRender extends AdminController
     ]);
   }
 
-  // RENDER OF REGISTERED USERS
+  // RENDER OF REGISTERED PROFILES
+
   public function registrations()
   {
 
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
-    $admin = $this->adminModel->admin();
-    $usersData = $this->adminModel->index();
+    $admin = $this->adminModel->admin(); // GET ADMIN BY SESSION
+    $usersData = $this->adminModel->index(); // GET ALL REGISTERED PROFILES
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/registrations/Registrations.php", [
@@ -46,6 +48,21 @@ class AdminRender extends AdminController
         "users" => $usersData["users"] ?? null,
         "numOfPage" => $usersData["numOfPage"] ?? null,
         "limit" => $usersData["limit"] ?? null
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
+
+  public function userMailPage($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin(); // GET ADMIN BY SESSION
+    $user = $this->adminModel->user($vars["id"]);
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/registrations/MailToUser.php", [
+        "admin" => $admin ?? null,
+        "user" => $user ?? null,
       ]),
       "admin" => $admin ?? null
     ]);

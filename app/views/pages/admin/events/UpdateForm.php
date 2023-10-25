@@ -31,17 +31,17 @@ $event_tasks = $params["event_tasks"];
         <div class="form-outline mb-4">
           <label class="form-label"><b>Esemény kezdő dátuma</b></label>
           <br>
-          <input type="date" name="date" id="start-date" class="mt-1" required value="<?= $event["date"] ?? '' ?>" />
+          <input type="date" name="date" id="start-date" class="mt-1"  min="<?= date('Y-m-d') ?>" required value="<?= $event["date"] ?? '' ?>" />
         </div>
         <div class="form-outline mb-4">
           <label class="form-label"><b>Esemény záró dátuma</b></label>
           <br>
-          <input type="date" name="end_date" id="end-date" class="mt-1" required value="<?= $event["end_date"] ?? '' ?>" />
+          <input type="date" name="end_date" id="end-date" class="mt-1"  min="<?= date('Y-m-d') ?>" required value="<?= $event["end_date"] ?? '' ?>" />
         </div>
         <div class="form-outline mb-4">
           <label class="form-label"><b>Regisztráció lezárásának dátuma</b></label>
           <br>
-          <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1" required value="<?= $event["reg_end_date"] ?? '' ?>" />
+          <input type="date" name="reg_end_date" id="reg-end-date" class="mt-1"  min="<?= date('Y-m-d') ?>" required value="<?= $event["reg_end_date"] ?? '' ?>" />
         </div>
 
         <div class="form-outline mb-4">

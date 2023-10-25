@@ -1,6 +1,7 @@
 <?php
 require_once 'app/controllers/documents/Document_Controller.php';
 require_once 'app/controllers/documents/Document_Render.php';
+
 $r->addRoute('GET', '/admin/documents', [DocumentRender::class, 'index']);
 $r->addRoute('GET', '/admin/documents/new', [DocumentRender::class, 'documentForm']);
 $r->addRoute('GET', '/admin/documents/update/{id}', [DocumentRender::class, 'updateForm']);

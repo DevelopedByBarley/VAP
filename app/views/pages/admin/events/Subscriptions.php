@@ -45,7 +45,7 @@ $subscriptions = $params["subscriptions"];
                   <?= $user["userRefId"] ? '<i class="bi bi-check-circle-fill"></i>' : '<i class="bi bi-x-circle-fill"></i>' ?>
                 </td>
                 <td>
-                  <a href="/admin/event/user/<?= $user["id"] ?>" class="btn btn-outline-primary">Megtekintés</a>
+                  <a href="/admin/event/subscriber/<?= $user["id"] ?>" class="btn btn-outline-primary">Megtekintés</a>
                 </td>
               </tr>
             <?php endforeach ?>

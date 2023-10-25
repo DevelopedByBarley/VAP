@@ -35,7 +35,7 @@ $langs = LANGS;
           <small><i>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</i></small>
         </div>
         <div class="col-xs-12 text-start">
-          <form action="/event/register/<?= $event["eventId"] ?>" method="POST">
+          <form action="/event/subscribe/<?= $event["eventId"] ?>" method="POST">
             <div class="mb-4">
               <div class="mb-3">
                 <i><b>Választható időpontok</b></i>
@@ -106,7 +106,7 @@ $langs = LANGS;
 
 
 
-      <form class="p-3" style="background-color: white;;" action="/event/register/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+      <form class="p-3" style="background-color: white;;" action="/event/subscribe/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
         <h3 class="text-center mb-5 mt-5">Jelentkezés kitöltése</h3>
 
         <div class="row mb-4 mt-5">

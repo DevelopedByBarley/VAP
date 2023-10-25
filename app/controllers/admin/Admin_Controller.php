@@ -34,24 +34,30 @@ class AdminController
   public function banUser($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    
+
     $this->adminModel->ban($vars["id"]);
   }
-  
-    // LOGOUT ADMIN
-    public function logoutAdmin()
-    {
-      LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-      $this->authService->logoutAdmin();
-    }
-  
+
+  public function sendMailToUser($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->adminModel->sendMailToUser($_POST, $vars["id"]);
+  }
+
+  // LOGOUT ADMIN
+  public function logoutAdmin()
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->authService->logoutAdmin();
+  }
+
+
   // PUBLIC
-  
+
   // LOGIN ADMIN
-  
+
   public function loginAdmin()
   {
     $this->authService->loginAdmin($_POST);
   }
-
 }

@@ -80,7 +80,7 @@ class EventRender extends EventController
   }
 
   // RENDER SINGLE SUBSCRIBER FOR ADMIN
-  public function registeredUser($vars)
+  public function subscriber($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
@@ -91,7 +91,7 @@ class EventRender extends EventController
     $tasks = $this->eventModel->getEventTasks($eventId);
 
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/User.php", [
+      "content" => $this->renderer->render("/pages/admin/events/Subscriber.php", [
         "admin" => $admin ?? null,
         "tasks" => $tasks ?? null,
         "user" => $user ?? null
@@ -161,6 +161,24 @@ class EventRender extends EventController
 
 
 
+  public function subMailForm($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $subId = $vars["id"];
+    $sub = $this->eventModel->getRegisteredUser($subId);
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/events/MailToSub.php", [
+        "admin" => $admin ?? null,
+        "sub" => $sub ?? null,
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
+
+
+
 
   /** PUBLIC */
 
@@ -191,7 +209,7 @@ class EventRender extends EventController
     $event = $this->eventModel->getEventById($eventId);
     $user = $this->userModel->getMe();
     $isRegistered = null;
-    if($user) {
+    if ($user) {
       $isRegistered = $this->eventModel->checkIsUserRegisteredToEvent($eventId, $user["id"]);
     }
 
@@ -220,7 +238,7 @@ class EventRender extends EventController
 
 
   // RENDER REGISTER TO EVENT FORM FOR USERS
-  public function registerToEventForm($vars)
+  public function subscribeForm($vars)
   {
     session_start();
     $id = $vars["id"];
@@ -241,7 +259,7 @@ class EventRender extends EventController
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user,
-      "content" => $this->renderer->render("/pages/user/events/Register.php", [
+      "content" => $this->renderer->render("/pages/user/events/Subscribe.php", [
         "user" => $user ?? null,
         "event" => $event ?? null,
         "dates" => $dates ?? null,

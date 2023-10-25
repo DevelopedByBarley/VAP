@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 require_once 'app/helpers/Alert.php';
 
 
@@ -31,7 +31,8 @@ class EventModel
     $stmt->execute();
   }
 
-  private function setEventsPublic() {
+  private function setEventsPublic()
+  {
     $today = date("Y-m-d");
 
 
@@ -353,9 +354,9 @@ class EventModel
   {
     foreach ($subscriptions as $subscription) {
       if ($subscription["lang"] === "Hu") {
-        $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Hello");
+        $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Üzenet");
       } else if ($subscription["lang"] === "En") {
-        $this->mailer->send($subscription["email"], $body["mail-body-En"], "Hello");
+        $this->mailer->send($subscription["email"], $body["mail-body-En"], "Message");
       }
     }
   }
@@ -418,6 +419,17 @@ class EventModel
       $body = str_replace('{{id}}', $eventId, $body);
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Új esemény" : "New event!");
     }
+  }
+
+
+  public function sendMailToSub($body, $subId)
+  {
+
+    $sub = self::getRegisteredUser($subId);
+    $this->mailer->send($sub["email"], $body["mail-body"], $sub["lang"] === "Hu" ? "Üzenet" : "Message");
+
+    $this->alert->set('Sikeres email kiküldés!', 'success', "/admin/event/subscriber/$subId");
+
   }
 
 
@@ -521,29 +533,21 @@ class EventModel
   }
 
 
-  public function acceptUserSubscription($subId) {
+  public function acceptUserSubscription($subId)
+  {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
     $stmt->bindParam(":subId", $subId);
     $stmt->execute();
 
-    $sub = self::getRegisteredUser($subId);
-
-    $this->mailer->send($sub["email"], "Regisztráció elfogadva!", "Visszaigazolás a regisztrációról!");
-    
-    
-    $this->alert->set('Eseményre való regisztráció elfogadva!', "success", "/admin/event/user/$subId");
+    $this->alert->set('Eseményre való regisztráció elfogadva!', "success", "/admin/event/subscriber/$subId");
   }
-  
-  public function deleteUserSubscription($subId) {
+
+  public function deleteUserSubscription($subId)
+  {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '0' WHERE `registrations`.`id` = :subId;");
     $stmt->bindParam(":subId", $subId);
     $stmt->execute();
-    
-    
-    $sub = self::getRegisteredUser($subId);
-    $this->mailer->send($sub["email"], "Regisztráció visszavonva!", "Visszaigazolás a regisztrációról!");
 
-
-    $this->alert->set('Elfogadott regisztráció visszavonva!', "success", "/admin/event/user/$subId");
+    $this->alert->set('Elfogadott regisztráció visszavonva!', "success", "/admin/event/subscriber/$subId");
   }
 }

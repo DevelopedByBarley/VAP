@@ -13,13 +13,40 @@ let eventDateState = prevContent !== undefined ? JSON.parse(prevContent) : [
 
 let startDate = document.getElementById('start-date');
 let endDate = document.getElementById('end-date');
+let regEndDate = document.getElementById('reg-end-date');
 
 
 
 let dateOfEvent = {
   startDate: startDate.value !== '' ? startDate.value : '',
-  endDate: endDate.value !== '' ? endDate.value : ''
+  endDate: endDate.value !== '' ? endDate.value : '',
+  regEndDate: regEndDate.value !== '' ? regEndDate.value : '',
 }
+
+regEndDate.addEventListener('change', (event) => {
+  dateOfEvent.regEndDate = event.target.value;
+
+  if(dateOfEvent.startDate === '') {
+    alert('A regisztráció lezárása előtt válassza ki a kezdő dátumot!');
+    regEndDate.value = '';
+    dateOfEvent.regEndDate = event.target.value;
+    return;
+  }
+
+  if (dateOfEvent.regEndDate >= dateOfEvent.startDate) {
+    alert('A regisztráció lezárásának dátuma nem lehet nagyobb vagy egyenlő mint a kezdő dátum!');
+    regEndDate.value = '';
+    dateOfEvent.regEndDate = event.target.value;
+    return;
+  }
+
+  let reset = eventDateState.slice(0, 1);
+  reset[0].date = ''
+  eventDateState = reset;
+
+  renderDatesOfEvent();
+})
+
 
 
 startDate.addEventListener('change', (event) => {
@@ -31,6 +58,7 @@ startDate.addEventListener('change', (event) => {
     dateOfEvent.startDate = event.target.value;
     return;
   }
+
 
   let reset = eventDateState.slice(0, 1);
   reset[0].date = ''

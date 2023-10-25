@@ -7,6 +7,7 @@ class DocumentModel extends AdminModel
   }
 
 
+  // GET ALL DOCUMENTS OF WEBSITE
   public function index()
   {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM documents");
@@ -30,6 +31,7 @@ class DocumentModel extends AdminModel
     ];
   }
 
+  // ADD NEW DOCUMENT TO WEBSITE
   public function new($files, $body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -58,6 +60,8 @@ class DocumentModel extends AdminModel
     }
   }
 
+
+  // DELETE DOCUMENT FROM WEBSITE
   public function delete($id)
   {
     $fileNameForDelete = self::getDocumentById($id)["fileName"];
@@ -71,6 +75,7 @@ class DocumentModel extends AdminModel
   }
 
 
+  // UPDATE DOCUMENT OF WEBSITE
   public function update($id, $files, $body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -112,8 +117,11 @@ class DocumentModel extends AdminModel
 
 
 
+
+  // GET DOCUMENT BY ID
   public function getDocumentById($id)
   {
+   
     $stmt = $this->pdo->prepare("SELECT * FROM `documents` WHERE `id` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();

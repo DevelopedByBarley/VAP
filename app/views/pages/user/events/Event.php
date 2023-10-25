@@ -109,8 +109,8 @@ $isRegistered = $params["isRegistered"] ?? null;
       <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
         <span class="badge p-3 bg-danger">Regisztráció lezárult</span>
       <?php else : ?>
-        <?= $isRegistered ? '' : "<a href=\"/event/register/{$event['eventId']}\" class=\"btn secondary-btn\">Regisztráció</a>" ?>
-        <button type="button" class="btn primary-btn ms-1">Üzenet küldése</button>
+        <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn secondary-btn\">Regisztráció</a>" ?>
+        <a href="mailto:hello@artnesz.hu" class="btn primary-btn ms-1">Üzenet küldése</a>
       <?php endif ?>
     </div>
   </div>
