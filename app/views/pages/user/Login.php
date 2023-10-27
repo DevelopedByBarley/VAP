@@ -16,8 +16,8 @@ $langs = LANGS;
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center">
-                  <img src="/public/assets/icons/logo.png" style="width: 185px;" alt="logo" class="my-5">
-                  <h4 class="mt-1 my-5 pb-1">Welcome to the VAP Team</h4>
+                  <img src="/public/assets/icons/logo.png" style="width: 185px;" alt="logo" class="my-3">
+                  <h4 class="mt-2 pb-1 text-uppercase">Welcome to the VAP Team</h4>
                 </div>
 
                 <form action="/user/login" method="POST" id="login" class="w-100">
@@ -33,12 +33,12 @@ $langs = LANGS;
                     <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
                   </div>
 
-                  <div class="text-center pt-1 mb-5 pb-1">
+                  <div class="text-center pt-1 mb-2 pb-1">
                     <button type="submit" class="btn secondary-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
                     <p class="mt-3">Forgot <a href="/user/forgot-pw">Password?</a></p>
                   </div>
 
-                  <div class="d-flex align-items-center justify-content-center pb-4">
+                  <div class="d-flex align-items-center justify-content-center">
                     <p class="mb-0 me-2">Don't have an account?</p>
                     <a href="/user/registration" class="btn btn-outline-primary">Create new</a>
                   </div>
@@ -49,7 +49,7 @@ $langs = LANGS;
             </div>
             <div class="col-lg-6 bg-dark d-none d-lg-flex align-items-center">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
+                <h4 class="mb-4 text-uppercase">We are more than just a company</h4>
                 <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                   exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

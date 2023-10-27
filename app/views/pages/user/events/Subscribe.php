@@ -29,7 +29,7 @@ $langs = LANGS;
 
       <div class="row p-sm-5">
         <div class="col-12 text-center mt-3">
-          <h1>Regisztráció kitöltése</h1>
+          <h1 class="text-uppercase mt-5">Regisztráció kitöltése</h1>
         </div>
         <div class="text-center mb-5">
           <small><i>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</i></small>
@@ -107,7 +107,7 @@ $langs = LANGS;
 
 
       <form class="p-3" style="background-color: white;;" action="/event/subscribe/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
-        <h3 class="text-center mb-5 mt-5">Jelentkezés kitöltése</h3>
+        <h3 class="text-center mb-5 mt-5 text-uppercase">Regisztráció kitöltése</h3>
 
         <div class="row mb-4 mt-5">
 

@@ -1,6 +1,5 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
 $user = $params["user"] ?? null;
 ?>
 
@@ -94,10 +93,10 @@ $user = $params["user"] ?? null;
                             <?php if (!isset($_SESSION["userId"])) : ?>
                                 <div class="navbar-text text-center mt-3 d-flex align-items-center justify-content-center">
                                     <a href="/user/registration" class="btn text-light m-1" id="user-registration-button">
-                                        <?= $langs["components"]["navbar"]["registrationBtn"][$lang] ?? 'Regisztráció' ?>
+                                        <?= BUTTONS["registration"][$lang] ?? 'Regisztráció' ?>
                                     </a>
                                     <a href="/login" class="btn text-light m-1" id="user-login-button">
-                                        <?= $langs["components"]["navbar"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?>
+                                        <?= BUTTONS["login"][$lang] ?? 'Bejelentkezés' ?>
                                     </a>
                                 </div>
                             <?php else : ?>
@@ -107,12 +106,12 @@ $user = $params["user"] ?? null;
                                             <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/user/dashboard">Profil</a></li>
-                                            <li><a class="dropdown-item" href="/user/settings">Profil szerkesztése</a></li>
+                                            <li><a class="dropdown-item" href="/user/dashboard"><?= NAVBAR["profile"]["profile"][$lang] ?? 'Pofil' ?></a></li>
+                                            <li><a class="dropdown-item" href="/user/settings"><?= NAVBAR["profile"]["profile_settings"][$lang] ?? 'Profil szerkesztése' ?></a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
-                                            <li><a class="dropdown-item" href="/user/logout">Kijelentkezés</a></li>
+                                            <li><a class="dropdown-item" href="/user/logout"><?= BUTTONS["logout"][$lang] ?? 'Kijelentkezés' ?></a></li>
                                         </ul>
                                     </div>
                                 </div>

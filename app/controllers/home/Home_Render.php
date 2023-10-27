@@ -12,8 +12,7 @@ class HomeRender extends HomeController
 	{
 		session_start();
 		$partners = $this->partnerModel->partners();
-		var_dump($partners);
-		exit;
+		
 		$user =  $this->userModel->getMe();
 		echo $this->renderer->render("Layout.php", [
 			"user" => $user,

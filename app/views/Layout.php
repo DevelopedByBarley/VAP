@@ -35,6 +35,7 @@
     <script src="/public/js/Event.Dates.js"></script>
     <script src="/public/js/AOS.js"></script>
     <script src="/public/js/MMParallax.js"></script>
+    <script src="/public/js/GetCookie.js"></script>
 </body>
 
 </html>

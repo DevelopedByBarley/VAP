@@ -9,7 +9,7 @@ $langs = LANGS;
     <div class="row w-100 d-flex align-items-center justify-content-center">
 
       <div class="col-12 col-lg-7 p-5 d-none d-lg-block">
-        <div id="forgot-pw-image" style="background: url('/public/assets/images/forgot.jpg') center center/cover; min-height: 70vh;"></div>
+        <div id="forgot-pw-image" style="background: url('/public/assets/images/forgot.jpg') center center/cover; min-height: 600px;"></div>
       </div>
 
       <div class="col-xs-12 col-lg-5 rounded">

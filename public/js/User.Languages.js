@@ -10,10 +10,10 @@ let prevUserLangData;
 
 
 
-if(userLanguages) {
-   prevUserLangData = JSON.parse(userLanguages.dataset.langs);
+if (userLanguages) {
+  prevUserLangData = JSON.parse(userLanguages.dataset.langs);
   console.log(prevUserLangData);
-  }
+}
 
 if (prevUserLangData && prevUserLangData.length !== 0) {
   localStorage.setItem('langs', JSON.stringify(prevUserLangData));
@@ -28,6 +28,13 @@ let langState = localStorage.getItem('langs') !== null ? JSON.parse(localStorage
 ];
 
 
+let basicLangsOfUserLanguages = {
+  selectLevel: {
+    Hu: "Válassza ki a nyelvtudás szintjét!",
+    En: "Choose your language level!",
+    Sp: ""
+  },
+}
 
 
 let langs = [
@@ -99,12 +106,6 @@ langModalBtn.addEventListener('click', () => {
   myModal.show();
 })
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
 function renderLangLevels(selectedIndex) {
   let temp = ``;
 
@@ -131,7 +132,7 @@ function renderLangs() {
     </div>
     <div class="col-sm-4 mt-2">
       <select class="form-select lang-levels" aria-label="Default select example" required name="levels[]">
-        <option value="">Válassza ki a nyelvtudás szintjét!</option>
+        <option value="">${basicLangsOfUserLanguages.selectLevel[getCookie("lang")]}</option>
         ${renderLangLevels(lang.level)}
       </select>
     </div>

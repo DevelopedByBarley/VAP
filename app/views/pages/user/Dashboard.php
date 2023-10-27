@@ -5,7 +5,7 @@ $user = $params["user"];
 $subscriptions = $params["subscriptions"] ?? null;
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $langs = LANGS;
-
+$event = $params["event"] ?? null;
 ?>
 
 <div class="container py-5">
@@ -75,7 +75,7 @@ $langs = LANGS;
           </div>
         </div>
         <div class="d-flex align-items-center justify-content-center">
-          <div class="btn-group">
+          <div class="btn-group mb-5">
             <a href="/user/logout" class="btn btn-outline-danger m-1">Kijelentkezés</a>
             <a href="/user/settings" class="btn btn-outline-primary m-1">Profil szerkesztése</a>
           </div>
@@ -89,15 +89,16 @@ $langs = LANGS;
       <div class="card mb-4">
         <div class="card-body d-flex align-items-center justify-content-center flex-column" style="overflow-y: scroll; min-height: 350px">
           <div id="subscriptions" class="p-2 d-flex align-items-center justify-content-center flex-column">
-            <h2 class="text-center mb-5"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
+            <h2 class="text-center"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
             <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
-              <h5 class="text-center"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
-              <div class="text-center">
-                <a href="/events" class="m-1 btn btn-success" id="event-btn">
-                  <?= PROFILE["subscriptions"]["check_subscription_btn"][$lang] ?? 'Név' ?>
-                </a>
-              </div>
+              <h5 class="text-center mb-3"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
+              <!--EVENT ROW -->
+              <?php if ($event) : ?>
+                <div class="btn-group text-center">
+                  <a href= "/event/<?= $event["eventId"] ?>" class="btn primary-btn">Kötvetkező eseményünk</a>
+                </div>
+              <?php endif ?>
             <?php else : ?>
               <div class="row d-flex align-items-center justify-content-center">
                 <?php foreach ($subscriptions as $subscription) : ?>

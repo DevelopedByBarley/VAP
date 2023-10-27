@@ -50,12 +50,14 @@ class UserRender extends UserController
     $documents = $this->userModel->getDocumentsByUser($user["id"]);
     $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
     $subscriptions = $this->userModel->getRegistrationsByUser($user["id"]);
+    $event = $this->eventModel->getLatestEvent();
 
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
         "user" => $user ?? null,
+        "event" => $event,
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
         "subscriptions" => $subscriptions ?? null,
@@ -86,6 +88,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/Documents.php", [
         "user" => $user ?? null,
         "documents" => $documents ?? null,
@@ -102,6 +105,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/UpdateDocumentForm.php", [
         "user" => $user ?? null,
         "document" => $document ?? null,
@@ -118,6 +122,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "user" => $user,
       "content" => $this->renderer->render("/pages/user/DocumentForm.php", [
         "user" => $user ?? null,
         "document" => $document ?? null,

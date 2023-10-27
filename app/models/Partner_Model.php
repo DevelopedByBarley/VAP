@@ -7,6 +7,7 @@ class PartnerModel extends AdminModel
     parent::__construct();
   }
 
+  // INSERT NEW DOCUMENT FOR ADMIN
   public function insert($files, $body)
   {
     $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null, [
@@ -38,6 +39,8 @@ class PartnerModel extends AdminModel
     return $partners;
   }
 
+
+  // GET ALL OF PARTNERS FOR ADMIN LIST
   public function getPartners()
   {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM partners");
@@ -64,6 +67,8 @@ class PartnerModel extends AdminModel
     ];
   }
 
+
+  // DELETE PARTNER FOR ADMIN
   public function delete($id)
   {
     $fileNameForDelete = self::getPartnerById($id)["fileName"];
@@ -116,6 +121,8 @@ class PartnerModel extends AdminModel
     header("Location:  /admin/partners");
   }
 
+
+  // GET PARTNER FOR ADMIN
   public function getPartnerById($id)
   {
 

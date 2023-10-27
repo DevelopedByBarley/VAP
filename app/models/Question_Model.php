@@ -6,6 +6,7 @@ class QuestionModel extends AdminModel
     parent::__construct();
   }
 
+  // GET QUESTIONS FOR ADMIN AND HOME
   public function questions()
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `questions`");
@@ -15,6 +16,7 @@ class QuestionModel extends AdminModel
     return $questions;
   }
 
+  // GET SINGLE QUESTION FOR ADMIN
   public function question($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `questions` WHERE `q_id` = :id");
@@ -25,6 +27,7 @@ class QuestionModel extends AdminModel
     return $question;
   }
 
+  // ADD NEW QUESTION FOR ADMIN
   public function new($body)
   {
     $q_id = uniqid();
@@ -49,6 +52,7 @@ class QuestionModel extends AdminModel
     }
   }
 
+  // DELETE QUESTION FOR ADMIN
   public function delete($id)
   {
     $stmt = $this->pdo->prepare("DELETE  FROM `questions` WHERE `q_id` = :id");
@@ -57,6 +61,9 @@ class QuestionModel extends AdminModel
 
     header("Location: /admin/questions");
   }
+
+
+  // UPDATE QUESTION FOR ADMIN
 
   public function update($id, $body)
   {

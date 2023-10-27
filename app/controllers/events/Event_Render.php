@@ -180,25 +180,6 @@ class EventRender extends EventController
 
 
 
-  /** PUBLIC */
-
-  // RENDER EVENTS FOR USERS
-  public function events()
-  {
-    session_start();
-
-    $events = $this->eventModel->index();
-
-    $user = $this->userModel->getMe();
-
-    echo $this->renderer->render("Layout.php", [
-      "user" => $user,
-      "content" => $this->renderer->render("/pages/user/events/Events.php", [
-        "user" => $user ?? null,
-        "events" => $events ?? null
-      ]),
-    ]);
-  }
 
   // RENDER EVENT FOR USER
   public function event($vars)

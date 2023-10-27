@@ -7,6 +7,7 @@ class VolunteerModel extends AdminModel
     parent::__construct();
   }
 
+  // GET VOLUNTEERS FOR ADMIN AND HOME
   public function getVolunteers()
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `volunteers` ORDER BY `createdAt` DESC LIMIT 3");
@@ -17,7 +18,7 @@ class VolunteerModel extends AdminModel
     return $volunteers;
   }
 
-
+  // INSERT VOLUNTEER FOR ADMIN
   public function addVolunteer($files, $body)
   {
     $fileName = $this->fileSaver->saver($files["v_image"], "/uploads/images/volunteers", null, [
@@ -40,6 +41,7 @@ class VolunteerModel extends AdminModel
     header("Location: /admin/volunteers");
   }
 
+  // DELETE VOLUNTEER FOR ADMIN
   public  function deleteVolunteer($id)
   {
     $fileNameForDelete = self::getVolunteerByCommonId($id)["fileName"];
@@ -52,6 +54,7 @@ class VolunteerModel extends AdminModel
     header("Location:  /admin/volunteers");
   }
 
+  // GET SINGLE VOLUNTEER FOR ADMIN
   public function getVolunteerByCommonId($id)
   {
 
@@ -64,7 +67,7 @@ class VolunteerModel extends AdminModel
   }
 
 
-
+  // UPDATE VOLUNTEER FOR ADMIN
   public function update($files, $id, $body)
   {
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -105,6 +108,9 @@ class VolunteerModel extends AdminModel
     header("Location:  /admin/volunteers");
   }
 
+
+
+  // GET PREV IMAGE FOR VOLUNTEER 
   private  function getPrevImageByVolunteer($id)
   {
 

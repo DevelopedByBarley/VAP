@@ -97,7 +97,7 @@
 
 #recommendation-bg {
   background: url("/public/assets/images/2.jpg") center center/cover;
-  min-height: 50vh;
+  min-height: 500px;
 }
 
 
@@ -116,7 +116,7 @@
 
 #advantages-bg {
   background: url("/public/assets/images/4.jpg") center center/cover;
-  min-height: 50vh;
+  min-height: 500px;
 }
 
 

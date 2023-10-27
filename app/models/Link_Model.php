@@ -16,6 +16,7 @@ class LinkModel extends AdminModel
   }
 
 
+  // GET ALL OF LINKS FOR ADMIN AND HOME
   public function links()
   {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM links");
@@ -39,6 +40,7 @@ class LinkModel extends AdminModel
     ];
   }
 
+  // INSERT LINKS FOR ADMIN
   public function insert($body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -56,6 +58,7 @@ class LinkModel extends AdminModel
     header("Location: /admin/links");
   }
 
+  // DELETE LINKS FOR ADMIN
   public function delete($id)
   {
 
@@ -67,7 +70,7 @@ class LinkModel extends AdminModel
   }
 
 
-
+  // UPDATE LINKS FRO ADMIN
   public function update($id, $body)
   {
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -90,7 +93,7 @@ class LinkModel extends AdminModel
     header("Location:  /admin/links");
   }
 
-
+  // GET LINK BY ID FOR ADMIN
   public function getLinkById($id)
   {
 

@@ -19,20 +19,6 @@ class UserModel
     $this->alert = new Alert();
   }
 
-
-  // GET ALL EVENT DATA FOR SUBSCRIBER
-
-  public function getRegistrationsByUser($userId)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
-
-    $stmt->bindParam(":id", $userId);
-    $stmt->execute();
-    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $registrations;
-  }
-
   // GET USER BY SESSION
   public function getMe()
   {
@@ -163,6 +149,7 @@ class UserModel
     }
   }
 
+
   // UPDATE USER FROM USER SETTINGS
   public function update($body)
   {
@@ -259,6 +246,7 @@ class UserModel
     }
   }
 
+  // DELETE ALL LANGUAGES BY USER
   public function deleteUserLanguages($userId)
   {
 
@@ -267,50 +255,6 @@ class UserModel
     $stmt->execute();
   }
 
-  public function deleteUserDocuments($documents)
-  {
-
-    foreach ($documents as $document) {
-      $documentName = $document["name"];
-      unlink("./public/assets/uploads/documents/users/$documentName");
-    }
-  }
-
-  // CHECK USER EMAIL EXIST INTO THE DB 
-  private function checkIsUserExist($email)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
-
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && !empty($user)) {
-      return true;
-    }
-
-    return false;
-  }
-
-
-  // SET PREV CONTENT BEFORE REDIRECT
-  private function setPrevContent()
-  {
-    $langs = $_POST["langs"];
-    $levels = $_POST["levels"];
-    $userLanguages = [];
-
-    // POST langs átalakítása a megfelelő formátumra!
-    for ($i = 0; $i < count($langs); $i++) {
-      $userLanguages[] = [
-        "lang" => $langs[$i],
-        "level" => $levels[$i]
-      ];
-    }
-
-    $_POST["userLanguages"] = $userLanguages;
-    $_SESSION["prevRegisterContent"] = $_POST;
-  }
 
 
 
@@ -328,9 +272,12 @@ class UserModel
 
 
 
-  // DOCUMENTS
 
-  // DELETE DOCUMENT FROM USER SETTINGS
+
+
+  // DOCUMENTS -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*>
+
+  // DELETE SINGLE DOCUMENT FROM USER SETTINGS
 
   public function deleteDocument($id)
   {
@@ -346,6 +293,16 @@ class UserModel
 
     if ($isSuccess) {
       header("Location: /user/documents");
+    }
+  }
+
+  // DELETE ALL DOCUMENTS BY USER
+  public function deleteUserDocuments($documents)
+  {
+
+    foreach ($documents as $document) {
+      $documentName = $document["name"];
+      unlink("./public/assets/uploads/documents/users/$documentName");
     }
   }
 
@@ -470,9 +427,10 @@ class UserModel
 
 
 
- // TASKS
+  // TASKS
 
-  private function updateTasks($id, $tasks) {
+  private function updateTasks($id, $tasks)
+  {
     $stmt = $this->pdo->prepare("DELETE FROM `user_tasks` where `userRefId` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -480,8 +438,9 @@ class UserModel
     self::insertTasks($id, $tasks);
   }
 
-  private function insertTasks($id, $tasks) {
-    foreach($tasks as $task) {
+  private function insertTasks($id, $tasks)
+  {
+    foreach ($tasks as $task) {
       $stmt = $this->pdo->prepare("INSERT INTO `user_tasks` VALUES (NULL, :task, :userRefId)");
       $stmt->bindParam(':task', $task);
       $stmt->bindParam(':userRefId', $id);
@@ -489,7 +448,8 @@ class UserModel
     }
   }
 
-  public function getTasksByUser($id) {
+  public function getTasksByUser($id)
+  {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_tasks` WHERE `userRefId` = :id");
 
     $stmt->bindParam(":id", $id);
@@ -577,5 +537,63 @@ class UserModel
     $stmt->execute();
 
     $this->alert->set("Jelszó megváltoztatása sikeres!", "success", "/user/dashboard");
+  }
+
+
+
+
+
+  /**SUBSCRIBER??????? --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+  // GET ALL EVENT DATA BY SUBSCRIBER
+
+  public function getRegistrationsByUser($userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
+
+    $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $registrations;
+  }
+
+
+  /**PRIVATES ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+  // CHECK USER EMAIL EXIST INTO THE DB 
+  private function checkIsUserExist($email)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && !empty($user)) {
+      return true;
+    }
+
+    return false;
+  }
+
+
+  // SET PREV CONTENT BEFORE REDIRECT
+  private function setPrevContent()
+  {
+    $langs = $_POST["langs"];
+    $levels = $_POST["levels"];
+    $userLanguages = [];
+
+    // POST langs átalakítása a megfelelő formátumra!
+    for ($i = 0; $i < count($langs); $i++) {
+      $userLanguages[] = [
+        "lang" => $langs[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+    $_POST["userLanguages"] = $userLanguages;
+    $_SESSION["prevRegisterContent"] = $_POST;
   }
 }

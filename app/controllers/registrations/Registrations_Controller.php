@@ -1,10 +1,12 @@
+
 <?php
 require_once 'app/services/AuthService.php';
 require_once 'app/helpers/LoginChecker.php';
 require_once 'app/helpers/FileSaver.php';
 require_once 'app/models/User_Model.php';
 
-class AdminController
+
+class RegistrationsController
 {
   protected $renderer;
   protected $authService;
@@ -20,22 +22,20 @@ class AdminController
     $this->userModel = new UserModel();
   }
 
-
-
-  // LOGOUT ADMIN
-  public function logoutAdmin()
+  // BAN USER /// MEG KELL CSINÁLNI MINDEN USER ADAT TÖRLÉSÉT!
+  public function banUser($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $this->authService->logoutAdmin();
+
+    $this->adminModel->ban($vars["id"]);
   }
 
 
-  // PUBLIC
-
-  // LOGIN ADMIN
-
-  public function loginAdmin()
+  public function sendMailToUser($vars)
   {
-    $this->authService->loginAdmin($_POST);
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->adminModel->sendMailToUser($_POST, $vars["id"]);
   }
+ 
 }
+?>
