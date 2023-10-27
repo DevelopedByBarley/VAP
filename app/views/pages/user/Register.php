@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="/public/css/register.css?v=<?php echo time() ?>">
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
-$prev = $params["prev"];
+  $prev = $params["prev"];
 $tasks = isset($prev) ? array_map('intval', $prev["tasks"]) : [];
 $userLanguages = $prev["userLanguages"] ?? null;
 

@@ -6,8 +6,6 @@ $dates = $params["dates"];
 $tasks = $params["tasks"];
 $user = $params["user"];
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-
-$langs = LANGS;
 ?>
 
 <div class="container-fluid">

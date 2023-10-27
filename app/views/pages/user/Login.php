@@ -3,7 +3,6 @@
 
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
 ?>
 
 <section class="vh-100">
@@ -17,30 +16,30 @@ $langs = LANGS;
 
                 <div class="text-center">
                   <img src="/public/assets/icons/logo.png" style="width: 185px;" alt="logo" class="my-3">
-                  <h4 class="mt-2 pb-1 text-uppercase">Welcome to the VAP Team</h4>
+                  <h4 class="mt-2 pb-1 text-uppercase"><?= LOGIN["welcome"][$lang] ?? 'HIBA' ?></h4>
                 </div>
 
                 <form action="/user/login" method="POST" id="login" class="w-100">
-                  <p>Please login to your account</p>
+                  <p><?= LOGIN["please"][$lang] ?? 'HIBA' ?></p>
 
                   <div class="form-outline mb-4">
-                    <label for="email" class="form-label"><?= $langs["loginForm"]["email"][$lang] ?? 'Email cim' ?></label>
+                    <label for="email" class="form-label"><?= LOGIN["email"][$lang] ?? 'Email cim' ?></label>
                     <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= $langs["loginForm"]["email"][$lang] ?? 'Email cim' ?>">
                   </div>
 
                   <div class="form-outline mb-4">
-                    <label for="password" class="form-label"><?= $langs["loginForm"]["password"][$lang] ?? 'Jelszó' ?></label>
+                    <label for="password" class="form-label"><?= LOGIN["password"][$lang] ?? 'Jelszó' ?></label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
                   </div>
 
                   <div class="text-center pt-1 mb-2 pb-1">
-                    <button type="submit" class="btn secondary-btn"><?= $langs["loginForm"]["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
-                    <p class="mt-3">Forgot <a href="/user/forgot-pw">Password?</a></p>
+                    <button type="submit" class="btn secondary-btn"><?= LOGIN["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
+                    <p class="mt-3"><?= LOGIN["forgot"][$lang] ?? 'HIBA' ?></p>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center">
-                    <p class="mb-0 me-2">Don't have an account?</p>
-                    <a href="/user/registration" class="btn btn-outline-primary">Create new</a>
+                    <p class="mb-0 me-2"><?= LOGIN["have"][$lang] ?? 'HIBA' ?></p>
+                    <a href="/user/registration" class="btn btn-outline-primary"><?= LOGIN["create-btn"][$lang] ?? 'HIBA' ?></a>
                   </div>
 
                 </form>
@@ -49,10 +48,10 @@ $langs = LANGS;
             </div>
             <div class="col-lg-6 bg-dark d-none d-lg-flex align-items-center">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4 text-uppercase">We are more than just a company</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h4 class="mb-4 text-uppercase"><?= LOGIN["description_title"][$lang] ?? 'HIBA' ?></h4>
+                <p class="small mb-0">
+                <?= LOGIN["description_content"][$lang] ?? 'HIBA' ?>
+                </p>
               </div>
             </div>
           </div>

@@ -4,7 +4,6 @@
 $user = $params["user"];
 $subscriptions = $params["subscriptions"] ?? null;
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
 $event = $params["event"] ?? null;
 ?>
 
@@ -22,13 +21,13 @@ $event = $params["event"] ?? null;
     <div class="col-12">
       <div class="p-lg-4 text-black">
         <div class="mb-5">
-          <p class="lead fw-normal mb-1 my-4">About</p>
+          <p class="lead fw-normal mb-1 my-4"><?= DASHBOARD["about"]["title"][$lang] ?? 'HIBA' ?></p>
           <div class="p-4" style="background-color: #f8f9fa;">
             <div class="card mb-4">
               <div class="card-body">
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Full Name</p>
+                    <p class="mb-0"><?= DASHBOARD["about"]["name"][$lang] ?? 'HIBA' ?></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><?= $user["name"] ?></p>
@@ -37,7 +36,7 @@ $event = $params["event"] ?? null;
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Email</p>
+                    <p class="mb-0"><?= DASHBOARD["about"]["email"][$lang] ?? 'HIBA' ?></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><?= $user["email"] ?></p>
@@ -46,7 +45,7 @@ $event = $params["event"] ?? null;
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Phone</p>
+                    <p class="mb-0"><?= DASHBOARD["about"]["phone"][$lang] ?? 'HIBA' ?></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><?= $user["mobile"] ?></p>
@@ -55,7 +54,7 @@ $event = $params["event"] ?? null;
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Address</p>
+                    <p class="mb-0"><?= DASHBOARD["about"]["address"][$lang] ?? 'HIBA' ?></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><?= $user["address"] ?></p>
@@ -64,7 +63,7 @@ $event = $params["event"] ?? null;
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Profil létrehozva</p>
+                    <p class="mb-0"><?= DASHBOARD["about"]["createdAt"][$lang] ?? 'HIBA' ?></p>
                   </div>
                   <div class="col-sm-9">
                     <p class="text-muted mb-0"><?= date("Y-m-d", $user["createdAt"]) ?></p>
@@ -76,8 +75,8 @@ $event = $params["event"] ?? null;
         </div>
         <div class="d-flex align-items-center justify-content-center">
           <div class="btn-group mb-5">
-            <a href="/user/logout" class="btn btn-outline-danger m-1">Kijelentkezés</a>
-            <a href="/user/settings" class="btn btn-outline-primary m-1">Profil szerkesztése</a>
+            <a href="/user/logout" class="btn btn-outline-danger m-1"><?= BUTTONS["logout"][$lang] ?? 'HIBA' ?></a>
+            <a href="/user/settings" class="btn btn-outline-primary m-1"><?= DASHBOARD["about"]["profile_settings_btn"][$lang] ?? 'HIBA' ?></a>
           </div>
         </div>
       </div>
@@ -96,8 +95,10 @@ $event = $params["event"] ?? null;
               <!--EVENT ROW -->
               <?php if ($event) : ?>
                 <div class="btn-group text-center">
-                  <a href= "/event/<?= $event["eventId"] ?>" class="btn primary-btn">Kötvetkező eseményünk</a>
+                  <a href="/event/<?= $event["eventId"] ?>" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?></a>
                 </div>
+              <?php else : ?>
+                <h6><?= DASHBOARD["subscriptions"]["no_events"][$lang] ?></h6>
               <?php endif ?>
             <?php else : ?>
               <div class="row d-flex align-items-center justify-content-center">

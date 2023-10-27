@@ -186,36 +186,6 @@ define('UPLOAD_IMAGE', [
 ]);
 
 
-define('UPLOAD_DOCUMENTS', [
-  "title" => [
-    "En" => "Upload CV or Cover letter (PDF, PNG, JPEG)",
-    "Hu" => "Önéletrajz vagy motivációs levél feltöltése (PDF, PNG, JPEG)",
-    "sp" => ""
-  ],
-  "types" => [
-    "1" => [
-      "En" => "Cover letter",
-      "Hu" => "Motivációs levél",
-      "sp" => ""
-    ],
-    "2" => [
-      "En" => "CV",
-      "Hu" => "Önéletrajz",
-      "sp" => ""
-    ],
-    "3" => [
-      "En" => "Other",
-      "Hu" => "Egyéb",
-      "sp" => ""
-    ]
-  ],
-  "add_document" => [
-    "En" => "Add document",
-    "Hu" => "Dokumentum hozzáadása",
-    "sp" => ""
-  ]
-]);
-
 define('LANGUANGE_KNOWLEDGE', [
 
   "title" =>  [
@@ -448,33 +418,9 @@ define('Levels', [
 
 
 
-define("LANGS", [
 
-  "loginForm" => [
-    "title" => [
-      "En" => "Login",
-      "Hu" => "Bejelentkezés",
-      "sp" => ""
-    ],
 
-    "email" => [
-      "En" => "Email address",
-      "Hu" => "Email cim",
-      "sp" => ""
-    ],
-    "password" => [
-      "En" => "Password",
-      "Hu" => "Jelszó",
-      "sp" => ""
-    ],
-    "loginBtn" => [
-      "En" => "Login",
-      "Hu" => "Bejelentkezés",
-      "sp" => ""
-    ]
-  ],
 
-]);
 
 
 

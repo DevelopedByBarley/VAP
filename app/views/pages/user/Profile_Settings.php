@@ -3,7 +3,6 @@
 
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$langs = LANGS;
 $user = $params["user"];
 
 $tasks = array_column($params["tasks"], "task");
@@ -73,7 +72,7 @@ $userLanguages = $params["userLanguages"];
 
         <div class="col-xs-12 mt-3">
           <div class="form-outline mb-4 text-center">
-            <label class="form-label mb-3 required"><b><?= $langs["registration"]["form"]["professions"]["title"][$lang] ?? 'Mivel foglalkozol?' ?></b></label>
+            <label class="form-label mb-3 required"><b><?= PROFESSIONS["title"][$lang] ?? 'HIBA' ?></b></label>
             <br>
 
             <?php foreach (PROFESSIONS["profession"] as $index => $profession) : ?>
@@ -130,7 +129,7 @@ $userLanguages = $params["userLanguages"];
             </label>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
-              További nyelvek hozzáadása
+              <?= USER_LANGUAGES["btn"][$lang] ?? 'HIBA' ?>
             </button>
 
             <!-- Modal -->
@@ -143,23 +142,26 @@ $userLanguages = $params["userLanguages"];
                   </div>
                   <div class="modal-body">
                     <div id="language-modal-container">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
-                        <label class="form-check-label" for="lang_2">
-                          Angol
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
-                        <label class="form-check-label" for="lang_3">
-                          Német
-                        </label>
+                      <div class="container">
+                        <div class="row d-flex align-items-center justify-content-center">
+                          <?php foreach (Languages as $index => $language) : ?>
+                            <?php $index += 1 ?>
+                            <div class="col-12 border p-2 m-1">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="lang" id="lang_<?= $index ?>" value="<?= $index ?>">
+                                <label class="form-check-label" for="lang_2">
+                                  <?= $language[$lang] ?>
+                                </label>
+                              </div>
+                            </div>
+                          <?php endforeach ?>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vissza</button>
-                    <button type="button" class="btn btn-primary" id="language-select-btn">Nyelv hozzáadása</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= USER_LANGUAGES["modal"]["back"][$lang] ?? 'HIBA' ?></button>
+                    <button type="button" class="btn btn-primary" id="language-select-btn"><?= USER_LANGUAGES["modal"]["add"][$lang] ?? 'HIBA' ?></button>
                   </div>
                 </div>
               </div>
@@ -244,9 +246,17 @@ $userLanguages = $params["userLanguages"];
 
 
         <div class="col-xs-12 border border-rounded-lg p-3 mb-4 shadow">
-          <h1>Feltöltött dokumentumok</h1>
-          <p>Jelenleg <b class="text-info" style="font-size: 1.2rem"><?= count($documents)  ?></b> dokumentum van feltöltve</p>
-          <?php echo count($documents) !== 0 ? '<a href="/user/documents" class="btn btn-outline-primary">Megtekintés</a>' : '<a href="/user/documents/new" class="btn btn-outline-primary">Dokumentum feltöltése</a>' ?>
+          <h1><?= PROFILE_SETTINGS["documents"]["title"][$lang] ?? 'HIBA' ?></h1>
+          <p> <b class="text-info" style="font-size: 1.3rem"><?= count($documents)  ?></b> <?= PROFILE_SETTINGS["documents"]["content"][$lang] ?? 'HIBA' ?></p>
+          <?php
+          $buttonText = PROFILE_SETTINGS["documents"]["check_btn"][$lang] ?? '';
+          if (count($documents) !== 0) {
+            echo '<a href="/user/documents" class="btn btn-outline-primary">' . $buttonText . '</a>';
+          } else {
+            echo '<a href="/user/documents/new" class="btn btn-outline-primary">Dokumentum feltöltése</a>';
+          }
+          ?>
+
         </div>
 
 
@@ -257,8 +267,7 @@ $userLanguages = $params["userLanguages"];
               <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" id="flexSwitchCheckDefault" name="permission" value="on" <?php echo (int)$user["permission"] === 1 ? 'checked' :  '' ?>>
             </div>
             <label class="form-check-label mt-2 text-center" for="flexSwitchCheckDefault">
-              <?= $langs["registration"]["form"]["email_permission"][$lang] ?? 'Szerepeltethetünk-e a következő évek AMB önkéntesi adatbázisban, hogy az Art Marketről szóló újdonságokról elsőkézből értesülj?' ?>
-            </label>
+              <?= REGISTRATION["form"]["email_permission"][$lang] ?? '' ?>
           </div>
         </div>
       </div>
@@ -276,11 +285,13 @@ $userLanguages = $params["userLanguages"];
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="updateProfileModalLabel">Profil frissitése</h5>
+              <h5 class="modal-title" id="updateProfileModalLabel">
+                <?= PROFILE_SETTINGS["profile"]["update_profile_modal"]["title"][$lang] ?? 'HIBA' ?>
+              </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Biztosan frissited a profilodat?
+              <?= PROFILE_SETTINGS["profile"]["update_profile_modal"]["permission"][$lang] ?? 'HIBA' ?>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kilépés</button>
@@ -297,17 +308,20 @@ $userLanguages = $params["userLanguages"];
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteProfileModalLabel">Profil törlése</h5>
+        <h5 class="modal-title" id="deleteProfileModalLabel"><?= PROFILE_SETTINGS["profile"]["delete_profile_modal"]["title"][$lang] ?? 'HIBA' ?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="/user/delete" method="POST">
         <div class="modal-body">
-          Profil törléséhez ija be a következőt <b class="text-danger border border-danger p-1 rounded"><?= "Delete" . "_" . $user["name"] ?></b>.
-          <br>
-          <b class="text-danger">A profil törlése végleges!</b>
+          <div>
+            <?= PROFILE_SETTINGS["profile"]["delete_profile_modal"]["permission"][$lang] ?? 'HIBA' ?>:
+          </div>
+          <div class="mt-2">
+            <b class="text-danger mt-3 border border-danger p-1 rounded"><?= "Delete" . "_" . $user["name"] ?></b>
+          </div>
 
           <div class="mb-3 mt-3">
-            <input type="text" class="form-control" id="deleteProfileInput" name="idForDelete" required>
+            <input type="text" class="form-control" id="deleteProfileInput" name="idForDelete" required placeholder="Delete_*****">
           </div>
         </div>
         <div class="modal-footer">
@@ -319,7 +333,6 @@ $userLanguages = $params["userLanguages"];
   </div>
 </div>
 </div>
-
 
 
 <script>
