@@ -6,6 +6,7 @@ $dates = $params["dates"];
 $tasks = $params["tasks"];
 $user = $params["user"];
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+
 ?>
 
 <div class="container-fluid">
@@ -20,23 +21,23 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
           <h5><?= $user["name"] ?></h5>
           <p><?= $user["address"] ?></p>
           <a href="/user/dashboard" class="btn btn-outline-light mb-3" data-mdb-ripple-color="dark" style="z-index: 1;">
-            Profil áttekintése
+          <?= SUBSCRIBE_FORM["check_profile"][$lang] ?? '' ?>
           </a>
         </div>
       </div>
 
       <div class="row p-sm-5">
         <div class="col-12 text-center mt-3">
-          <h1 class="text-uppercase mt-5">Regisztráció kitöltése</h1>
-        </div>
+          <h1 class="text-uppercase mt-5"><?= SUBSCRIBE_FORM["title"][$lang] ?? 'HIBA' ?></h1>
+      </div>
         <div class="text-center mb-5">
-          <small><i>Bejelentkezett állapot esetén a profil adataival történik a regisztráció</i></small>
+          <small><i><?= SUBSCRIBE_FORM["message"][$lang] ?? 'HIBA' ?></i></small>
         </div>
         <div class="col-xs-12 text-start">
           <form action="/event/subscribe/<?= $event["eventId"] ?>" method="POST">
             <div class="mb-4">
               <div class="mb-3">
-                <i><b>Választható időpontok</b></i>
+                <i><b><?= SUBSCRIBE_FORM["choose_time"][$lang] ?? 'HIBA' ?></b></i>
               </div>
               <div class="btn-group">
                 <?php foreach ($dates as $index => $date) : ?>
@@ -47,7 +48,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
             </div>
             <div class="mb-4">
               <div class="mb-3">
-                <i><b>Választható feladatok</b></i>
+                <i><b><?= SUBSCRIBE_FORM["choose_task"][$lang] ?? 'HIBA' ?></b></i>
               </div>
               <?php foreach ($tasks as $index => $task) : ?>
                 <div>
@@ -60,7 +61,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
             </div>
 
             <div class="text-center">
-              <button type="submit" class="btn secondary-btn">Regisztráció</button>
+              <button type="submit" class="btn secondary-btn"> <?= REGISTRATION["form"]["registrationBtn"][$lang] ?? 'HIBA' ?></button>
             </div>
 
 
@@ -198,14 +199,14 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
 
 
-          <div class="col-xs-12 mt-3">
+          <div class="col-xs-12 mt-3" id="<?= isset($prev) ? 'user-languages' : '' ?>" <?= isset($prev) ? "data-langs='" . (isset($prev) ? json_encode($userLanguages) : null) . "'" : '' ?>>
             <div class="form-outline mb-4">
               <label class="form-check-label required" for="languages">
-                <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
+                <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'HIBA' ?></b>
               </label>
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
-                További nyelvek hozzáadása
+                <?= USER_LANGUAGES["btn"][$lang] ?? 'HIBA' ?>
               </button>
 
               <!-- Modal -->
@@ -218,23 +219,26 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
                     </div>
                     <div class="modal-body">
                       <div id="language-modal-container">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="lang" id="lang_2" value="1">
-                          <label class="form-check-label" for="lang_2">
-                            Angol
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="lang" id="lang_3" value="2">
-                          <label class="form-check-label" for="lang_3">
-                            Német
-                          </label>
+                        <div class="container">
+                          <div class="row d-flex align-items-center justify-content-center">
+                            <?php foreach (Languages as $index => $language) : ?>
+                              <?php $index += 1 ?>
+                              <div class="col-12 border p-2 m-1">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="lang" id="lang_<?= $index ?>" value="<?= $index ?>">
+                                  <label class="form-check-label" for="lang_2">
+                                    <?= $language[$lang] ?>
+                                  </label>
+                                </div>
+                              </div>
+                            <?php endforeach ?>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vissza</button>
-                      <button type="button" class="btn btn-primary" id="language-select-btn">Nyelv hozzáadása</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= USER_LANGUAGES["modal"]["back"][$lang] ?? 'HIBA' ?></button>
+                      <button type="button" class="btn btn-primary" id="language-select-btn"><?= USER_LANGUAGES["modal"]["add"][$lang] ?? 'HIBA' ?></button>
                     </div>
                   </div>
                 </div>
@@ -301,15 +305,15 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
 
           <div class="col-xs-12 mt-3 border p-3">
-            <label for="formFileMultiple" class="form-label mb-3"><b><?= UPLOAD_DOCUMENTS["title"][$lang] ?? '' ?></b></label>
+            <label for="formFileMultiple" class="form-label mb-3"><b><?= DOCUMENTS["title"][$lang] ?? '' ?></b></label>
             <div id="documents-container"></div>
             <div class="text-center mt-3 mb-5">
-              <button type="button" class="btn btn-outline-primary" id="add-document">Új dokumentum</button>
+              <button type="button" class="btn btn-outline-primary" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
             </div>
           </div>
           <div class="mb-4 mt-4">
             <div class="mb-3">
-              <b>Válassza ki az önnek megfelelő időpontot</b>
+              <b><?= SUBSCRIBE_FORM["choose_time"][$lang] ?? 'HIBA' ?></b>
             </div>
             <div class="btn-group">
               <?php foreach ($dates as $index => $date) : ?>
@@ -320,7 +324,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
           </div>
           <div class="mb-4">
             <div class="mb-3">
-              <b>Válassza ki az ön számára megfelelő feladatokat</b>
+              <b><?= SUBSCRIBE_FORM["choose_task"][$lang] ?? 'HIBA' ?></b>
             </div>
             <?php foreach ($tasks as $index => $task) : ?>
               <?php $index += 1 ?>

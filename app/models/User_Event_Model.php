@@ -1,6 +1,7 @@
 <?php
 require_once 'app/helpers/UUID.php';
 require_once 'app/helpers/Alert.php';
+require_once 'app/helpers/Success.php';
 
 // ONLY USER NOT ADMIN!
 
@@ -48,7 +49,7 @@ class UserEventModel
     $tasksInString = implode(",<br>", $tasksInLang);
 
     if (!$dates || !$tasks) {
-      $this->alert->set("Minden mező kitöltése kötelező!", "danger", "/event/register/$eventId");
+      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/register/$eventId");
     }
 
     // CHECK USER IS EXIST
@@ -62,7 +63,13 @@ class UserEventModel
       $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
       if (!empty($isUserExist)) {
-        $this->alert->set("Ezzel a profillal már regisztráltál erre az eseményre!", "danger", "/event/register/$eventId");
+        $this->alert->set(
+          "Ezzel a profillal már regisztráltál erre az eseményre!",
+          "You have already registered for this event with this profile!",
+          null,
+          "danger",
+          "/event/register/$eventId"
+        );
       }
 
 
@@ -120,19 +127,7 @@ class UserEventModel
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Esemény regisztráció!" : "Event registration");
 
-
-
-      // Redirect to success!
-      $_SESSION["success"] = [
-        "title" => "Köszönjük a regisztrációdat!",
-        "message" => "Az eseményre való regisztráció megtörtént! Az e-mail címére visszaigazoló levelet küldtünk!",
-        "button_message" => "Vissza a főoldalra",
-        "path" => "/",
-      ];
-      header("Location: /success");
-
-
-      return;
+      success();
     }
 
 
@@ -300,9 +295,9 @@ class UserEventModel
       $stmt->execute();
     }
   }
- 
 
-   // COPY DOCUMENTS FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
+
+  // COPY DOCUMENTS FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
   private function copyDocumentFromUserToRegister($registerId, $documents)
   {
     foreach ($documents as $document) {
@@ -343,7 +338,7 @@ class UserEventModel
     }
   }
 
-  
+
 
 
   // INSERT DOCUMENTS WHEN USER REGISTER TO EVENT

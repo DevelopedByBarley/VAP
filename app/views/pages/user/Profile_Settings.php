@@ -334,6 +334,9 @@ $userLanguages = $params["userLanguages"];
 </div>
 </div>
 
+<script src="/public/js/GetCookie.js"></script>
+
+<script src="/public/js/User.Languages.js"></script>
 
 <script>
   const form = document.getElementById('update-form');

@@ -22,12 +22,12 @@ define('LOGIN', [
   ],
   "create-btn" => [
     "Hu" => "Kattintson ide",
-    "En" => "Creat new",
+    "En" => "Create new",
     "Sp" => ""
   ],
   "description_title" => [
-    "Hu" => "MI TÖBBEK VAGYUNK MINT EGY CÉG",
-    "En" => "WE ARE MORE THAN JUST A COMPANY",
+    "Hu" => "KÖSZÖNTÜNK A VAP CSAPATBAN",
+    "En" => "WELCOME TO THE VAP TEAM",
     "Sp" => ""
   ],
   "description_content" => [

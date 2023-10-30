@@ -26,6 +26,10 @@
           <textarea class="form-control" id="descriptionInEn" rows="4" name="descriptionInEn" required><?= $partner["descriptionInEn"] ?></textarea>
         </div>
         <div class="form-outline mb-4">
+          <label class="form-label" for="descriptionInEn">Partner link</label>
+          <input type="text" class="form-control" id="link" name="link" required placeholder="Partner link" value="<?= $partner["link"]  ?? '' ?>"/>
+        </div>
+        <div class="form-outline mb-4">
           <div class="mb-3">
             <label for="formFile" class="form-label">Fénykép feltöltése</label>
             <input class="form-control" type="file" id="formFile" name="p_image">

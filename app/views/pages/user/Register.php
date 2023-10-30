@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/public/css/register.css?v=<?php echo time() ?>">
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-  $prev = $params["prev"];
+$prev = $params["prev"];
 $tasks = isset($prev) ? array_map('intval', $prev["tasks"]) : [];
 $userLanguages = $prev["userLanguages"] ?? null;
 
@@ -247,10 +247,10 @@ $userLanguages = $prev["userLanguages"] ?? null;
           </div>
         </div>
         <div class="col-xs-12 mt-3 border p-3">
-          <label for="formFileMultiple" class="form-label mb-3"><b><?= UPLOAD_DOCUMENTS["title"][$lang] ?? '' ?></b></label>
+          <label for="formFileMultiple" class="form-label mb-3"><b><?= DOCUMENTS["title"][$lang] ?? '' ?></b></label>
           <div id="documents-container"></div>
           <div class="text-center mt-3 mb-5">
-            <button type="button" class="btn btn-outline-primary" id="add-document"><?= UPLOAD_DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
+            <button type="button" class="btn btn-outline-primary" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
           </div>
         </div>
 
@@ -286,8 +286,9 @@ $userLanguages = $prev["userLanguages"] ?? null;
       </div>
   </form>
 </div>
-
-
+<script src="/public/js/GetCookie.js"></script>
+<script src="/public/js/User.Documents.js"></script>
+<script src="/public/js/User.Languages.js"></script>
 
 <script>
   const form = document.getElementById('register-form');

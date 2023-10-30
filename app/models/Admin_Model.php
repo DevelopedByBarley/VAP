@@ -9,7 +9,7 @@ class AdminModel
   protected $fileSaver;
   protected $mailer;
   private $userModel;
-  private $alert;
+  protected $alert;
 
   public function __construct()
   {
@@ -112,11 +112,11 @@ class AdminModel
 
     $user = self::user($userId);
 
- 
-    
+
+
 
     $this->mailer->send($user["email"], $body["mail-body"], $user["lang"] === "Hu" ? "Üzenet" : "Message");
 
-    $this->alert->set('Sikeres email kiküldés!', 'success', "/admin/user/$userId");
+    $this->alert->set('Sikeres email kiküldés!', null, null, 'success', "/admin/user/$userId");
   }
 }

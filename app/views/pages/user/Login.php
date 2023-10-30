@@ -9,18 +9,19 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
+        <div class="card border-0 text-black">
           <div class="row g-0">
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center">
                   <img src="/public/assets/icons/logo.png" style="width: 185px;" alt="logo" class="my-3">
-                  <h4 class="mt-2 pb-1 text-uppercase"><?= LOGIN["welcome"][$lang] ?? 'HIBA' ?></h4>
                 </div>
 
                 <form action="/user/login" method="POST" id="login" class="w-100">
-                  <p><?= LOGIN["please"][$lang] ?? 'HIBA' ?></p>
+                  <div class="text-center my-3">
+                    <b class="text-center"><?= LOGIN["please"][$lang] ?? 'HIBA' ?></b>
+                  </div>
 
                   <div class="form-outline mb-4">
                     <label for="email" class="form-label"><?= LOGIN["email"][$lang] ?? 'Email cim' ?></label>
@@ -50,7 +51,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h4 class="mb-4 text-uppercase"><?= LOGIN["description_title"][$lang] ?? 'HIBA' ?></h4>
                 <p class="small mb-0">
-                <?= LOGIN["description_content"][$lang] ?? 'HIBA' ?>
+                  <?= LOGIN["description_content"][$lang] ?? 'HIBA' ?>
                 </p>
               </div>
             </div>

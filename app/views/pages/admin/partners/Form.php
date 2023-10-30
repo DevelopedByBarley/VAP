@@ -10,23 +10,27 @@
         <hr class="mb-5">
 
         <div class="form-outline mb-4">
-          <label class="form-label" for="name"><b>N;</b></label>
+          <label class="form-label" for="name"><b>Partner neve</b></label>
           <input type="text" id="name" class="form-control" name="name" required placeholder="Partner neve" value="<?= $prev["name"]  ?? '' ?>" />
         </div>
 
         <!-- Message input -->
 
         <div class="form-outline mb-4">
-          <label class="form-label" for="descriptionInHu">Rövid leirás</label>
+          <label class="form-label" for="descriptionInHu"><b>Rövid leirás</b></label>
           <textarea class="form-control" id="descriptionInHu" rows="4" name="descriptionInHu" required placeholder="Partner rövid leirása"><?= $prev["descriptionInHu"]  ?? '' ?></textarea>
         </div>
         <div class="form-outline mb-4">
-          <label class="form-label" for="descriptionInEn">Rövid leirás angolul</label>
+          <label class="form-label" for="descriptionInEn"><b>Rövid leirás angolul</b></label>
           <textarea class="form-control" id="descriptionInEn" rows="4" name="descriptionInEn" required placeholder="Partner rövid leirása angolul"><?= $prev["descriptionInEn"]  ?? '' ?></textarea>
         </div>
         <div class="form-outline mb-4">
+          <label class="form-label" for="link"><b>Partner link</b></label>
+          <input type="text" class="form-control" id="link" name="link" required placeholder="Partner link"><?= $prev["descriptionInEn"]  ?? '' ?></input>
+        </div>
+        <div class="form-outline mb-4">
           <div class="mb-3">
-            <label for="formFile" class="form-label">Logo feltöltése</label>
+            <label for="formFile" class="form-label"><b>Logo feltöltése</b></label>
             <input class="form-control" type="file" id="formFile" name="p_image" required>
           </div>
         </div>

@@ -17,6 +17,16 @@ $event = $params["event"] ?? null;
       <p><?= $user["address"] ?></p>
     </div>
   </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="btn-group mb-5">
+          <a href="/user/logout" class="btn btn-outline-danger m-1"><?= BUTTONS["logout"][$lang] ?? 'HIBA' ?></a>
+          <a href="/user/settings" class="btn btn-outline-dark m-1"><?= DASHBOARD["about"]["profile_settings_btn"][$lang] ?? 'HIBA' ?></a>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-12">
       <div class="p-lg-4 text-black">
@@ -71,12 +81,6 @@ $event = $params["event"] ?? null;
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="d-flex align-items-center justify-content-center">
-          <div class="btn-group mb-5">
-            <a href="/user/logout" class="btn btn-outline-danger m-1"><?= BUTTONS["logout"][$lang] ?? 'HIBA' ?></a>
-            <a href="/user/settings" class="btn btn-outline-primary m-1"><?= DASHBOARD["about"]["profile_settings_btn"][$lang] ?? 'HIBA' ?></a>
           </div>
         </div>
       </div>

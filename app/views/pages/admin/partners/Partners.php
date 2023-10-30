@@ -54,7 +54,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
                     </div>
                   </td>
                   <td>
-                    <?= $partner["createdAt"] ?>
+                    <?= date("Y/m/d", $partner["createdAt"]) ?>
                   </td>
                   <td>
 

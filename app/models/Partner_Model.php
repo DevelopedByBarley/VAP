@@ -14,24 +14,28 @@ class PartnerModel extends AdminModel
       'image/png',
       'image/jpeg',
     ]);
+    
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $createdAt = time();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `partners` VALUES (NULL, :name, :descriptionInHu, :descriptionInEn, :fileName, :createdAt)");
+    $stmt = $this->pdo->prepare("INSERT INTO `partners` VALUES (NULL, :name, :descriptionInHu, :descriptionInEn, :link, :fileName, :createdAt)");
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
     $stmt->bindParam(":descriptionInEn", $descriptionInEn);
+    $stmt->bindParam(":link", $link);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
 
     $stmt->execute();
-    header("Location: /admin/partners");
+    $this->alert->set('Új partner sikeresen hozzáadva!', null, null, "success", "/admin/partners");
   }
 
 
-  public function partners() {
+  public function partners()
+  {
     $stmt = $this->pdo->prepare("SELECT * FROM `partners`");
     $stmt->execute();
     $partners = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -78,7 +82,7 @@ class PartnerModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/partners");
+    $this->alert->set('Új partner sikeresen törölve!', null, null, "success", "/admin/partners");
   }
 
   public function update($files, $id, $body)
@@ -87,6 +91,7 @@ class PartnerModel extends AdminModel
 
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $prevImage = self::getPartnerById($id)["fileName"];
     $fileName = '';
 
@@ -108,17 +113,19 @@ class PartnerModel extends AdminModel
     `name` = :name, 
     `descriptionInHu` = :descriptionInHu, 
     `descriptionInEn` = :descriptionInEn, 
+    `link` = :link, 
     `fileName` = :fileName 
     WHERE `partners`.`id` = :id");
 
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
     $stmt->bindParam(":descriptionInEn", $descriptionInEn);
+    $stmt->bindParam(":link", $link);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/partners");
+    $this->alert->set('Új partner sikeresen törölve!', null, null, "success", "/admin/partners");
   }
 
 

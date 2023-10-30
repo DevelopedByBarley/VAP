@@ -95,3 +95,6 @@
     </div>
   </div>
 </div>
+
+<script src="/public/js/Event.Links.js"></script>
+<script src="/public/js/Event.Dates.js"></script>

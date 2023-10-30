@@ -2,20 +2,34 @@
 class Alert
 {
   // SET ALERT
-  public function set($message, $bg, $location)
+  public function set($message, $messageInEng = null, $messageInSp = null, $bg, $location)
   {
 
     if (session_id() == '') {
       session_start();
     }
 
-    $_SESSION["alert"] = [
-      "message" => $message,
-      "bg" => $bg,
-      "expires" => time() + 2
-    ];
+    $lang = $_COOKIE["lang"] ?? null;
 
-    header("Location: $location");
-    exit;
+    if ($lang === "Hu") {
+      $_SESSION["alert"] = [
+        "message" => $message,
+        "bg" => $bg,
+        "expires" => time() + 2
+      ];
+
+      header("Location: $location");
+      exit;
+
+    } else if ($lang === "En") {
+      $_SESSION["alert"] = [
+        "message" => $messageInEng,
+        "bg" => $bg,
+        "expires" => time() + 2
+      ];
+      header("Location: $location");
+      exit;
+      
+    }
   }
 }

@@ -18,8 +18,7 @@ $isRegistered = $params["isRegistered"] ?? null;
       <div class="text-light text-center h-100 w-100 d-flex align-items-center justify-content-center flex-column" style="background-color:hsla(176, 0%, 0%, 0.6)">
         <h1 class="text-light"><?= $event["nameInHu"] ?></h1>
         <h3 class="text-light"><?= $event["date"] ?> - <?= $event["end_date"] ?></h3>
-        <p class="mb-5"><i class="text-light">Üdvözöljük a <?= $event["nameInHu"] ?> esemény oldalán!</i></p>
-        <p class="text-light">Görges tovább a részletekért és a jelentkezésért</p>
+        <p class="text-light mt-4"><?= EVENT["scrollDown"][$lang] ?? 'HIBA' ?></p>
 
       </div>
     </div>
@@ -51,13 +50,13 @@ $isRegistered = $params["isRegistered"] ?? null;
   <div class="row">
     <div class="col-12 text-center my-5 d-flex justify-content-center flex-column reveal" style="min-height: 30vh;">
       <h2 class="text-uppercase mb-4"><?= $event["nameInHu"] ?></h2>
-      <p><?= $event["descriptionInEn"] ?></p>
+      <p><?= $event[languageSwitcher("description")] ?></p>
     </div>
   </div>
   <div class="row">
     <div class="col-12 text-center text-lg-end offset-lg-2 col-lg-10 my-5 d-flex justify-content-center flex-column" style="min-height: 30vh;">
-      <h2 class="text-uppercase reveal">Választható feladatok</h2>
-      <p class="reveal"><i>Válassza ki jelentkezésnél hogy mely feladatkörök érdeklik önt a legjobban!</i></p>
+      <h2 class="text-uppercase reveal"><?= EVENT["tasks"]["title"][$lang] ?? 'HIBA' ?></h2>
+      <p class="reveal"><i><?= EVENT["tasks"]["description"][$lang] ?? 'HIBA' ?></i></p>
       <div class="row mt-4">
         <?php foreach ($tasks as $task) : ?>
           <div class="col-12 reveal">
@@ -72,8 +71,8 @@ $isRegistered = $params["isRegistered"] ?? null;
 
   <div class="row">
     <div class="col-12 text-center text-lg-start col-lg-10 my-5 d-flex justify-content-center flex-column" style="min-height: 30vh;">
-      <h2 class="text-uppercase reveal">Kapcsolódó online felületek</h2>
-      <p class="reveal"><i>Tekintse meg az eseményhez kapcsolódó online felületeinket további információkért!</i></p>
+      <h2 class="text-uppercase reveal"><?= EVENT["links"]["title"][$lang] ?? 'HIBA' ?></h2>
+      <p class="reveal"><i><?= EVENT["links"]["description"][$lang] ?? 'HIBA' ?></i></p>
       <div class="row mt-4">
         <?php foreach ($links as $link) : ?>
           <div class="col-12 reveal">
@@ -87,9 +86,9 @@ $isRegistered = $params["isRegistered"] ?? null;
 
   <div class="row">
     <div class="col-12 text-center d-flex align-items-center justify-content-center flex-column" style="min-height: 30vh;">
-      <h1 class="reveal">Mi következik a regisztráció után?</h1>
-      <p class="reveal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente et recusandae repudiandae, laudantium saepe fugiat. Doloremque, excepturi possimus aperiam saepe velit quibusdam iusto quisquam consectetur, omnis animi, illum dicta enim!
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio modi amet illo, pariatur consequuntur autem rerum vitae, expedita voluptate quo doloremque facere suscipit sed repellendus similique, id quasi incidunt numquam.
+      <h1 class="reveal"><?= EVENT["after_registration"]["title"][$lang] ?? 'HIBA' ?></h1>
+      <p class="reveal">
+        <?= EVENT["after_registration"]["description"][$lang] ?? 'HIBA' ?>
       </p>
     </div>
   </div>
@@ -98,10 +97,10 @@ $isRegistered = $params["isRegistered"] ?? null;
   <div class="row mt-5 reveal">
     <div class="col-12">
       <?php if ($isRegistered) : ?>
-        <h1 class="text-center">Erre az eseményre már regisztrált!</h1>
+        <h1 class="text-center"><?= EVENT['registrated'][$lang] ?? 'HIBA' ?></h1>
       <?php else : ?>
-        <h1 class="text-center">Tovább a regisztrációhoz.</h1>
-        <p class="text-center"><i>Lépj tovább a regisztrációs felületre vagy kérdezz tőlünk bátran az "Üzenet" küldése gomb segítségével!</i></p>
+        <h1 class="text-center"><?= EVENT["go_to_reg"]["title"][$lang] ?? 'HIBA' ?></h1>
+        <p class="text-center"><i><?= EVENT["go_to_reg"]["description"][$lang] ?? 'HIBA' ?></i></p>
       <?php endif ?>
 
     </div>
@@ -109,8 +108,9 @@ $isRegistered = $params["isRegistered"] ?? null;
       <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
         <span class="badge p-3 bg-danger">Regisztráció lezárult</span>
       <?php else : ?>
-        <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn secondary-btn\">Regisztráció</a>" ?>
-        <a href="mailto:hello@artnesz.hu" class="btn primary-btn ms-1">Üzenet küldése</a>
+        <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn secondary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
+        <a href="mailto:developedbybarley@gmail.com" class="btn primary-btn ms-1"><?= EVENT['send_message'][$lang] ?? 'HIBA' ?></a>
+
       <?php endif ?>
     </div>
   </div>

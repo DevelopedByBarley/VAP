@@ -11,7 +11,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
     <div class="row">
       <div class="col-12">
         <form action="/user/documents/update/<?= $document["id"] ?>" method="POST" enctype="multipart/form-data" class="head">
-          <div class="document p-5 mt-2">
+          <div class="document mt-2">
             <h1 class="text-center text-lg-start mt-2 mb-3 "><?= UPDATE_DOCUMENT_FORM["update_document"][$lang] ?? 'HIBA' ?></h1>
             <p class="text-center text-lg-start"><?= UPDATE_DOCUMENT_FORM["content"][$lang] ?? 'HIBA' ?></p>
             <hr class="mb-4 text-light">
@@ -24,8 +24,8 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
               <?php endforeach ?>
             </select>
             <div class="mb-3" class="document">
-              <label for="document">
-                <?= UPDATE_DOCUMENT_FORM["upload"][$lang] ?? 'HIBA' ?>
+              <label for="document" class="mb-2">
+                <b><?= UPDATE_DOCUMENT_FORM["upload"][$lang] ?? 'HIBA' ?></b>
               </label>
               <input class="form-control" type="file" name="document" id="documents" />
             </div>

@@ -210,19 +210,20 @@ $user = $params["user"];
 				<?php $counter = 0; ?>
 				<?php foreach ($partners as $index => $partner) : ?>
 					<?php if ($counter < 9) : ?>
-						<div class="card p-2 m-4 shadow d-flex align-items-center justify-content-center" style="max-width: 540px; min-height: 150px;">
-							<div class="row g-0">
-								<div class="col-md-4 d-flex align-items-center justify-content-center">
-									<div style="background: url('/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>') center center/cover; height: 100px; width: 100px;" class="card-img-top"></div>
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-										<h5 class="card-title"><?= $partner["name"] ?></h5>
-										<p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
+							<a href="<?= $partner["link"] ?? '' ?>" class="card p-2 m-4 shadow d-flex align-items-center justify-content-center text-decoration-none text-dark" style="max-width: 540px; min-height: 150px;">
+								<div class="row g-0">
+									<div class="col-md-4 d-flex align-items-center justify-content-center">
+										<div style="background: url('/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>') center center/cover; height: 100px; width: 100px;" class="card-img-top"></div>
+									</div>
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 class="card-title"><?= $partner["name"] ?></h5>
+											<p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
+							</a>
+						</a>
 
 						<?php $counter++; ?>
 					<?php endif; ?>

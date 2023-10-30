@@ -2,11 +2,11 @@
 
 <div class="container vh-100 d-flex align-items-center justify-content-center flex-column">
   <div class="row w-100 d-flex align-items-center justify-content-center flex-column">
-    <div class="col-4 mb-5 text-center">
+    <div class="col-12 col-lg-4 mb-5 text-center">
       <img src="/public/assets/icons/logo.png" style="width: 250px;" alt="">
     </div>
-    <div class="col-4">
-      <form class="border p-5" id="admin-login-form" action="/admin/login" method="POST">
+    <div class="col-12 col-lg-4">
+      <form class=" p-5" id="admin-login-form" action="/admin/login" method="POST">
         <div class="mb-3">
           <label class="form-label">Név</label>
           <input type="text" class="form-control" name="name" placeholder="Név" required>

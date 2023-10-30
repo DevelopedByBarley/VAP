@@ -100,8 +100,7 @@ class EventModel
     self::sendMailForRegisteredUsers($lastId);
     exit;
 
-
-    header("Location: /admin/events");
+    $this->alert->set('Új esemény sikeresen hozzáadva!', null, null, "success", "/admin/events");
   }
 
 
@@ -118,7 +117,7 @@ class EventModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/events");
+    $this->alert->set('Esemény sikeresen törölve!', null, null, "success", "/admin/events");
   }
 
 
@@ -189,7 +188,7 @@ class EventModel
     self::updateEventTasks($id, $tasks);
     self::setEventsPublic();
 
-    header("Location:  /admin/events");
+    $this->alert->set('Új esemény sikeresen frissítve!', null, null, "success", "/admin/events");
   }
 
 
@@ -428,8 +427,13 @@ class EventModel
     $sub = self::getRegisteredUser($subId);
     $this->mailer->send($sub["email"], $body["mail-body"], $sub["lang"] === "Hu" ? "Üzenet" : "Message");
 
-    $this->alert->set('Sikeres email kiküldés!', 'success', "/admin/event/subscriber/$subId");
-
+    $this->alert->set(
+      'Email kiküldése sikeres!',
+      'Successful email sent!',
+      null,
+      'success',
+      "/admin/event/subscriber/$subId"
+    );
   }
 
 
@@ -539,7 +543,7 @@ class EventModel
     $stmt->bindParam(":subId", $subId);
     $stmt->execute();
 
-    $this->alert->set('Eseményre való regisztráció elfogadva!', "success", "/admin/event/subscriber/$subId");
+    $this->alert->set('Eseményre való regisztráció elfogadva!', null, null, "success", "/admin/event/subscriber/$subId");
   }
 
   public function deleteUserSubscription($subId)
@@ -548,6 +552,6 @@ class EventModel
     $stmt->bindParam(":subId", $subId);
     $stmt->execute();
 
-    $this->alert->set('Elfogadott regisztráció visszavonva!', "success", "/admin/event/subscriber/$subId");
+    $this->alert->set('Elfogadott regisztráció visszavonva!', null, null, "success", "/admin/event/subscriber/$subId");
   }
 }

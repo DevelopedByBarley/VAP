@@ -1,3 +1,7 @@
+<?php 
+  if(!$params["message"] || !$params["title"]) header("Location: /");
+?>
+
 <div class="container-fluid">
   <div class="container">
     <div class="row d-flex align-items-center justify-content-center flex-column" style="min-height: 92vh;">

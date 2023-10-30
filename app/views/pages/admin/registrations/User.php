@@ -114,7 +114,7 @@ $tasks = array_column($params["tasks"], "task");
                             <a href="/public/assets/uploads/documents/users/<?= $document["name"] ?>"> <?= $document["name"] ?></a>
                           </div>
                           <div class="col-4">
-                            <span> <?= UPLOAD_DOCUMENTS["types"][$document["type"]]["Hu"] ?></span>
+                            <span> <?= DOCUMENTS["types"][$document["type"]]["Hu"] ?></span>
                           </div>
                         </div>
                       <?php endforeach ?>

@@ -27,15 +27,11 @@
     <?php endif ?>
 
 
+    <script src="/public/js/UUID.js"></script>
     <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>
-    <script src="/public/js/User.Documents.js"></script>
-    <script src="/public/js/User.Languages.js"></script>
-    <script src="/public/js/Event.Links.js"></script>
-    <script src="/public/js/Event.Dates.js"></script>
     <script src="/public/js/AOS.js"></script>
     <script src="/public/js/MMParallax.js"></script>
-    <script src="/public/js/GetCookie.js"></script>
 </body>
 
 </html>

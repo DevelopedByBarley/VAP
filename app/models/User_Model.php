@@ -45,7 +45,7 @@ class UserModel
     if (!$fileName || in_array(false, $documentName)) {
       self::setPrevContent();
 
-      $this->alert->set("File típus elutasítva", "danger", "/user/registration");
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/user/registration");
     }
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -82,7 +82,13 @@ class UserModel
 
     if ($isUserExist) {
       self::setPrevContent();
-      $this->alert->set("Ez a felhasználó már létezik!", "danger", "/user/registration");
+      $this->alert->set(
+        "Ez a felhasználó már létezik!",
+        "This user is already exist!",
+        null,
+        "danger",
+        "/user/registration"
+      );
     }
 
 
@@ -139,13 +145,8 @@ class UserModel
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
 
       if (isset($_SESSION["prevRegisterContent"])) unset($_SESSION["prevRegisterContent"]);
-      $_SESSION["success"] = [
-        "title" => "Sikeres regisztráció!",
-        "message" => "Regisztráció sikerességéről visszaigazoló e-mailt küldtünk! ",
-        "button_message" => "Tovább a bejelentkezéshez",
-        "path" => "/login",
-      ];
-      header("Location: /success");
+
+      success();
     }
   }
 
@@ -206,9 +207,8 @@ class UserModel
     if ($isSuccess) {
       self::updateUserLanguages($userId, $languages, $levels);
       self::updateTasks($userId, $tasks);
-      setcookie("alert_message", "Profil frissítése sikeres!", time() + 2, "/");
-      setcookie("alert_bg", "success", time() + 5, "/");
-      header('Location: /user/settings');
+
+      $this->alert->set('Profil frissítése sikeres!', 'You updating your profile successfully!', null, 'success', '/user/settings');
     }
   }
 
@@ -528,7 +528,13 @@ class UserModel
     $compared = $confirm_pw === $new_pw;
 
     if (!$isVerified || !$compared) {
-      $this->alert->set("Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!", "danger", "/user/password-reset");
+      $this->alert->set(
+        "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
+        "Password change unsuccessful, you provided incorrect data!",
+        null,
+        "danger",
+        "/user/password-reset"
+      );
     }
 
     $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`id` = :userId;");
@@ -536,7 +542,13 @@ class UserModel
     $stmt->bindParam(":userId", $userId);
     $stmt->execute();
 
-    $this->alert->set("Jelszó megváltoztatása sikeres!", "success", "/user/dashboard");
+    $this->alert->set(
+      "Jelszó megváltoztatása sikeres!",
+      "Password change successful!",
+      null,
+      "success",
+      "/user/dashboard"
+    );
   }
 
 

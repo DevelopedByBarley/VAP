@@ -38,7 +38,7 @@ class VolunteerModel extends AdminModel
     $stmt->bindParam(":createdAt", $createdAt);
 
     $stmt->execute();
-    header("Location: /admin/volunteers");
+    $this->alert->set('Új önkéntes sikeresen hozzáadva!', null, null, "success", "/admin/volunteers");
   }
 
   // DELETE VOLUNTEER FOR ADMIN
@@ -51,7 +51,7 @@ class VolunteerModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/volunteers");
+    $this->alert->set('Új önkéntes sikeresen törölve!', null, null, "success", "/admin/volunteers");
   }
 
   // GET SINGLE VOLUNTEER FOR ADMIN
@@ -105,7 +105,7 @@ class VolunteerModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/volunteers");
+    $this->alert->set('Új önkéntes sikeresen frissítve!', null, null, "success", "/admin/volunteers");
   }
 
 
