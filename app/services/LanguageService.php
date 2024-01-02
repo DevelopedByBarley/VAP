@@ -1,20 +1,36 @@
 <?php
+
 class LanguageService
 {
-
-  // SET LANGUAGE WITH MODAL
-
-  public function language($body)
+  public function language()
   {
 
     $expiration_date = time() + (7 * 24 * 60 * 60);
+    $ret = "";
+
+
+    $browser_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+    // Az első preferált nyelv kinyerése a listából
+    $preferred_languages = explode(',', $browser_language);
+    $language = strtolower(trim(explode(';', $preferred_languages[0])[0]));
+
+    
+    if ($language === "hu-hu") {
+      $ret = "Hu";
+    } elseif($language === "es") {
+      $ret = "Sp";
+    } else {
+      $ret = "En";
+    }
+    
+    
 
     $cookie_name = "lang";
-    $cookie_value = $body["language"] ?? null;
 
-    setcookie($cookie_name, $cookie_value, $expiration_date, "/");
 
-    header("Location: /");
+    setcookie($cookie_name, $ret, $expiration_date, "/");
+
   }
 
   // SWITCH LANGUAGE

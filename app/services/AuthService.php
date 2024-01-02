@@ -96,13 +96,13 @@ class AuthService
 
 
         if (!$user || count($user) === 0) {
-            $this->alert->set("Hibás email vagy jelszó", "danger", "/login");
-           }
+            $this->alert->set("Hibás email vagy jelszó",  "Email or password is wrong", null, "danger", "/login");
+        }
 
         $isVerified = password_verify($pw, $user["password"]);
 
         if (!$isVerified) {
-            $this->alert->set("Hibás email vagy jelszó", "danger", "/login");
+            $this->alert->set("Hibás email vagy jelszó", "Email or password is wrong", null, "danger", "/login");
         }
 
         $_SESSION["userId"] = $user["id"];

@@ -1,3 +1,9 @@
+<?php 
+    if(!isset($_COOKIE["lang"])) {
+        header('Location: /');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,17 +20,11 @@
 </head>
 
 <body>
-
-
-    <?php if (!isset($_COOKIE["lang"])) : ?>
-        <?php include 'app/views/components/LanguageModal.php' ?>
-    <?php else : ?>
-        <?php include 'app/views/components/Alert.php' ?>
-        <?php include 'includes/Navbar.php' ?>
-        <div class="mt-5">
-            <?= $params["content"] ?>
-        </div>
-    <?php endif ?>
+    <?php include 'app/views/components/Alert.php' ?>
+    <?php include 'includes/Navbar.php' ?>
+    <div class="mt-5">
+        <?= $params["content"] ?>
+    </div>
 
 
     <script src="/public/js/UUID.js"></script>

@@ -26,7 +26,6 @@ class HomeController
         $this->linkModel = new LinkModel();
         $this->eventModel = new EventModel();
         $this->languageService = new LanguageService();
-
     }
 
     // PUBLIC
@@ -34,7 +33,13 @@ class HomeController
     // SET LANGUAGE WITH MODAL
     public function setLanguage()
     {
-        $this->languageService->language($_POST);
+        $browser_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+        // Az első preferált nyelv kinyerése a listából
+        $preferred_languages = explode(',', $browser_language);
+        $language = strtolower(trim($preferred_languages[0]));     
+        $this->languageService->language($_POST, $language );
+        header('Location: /');
     }
 
     // SWITCH LANGUAGE
@@ -42,5 +47,4 @@ class HomeController
     {
         $this->languageService->switch($vars["lang"]);
     }
-    
 }

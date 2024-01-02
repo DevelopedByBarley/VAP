@@ -1,4 +1,7 @@
 <?php
+
+ini_set('display_errors', 1);
+
 require 'vendor/autoload.php';
 require 'config/Database.php';
 require 'app/helpers/LanguageSwitcher.php';

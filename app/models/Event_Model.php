@@ -363,18 +363,16 @@ class EventModel
 
 
 
-
   // GET EVENT DATES BY EVENT ID
   public function getEventDates($id)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id");
+    $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id ORDER BY date ASC");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $events;
+    return $dates;
   }
-
 
 
 

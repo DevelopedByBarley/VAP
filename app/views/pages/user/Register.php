@@ -24,7 +24,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12">
         <div class="form-outline">
           <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="text" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" />
+          <input type="text" pattern=".{5,}" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" />
         </div>
       </div>
 
@@ -34,7 +34,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
           <label class="form-label required" for="email"><b><?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="email" id="email" name="email" class="form-control" required value="<?= $prev["email"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?>" />
+          <input type="email" id="email" name="email" pattern=".{11,}" class="form-control" required value="<?= $prev["email"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?>" />
         </div>
       </div>
 

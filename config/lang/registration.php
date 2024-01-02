@@ -238,13 +238,23 @@ define('REGISTRATION', [
     "name" => [
       "En" => "Name",
       "Hu" => "Név",
-      "Sp" => ""
+      "Sp" => "",
+      "label" => [
+        "En" => "(5 characters minimum)",
+        "Hu" => "(Minimum 5 karakter)",
+        "Sp" => ""
+      ]
     ],
 
     "email" => [
       "En" => "E-mail address",
       "Hu" => "E-mail cim",
-      "Sp" => ""
+        "Sp" => "",
+        "label" => [
+          "En" => "(11 characters minimum)",
+          "Hu" => "(Minimum 11 karakter)",
+          "Sp" => ""
+      ]
     ],
 
     "password" => [

@@ -56,11 +56,11 @@ class ResetPw
         $stmt->bindParam(':expires', $expires);
 
         $stmt->execute();
-        $body = $_SERVER["TOKEN_ADD"] . "user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
+        $body = "http://localhost:8080/user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
-        
-        $this->alert->set('A jelszó változtatásához szükséges levelet az e-mail címére küldtük', "success", "/login");
+
+        $this->alert->set('A jelszó változtatásához szükséges levelet az e-mail címére küldtük', 'The letter to change the password has been sent to your e-mail address', null, "success", "/login");
     }
 
 
@@ -97,6 +97,8 @@ class ResetPw
         $email = $body["email"];
         $token = $body["token"];
 
+    
+
         if ($password !== $password_repeat) {
             header("Location: " . $_SERVER['HTTP_REFERER'] . "&pwVerifyProblem=1");
             exit;
@@ -115,8 +117,6 @@ class ResetPw
         $stmt->execute();
 
 
-        $this->alert->set('Új jelszó sikeresen beállítva!', "success", "/login");
-
-        
+        $this->alert->set('Új jelszó sikeresen beállítva!', 'New password successfully set!', null, "success", "/login");
     }
 }

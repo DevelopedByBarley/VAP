@@ -12,7 +12,7 @@ class HomeRender extends HomeController
 	{
 		session_start();
 		$partners = $this->partnerModel->partners();
-		
+
 		$user =  $this->userModel->getMe();
 		echo $this->renderer->render("Layout.php", [
 			"user" => $user,
@@ -28,6 +28,11 @@ class HomeRender extends HomeController
 	public function home()
 	{
 		session_start();
+
+		if (!isset($_COOKIE["lang"])) {
+			$this->languageService->language();
+		}
+
 		$user = $this->userModel->getMe();
 		$volunteers = $this->volunteerModel->getVolunteers();
 		$partners = $this->partnerModel->partners();
