@@ -6,7 +6,7 @@ require_once 'app/helpers/FileSaver.php';
 require_once 'app/models/User_Model.php';
 
 
-class RegistrationsController
+class SubscriptionsController
 {
   protected $renderer;
   protected $authService;

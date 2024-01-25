@@ -79,7 +79,7 @@ class UserController
     session_start();
     $this->userModel->registerUser($_FILES, $_POST);
   }
-
+  
 
   public function login()
   {

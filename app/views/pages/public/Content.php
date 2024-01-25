@@ -23,9 +23,12 @@ $user = $params["user"];
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
 			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
 			<p class="text-center"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
-			<?php if (!$user) : ?>
-				<a href="/user/registration" class="btn pr-color btn text-light">Önkéntes regisztráció</a>
-			<?php endif ?>
+			<div class="btn-group">
+				<?php if (!$user) : ?>
+					<a href="/user/registration" class="btn pr-color btn text-light mx-2">Regisztráljon önkéntesnek</a>
+				<?php endif ?>
+				<a href="/event/<?= $latestEvent["eventId"]?>" class="btn sc-color btn text-light mx-2">Következő eseményünk</a>
+			</div>
 
 
 		</div>
@@ -210,19 +213,19 @@ $user = $params["user"];
 				<?php $counter = 0; ?>
 				<?php foreach ($partners as $index => $partner) : ?>
 					<?php if ($counter < 9) : ?>
-							<a href="<?= $partner["link"] ?? '' ?>" class="card p-2 m-4 shadow d-flex align-items-center justify-content-center text-decoration-none text-dark" style="max-width: 540px; min-height: 150px;">
-								<div class="row g-0">
-									<div class="col-md-4 d-flex align-items-center justify-content-center">
-										<div style="background: url('/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>') center center/cover; height: 100px; width: 100px;" class="card-img-top"></div>
-									</div>
-									<div class="col-md-8">
-										<div class="card-body">
-											<h5 class="card-title"><?= $partner["name"] ?></h5>
-											<p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
-										</div>
+						<a href="<?= $partner["link"] ?? '' ?>" class="card p-2 m-4 shadow d-flex align-items-center justify-content-center text-decoration-none text-dark" style="max-width: 540px; min-height: 150px;">
+							<div class="row g-0">
+								<div class="col-md-4 d-flex align-items-center justify-content-center">
+									<div style="background: url('/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>') center center/cover; height: 100px; width: 100px;" class="card-img-top"></div>
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title"><?= $partner["name"] ?></h5>
+										<p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
 									</div>
 								</div>
-							</a>
+							</div>
+						</a>
 						</a>
 
 						<?php $counter++; ?>

@@ -1,6 +1,6 @@
 <?php
-  require_once 'app/controllers/registrations/Registrations_Controller.php';
-  class RegistrationsRender extends RegistrationsController {
+  require_once 'app/controllers/registrations/Subscriptions_Controller.php';
+  class SubscriptionsRender extends SubscriptionsController {
     public function __construct()
     {
       parent::__construct();

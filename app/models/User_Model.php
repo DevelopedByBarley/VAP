@@ -1,6 +1,7 @@
 <?php
 require_once 'app/helpers/Alert.php';
 require_once 'app/services/AuthService.php';
+require_once 'app/helpers/Validate.php';
 
 
 class UserModel
@@ -9,6 +10,7 @@ class UserModel
   private $fileSaver;
   private $mailer;
   private $alert;
+  private $validator;
 
   public function __construct()
   {
@@ -17,6 +19,7 @@ class UserModel
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
     $this->alert = new Alert();
+    $this->validator = new Validator();
   }
 
   // GET USER BY SESSION
@@ -73,18 +76,28 @@ class UserModel
     $createdAt = time();
 
 
+    $schema = $this->validator->userRegisterSchema();
+
+    $errors = $this->validator->validate($schema, $_POST);
+    $errorMessages = $this->validator->getErrorMessages($schema, $errors);
 
 
-
-
+    if (!empty($errorMessages)) {
+      session_start();
+      $_SESSION["regErrors"] = $errorMessages;
+      self::setPrevContent();
+      header("Location: /user/registration");
+      exit;
+    }
 
     $isUserExist = self::checkIsUserExist($email);
 
     if ($isUserExist) {
       self::setPrevContent();
+      $_SESSION["regErrors"] = $errorMessages;
       $this->alert->set(
-        "Ez a felhasználó már létezik!",
-        "This user is already exist!",
+        "Ezzel az email címmel már regisztráltak!",
+        "This email is already exist!",
         null,
         "danger",
         "/user/registration"
@@ -154,6 +167,7 @@ class UserModel
   // UPDATE USER FROM USER SETTINGS
   public function update($body)
   {
+
     $userId = $_SESSION["userId"] ?? null;
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -171,7 +185,18 @@ class UserModel
 
     $lang = $_COOKIE["lang"] ?? null;
 
+    $schema = $this->validator->userUpdateSchema();
 
+    $errors = $this->validator->validate($schema, $_POST);
+    $errorMessages = $this->validator->getErrorMessages($schema, $errors);
+
+
+    if (!empty($errorMessages)) {
+      $_SESSION["profileUpdateError"] = $errorMessages;
+      self::setPrevContent();
+      $this->alert->set('Profil frissítése sikertelen!', 'Profile updating error!', null, 'danger', '/user/settings');
+      exit;
+    }
 
     $stmt = $this->pdo->prepare("UPDATE `users` 
         SET 
@@ -207,6 +232,8 @@ class UserModel
     if ($isSuccess) {
       self::updateUserLanguages($userId, $languages, $levels);
       self::updateTasks($userId, $tasks);
+
+      if(isset($_SESSION["profileUpdateError"])) unset($_SESSION["profileUpdateError"]);
 
       $this->alert->set('Profil frissítése sikeres!', 'You updating your profile successfully!', null, 'success', '/user/settings');
     }
@@ -606,6 +633,6 @@ class UserModel
     }
 
     $_POST["userLanguages"] = $userLanguages;
-    $_SESSION["prevRegisterContent"] = $_POST;
+    $_SESSION["prevRegContent"] = $_POST;
   }
 }

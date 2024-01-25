@@ -1,11 +1,13 @@
 <?php
 require_once 'app/helpers/Alert.php';
+require_once 'app/helpers/Validate.php';
 
 class ResetPw
 {
     private $pdo;
     private $mailer;
     private $alert;
+    private $validator;
 
     public function __construct()
     {
@@ -13,18 +15,29 @@ class ResetPw
         $this->pdo = $db->getConnect();
         $this->mailer = new Mailer();
         $this->alert = new Alert();
+        $this->validator = new Validator();
     }
 
     public function pwRequest($body)
     {
+        session_start();
         $email = $body["email"];
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user) {
-            echo "Something went wrong";
+
+        $validator = new Validator();
+        $schema = $validator->forgotPwFormSchema();
+        $errors = $validator->validate($schema, $_POST);
+     
+        $errorMessages = $validator->getErrorMessages($schema, $errors);
+    
+
+        if(!empty($errorMessages)) {
+            $_SESSION["forgotPwFormErrors"] = $errorMessages;
+            header('Location: /user/forgot-pw');
             exit;
         }
 
@@ -60,7 +73,9 @@ class ResetPw
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
 
+        if(isset($_SESSION["forgotPwFormErrors"])) unset($_SESSION["forgotPwFormErrors"]);
         $this->alert->set('A jelszó változtatásához szükséges levelet az e-mail címére küldtük', 'The letter to change the password has been sent to your e-mail address', null, "success", "/login");
+    
     }
 
 
@@ -97,11 +112,10 @@ class ResetPw
         $email = $body["email"];
         $token = $body["token"];
 
-    
+
 
         if ($password !== $password_repeat) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "&pwVerifyProblem=1");
-            exit;
+            $this->alert->set('A jelszavak nem egyeznek', "The passwords are not the same", null, "danger", $_SERVER['HTTP_REFERER']);
         }
 
         $hashedPw = password_hash($password, PASSWORD_DEFAULT);

@@ -23,15 +23,107 @@ class Validator
 
 
 
-  public function userSchema()
+  public function userRegisterSchema()
   {
     $userSchema = [
-      "email" => [$this->validators->required(), $this->validators->validateEmail()],
-      "password" => [$this->validators->required(),$this->validators->checkPassword()],
+      "name" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->multipleWords()
+      ],
+      "email" => [
+        $this->validators->required(),
+        $this->validators->validateEmail()
+      ],
+      "password" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->containNum(),
+        $this->validators->containLowercase(),
+        $this->validators->containUppercase(),
+        $this->validators->containSpecialChars(),
+
+      ],
+      "address" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->containNum(),
+        $this->validators->containUppercase(),
+
+      ],
+      "mobile" => [
+        $this->validators->required(), $this->validators->validatePhone()
+      ],
     ];
 
     return $this->toSchema($userSchema);
   }
+
+  public function userUpdateSchema()
+  {
+    $userSchema = [
+      "name" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->multipleWords()
+      ],
+      "address" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->containNum(),
+        $this->validators->containUppercase(),
+
+      ],
+      "mobile" => [
+        $this->validators->required(), $this->validators->validatePhone()
+      ],
+    ];
+
+    return $this->toSchema($userSchema);
+  }
+
+
+
+  public function subscriptionSchema()
+  {
+    $subscriptioSchema = [
+      "name" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->multipleWords()
+      ],
+      "email" => [
+        $this->validators->required(),
+        $this->validators->validateEmail()
+      ],
+      "address" => [
+        $this->validators->required(),
+        $this->validators->strLength(5),
+        $this->validators->containNum(),
+        $this->validators->containUppercase(),
+
+      ],
+      "mobile" => [
+        $this->validators->required(), $this->validators->validatePhone()
+      ],
+    ];
+
+    return $this->toSchema($subscriptioSchema);
+  }
+
+  public function forgotPwFormSchema()
+  {
+    $forgotPwFormSchema = [
+      "email" => [
+        $this->validators->required(),
+        $this->validators->validateEmail()
+      ],
+    ];
+
+    return $this->toSchema($forgotPwFormSchema);
+  }
+
+
 
   private function toSchema($schema)
   {
@@ -81,10 +173,21 @@ class Validator
 
   public function getErrorMessages($schema, $errors)
   {
+
+
     $validatorNameToMessage  = [
-      "required" => fn () => "A mező kitöltése kötelező!",
-      "checkPassword" => fn () => "Jelszónak tartalmaznia kell Nagy, Kisbetűt, Számot és Speciális karaktert",
-      "validateEmail" => fn () => "Email formátuma nem megfelelő!"
+      "required" => fn () => "A mező kitöltése kötelező. <br>",
+      "strLength" => fn () => "Az értéknek legalább 5 betűből kell állnia. <br>",
+      "multipleWords" => fn () => "Az értéknek legalább 2 szót kell tartalmaznia. <br>",
+      "containNum" => fn () => "Az értéknek tartalmaznia számot. <br>",
+      "containUppercase" => fn () => "Az értéknek tartalmaznia nagy betűt. <br>",
+      "containLowercase" => fn () => "Az értéknek tartalmaznia kis betűt. <br>",
+      "containSpecialChars" => fn () => "Az értéknek tartalmaznia speciális karaktert. <br>",
+      "checkPassword" => fn () => "Az értéknek tartalmaznia kell Nagy, Kisbetűt, Számot és Speciális karaktert. <br>",
+      "validateEmail" => fn () => "Emailnek legalább 9 karakternek kell lennie!. <br>",
+      "validateAddress" => fn () => "Az értéknek legalább 5 karaktert, nagybetűt és számot kell tartalmaznia. <br>",
+      "validatePhone" => fn () => "Az értéknek minimum 9 karakternek kell lennie<br>",
+
     ];
 
     $ret = [];
@@ -98,6 +201,9 @@ class Validator
         }
       }
     }
+
+
+
     return $ret;
   }
 }

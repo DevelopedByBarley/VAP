@@ -264,8 +264,8 @@ define('REGISTRATION', [
     ],
 
     "address" => [
-      "En" => "Address",
-      "Hu" => "Lakhely",
+      "En" => "Full address",
+      "Hu" => "Teljes lakcím",
       "Sp" => ""
     ],
 

@@ -1,5 +1,7 @@
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
+$errors = $params["errors"] ?? null;
+
 ?>
 
 
@@ -18,7 +20,14 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
           </h1>
           <div class="mb-3 mt-5">
             <label for="email" class="form-label"> <?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?></label>
-            <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?>">
+            <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?>" required>
+            <?php if (isset($errors["email"])) : ?>
+              <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors["email"] as $error) : ?>
+                  <?= $error ?>
+                <?php endforeach ?>
+              </div>
+            <?php endif ?>
           </div>
 
           <div class="text-center mt-5">

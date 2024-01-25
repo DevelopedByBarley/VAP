@@ -2,6 +2,8 @@
 require_once 'app/helpers/UUID.php';
 require_once 'app/helpers/Alert.php';
 require_once 'app/helpers/Success.php';
+require_once 'app/helpers/Validate.php';
+
 
 // ONLY USER NOT ADMIN!
 
@@ -41,6 +43,14 @@ class UserEventModel
     $tasksInLang = [];
 
 
+    // VALIDATOR
+    $validator = new Validator();
+    $schema = $validator->subscriptionSchema();
+    $errors = $validator->validate($schema, $_POST);
+    $errorMessages = $validator->getErrorMessages($schema, $errors);
+
+
+
     // CONVERT TASK TO STRING FOR MAIL
     foreach ($tasks as $index => $task) {
       $tasksInLang[$index] = TASK_AREAS["areas"][$task][$lang];
@@ -73,7 +83,6 @@ class UserEventModel
       }
 
 
-      // INSERT USER IF USER EXIST
 
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
@@ -157,6 +166,18 @@ class UserEventModel
 
 
 
+
+    if (!empty($errorMessages)) {
+      $_SESSION["subErrors"] = $errorMessages;
+      self::setPrevContent();
+
+      header("Location: /event/subscribe/" . $eventId);
+      exit;
+    }
+
+
+
+
     $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email");
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":email", $email);
@@ -164,8 +185,15 @@ class UserEventModel
     $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!empty($isUserExist)) {
-      echo "Ezzel a profillal már regisztráltál erre az eseményre";
-      exit;
+      $_SESSION["subErrors"] = $errorMessages;
+      $this->setPrevContent();
+      $this->alert->set(
+        "Ezzel az email címmel már regisztráltál erre az eseményre!",
+        "You have already registered for this event with this profile!",
+        null,
+        "danger",
+        "/event/subscribe/$eventId"
+      );
     }
 
 
@@ -225,6 +253,10 @@ class UserEventModel
       "button_message" => "Vissza a főoldalra",
       "path" => "/",
     ];
+
+    if (isset($_SESSION["subErrors"])) unset($_SESSION["subErrors"]);
+    if (isset($_SESSION["prevSubContent"])) unset($_SESSION["prevSubContent"]);
+
     header("Location: /success");
   }
 
@@ -378,5 +410,26 @@ class UserEventModel
 
 
     return $ret;
+  }
+
+  // SET PREV CONTENT BEFORE REDIRECT
+  private function setPrevContent()
+  {
+    $langs = $_POST["langs"];
+    $levels = $_POST["levels"];
+    $userLanguages = [];
+
+
+    // POST langs átalakítása a megfelelő formátumra!
+    for ($i = 0; $i < count($langs); $i++) {
+      $userLanguages[] = [
+        "lang" => $langs[$i],
+        "level" => $levels[$i]
+      ];
+    }
+
+
+    $_POST["userLanguages"] = $userLanguages;
+    $_SESSION["prevSubContent"] = $_POST;
   }
 }

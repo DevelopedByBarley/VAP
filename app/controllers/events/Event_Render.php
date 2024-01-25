@@ -237,6 +237,9 @@ class EventRender extends EventController
     $tasks = $this->eventModel->getEventTasks($id);
     $user = $this->userModel->getMe();
     $lang = $_COOKIE["lang"] ?? null;
+    $errors = $_SESSION["subErrors"] ?? null;
+    $prev = $_SESSION["prevSubContent"] ?? null;
+ 
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user,
@@ -247,6 +250,8 @@ class EventRender extends EventController
         "links" => $links ?? null,
         "tasks" => $tasks ?? null,
         "lang" => $lang,
+        "errors" => $errors,
+        "prev" => $prev ?? null
       ]),
     ]);
   }

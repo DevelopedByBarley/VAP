@@ -33,13 +33,17 @@ class UserRender extends UserController
       header('Location: /');
       exit;
     }
-    $prev = $_SESSION["prevRegisterContent"] ?? null;
+    $prev = $_SESSION["prevRegContent"] ?? null;
+    $errors = $_SESSION["regErrors"] ?? null;
+
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/user/Register.php", [
-        "prev" => $prev ?? null
+        "prev" => $prev ?? null,
+        "errors" => $errors ?? null
       ])
     ]);
+
   }
 
   // RENDER DASHBOARD FOR USERS
@@ -134,14 +138,21 @@ class UserRender extends UserController
   // RENDER FORGOT PW FORM FOR USERS
   public function forgotPwForm()
   {
+    session_start();
+    $errors = $_SESSION["forgotPwFormErrors"] ?? null;
+
+  
     echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", []),
+      "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", [
+        "errors" => $errors
+      ]),
     ]);
   }
 
   // RENDER FORGOT PW FORM FOR USERS
   public function resetPwForm()
   {
+    session_start();
     $token = $_GET["token"] ?? null;
     $expires = $_GET["expires"] ?? null;
     $emailByToken = $this->resetPwService->checkTokenData($token, $expires);
@@ -170,6 +181,7 @@ class UserRender extends UserController
     $userLanguages = $this->userModel->getLanguagesByUser($user["id"]);
     $tasks = $this->userModel->getTasksByUser($user["id"]);
 
+    $errors = $_SESSION["profileUpdateError"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user ?? null,
@@ -178,6 +190,7 @@ class UserRender extends UserController
         "tasks" => $tasks ?? null,
         "documents" => $documents ?? null,
         "userLanguages" => $userLanguages ?? null,
+        "errors" => $errors ?? null
       ]),
     ]);
   }

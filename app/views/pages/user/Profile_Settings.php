@@ -8,6 +8,7 @@ $user = $params["user"];
 $tasks = array_column($params["tasks"], "task");
 $documents = $params["documents"];
 $userLanguages = $params["userLanguages"];
+$errors = $params["errors"];
 ?>
 
 <div class="container-fluid">
@@ -24,6 +25,14 @@ $userLanguages = $params["userLanguages"];
           <div class="form-outline">
             <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="name" name="name" class="form-control" value="<?= $user["name"] ?? '' ?>" required />
+            <?php if (isset($errors["name"])) : ?>
+              <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors["name"] as $error) : ?>
+                  <?= $error ?>
+                <?php endforeach ?>
+
+              </div>
+            <?php endif ?>
           </div>
         </div>
 
@@ -53,6 +62,13 @@ $userLanguages = $params["userLanguages"];
           <div class="form-outline mb-4">
             <label class="form-label required" for="city"><b><?= REGISTRATION["form"]["address"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="address" name="address" class="form-control" required value="<?= $user["address"] ?? '' ?>" />
+            <?php if (isset($errors["address"])) : ?>
+              <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors["address"] as $error) : ?>
+                  <?= $error ?>
+                <?php endforeach ?>
+              </div>
+            <?php endif ?>
           </div>
         </div>
 
@@ -63,6 +79,13 @@ $userLanguages = $params["userLanguages"];
           <div class="form-outline mb-4">
             <label class="form-label" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="phone" name="mobile" class="form-control" value="<?= $user["mobile"] ?? '' ?>" />
+            <?php if (isset($errors["mobile"])) : ?>
+              <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors["mobile"] as $error) : ?>
+                  <?= $error ?>
+                <?php endforeach ?>
+              </div>
+            <?php endif ?>
           </div>
         </div>
 

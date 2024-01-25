@@ -9,6 +9,7 @@ class EventController
   protected $renderer;
   protected $adminModel;
   protected $userEventModel;
+  
 
   public function __construct()
   {

@@ -2,6 +2,7 @@
 
 $sub = $params["user"];
 $tasks = array_column($params["tasks"], "task");
+
 ?>
 
 <div class="container">
