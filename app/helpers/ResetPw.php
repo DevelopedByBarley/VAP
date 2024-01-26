@@ -27,20 +27,6 @@ class ResetPw
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-        $validator = new Validator();
-        $schema = $validator->forgotPwFormSchema();
-        $errors = $validator->validate($schema, $_POST);
-     
-        $errorMessages = $validator->getErrorMessages($schema, $errors);
-    
-
-        if(!empty($errorMessages)) {
-            $_SESSION["forgotPwFormErrors"] = $errorMessages;
-            header('Location: /user/forgot-pw');
-            exit;
-        }
-
         $token = uniqid();
         $current_time = time();
         $expires = date('Y-m-d H:i:s', strtotime('+10 minutes', $current_time));

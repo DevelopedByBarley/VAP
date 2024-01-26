@@ -348,15 +348,19 @@ class EventModel
 
 
   // Send email to registered users public function!
-  public function sendEmailToRegisteredUsers($body, $subscriptions)
+  public function sendEmailToRegisteredUsers($body, $subscriptions, $eventId)
   {
     foreach ($subscriptions as $subscription) {
       if ($subscription["lang"] === "Hu") {
         $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Üzenet");
-      } else if ($subscription["lang"] === "En") {
+      } else if ($subscription["lang"] === "Sp") {
+        $this->mailer->send($subscription["email"], $body["mail-body-Sp"], "");
+      } else {
         $this->mailer->send($subscription["email"], $body["mail-body-En"], "Message");
       }
     }
+
+    $this->alert->set('Emailek sikeresen kiküldve!','Emailek sikeresen kiküldve!','Emailek sikeresen kiküldve!', "success", "/admin/event/$eventId");
   }
 
 
@@ -415,6 +419,7 @@ class EventModel
       $body = str_replace('{{id}}', $eventId, $body);
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Új esemény" : "New event!");
     }
+
   }
 
 

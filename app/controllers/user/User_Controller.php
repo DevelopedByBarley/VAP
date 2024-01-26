@@ -1,6 +1,7 @@
 <?php
 require_once 'app/models/User_Model.php';
 require_once 'app/models/Event_Model.php';
+require_once 'app/helpers/Alert.php';
 
 class UserController
 {
@@ -11,6 +12,7 @@ class UserController
   protected $loginChecker;
   protected $resetPwService;
   protected $eventModel;
+  protected $alert;
 
   public function __construct()
   {
@@ -21,6 +23,7 @@ class UserController
     $this->loginChecker = new LoginChecker();
     $this->resetPwService = new ResetPw();
     $this->eventModel = new EventModel();
+    $this->alert = new Alert();
   }
 
 

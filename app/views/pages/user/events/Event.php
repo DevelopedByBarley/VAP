@@ -117,7 +117,7 @@ $isRegistered = $params["isRegistered"] ?? null;
             Regisztráció
           </button>
         <?php else : ?>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn primary-btn\">" . (EVENT['registration_without_profile'][$lang] ?? 'HIBA') . "</a>" ?>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn primary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
 
         <?php endif ?>
 

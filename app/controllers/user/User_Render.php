@@ -158,8 +158,7 @@ class UserRender extends UserController
     $emailByToken = $this->resetPwService->checkTokenData($token, $expires);
 
     if (!$emailByToken) {
-      echo "Token nem lejárt vagy nem létezik!";
-      return;
+      $this->alert->set("Token lejárt vagy nem létezik", "Token is expired or doesn't exist!", null, "danger", "/login");
     }
 
 

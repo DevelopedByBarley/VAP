@@ -72,7 +72,7 @@ class EventController
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
-    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions);
+    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions, $vars["id"]);
   }
 
   public function sendMailToSub($vars)

@@ -575,9 +575,15 @@ class UserModel
 
   public function getRegistrationsByUser($userId)
   {
-    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.userRefId = :id");
-
+    $stmt = $this->pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :id");
     $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+    $email = $stmt->fetch(PDO::FETCH_ASSOC)["email"];
+  
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email");
+
+    $stmt->bindParam(":email", $email);
     $stmt->execute();
     $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -117,6 +117,6 @@ class AdminModel
 
     $this->mailer->send($user["email"], $body["mail-body"], $user["lang"] === "Hu" ? "Üzenet" : "Message");
 
-    $this->alert->set('Sikeres email kiküldés!', null, null, 'success', "/admin/user/$userId");
+    $this->alert->set('Sikeres email kiküldés!', 'Sikeres email kiküldés!', 'Sikeres email kiküldés!', 'success', "/admin/user/$userId");
   }
 }
