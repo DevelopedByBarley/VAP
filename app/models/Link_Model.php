@@ -55,7 +55,7 @@ class LinkModel extends AdminModel
     $stmt->bindParam(":createdAt", $createdAt);
 
     $stmt->execute();
-    header("Location: /admin/links");
+    $this->alert->set('Új link sikeresen hozzáadva!', 'Új link sikeresen hozzáadva!', 'Új link sikeresen hozzáadva!', "success", "/admin/links");
   }
 
   // DELETE LINKS FOR ADMIN
@@ -66,7 +66,7 @@ class LinkModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/links");
+    $this->alert->set('Link sikeresen törölve!', 'Link sikeresen törölve!', 'Link sikeresen törölve!', "success", "/admin/links");
   }
 
 
@@ -90,7 +90,7 @@ class LinkModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/links");
+    $this->alert->set('Link sikeresen frissítve!', 'Link sikeresen frissítve!', 'Link sikeresen frissítve!', "success", "/admin/links");
   }
 
   // GET LINK BY ID FOR ADMIN

@@ -21,13 +21,8 @@ $errors = $params["errors"] ?? null;
           <div class="mb-3 mt-5">
             <label for="email" class="form-label"> <?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?></label>
             <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?>" required>
-            <?php if (isset($errors["email"])) : ?>
-              <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors["email"] as $error) : ?>
-                  <?= $error ?>
-                <?php endforeach ?>
-              </div>
-            <?php endif ?>
+            <small id="emailInputAlert" class="text-danger"></small>
+
           </div>
 
           <div class="text-center mt-5">
@@ -38,3 +33,5 @@ $errors = $params["errors"] ?? null;
     </div>
   </div>
 </div>
+
+<script src="/public/js/validators/ForgotPw.js"></script>

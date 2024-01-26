@@ -48,7 +48,7 @@ class QuestionModel extends AdminModel
     $stmt->execute();
 
     if ($this->pdo->lastInsertId()) {
-      header("Location: /admin/questions");
+      $this->alert->set('Új kérdés sikeresen hozzáadva!', 'Új kérdés sikeresen hozzáadva!', 'Új kérdés sikeresen hozzáadva!', "success", "/admin/questions");
     }
   }
 
@@ -59,7 +59,7 @@ class QuestionModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location: /admin/questions");
+    $this->alert->set('Kérdés sikeresen törölve!', 'Kérdés sikeresen törölve!', 'Kérdés sikeresen törölve!', "success", "/admin/questions");
   }
 
 
@@ -87,6 +87,6 @@ class QuestionModel extends AdminModel
 
     $stmt->execute();
 
-    header("Location: /admin/questions");
+    $this->alert->set('Kérdés sikeresen frissítve!', 'Kérdés sikeresen frissítve!', 'Kérdés sikeresen frissítve!', "success", "/admin/questions");
   }
 }

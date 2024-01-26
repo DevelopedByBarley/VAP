@@ -25,11 +25,13 @@ var_dump($email);
           </h1>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label required"><?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required placeholder="<?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?>">
+            <input type="password" class="form-control"  id="password" name="password" required placeholder="<?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?>">
+            <small id="pwInputAlert" class="text-danger"> </small>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label required"><?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password-repeat" required placeholder="<?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?>">
+            <input type="password" class="form-control" id="pwRepeat" name="password-repeat" required placeholder="<?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?>">
+            <small id="pwRepeatInputAlert" class="text-danger"> </small>
           </div>
 
           <div class="hiddens">
@@ -45,3 +47,5 @@ var_dump($email);
     </div>
   </div>
 </div>
+
+<script src="/public/js/validators/ResetPwForm.js"></script>

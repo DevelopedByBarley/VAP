@@ -1,13 +1,11 @@
 
 input {
-  border: 1px solid !important;
   border-radius: 0 !important;
   border-radius: none !important;
 }
 
 input:focus {
-  border: 2px solid black !important;
-  box-shadow: none !important;
+  outline: none !important;
 }
 
 h1,

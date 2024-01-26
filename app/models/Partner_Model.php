@@ -30,7 +30,7 @@ class PartnerModel extends AdminModel
     $stmt->bindParam(":createdAt", $createdAt);
 
     $stmt->execute();
-    $this->alert->set('Új partner sikeresen hozzáadva!', null, null, "success", "/admin/partners");
+    $this->alert->set('Új partner sikeresen hozzáadva!', 'Új partner sikeresen hozzáadva!', 'Partner sikeresen törölve!', "success", "/admin/partners");
   }
 
 
@@ -82,7 +82,7 @@ class PartnerModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    $this->alert->set('Új partner sikeresen törölve!', null, null, "success", "/admin/partners");
+    $this->alert->set('Partner sikeresen törölve!', 'Partner sikeresen törölve!', 'Partner sikeresen törölve!', "success", "/admin/partners");
   }
 
   public function update($files, $id, $body)
@@ -125,7 +125,7 @@ class PartnerModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    $this->alert->set('Új partner sikeresen törölve!', null, null, "success", "/admin/partners");
+    $this->alert->set('Partner sikeresen frissítve!', 'Partner sikeresen frissítve!', 'Partner sikeresen frissítve!', "success", "/admin/partners");
   }
 
 

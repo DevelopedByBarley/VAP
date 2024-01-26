@@ -10,7 +10,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 vh-100">
       <div id="admin-links" class="d-flex align-items-center justify-content-center flex-column w-100 h-100">
         <?php if (!isset($links) || count($links) === 0) : ?>
           <div id="no-links" class="text-center">

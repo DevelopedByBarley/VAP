@@ -56,7 +56,7 @@ class DocumentModel extends AdminModel
     $stmt->execute();
 
     if ($this->pdo->lastInsertId()) {
-      header("Location: /admin/documents");
+      $this->alert->set('Új dokumentum sikeresen hozzáadva!', 'Új dokumentum sikeresen hozzáadva!', 'Új dokumentum sikeresen hozzáadva!', "success", "/admin/documents");
     }
   }
 
@@ -71,7 +71,7 @@ class DocumentModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/documents");
+    $this->alert->set('Dokumentum sikeresen törölve!', 'Dokumentum sikeresen törölve!', 'Dokumentum sikeresen törölve!', "success", "/admin/documents");
   }
 
 
@@ -89,8 +89,6 @@ class DocumentModel extends AdminModel
         'application/pdf',
         'application/msword',
       ]);
-
-      
     } else {
       $documentName = $prevImage;
     }
@@ -112,7 +110,7 @@ class DocumentModel extends AdminModel
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    header("Location:  /admin/documents");
+    $this->alert->set('Dokumentum sikeresen frissítve!', 'Dokumentum sikeresen frissítve!', 'Dokumentum sikeresen frissítve!', "success", "/admin/documents");
   }
 
 
@@ -121,7 +119,7 @@ class DocumentModel extends AdminModel
   // GET DOCUMENT BY ID FOR ADMIN
   public function getDocumentById($id)
   {
-   
+
     $stmt = $this->pdo->prepare("SELECT * FROM `documents` WHERE `id` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();

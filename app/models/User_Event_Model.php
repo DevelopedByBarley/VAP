@@ -43,13 +43,6 @@ class UserEventModel
     $tasksInLang = [];
 
 
-    // VALIDATOR
-    $validator = new Validator();
-    $schema = $validator->subscriptionSchema();
-    $errors = $validator->validate($schema, $_POST);
-    $errorMessages = $validator->getErrorMessages($schema, $errors);
-
-
 
     // CONVERT TASK TO STRING FOR MAIL
     foreach ($tasks as $index => $task) {
@@ -59,7 +52,7 @@ class UserEventModel
     $tasksInString = implode(",<br>", $tasksInLang);
 
     if (!$dates || !$tasks) {
-      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/register/$eventId");
+      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/subscribe/$eventId");
     }
 
     // CHECK USER IS EXIST
@@ -78,7 +71,7 @@ class UserEventModel
           "You have already registered for this event with this profile!",
           null,
           "danger",
-          "/event/register/$eventId"
+          "/event/subscribe/$eventId"
         );
       }
 
@@ -185,7 +178,6 @@ class UserEventModel
     $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!empty($isUserExist)) {
-      $_SESSION["subErrors"] = $errorMessages;
       $this->setPrevContent();
       $this->alert->set(
         "Ezzel az email címmel már regisztráltál erre az eseményre!",
@@ -198,7 +190,7 @@ class UserEventModel
 
 
     if (!$dates || !$tasks) {
-      header("Location: /event/register/" . $eventId);
+      header("Location: /event/subscribe/" . $eventId);
       exit;
     }
 

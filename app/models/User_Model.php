@@ -10,7 +10,6 @@ class UserModel
   private $fileSaver;
   private $mailer;
   private $alert;
-  private $validator;
 
   public function __construct()
   {
@@ -19,7 +18,6 @@ class UserModel
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
     $this->alert = new Alert();
-    $this->validator = new Validator();
   }
 
   // GET USER BY SESSION
@@ -76,15 +74,8 @@ class UserModel
     $createdAt = time();
 
 
-    $schema = $this->validator->userRegisterSchema();
-
-    $errors = $this->validator->validate($schema, $_POST);
-    $errorMessages = $this->validator->getErrorMessages($schema, $errors);
-
-
     if (!empty($errorMessages)) {
       session_start();
-      $_SESSION["regErrors"] = $errorMessages;
       self::setPrevContent();
       header("Location: /user/registration");
       exit;
@@ -94,7 +85,6 @@ class UserModel
 
     if ($isUserExist) {
       self::setPrevContent();
-      $_SESSION["regErrors"] = $errorMessages;
       $this->alert->set(
         "Ezzel az email címmel már regisztráltak!",
         "This email is already exist!",
@@ -185,10 +175,7 @@ class UserModel
 
     $lang = $_COOKIE["lang"] ?? null;
 
-    $schema = $this->validator->userUpdateSchema();
 
-    $errors = $this->validator->validate($schema, $_POST);
-    $errorMessages = $this->validator->getErrorMessages($schema, $errors);
 
 
     if (!empty($errorMessages)) {
