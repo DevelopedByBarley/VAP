@@ -98,7 +98,6 @@ class EventModel
 
 
     self::sendMailForRegisteredUsers($lastId);
-    exit;
 
     $this->alert->set('Új esemény sikeresen hozzáadva!', null, null, "success", "/admin/events");
   }

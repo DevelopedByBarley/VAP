@@ -10,6 +10,9 @@ $dates = $params["dates"] ?? null;
 $links = $params["links"] ?? null;
 $tasks = $params["tasks"] ?? null;
 $isRegistered = $params["isRegistered"] ?? null;
+
+
+
 ?>
 
 <div class="container-fluid mt-b" style="position: relative; z-index: 0;">
@@ -108,11 +111,51 @@ $isRegistered = $params["isRegistered"] ?? null;
       <?php if (strtotime($event["end_date"]) < strtotime('today') || strtotime($event["reg_end_date"]) < strtotime('today')) : ?>
         <span class="badge p-3 bg-danger">Regisztráció lezárult</span>
       <?php else : ?>
-        <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn secondary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
-        <a href="mailto:developedbybarley@gmail.com" class="btn primary-btn ms-1"><?= EVENT['send_message'][$lang] ?? 'HIBA' ?></a>
+
+        <?php if (!isset($_SESSION["userId"])) : ?>
+          <button type="button" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Regisztráció
+          </button>
+        <?php else : ?>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn primary-btn\">" . (EVENT['registration_without_profile'][$lang] ?? 'HIBA') . "</a>" ?>
+
+        <?php endif ?>
+
+
+
+
+
+
+        <a href="mailto:developedbybarley@gmail.com" class="btn secondary-btn ms-1"><?= EVENT['send_message'][$lang] ?? 'HIBA' ?></a>
 
       <?php endif ?>
     </div>
   </div>
 
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Önkéntes profil regisztrációja</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Önkéntes profil regisztráció után lehetősege nyílik arra hogy értesítést kapjon következő
+        eseményinkről, kezelheti és módosíthatja adatait, és egy kattintással regisztrálhat bármelyik leendő eseményünkre!
+      </div>
+      <div class="modal-footer">
+        <a href="/user/registration" class="btn btn-primary">Profilt regisztrálok</button>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn btn-secondary\">" . (EVENT['registration_without_profile'][$lang] ?? 'HIBA') . "</a>" ?>
+      </div>
+    </div>
+  </div>
 </div>

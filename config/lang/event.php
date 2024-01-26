@@ -59,6 +59,11 @@ define('EVENT', [
     "En" => "Registration",
     "Sp" => ""
   ],
+  "registration_without_profile" => [
+    "Hu" => "Profil nélkül folytatom",
+    "En" => "Continue without profile",
+    "Sp" => ""
+  ],
   "send_message" => [
     "Hu" => "Üzenet küldése",
     "En" => "Send message",
