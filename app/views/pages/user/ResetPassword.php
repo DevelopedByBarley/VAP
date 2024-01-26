@@ -24,11 +24,14 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label required"><?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="new_password" required placeholder="<?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?>">
+            <input type="password" class="form-control" id="password" name="new_password" required placeholder="<?= CHANGE_PW["new_pw"][$lang] ?? 'HIBA' ?>">
+            <small class="text-danger" id="pwInputAlert"></small>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label required"><?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="confirm_password" required placeholder="<?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?>">
+            <input type="password" class="form-control" id="pwRepeat" name="confirm_password" required placeholder="<?= CHANGE_PW["new_pw_again"][$lang] ?? 'HIBA' ?>">
+            <small class="text-danger" id="pwRepeatInputAlert"></small>
+
           </div>
 
           <div class="text-center mt-5">
@@ -39,3 +42,5 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
     </div>
   </div>
 </div>
+
+<script src="/public/js/validators/ResetPwForm.js"></script>
