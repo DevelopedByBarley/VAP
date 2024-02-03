@@ -19,14 +19,14 @@ $errors = $params["errors"] ?? null;
             <?= FORGOT_PW["title"][$lang] ?? 'HIBA' ?>
           </h1>
           <div class="mb-3 mt-5">
-            <label for="email" class="form-label"> <?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?></label>
+            <label for="email" class="form-label required"> <?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?></label>
             <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= FORGOT_PW["email"][$lang] ?? 'HIBA' ?>" required>
             <small id="emailInputAlert" class="text-danger"></small>
 
           </div>
 
           <div class="text-center mt-5">
-            <button type="submit" class="btn btn-primary"><?= FORGOT_PW["pw_req"][$lang] ?? 'HIBA' ?></button>
+            <button type="submit" class="btn btn-outline-dark"><?= FORGOT_PW["pw_req"][$lang] ?? 'HIBA' ?></button>
           </div>
         </form>
       </div>

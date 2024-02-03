@@ -31,11 +31,7 @@ $user = $params["user"] ?? null;
                                         <?= NAVBAR["partners"][$lang] ?? 'Partner Oldalak' ?>
                                     </a>
                                 </li>
-                                <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#edu' : '#edu' ?>">
-                                        <?= NAVBAR["edu"][$lang] ?? 'Edu' ?>
-                                    </a>
-                                </li>
+                            
                                 <!--
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#">

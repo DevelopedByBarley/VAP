@@ -100,4 +100,5 @@ class UserController
   {
     $this->resetPwService->newPw($_POST);
   }
+
 }

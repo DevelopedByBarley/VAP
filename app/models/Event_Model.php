@@ -539,6 +539,9 @@ class EventModel
   }
 
 
+
+
+
   public function acceptUserSubscription($subId)
   {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
@@ -556,4 +559,25 @@ class EventModel
 
     $this->alert->set('Elfogadott regisztráció visszavonva!', null, null, "success", "/admin/event/subscriber/$subId");
   }
+
+
+  public function getAcceptedSubs()
+  {
+
+
+
+    $stmt = $this->pdo->prepare("SELECT registrations.*, GROUP_CONCAT(registration_dates.date) as dates FROM registrations INNER JOIN registration_dates ON registration_dates.registerRefId = registrations.id WHERE registrations.isAccepted = 1 GROUP BY registrations.id;");
+    $isSuccess = $stmt->execute();
+    
+    $subs =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $subs;
+  
+
+    
+    
+  }
+
 }
+
+

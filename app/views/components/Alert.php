@@ -2,7 +2,7 @@
 $alert = $_SESSION["alert"] ?? null;
 ?>
 
-<link rel="stylesheet" href="/public/css/components/alert.css">
+<link rel="stylesheet" href="/public/css/components/alert.css?v=<?php echo time() ?>">
 
 <?php if (isset($alert)) : ?>
   <div id="toast-modal" class="text-center toast p-2 align-items-center text-white bg-<?= $alert["bg"] ?> border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
@@ -16,7 +16,7 @@ $alert = $_SESSION["alert"] ?? null;
     const toast = document.querySelector("#toast-modal");
     setTimeout(() => {
       toast.style.display = "none";
-    }, 3000)
+    }, 6000)
   </script>
 <?php endif; ?>
 

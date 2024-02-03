@@ -13,7 +13,6 @@
   {
     
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-
     $admin = $this->adminModel->admin(); // GET ADMIN BY SESSION
     $usersData = $this->adminModel->index(); // GET ALL REGISTERED PROFILES
 

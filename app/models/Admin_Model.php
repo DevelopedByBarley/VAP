@@ -62,7 +62,6 @@ class AdminModel
 
 
 
-
   // GET ALL OF REGISTERED PROFILES
   public function index()
   {

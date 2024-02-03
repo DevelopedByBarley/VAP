@@ -40,7 +40,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="mb-0 me-2"><?= LOGIN["have"][$lang] ?? 'HIBA' ?></p>
-                    <a href="/user/registration" class="btn btn-outline-primary"><?= LOGIN["create-btn"][$lang] ?? 'HIBA' ?></a>
+                    <a href="/user/registration" class="btn btn-outline-dark"><?= LOGIN["create-btn"][$lang] ?? 'HIBA' ?></a>
                   </div>
 
                 </form>

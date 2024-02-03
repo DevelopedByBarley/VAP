@@ -1,6 +1,8 @@
 <?php
 require_once 'app/models/Event_Model.php';
 require_once 'app/models/User_Event_Model.php';
+require_once 'app/helpers/ExportExcel.php';
+
 
 class EventController
 {
@@ -109,5 +111,14 @@ class EventController
     }
 
     $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
+  }
+
+  public function exportSubs() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+
+    $data = $this->eventModel->getAcceptedSubs();
+    $XLSX = new XLSX();
+    $XLSX->write($data);
+    exit;
   }
 }

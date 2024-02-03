@@ -1,7 +1,6 @@
 <?php
 require_once 'app/helpers/UUID.php';
 require_once 'app/helpers/Alert.php';
-require_once 'app/helpers/Success.php';
 require_once 'app/helpers/Validate.php';
 
 
@@ -129,7 +128,7 @@ class UserEventModel
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Esemény regisztráció!" : "Event registration");
 
-      success();
+      $this->alert->set("Az eseményre ön sikeresen regisztrált!", "You have successfully registered for the event!", null, "success", "/");
     }
 
 

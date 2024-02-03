@@ -27,7 +27,10 @@ $user = $params["user"];
 				<?php if (!$user) : ?>
 					<a href="/user/registration" class="btn pr-color btn text-light mx-2">Regisztráljon önkéntesnek</a>
 				<?php endif ?>
-				<a href="/event/<?= $latestEvent["eventId"]?>" class="btn sc-color btn text-light mx-2">Következő eseményünk</a>
+				<?php if ($latestEvent) : ?>
+
+					<a href="/event/<?= $latestEvent["eventId"] ?>" class="btn sc-color btn text-light mx-2">Következő eseményünk</a>
+				<?php endif ?>
 			</div>
 
 

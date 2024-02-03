@@ -33,6 +33,7 @@ class UserModel
   }
 
 
+
   // REGISTER USER 
   public function registerUser($files, $body)
   {
@@ -63,6 +64,10 @@ class UserModel
     $tasks = $body["tasks"] ?? null;
     $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
+
+    $code = uniqid();
+    $isActivated = 0;
+
     $typeOfDocument = $body["typeOfDocument"] ?? [];
     $languages = $body["langs"] ?? [];
     $levels = $body["levels"] ?? [];
@@ -114,7 +119,10 @@ class UserModel
         :permission, 
         :lang, 
         :fileName,
-        :createdAt)");
+        :createdAt,
+        :activation_code,
+        :isActivated
+        )");
 
     // Paraméterek kötése
     $stmt->bindParam(':name', $name);
@@ -132,6 +140,8 @@ class UserModel
     $stmt->bindParam(':lang', $lang);
     $stmt->bindParam(':fileName', $fileName);
     $stmt->bindParam(':createdAt', $createdAt);
+    $stmt->bindParam(':activation_code', $code);
+    $stmt->bindParam(':isActivated', $isActivated);
 
     // INSERT parancs végrehajtása
     $stmt->execute();
@@ -144,12 +154,13 @@ class UserModel
       self::insertTasks($lastInsertedId, $tasks);
       $body = file_get_contents("./app/views/templates/user_registration/UserRegistrationMailTemplate" . $lang . ".php");
       $body = str_replace('{{name}}', $name, $body);
+      $body = str_replace('{{code}}', $code, $body);
 
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
 
       if (isset($_SESSION["prevRegisterContent"])) unset($_SESSION["prevRegisterContent"]);
 
-      success();
+      $this->alert->set("Sikeres regisztráció! Az ön e-mail címére visszaigazoló e-mailt küldtünk!", "asd", null, "success", "/login");
     }
   }
 
@@ -220,7 +231,7 @@ class UserModel
       self::updateUserLanguages($userId, $languages, $levels);
       self::updateTasks($userId, $tasks);
 
-      if(isset($_SESSION["profileUpdateError"])) unset($_SESSION["profileUpdateError"]);
+      if (isset($_SESSION["profileUpdateError"])) unset($_SESSION["profileUpdateError"]);
 
       $this->alert->set('Profil frissítése sikeres!', 'You updating your profile successfully!', null, 'success', '/user/settings');
     }
@@ -579,7 +590,7 @@ class UserModel
     $stmt->bindParam(":id", $userId);
     $stmt->execute();
     $email = $stmt->fetch(PDO::FETCH_ASSOC)["email"];
-  
+
 
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email");
 

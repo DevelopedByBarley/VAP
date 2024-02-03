@@ -1,5 +1,4 @@
 <?php
-
 class EventRender extends EventController
 {
 
@@ -57,11 +56,19 @@ class EventRender extends EventController
       "admin" => $admin ?? null
     ]);
   }
+ 
+
+
+
 
   // GET ALL SUBSCRIPTIONS FOR ADMIN
   public function subscriptions($vars)
   {;
+
+ 
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+   
+    
     $eventId = $vars["id"] ?? null;
     $admin = $this->adminModel->admin();
     $event = $this->eventModel->getEventById($eventId);

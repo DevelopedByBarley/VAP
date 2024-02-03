@@ -100,7 +100,7 @@ $errors = $params["errors"];
 
             <?php foreach (PROFESSIONS["profession"] as $index => $profession) : ?>
               <input type="radio" class="btn-check" name="profession" id="profession_<?= $index ?>" value="<?= $profession['Hu'] ?>" autocomplete="off" required <?php echo $profession['Hu'] === $user["profession"] ? 'checked' :  '' ?>>
-              <label class="btn btn-outline-primary" for="profession_<?= $index ?>">
+              <label class="btn btn-outline-dark" for="profession_<?= $index ?>">
                 <?= PROFESSIONS["profession"][$index][$lang] ?? '' ?>
               </label>
             <?php endforeach ?>
@@ -151,7 +151,7 @@ $errors = $params["errors"];
               <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'Idegennyelv ismeret' ?></b>
             </label>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
+            <button type="button" class="btn btn-outline-dark m-3" id="lang-modal-btn">
               <?= USER_LANGUAGES["btn"][$lang] ?? 'HIBA' ?>
             </button>
 

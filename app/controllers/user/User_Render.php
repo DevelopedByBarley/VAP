@@ -153,6 +153,13 @@ class UserRender extends UserController
   public function resetPwForm()
   {
     session_start();
+
+    $user = $_SESSION["userId"] ?? null;
+
+    if($user) {
+      $this->authService->logoutUser();
+    }
+
     $token = $_GET["token"] ?? null;
     $expires = $_GET["expires"] ?? null;
     $emailByToken = $this->resetPwService->checkTokenData($token, $expires);

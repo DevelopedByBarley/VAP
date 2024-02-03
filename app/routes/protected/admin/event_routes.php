@@ -18,6 +18,7 @@ $r->addRoute('GET', '/admin/events/delete/{id}', [EventController::class, 'delet
 $r->addRoute('GET', '/admin/event/state/{id}', [EventController::class, 'setEventState']);
 $r->addRoute('GET', '/admin/subscription/accept/{id}', [EventController::class, 'acceptSubscription']);
 $r->addRoute('GET', '/admin/subscription/delete/{id}', [EventController::class, 'deleteSubscription']);
+$r->addRoute('GET', '/admin/subscription/export-subscribers', [EventController::class, 'exportSubs']);
 
 
 

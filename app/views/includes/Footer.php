@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="footer">
     <footer class="text-center text-lg-start text-white sc-color">
         <!-- Grid container -->
         <div class="container p-4 pb-0">

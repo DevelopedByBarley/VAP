@@ -17,16 +17,20 @@ class ResetPw
         $this->alert = new Alert();
         $this->validator = new Validator();
     }
-
+    
     public function pwRequest($body)
     {
         session_start();
+        
+        $url = $_SERVER["REFERER"];
         $email = $body["email"];
+
+        
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        
         $token = uniqid();
         $current_time = time();
         $expires = date('Y-m-d H:i:s', strtotime('+10 minutes', $current_time));
@@ -55,14 +59,19 @@ class ResetPw
         $stmt->bindParam(':expires', $expires);
 
         $stmt->execute();
-        $body = "http://localhost:8080/user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
+
+
+
+        $body = "$url/user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
 
-        if(isset($_SESSION["forgotPwFormErrors"])) unset($_SESSION["forgotPwFormErrors"]);
+        if (isset($_SESSION["forgotPwFormErrors"])) unset($_SESSION["forgotPwFormErrors"]);
         $this->alert->set('A jelszó változtatásához szükséges levelet az e-mail címére küldtük', 'The letter to change the password has been sent to your e-mail address', null, "success", "/login");
-    
     }
+
+
+   
 
 
     public function checkTokenData($token)
