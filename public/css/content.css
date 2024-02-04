@@ -120,19 +120,6 @@
 }
 
 
-
-.letters:nth-child(1) {
-  color: var(--pr-color);
-}
-
-.letters:nth-child(2) {
-  color: var(--sc-color);
-}
-
-.letters:nth-child(3) {
-  color: yellow;
-}
-
 .list-component {
   border-radius: 15px;
   width: 95%;

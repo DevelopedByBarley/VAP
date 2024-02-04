@@ -21,7 +21,7 @@ $user = $params["user"];
 
 	<div class="row">
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
-			<h1 class="text-center mb-3"><span class="letters">V</span>olunteer <span class="letters">A</span>rt <span class="letters">P</span>rograms</h1>
+			<h1 class="text-center mb-3">Volunteer Art Programs</h1>
 			<p class="text-center"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
 			<div class="btn-group">
 				<?php if (!$user) : ?>
@@ -185,6 +185,7 @@ $user = $params["user"];
 				<div class="col-12 col-sm-9 col-lg-6 p-4 reveal rounded" id="latest-event-title">
 					<h1 class="mt-5 mb-2 text-light text-uppercase">Következő eseményünk</h1>
 					<p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ducimus, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam, distinctio cumque doloremque animi id perferendis error aut est fugit esse architecto maxime! Non a iure expedita aut id totam.</p>
+					<a href="/events" class="btn btn-outline-light">További eseményeink</a>
 				</div>
 				<div class="col-12 col-sm-6 col-lg-5 p-3 d-flex align-items-center justify-content-center text-dark reveal rounded">
 					<a href="/event/<?= $latestEvent["eventId"] ?>" style="text-decoration: none;">

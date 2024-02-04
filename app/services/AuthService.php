@@ -105,7 +105,7 @@ class AuthService
             $this->alert->set("Hibás email vagy jelszó", "Email or password is wrong", null, "danger", "/login");
         }
 
-        if ($user["isActivated"] !== 1) {
+        if ((int)$user["isActivated"] !== 1) {
             $this->alert->set("Hibás email vagy jelszó", "Email or password is wrong", null, "danger", "/login");
         }
 

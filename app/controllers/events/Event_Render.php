@@ -56,7 +56,7 @@ class EventRender extends EventController
       "admin" => $admin ?? null
     ]);
   }
- 
+
 
 
 
@@ -65,10 +65,10 @@ class EventRender extends EventController
   public function subscriptions($vars)
   {;
 
- 
+
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-   
-    
+
+
     $eventId = $vars["id"] ?? null;
     $admin = $this->adminModel->admin();
     $event = $this->eventModel->getEventById($eventId);
@@ -188,6 +188,7 @@ class EventRender extends EventController
 
 
 
+
   // RENDER EVENT FOR USER
   public function event($vars)
   {
@@ -246,7 +247,7 @@ class EventRender extends EventController
     $lang = $_COOKIE["lang"] ?? null;
     $errors = $_SESSION["subErrors"] ?? null;
     $prev = $_SESSION["prevSubContent"] ?? null;
- 
+
 
     echo $this->renderer->render("Layout.php", [
       "user" => $user,
@@ -258,6 +259,27 @@ class EventRender extends EventController
         "tasks" => $tasks ?? null,
         "lang" => $lang,
         "errors" => $errors,
+        "prev" => $prev ?? null
+      ]),
+    ]);
+
+    
+  }
+
+
+  public function events() {
+
+    $lang = $_COOKIE["lang"] ?? null;
+    $user = $this->userModel->getMe();
+    $events = $this->eventModel->index();
+
+
+    echo $this->renderer->render("Layout.php", [
+      "user" => $user,
+      "content" => $this->renderer->render("/pages/user/events/Events.php", [
+        "user" => $user ?? null,
+        "events" => $events ?? null,
+        "lang" => $lang,
         "prev" => $prev ?? null
       ]),
     ]);

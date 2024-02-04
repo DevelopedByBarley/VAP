@@ -7,7 +7,7 @@ $user = $params["user"] ?? null;
     <div class="row">
         <div class="col">
             <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
-                <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
+                <nav class="navbar navbar-expand-xl navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="/"><img src="/public/assets/icons/logo.png" style="height: 50px; width: 100px;" /></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,12 @@ $user = $params["user"] ?? null;
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
+
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#latest-event' : '#latest-event' ?>">
+                                        <?= NAVBAR["events"][$lang] ?? 'Eseményeink' ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
                                         <?= NAVBAR["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
                                     </a>
@@ -31,16 +37,7 @@ $user = $params["user"] ?? null;
                                         <?= NAVBAR["partners"][$lang] ?? 'Partner Oldalak' ?>
                                     </a>
                                 </li>
-                            
-                                <!--
-                                <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="#">
-                                    <?php // NAVBAR["blog"][$lang] ?? 'Blog' 
-                                    ?>
-                                    </a>
-                                </li>
 
-                                -->
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
                                         <?= NAVBAR["faq"][$lang] ?? 'Gyakori kérdések' ?>
@@ -119,16 +116,23 @@ $user = $params["user"] ?? null;
     <?php else : ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container-fluid">
+
                 <div class="navbar-brand">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+
+                    <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
                         <i style="font-size: 1.2rem;" class="bi bi-list"></i>
                     </button>
+
                 </div>
-                <span class="navbar-text">
-                    <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
-                </span>
+                <div>
+                    <span class="navbar-text">
+                        <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
+                    </span>
+                </div>
+
             </div>
         </nav>
+
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"><?= $params["admin"]["name"] ?></h5>
