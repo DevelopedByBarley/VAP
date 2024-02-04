@@ -561,22 +561,8 @@ class EventModel
   }
 
 
-  public function getAcceptedSubs()
-  {
 
 
-
-    $stmt = $this->pdo->prepare("SELECT registrations.*, GROUP_CONCAT(registration_dates.date) as dates FROM registrations INNER JOIN registration_dates ON registration_dates.registerRefId = registrations.id WHERE registrations.isAccepted = 1 GROUP BY registrations.id;");
-    $isSuccess = $stmt->execute();
-    
-    $subs =  $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $subs;
-  
-
-    
-    
-  }
 
 }
 

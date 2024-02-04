@@ -249,11 +249,11 @@ define('REGISTRATION', [
     "email" => [
       "En" => "E-mail address",
       "Hu" => "E-mail cim",
-        "Sp" => "",
-        "label" => [
-          "En" => "(11 characters minimum)",
-          "Hu" => "(Minimum 11 karakter)",
-          "Sp" => ""
+      "Sp" => "",
+      "label" => [
+        "En" => "(11 characters minimum)",
+        "Hu" => "(Minimum 11 karakter)",
+        "Sp" => ""
       ]
     ],
 
@@ -377,21 +377,26 @@ define('USER_LANGUAGES', [
 
 define('Languages', [
   0 => [
+    "En" => "Hungarian",
+    "Hu" => "Magyar",
+    "sp" => ""
+  ],
+  1 => [
     "En" => "English",
     "Hu" => "Angol",
     "sp" => ""
   ],
-  1 => [
+  2 => [
     "En" => "Germany",
     "Hu" => "Német",
     "sp" => ""
   ],
-  2 => [
+  3 => [
     "En" => "Serbian",
     "Hu" => "Szerb",
     "sp" => ""
   ],
-  3 => [
+  4 => [
     "En" => "Spain",
     "Hu" => "Spanyol",
     "sp" => ""
@@ -400,21 +405,26 @@ define('Languages', [
 
 define('Levels', [
   0 => [
+    "En" => "I don't speak",
+    "Hu" => "Nem beszélem",
+    "sp" => ""
+  ],
+  1 => [
     "En" => "Native level",
     "Hu" => "Anyanyelvi szint",
     "sp" => ""
   ],
-  1 => [
+  2 => [
     "En" => "Basic level",
     "Hu" => "Alapfok",
     "sp" => ""
   ],
-  2 => [
+  3 => [
     "En" => "Intermediate level",
     "Hu" => "Középfok",
     "sp" => ""
   ],
-  3 => [
+  4 => [
     "En" => "Higher level",
     "Hu" => "Felsőfok",
     "sp" => ""

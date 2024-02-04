@@ -160,6 +160,8 @@ $userLanguages = $prev["userLanguages"] ?? null;
                             <?php $index += 1 ?>
                             <div class="col-12 border p-2 m-1">
                               <div class="form-check">
+                              <?php var_dump($index) ?>
+
                                 <input class="form-check-input" type="radio" name="lang" id="lang_<?= $index ?>" value="<?= $index ?>">
                                 <label class="form-check-label" for="lang_2">
                                   <?= $language[$lang] ?>

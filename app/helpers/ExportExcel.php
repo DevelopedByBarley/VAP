@@ -6,7 +6,7 @@ class XLSX
     public function write($data)
     {
         // Excel file name for download 
-        $fileName = "codexworld_export_data-" . date('Ymd') . ".xlsx";
+        $fileName = "codexworld_export_data-" . date('Ymd') . ".xls";
 
         // Headers for download 
         header("Content-Disposition: attachment; filename=\"$fileName\"");

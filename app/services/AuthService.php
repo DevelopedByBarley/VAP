@@ -131,7 +131,9 @@ class AuthService
 
     public function activateRegister()
     {
+        
         $code = $_GET["code"] ?? null;
+
         if (!$code) {
             header('Location: /');
         }

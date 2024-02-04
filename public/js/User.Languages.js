@@ -110,6 +110,7 @@ function renderLangLevels(selectedIndex) {
   let temp = ``;
 
   levels.forEach((level, index) => {
+    console.log(level);
     temp += `
       <option value="${index}" ${index.toString() === selectedIndex ? "selected" : ""}>${level[getCookie("lang")]}</option>
     `;
@@ -124,6 +125,7 @@ function renderLangs() {
 
 
   langState.forEach((lang, index) => {
+    console.log(langs[lang.lang])
     temp += `
     <div class="row border p-3 d-flex align-items-center justify-content-center" data-id="${lang.id}">
     <div class="col-sm-2 mt-2">
