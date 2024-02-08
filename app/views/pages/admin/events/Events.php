@@ -45,12 +45,17 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         </thead>
         <tbody>
           <?php foreach ($events as $index => $event) : ?>
-            <?php $current_event = $event["nameInHu"] ?>
+            <?php
+            $current_event = $event["nameInHu"];
+            $bgImageUrl = isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png';
+
+            ?>
 
             <tr>
               <td>
                 <div class="d-flex align-items-center">
-                  <img src="<?= isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+
+                  <div class="rounded-circle" style="width: 45px; height: 45px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;"></div>
                   <div class="ms-3">
                     <p class="fw-bold mb-1"> <?= $event["nameInHu"] ?></p>
                   </div>

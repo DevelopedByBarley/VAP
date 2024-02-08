@@ -260,14 +260,14 @@ class EventModel
 
 
   // GET LATEST EVENT FOR CONTENT PAGE
-  public function getLatestEvent()
+  public function getLatestEvents()
   {
     $today = date("Y-m-d");
 
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 1");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 3");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
-    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+    $event = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $event;
   }
@@ -376,6 +376,7 @@ class EventModel
 
     return $dates;
   }
+
 
 
 
@@ -537,11 +538,6 @@ class EventModel
       $stmt->execute();
     }
   }
-
-
-
-
-
   public function acceptUserSubscription($subId)
   {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");

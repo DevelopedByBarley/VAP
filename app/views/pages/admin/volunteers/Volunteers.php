@@ -20,12 +20,15 @@ $volunteers = $params["volunteers"] ?? null;
           </thead>
           <tbody>
             <?php foreach ($volunteers as $index => $volunteer) : ?>
-              <?php $current_volunteer = $volunteer["name"] ?>
+              <?php
+              $current_volunteer = $volunteer["name"];
+              $bgImageUrl = '/public/assets/uploads/images/volunteers/' . $volunteer["fileName"];
+              ?>
 
               <tr>
                 <td>
                   <div class="d-flex align-items-center">
-                    <img src="/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
+                    <div class="rounded-circle" style="width: 60px; height: 60px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;"></div>
                     <div class="ms-3">
                       <p class="fw-bold mb-1"> <?= $volunteer["name"] ?></p>
                     </div>

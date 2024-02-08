@@ -48,6 +48,9 @@ p {
 .sc-color {
   background-color: var(--sc-color);
 }
+.sc-color-tr {
+  background-color: var(--sc-color-tr);
+}
 
 .pr-color {
   background-color: var(--pr-color);

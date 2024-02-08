@@ -2,6 +2,7 @@
 
 $user = $params["user"];
 $tasks = array_column($params["tasks"], "task");
+$bgImageUrl = isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png';
 ?>
 
 <div class="container">
@@ -12,16 +13,16 @@ $tasks = array_column($params["tasks"], "task");
     <div class="col-12 d-flex align-items-center justify-content-center">
       <section>
         <div class="container py-5">
-
+         
           <div class="row">
             <div class="col-lg-4">
               <div class="card shadow">
-                <div class="card-body text-center">
-                  <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="avatar" class="rounded-circle img-fluid shadow" style="width: 150px; height: 150px;">
+                <div class="card-body text-center d-flex align-items-center justify-content-center flex-column">
+                  <div class="rounded-circle shadow" style="width: 150px; height: 150px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;"></div>
                   <p class="my-3">
                     <b style="font-size: 1.5rem"><?= $user["name"] ?></b> (<span><?= $user["lang"] ?></span>)
                   </p>
-            
+
                   <p class="text-muted mb-1"><?= $user["email"] ?></p>
                   <p class="text-muted mb-4"><?= $user["address"] ?></p>
                   <div class="d-flex justify-content-center mb-2">
@@ -80,6 +81,7 @@ $tasks = array_column($params["tasks"], "task");
                       <p class="mb-4"><span class="text-primary font-italic me-1">Nyelvek</span>
                       </p>
                       <?php foreach ($user["langs"] as $language) : ?>
+                        
                         <div class="row d-flex align-items-center justify-content-center border mt-1 p-1">
                           <div class="col-sm-3"><?= Languages[$language["lang"]]["Hu"] ?></div>
                           <div class="col-sm-3"><?= Levels[$language["level"]]["Hu"] ?></div>

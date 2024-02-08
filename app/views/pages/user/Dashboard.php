@@ -4,7 +4,7 @@
 $user = $params["user"];
 $subscriptions = $params["subscriptions"] ?? null;
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$event = $params["event"] ?? null;
+$events = $params["event"] ?? null;
 ?>
 
 <div class="container py-5">
@@ -97,9 +97,9 @@ $event = $params["event"] ?? null;
             <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
               <h5 class="text-center mb-3"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
               <!--EVENT ROW -->
-              <?php if ($event) : ?>
+              <?php if ($events) : ?>
                 <div class="btn-group text-center">
-                  <a href="/event/<?= $event["eventId"] ?>" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?></a>
+                  <a href="/event/<?= $events[0]["eventId"] ?>" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?></a>
                 </div>
               <?php else : ?>
                 <h6><?= DASHBOARD["subscriptions"]["no_events"][$lang] ?></h6>

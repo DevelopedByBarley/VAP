@@ -10,9 +10,9 @@ define("NAVBAR", [
     "Hu" => "Önkéntes beszámolók",
     "Sp" => ""
   ],
-  "edu" => [
-    "En" => "Edu",
-    "Hu" => "Edu",
+  "events" => [
+    "En" => "Events",
+    "Hu" => "Eseményeink",
     "Sp" => ""
   ],
   "partners" => [

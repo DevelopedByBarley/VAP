@@ -157,10 +157,8 @@ $userLanguages = $prev["userLanguages"] ?? null;
                       <div class="container">
                         <div class="row d-flex align-items-center justify-content-center">
                           <?php foreach (Languages as $index => $language) : ?>
-                            <?php $index += 1 ?>
                             <div class="col-12 border p-2 m-1">
                               <div class="form-check">
-                              <?php var_dump($index) ?>
 
                                 <input class="form-check-input" type="radio" name="lang" id="lang_<?= $index ?>" value="<?= $index ?>">
                                 <label class="form-check-label" for="lang_2">
@@ -222,7 +220,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
         <div class="col-xs-12 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="voluntary-tasks"><b>
-                <td><?= TASK_AREAS["title"][$lang] ?? 'Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron? ' ?></td>
+                <td><?= TASK_AREAS["title"][$lang] ?? 'Hiba' ?></td>
               </b></label>
 
             <?php foreach (TASK_AREAS["areas"] as $index => $area) : ?>
@@ -270,7 +268,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
           <label for="formFileMultiple" class="form-label mb-3"><b><?= DOCUMENTS["title"][$lang] ?? '' ?></b></label>
           <div id="documents-container"></div>
           <div class="text-center mt-3 mb-5">
-            <button type="button" class="btn btn-outline-primary" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
+            <button type="button" class="btn btn-outline-dark" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
           </div>
         </div>
 
@@ -306,10 +304,10 @@ $userLanguages = $prev["userLanguages"] ?? null;
       </div>
   </form>
 </div>
-<script src="/public/js/GetCookie.js"></script>
-<script src="/public/js/validators/Register.js"></script>
-<script src="/public/js/User.Documents.js"></script>
-<script src="/public/js/User.Languages.js"></script>
+<script src="/public/js/GetCookie.js?v=<?php echo time() ?>"></script>
+<script src="/public/js/validators/Register.js?v=<?php echo time() ?>"></script>
+<script src="/public/js/User.Documents.js?v=<?php echo time() ?>"></script>
+<script src="/public/js/User.Languages.js?v=<?php echo time() ?>"></script>
 
 <script>
   const form = document.getElementById('register-form');

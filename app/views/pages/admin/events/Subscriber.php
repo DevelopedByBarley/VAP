@@ -7,9 +7,6 @@ $tasks = array_column($params["tasks"], "task");
 
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/registrations">Vissza a regisztráltakhoz</a>
-    </div>
     <div class="col-12 d-flex align-items-center justify-content-center">
       <section>
         <div class="container py-5">

@@ -132,12 +132,13 @@ class UserEventModel
     }
 
 
-    // IF USER DOESN'T EXIST
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
 
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, [
-      'application/pdf',
-      'application/msword',
-    ]);
+    if (in_array(false, $documentName)) {
+      self::setPrevContent();
+
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/event/subscribe/$eventId");
+    }
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
@@ -154,18 +155,6 @@ class UserEventModel
     $levels = $body["levels"] ?? [];
 
     $documents = self::formatDocuments($documentName, $typeOfDocuments);
-
-
-
-
-
-    if (!empty($errorMessages)) {
-      $_SESSION["subErrors"] = $errorMessages;
-      self::setPrevContent();
-
-      header("Location: /event/subscribe/" . $eventId);
-      exit;
-    }
 
 
 
@@ -238,17 +227,11 @@ class UserEventModel
 
     $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
-    $_SESSION["success"] = [
-      "title" => "Köszönjük a regisztrációdat!",
-      "message" => "Az eseményre való regisztráció megtörtént! Az e-mail címére visszaigazoló levelet küldtünk!",
-      "button_message" => "Vissza a főoldalra",
-      "path" => "/",
-    ];
 
     if (isset($_SESSION["subErrors"])) unset($_SESSION["subErrors"]);
     if (isset($_SESSION["prevSubContent"])) unset($_SESSION["prevSubContent"]);
 
-    header("Location: /success");
+    $this->alert->set("Az eseményre ön sikeresen regisztrált!", "You have successfully registered for the event!", null, "success", "/");
   }
 
   // USER DELETE SELF FROM EVENT
@@ -263,7 +246,7 @@ class UserEventModel
     header("Location: /user/dashboard");
   }
 
-  // USER DELETE SELF FROM EVENT WITH MAIL
+  // USER DELETE SELF FROM EVENT WITH MAIL URL
   public function deleteRegistrationFromMailUrl($id)
   {
 
@@ -273,17 +256,20 @@ class UserEventModel
     $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$isSubExist) {
-      echo "Ilyen regisztráció nem létezik!";
-      exit;
+      $this->alert->set("Ilyen regisztráció nem létezik!", "Registratinon doesn't exist!", null, "danger", "/");
     }
 
 
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
+
+    $this->alert->set("Esemény regisztráció sikeresen törölve!", "Event subscription deleted succesfully!", null, "success", "/");
   }
 
   // INSERT LANGUAGES WHEN USER REGISTER TO EVENT
+
+
 
   private function insertLanguages($registerId, $languages, $levels)
   {

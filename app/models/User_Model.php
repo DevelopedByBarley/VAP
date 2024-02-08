@@ -67,6 +67,7 @@ class UserModel
 
     $code = uniqid();
     $isActivated = 0;
+    $expires = time() + 600;
 
     $typeOfDocument = $body["typeOfDocument"] ?? [];
     $languages = $body["langs"] ?? [];
@@ -75,16 +76,11 @@ class UserModel
     $documents = self::formatDocuments($documentName, $typeOfDocument);
 
 
+
     $lang = $_COOKIE["lang"] ?? null;
     $createdAt = time();
 
 
-    if (!empty($errorMessages)) {
-      session_start();
-      self::setPrevContent();
-      header("Location: /user/registration");
-      exit;
-    }
 
     $isUserExist = self::checkIsUserExist($email);
 
@@ -121,6 +117,7 @@ class UserModel
         :fileName,
         :createdAt,
         :activation_code,
+        :expires,
         :isActivated
         )");
 
@@ -141,6 +138,7 @@ class UserModel
     $stmt->bindParam(':fileName', $fileName);
     $stmt->bindParam(':createdAt', $createdAt);
     $stmt->bindParam(':activation_code', $code);
+    $stmt->bindParam(':expires', $expires);
     $stmt->bindParam(':isActivated', $isActivated);
 
     // INSERT parancs végrehajtása
@@ -158,9 +156,9 @@ class UserModel
 
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
 
-      if (isset($_SESSION["prevRegisterContent"])) unset($_SESSION["prevRegisterContent"]);
+      if (isset($_SESSION["prevRegContent"])) unset($_SESSION["prevRegContent"]);
 
-      $this->alert->set("Sikeres regisztráció! Az ön e-mail címére visszaigazoló e-mailt küldtünk!", "asd", null, "success", "/login");
+      $this->alert->set("Sikeres regisztráció! Az ön e-mail címére visszaigazoló e-mailt küldtünk!", "Successful registration! We have sent a confirmation email to your email address!", null, "success", "/login");
     }
   }
 
@@ -187,14 +185,6 @@ class UserModel
     $lang = $_COOKIE["lang"] ?? null;
 
 
-
-
-    if (!empty($errorMessages)) {
-      $_SESSION["profileUpdateError"] = $errorMessages;
-      self::setPrevContent();
-      $this->alert->set('Profil frissítése sikertelen!', 'Profile updating error!', null, 'danger', '/user/settings');
-      exit;
-    }
 
     $stmt = $this->pdo->prepare("UPDATE `users` 
         SET 
@@ -279,6 +269,138 @@ class UserModel
     $stmt->bindParam(":id", $userId);
     $stmt->execute();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public function activateRegister()
+  {
+    $code = filter_var($_GET["code"] ?? null, FILTER_SANITIZE_SPECIAL_CHARS);
+
+    if (!$code) {
+      header('Location: /');
+    }
+
+    try {
+      // Ellenőrizze, hogy van-e olyan rekord, amelynek az isActivated értéke 0, és az activation_code megegyezik a kóddal
+      $checkStmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `isActivated` = 0 AND `activation_code` = :activation_code");
+      $checkStmt->bindValue(':activation_code', $code, PDO::PARAM_STR);
+      $checkStmt->execute();
+
+      $user = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+      $isExpired = $user["expires"] < time();
+
+      if ($isExpired) {
+        $this->alert->set("Regisztráció aktiválása sikertelen! Lejárt link!", "Registration error! Link expired!", null, "danger", "/login");
+      }
+
+      $rowCount = $checkStmt->rowCount();
+
+      if ($rowCount > 0) {
+        // Van ilyen rekord, tehát folytathatja az aktiválást
+        $updateStmt = $this->pdo->prepare("UPDATE `users` SET `isActivated` = '1', `activation_code` = NULL WHERE `isActivated` = 0 AND `activation_code` = :activation_code");
+        $updateStmt->bindValue(':activation_code', $code, PDO::PARAM_STR);
+        $updateStmt->execute();
+
+        // Sikeres aktiválás üzenet beállítása
+        $this->alert->set("Regisztráció sikeresen aktiválva!", "Registration is successfully activated!", null, "success", "/login");
+      } else {
+        // Nincs ilyen rekord, így hibát jelenthet
+        $this->alert->set("Hiba a regisztráció aktiválása közben!", "Error while activating the registration!", null, "danger", "/");
+      }
+    } catch (PDOException $e) {
+      // Hiba kezelése
+      $this->alert->set("Hiba történt az aktiválás során.", "Error occurred during activation.", null, "danger", "/");
+      error_log("Aktiválási hiba: " . $e->getMessage());
+    }
+  }
+
+
+    public function deleteExpiredRegistrations()
+    {
+      $now = time();
+      $stmt = $this->pdo->prepare("SELECT id, fileName FROM `users` WHERE expires < :currentTime AND isActivated = 0");
+      $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
+      $stmt->execute();
+      $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+
+      if (!empty($users)) {
+        foreach ($users as $user) {
+          $documents = self::getDocumentsByUser($user["id"]);
+          self::deleteUserLanguages($user["id"]);
+          unlink("./public/assets/uploads/images/users/" . $user["fileName"]);
+        }
+
+        // Ha a $documents üres, akkor ne próbáljuk törölni
+        if (!empty($documents)) {
+          self::deleteUserDocuments($documents);
+        }
+
+        // A DELETE lekérdezéshez hozzá kell adni az "FROM" kulcsszót
+        $stmt = $this->pdo->prepare("DELETE FROM `users` WHERE expires < :currentTime AND isActivated = 0");
+        $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
+        $stmt->execute();
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -575,8 +697,6 @@ class UserModel
       "/user/dashboard"
     );
   }
-
-
 
 
 

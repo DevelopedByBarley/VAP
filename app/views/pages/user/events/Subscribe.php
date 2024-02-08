@@ -118,7 +118,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
           <div class="col-xs-12">
             <div class="form-outline">
               <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?></b></label>
-              <input type="text" id="name" name="name" class="form-control <?= (!isset($errors["name"])) ? '' : 'border border-danger'  ?> <?= (!isset($errors["name"])) && isset($prev["name"]) ? 'border border-success' : ''  ?>" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" />
+              <input type="text" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" />
               <small id="nameInputAlert" class="text-danger"></small>
 
             </div>
@@ -141,8 +141,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
         <div class="col-xs-12 col-md-6 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="city"><b><?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?></b></label>
-            <input type="text" id="address" name="address" class="form-control <?= (!isset($errors["address"])) ? '' : 'border border-danger'  ?> <?= (!isset($errors["address"])) && isset($prev["address"]) ? 'border border-success' : ''  ?>" required value="<?= $prev["address"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?>" />
-
+            <input type="text" id="address" name="address" class="form-control" required value="<?= $prev["address"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?>" />
             <small id="addressInputAlert" class="text-danger"></small>
 
           </div>
@@ -156,7 +155,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
         <div class="col-xs-12 col-md-6 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?></b></label>
-            <input type="number" id="phone" name="mobile" required class="form-control <?= (!isset($errors["mobile"])) ? '' : 'border border-danger'  ?> <?= (!isset($errors["mobile"])) && isset($prev["mobile"]) ? 'border border-success' : ''  ?>" value="<?= $prev["mobile"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?>" style="border: <?= !(isset($errors["phone"])) ? '1px solid green' : ''  ?>" />
+            <input type="number" id="phone" name="mobile" required class="form-control" value="<?= $prev["mobile"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?>" />
 
             <small id="phoneInputAlert" class="text-danger"></small>
 
@@ -169,7 +168,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
             <br>
             <?php foreach (PROFESSIONS["profession"] as $index => $profession) : ?>
               <input type="radio" class="btn-check" name="profession" id="profession_<?= $index ?>" value="<?= $profession['Hu'] ?>" <?= isset($prev) && $prev["profession"] === $profession["Hu"] ? 'checked' : '' ?> autocomplete="off" required>
-              <label class="btn btn-outline-primary" for="profession_<?= $index ?>">
+              <label class="btn btn-outline-dark" for="profession_<?= $index ?>">
                 <?= $profession[$lang] ?? 'Diák vagyok' ?>
               </label>
             <?php endforeach ?>
@@ -216,7 +215,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
                 <b> <?= LANGUANGE_KNOWLEDGE["title"][$lang] ?? 'HIBA' ?></b>
               </label>
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary m-3" id="lang-modal-btn">
+              <button type="button" class="btn btn-outline-dark m-3" id="lang-modal-btn">
                 <?= USER_LANGUAGES["btn"][$lang] ?? 'HIBA' ?>
               </button>
 
@@ -233,7 +232,6 @@ $userLanguages = $prev["userLanguages"] ?? null;
                         <div class="container">
                           <div class="row d-flex align-items-center justify-content-center">
                             <?php foreach (Languages as $index => $language) : ?>
-                              <?php $index += 1 ?>
                               <div class="col-12 border p-2 m-1">
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="lang" id="lang_<?= $index ?>" value="<?= $index ?>">
@@ -315,7 +313,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
             <label for="formFileMultiple" class="form-label required mb-3"><b><?= DOCUMENTS["title"][$lang] ?? '' ?></b></label>
             <div id="documents-container"></div>
             <div class="text-center mt-3 mb-5">
-              <button type="button" class="btn btn-outline-primary" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
+              <button type="button" class="btn btn-outline-dark" id="add-document"><?= DOCUMENTS["add_document"][$lang] ?? 'HIBA' ?></button>
             </div>
           </div>
           <div class="mb-4 mt-4">
@@ -329,7 +327,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
                 ?>
 
                 <input type="checkbox" class="btn-check" id="date-<?= $index ?>" autocomplete="off" name="dates[]" value="<?= $date["date"] ?>" <?= $found ? 'checked' : '' ?>>
-                <label class="btn btn-outline-primary" for="date-<?= $index ?>"><?= $date["date"] ?></label><br>
+                <label class="btn btn-outline-dark m-1" for="date-<?= $index ?>"><?= $date["date"] ?></label><br>
               <?php endforeach ?>
             </div>
           </div>

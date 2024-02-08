@@ -46,6 +46,11 @@ class AdminModel
   public function ban($id)
   {
     $documents = self::user($id)["documents"];
+    $fileNameForDelete = self::user($id)["fileName"];
+
+  
+    unlink("./public/assets/uploads/images/users/$fileNameForDelete");
+
 
     $stmt = $this->pdo->prepare("DELETE FROM users WHERE `id` LIKE :id");
     $stmt->bindParam(":id", $id);
@@ -53,7 +58,6 @@ class AdminModel
 
     if ($isSuccess) {
       $this->userModel->deleteUserDocuments($documents);
-      $this->userModel->deleteUserLanguages($id);
     }
 
     header('Location: /admin/registrations');

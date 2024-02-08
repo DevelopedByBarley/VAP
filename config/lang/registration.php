@@ -11,13 +11,13 @@ define('PROFESSIONS', [
   ],
   "profession" => [
     "student" => [
-      "En" => "I'm a student",
-      "Hu" => "Diák vagyok",
+      "En" => "Student",
+      "Hu" => "Diák",
       "Sp" => ""
     ],
     "worker" => [
-      "En" => "I've job",
-      "Hu" => "Dolgozok",
+      "En" => "Not a student",
+      "Hu" => "Nem diák",
       "sp" => ""
     ]
   ],
@@ -70,8 +70,8 @@ define(
   'PARTICIPATION',
   [
     "title" => [
-      "En" => "Have you previously participated in the AMB or other fine arts festivals (MÉF, GWB) as a volunteer?",
-      "Hu" => "Részt vettél korábban az AMB vagy további képzőművészeti fesztiválon (MÉF, GWB), mint önkéntes?",
+      "En" => "Have you ever volunteered at art events?",
+      "Hu" => "Önkénteskedtél már művészeti eseményeken?",
       "Sp" => ""
     ],
     "participations" => [
@@ -95,9 +95,8 @@ define(
 
 define('TASK_AREAS', [
   "title" => [
-    "En" => "
-      Which task areas are you interested in and willing to complete at the fair?",
-    "Hu" => "Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron?",
+    "En" => "Which tasks are you interested in?",
+    "Hu" => "Mely feladatkörök érdekelnek?",
     "sp" => ""
   ],
   "areas" => [

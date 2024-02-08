@@ -1,7 +1,6 @@
 <?php
 require_once 'app/controllers/user/User_Controller.php';
 require_once 'app/controllers/user/User_Render.php';
-require_once 'app/services/AuthService.php';
 
 $r->addRoute('GET', '/user/dashboard', [UserRender::class, 'dashboard']);
 $r->addRoute('GET', '/user/settings', [UserRender::class, 'profileSettingsForm']);
@@ -12,7 +11,7 @@ $r->addRoute('GET', '/user/documents', [UserRender::class, 'userDocuments']);
 
 
 
-$r->addRoute('GET', '/activate', [AuthService::class, 'activateRegister']);
+$r->addRoute('GET', '/activate', [UserController::class, 'activateRegisterFromEmail']);
 $r->addRoute('GET', '/user/logout', [UserController::class, 'logout']);
 $r->addRoute('GET', '/user/documents/delete/{id}', [UserController::class, 'deleteUserDocument']);
 $r->addRoute('POST', '/user/update', [UserController::class, 'updateUser']);

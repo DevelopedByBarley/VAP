@@ -8,14 +8,6 @@ class AdminRender extends AdminController
   {
     parent::__construct();
   }
-
-
-  
-  
-
-  
-
-
   // RENDER ADMIN LOGIN PAGE
   public function adminLoginPage()
   {
@@ -24,6 +16,8 @@ class AdminRender extends AdminController
       header("Location: /admin/registrations");
       return;
     }
+
+    $this->userModel->deleteExpiredRegistrations();
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/Login.php", [])

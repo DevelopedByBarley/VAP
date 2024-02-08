@@ -43,11 +43,15 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
             </thead>
             <tbody>
               <?php foreach ($partners as $partner) : ?>
-                <?php $current_partner = $partner["name"]; ?>
+                <?php
+                $current_partner = $partner["name"];
+                $bgImageUrl = '/public/assets/uploads/images/partners/' . $partner["fileName"];
+                ?>
                 <tr>
                   <td>
                     <div class="d-flex align-items-center">
-                      <img src="/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>" alt="" style="width: 60px; height: 60px" class="rounded-circle" />
+                      <div class="rounded-circle" style="width: 60px; height: 60px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;"></div>
+
                       <div class="ms-3">
                         <p class="fw-bold mb-1"> <?= $partner["name"] ?> </p>
                       </div>

@@ -38,10 +38,12 @@ class DocumentModel extends AdminModel
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $createdAt = time();
 
-    $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null, [
-      'application/pdf',
-      'application/msword',
-    ]);
+    $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null, null);
+
+  
+    if (!$documentName) {
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/admin/documents/new");
+    }
     $extension =  pathinfo($documentName, PATHINFO_EXTENSION);
 
 

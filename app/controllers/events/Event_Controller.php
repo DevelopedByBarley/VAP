@@ -11,7 +11,7 @@ class EventController
   protected $renderer;
   protected $adminModel;
   protected $userEventModel;
-  
+
 
   public function __construct()
   {
@@ -113,11 +113,14 @@ class EventController
     $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
   }
 
-  public function exportSubs() {
+  public function exportSubs()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
 
-    $data = $this->eventModel->getAcceptedSubs();
     $XLSX = new XLSX();
+    $data = $XLSX->getAcceptedSubs($_GET["id"]);
+
+  
     $XLSX->write($data);
     exit;
   }

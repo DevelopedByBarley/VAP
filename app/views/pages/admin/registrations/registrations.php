@@ -49,11 +49,17 @@ $searchValue = $_GET["search"] ?? '';
             </thead>
             <tbody>
               <?php foreach ($users as $index => $user) : ?>
-                <?php $current_user = $user["name"] ?>
+                <?php
+                $current_user = $user["name"];
+                $bgImageUrl = isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png';
+                ?>
                 <tr>
                   <td>
                     <div class="d-flex align-items-center">
-                      <img src="<?= isset($user["fileName"]) && $user["fileName"] !== '' ? '/public/assets/uploads/images/users/' . $user["fileName"] : '/public/assets/icons/bear.png' ?>" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+
+                      <div class="rounded-circle" style="width: 45px; height: 45px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;">
+                        <!-- Tartalom, ha szükséges -->
+                      </div>
                       <div class="ms-3">
                         <p class="fw-bold mb-1"> <?= $user["name"] ?></p>
                         <p class="text-muted mb-0"> <?= $user["email"] ?></p>

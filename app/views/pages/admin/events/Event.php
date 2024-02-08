@@ -7,6 +7,9 @@ $subscriptions = $params["subscriptions"];
 $countOfRegistrations = (int)$params["countOfRegistrations"];
 $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
 
+$bgImageUrl = isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png';
+
+
 ?>
 
 <section style="background-color: #eee; margin-top: 100px; width: 95%; margin: 0 auto; border-radius: 12px mb-5" class="shadow">
@@ -15,8 +18,9 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
     <div class="row">
       <div class="col-lg-4">
         <div class="card shadow">
-          <div class="card-body text-center">
-            <img src="<?= isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png' ?>" alt="avatar" class="rounded-circle img-fluid shadow" style="height: 150px;width: 150px;">
+          <div class="card-body text-center d-flex align-items-center justify-content-center flex-column">
+
+            <div class="rounded-circle shadow" style="width: 150px; height: 150px; background: url('<?php echo $bgImageUrl; ?>') center center/cover no-repeat;"></div>
             <h5 class="my-3"><?= $event["nameInHu"] ?></h5>
             <div class="mt-3 mb-3">
               <button class="btn <?= (int)$event["isPublic"] === 1 ? 'bg-success' : 'bg-danger' ?> text-light" checked>
@@ -37,7 +41,7 @@ $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
               <br>
               <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-primary mt-2">Áttekintés</a>
               <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Email küldése</a>
-              <a href="/admin/subscription/export-subscribers" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Excel exportálása</a>
+              <a href="/admin/subscription/export-subscribers?id=<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Excel exportálása</a>
             </div>
 
             <div class="btn-group text-center mb-3 mt-3">

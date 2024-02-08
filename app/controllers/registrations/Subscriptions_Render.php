@@ -1,5 +1,6 @@
 <?php
   require_once 'app/controllers/registrations/Subscriptions_Controller.php';
+  
   class SubscriptionsRender extends SubscriptionsController {
     public function __construct()
     {
@@ -11,7 +12,6 @@
 
   public function registrations()
   {
-    
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin(); // GET ADMIN BY SESSION
     $usersData = $this->adminModel->index(); // GET ALL REGISTERED PROFILES

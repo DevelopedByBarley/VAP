@@ -40,7 +40,7 @@ class HomeRender extends HomeController
 		$questions = $this->questionModel->questions();
 
 		$links = $this->linkModel->index();
-		$latestEvent = $this->eventModel->getLatestEvent();
+		$events = $this->eventModel->getLatestEvents();
 		$this->eventModel->setEventsPrivateIfExpired();
 
 
@@ -52,7 +52,7 @@ class HomeRender extends HomeController
 				"partners" => $partners ?? null,
 				"documents" => $documents ?? null,
 				"links" => $links ?? null,
-				"latestEvent" => $latestEvent ?? null,
+				"latestEvents" => $events ?? null,
 				"questions" => $questions ?? null
 			]),
 			"user" => $user ?? null,

@@ -20,13 +20,23 @@ define('PROFILE_SETTINGS', [
   "profile" => [
     "update_profile_modal" => [
       "title" => [
-        "Hu" => "Profil frissitése",
+        "Hu" => "Profil frissítése",
         "En" => "Update profile",
         "Sp" => ""
       ],
-      "permission" => [
-        "Hu" => "Biztosan frissited a profilodat?",
-        "En" => "Are you sure you're updating your profile?",
+      "attention" => [
+        "Hu" => " esemény regisztrációja van!" ,
+        "En" => " event registration you have!",
+        "Sp" => ""
+      ],
+      "permission_with_subscriptions" => [
+        "Hu" => "Figyelem! Profil frissítése esetén a már összes meglévő esemény regisztrációja törlődik! ",
+        "En" => "Attention! If you update your profile, the registration of all existing events will be deleted!",
+        "Sp" => ""
+      ],
+      "permission_without_subscriptions" => [
+        "Hu" => "Biztosan Frissíti profilját?",
+        "En" => "Are you sure you want to update your profile?",
         "Sp" => ""
       ],
       "back" => [

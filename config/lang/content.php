@@ -5,7 +5,22 @@ define('CONTENT', [
     "content" => [
       "Hu" => "A VAP = Volunteering in Art Programs egy olyan platform, ahol, ha érdekel a vizuális művészet, egyetlen regisztrációval több művészeti projektben és eseményben is önkénteskedhetsz.",
       "En" => "Volunteering in Art Programs is a platform where if you are interested in the visual arts, you can volunteer for multiple art projects and events with a single registration."
-    ]
+    ],
+    "reg_volunteer_btn" => [
+      "Hu" => "Regisztráljon önkéntesnek",
+      "En" => "Volunteer registration",
+      "Sp" => ""
+    ],
+    "next_event_btn" => [
+      "Hu" => "Következő eseményünk",
+      "En" => "Next event",
+      "Sp" => ""
+    ],
+    "reg_volunteer_btn" => [
+      "Hu" => "Regisztráljon önkéntesnek",
+      "En" => "Volunteer registration",
+      "Sp" => ""
+    ],
   ],
   "aboutUs" => [
     "title" => [

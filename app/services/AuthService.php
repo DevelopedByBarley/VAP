@@ -127,40 +127,4 @@ class AuthService
 
         header("Location: " . $referer);
     }
-
-
-    public function activateRegister()
-    {
-        
-        $code = $_GET["code"] ?? null;
-
-        if (!$code) {
-            header('Location: /');
-        }
-
-        try {
-            // Ellenőrizze, hogy van-e olyan rekord, amelynek az isActivated értéke 0, és az activation_code megegyezik a kóddal
-            $checkStmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `isActivated` = 0 AND `activation_code` = :activation_code");
-            $checkStmt->bindParam(':activation_code', $code);
-            $checkStmt->execute();
-
-            $rowCount = $checkStmt->rowCount();
-
-            if ($rowCount > 0) {
-                // Van ilyen rekord, tehát folytathatja az aktiválást
-                $updateStmt = $this->pdo->prepare("UPDATE `users` SET `isActivated` = '1', `activation_code` = NULL WHERE `isActivated` = 0 AND `activation_code` = :activation_code");
-                $updateStmt->bindParam(':activation_code', $code);
-                $updateStmt->execute();
-
-                // Sikeres aktiválás üzenet beállítása
-                $this->alert->set("Regisztráció sikeresen aktiválva!", "Registration is successfully activated!", null, "success", "/login");
-            } else {
-                // Nincs ilyen rekord, így hibát jelenthet
-                $this->alert->set("Hiba a regisztráció aktiválása közben!", "Error while activating the registration!", null, "danger", "/");
-            }
-        } catch (PDOException $e) {
-            // Hiba kezelése
-            $this->alert->set("Hiba történt az aktiválás során: " . $e->getMessage(), "Error occurred during activation: " . $e->getMessage(), null, "danger", "/");
-        }
-    }
 }

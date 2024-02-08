@@ -101,4 +101,8 @@ class UserController
     $this->resetPwService->newPw($_POST);
   }
 
+  public function activateRegisterFromEmail() {
+    $this->userModel->activateRegister();
+  }
+
 }

@@ -8,7 +8,7 @@ $user = $params["user"];
 $tasks = array_column($params["tasks"], "task");
 $documents = $params["documents"];
 $userLanguages = $params["userLanguages"];
-$errors = $params["errors"];
+$subscriptions = $params["subscriptions"];
 ?>
 
 <div class="container-fluid">
@@ -230,7 +230,7 @@ $errors = $params["errors"];
         <div class="col-xs-12 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="voluntary-tasks"><b>
-                <td><?= $langs["registration"]["form"]["task_area"]["title"][$lang] ?? 'Mely feladatterületek érdekelnek és végeznéd szívesen a vásáron? ' ?></td>
+                <td><?= TASK_AREAS["title"][$lang] ?? 'Hiba' ?></td>
               </b></label>
 
 
@@ -253,7 +253,7 @@ $errors = $params["errors"];
         <div class="col-xs-12 mt-3">
           <div class="form-outline mb-4">
             <label class="form-label required" for="informed-by"><b>
-                <?= INFORMED_BY["title"][$lang] ?? 'Honnan hallottál a programról? ' ?>
+                <?= INFORMED_BY["title"][$lang] ?? 'Hiba  ' ?>
               </b></label>
             <?php foreach (INFORMED_BY["inform"] as $index => $inform) : ?>
 
@@ -314,11 +314,12 @@ $errors = $params["errors"];
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <?= PROFILE_SETTINGS["profile"]["update_profile_modal"]["permission"][$lang] ?? 'HIBA' ?>
+              <?= PROFILE_SETTINGS["profile"]["update_profile_modal"]["permission_without_subscriptions"][$lang] ?? 'HIBA' ?>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kilépés</button>
-              <button type="submit" class="btn btn-primary">Mentés</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégsem</button>
+              <button type="submit" class="btn btn-primary">Profil frissítése</button>
             </div>
           </div>
         </div>

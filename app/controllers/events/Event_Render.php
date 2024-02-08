@@ -245,7 +245,6 @@ class EventRender extends EventController
     $tasks = $this->eventModel->getEventTasks($id);
     $user = $this->userModel->getMe();
     $lang = $_COOKIE["lang"] ?? null;
-    $errors = $_SESSION["subErrors"] ?? null;
     $prev = $_SESSION["prevSubContent"] ?? null;
 
 
@@ -258,7 +257,6 @@ class EventRender extends EventController
         "links" => $links ?? null,
         "tasks" => $tasks ?? null,
         "lang" => $lang,
-        "errors" => $errors,
         "prev" => $prev ?? null
       ]),
     ]);
@@ -280,7 +278,6 @@ class EventRender extends EventController
         "user" => $user ?? null,
         "events" => $events ?? null,
         "lang" => $lang,
-        "prev" => $prev ?? null
       ]),
     ]);
   }
