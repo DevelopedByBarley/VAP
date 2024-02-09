@@ -25,13 +25,15 @@
     <div class="mt-5">
         <?= $params["content"] ?>
     </div>
-
+    
+    <?php include 'app/views/components/Cookie.php' ?>
 
     <script src="/public/js/UUID.js"></script>
     <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>
     <script src="/public/js/AOS.js"></script>
     <script src="/public/js/MMParallax.js"></script>
+    <script src="/public/js/Cookie.js"></script>
 </body>
 
 </html>

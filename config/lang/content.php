@@ -254,5 +254,34 @@ define('CONTENT', [
         "Sp" => ""
       ],
     ]
+  ],
+
+
+  "footer" => [
+    "desc" => [
+      "En" => "Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+      "Hu" => "Itt sorokat és oszlopokat használhat a lábléc tartalmának rendszerezéséhez. Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+      "Sp" => ""
+    ],
+    "docs" => [
+      "En" => "Useful documents",
+      "Hu" => "Hasznos dokumentumok",
+      "Sp" => ""
+    ],
+    "links" => [
+      "En" => "Useful links",
+      "Hu" => "Hasznos linkek",
+      "Sp" => ""
+    ],
+    "address" => [
+      "En" => "Address",
+      "Hu" => "Cím",
+      "Sp" => ""
+    ],
+    "company_registration_number" => [
+      "En" => "Company registration number",
+      "Hu" => "Cégjegyzékszám",
+      "Sp" => ""
+    ]
   ]
 ]);

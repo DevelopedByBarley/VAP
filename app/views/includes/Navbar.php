@@ -23,7 +23,7 @@ $user = $params["user"] ?? null;
                                 </li>
                                 <li class="nav-item m-1 mt-3">
 
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#latest-event' : '#latest-event' ?>">
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#latest-events' : '#latest-events' ?>">
                                         <?= NAVBAR["events"][$lang] ?? 'Eseményeink' ?>
                                     </a>
                                 </li>

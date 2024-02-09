@@ -37,8 +37,10 @@ define('EVENT', [
       "Sp" => ""
     ],
     "description" => [
-      "Hu" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente et recusandae repudiandae, laudantium saepe fugiat. Doloremque, excepturi possimus aperiam saepe velit quibusdam iusto quisquam consectetur, omnis animi, illum dicta enim! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio modi amet illo, pariatur consequuntur autem rerum vitae, expedita voluptate quo doloremque facere suscipit sed repellendus similique, id quasi incidunt numquam.",
-      "En" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente et recusandae repudiandae, laudantium saepe fugiat. Doloremque, excepturi possimus aperiam saepe velit quibusdam iusto quisquam consectetur, omnis animi, illum dicta enim! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio modi amet illo, pariatur consequuntur autem rerum vitae, expedita voluptate quo doloremque facere suscipit sed repellendus similique, id quasi incidunt numquam.",
+      "Hu" => "Ha jelentkezel egy eseményre önkéntesnek, akkor a regisztrációt követően emailben küldünk értesítést a minden elérhető információról, ami az önkéntes feladathoz kapcsolódik. Ha még nem önkénteskedtél velünk az előző években, akkor első lépésként egy interjú időpontot fogunk egyeztetni. Ha már dolgoztunk együtt, akkor az eligazítás és időbeosztás, valamint az előzetes feladatokat fogjuk egyeztetni. 
+      Ne félj, minden információt, feladatot előzetesen emailen, messengeren is küldeni fogunk! Bármilyen kérdésed, kérésed van elérsz minket a <b>hello@artnesz.hu<b/> címen.",
+      "En" => "If you sign up to volunteer for an event, we will send you an email after registration with all the information available about the volunteering task. If you haven't volunteered with us before, we'll schedule an interview as a first step. If you have worked with us before, we will agree on a briefing and schedule, as well as preliminary tasks. 
+      Don't worry, we will send you all information and tasks in advance via email or messenger! If you have any questions or requests, you can reach us at <b>hello@artnesz.hu.</b>",
       "Sp" => ""
     ],
   ],
@@ -60,8 +62,8 @@ define('EVENT', [
     "Sp" => ""
   ],
   "registration_without_profile" => [
-    "Hu" => "Profil nélkül regisztrálok",
-    "En" => "Registration without profile",
+    "Hu" => "Registration without profile",
+    "En" => "Profil nélkül regisztrálok",
     "Sp" => ""
   ],
   "send_message" => [
@@ -73,6 +75,31 @@ define('EVENT', [
     "Hu" => "Erre az eseményre már regisztrált!",
     "En" => "You are already registered for this event!",
     "Sp" => ""
-  ]
+  ],
+  "modal" => [
+    "title" => [
+      "Hu" => "Profil regisztrációja",
+      "En" => "Profil registration",
+      "Sp" => ""
+    ],
+    "desc" => [
+      "Hu" => "Önkéntes profil regisztráció után lehetősege nyílik arra hogy értesítést kapjon következő eseményinkről, kezelheti és módosíthatja adatait, és egy kattintással regisztrálhat bármelyik leendő eseményünkre!",
+      "En" => "After registering a volunteer profile, it is possible to receive notifications about the next event and change your data, and you can register for all our future events with one click!",
+      "Sp" => ""
+    ],
+    "accept" => [
+      "Hu" => "Profilt regisztrálok",
+      "En" => "Profil registration",
+      "Sp" => ""
+    ],
+    "decline" => [
+      "Hu" => "Profil nélkül regisztrálok",
+      "En" => "Registration without profile",
+      "Sp" => ""
+    ],
+
+  ],
+
+
 
 ]);

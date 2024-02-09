@@ -6,8 +6,10 @@ $links = $params["links"];
 $subscriptions = $params["subscriptions"];
 $countOfRegistrations = (int)$params["countOfRegistrations"];
 $countOfUserByEmailStates = $params["countOfUserByEmailStates"];
-
+$anyAccepted = $params["anyAccepted"];
 $bgImageUrl = isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/assets/uploads/images/events/' . $event["fileName"] : '/public/assets/icons/bear.png';
+
+
 
 
 ?>
@@ -41,7 +43,9 @@ $bgImageUrl = isset($event["fileName"]) && $event["fileName"] !== '' ? '/public/
               <br>
               <a href="/admin/event/subscriptions/<?= $event["eventId"] ?>" class="btn btn-primary mt-2">Áttekintés</a>
               <a href="/admin/event/email/<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Email küldése</a>
-              <a href="/admin/subscription/export-subscribers?id=<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 ? 'disabled' : '' ?>">Excel exportálása</a>
+              <a href="/admin/subscription/export-subscribers?id=<?= $event["eventId"] ?>" class="btn btn-secondary mt-2 <?= $countOfRegistrations === 0 || !$anyAccepted ? 'disabled' : '' ?>">Excel exportálása</a>
+
+              <p class="mt-3">Az excelbe csak az elfogadott regisztrációk lesznek benne, ha nincs elfogadott regisztráció sem, az exportálás nem lehetséges </p>
             </div>
 
             <div class="btn-group text-center mb-3 mt-3">

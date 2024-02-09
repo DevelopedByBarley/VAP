@@ -31,7 +31,7 @@
         </div>
 
         <p>
-          <b> Kérjük ellenőrizze le, hogy az email címeét jól adta meg, mert a további információt arra küldjük!</b>
+          <b> Kérjük ellenőrizze le, hogy az email címét jól adta meg, mert a további információt arra küldjük!</b>
         </p>
         <p>Az eseményre való jelentkezést a profiljából követheti vagy törörlheti!</p>
         <p>Ha a jelentkezés profil nélkül történt akkor a lemondás a következő linken lehetséges

@@ -275,58 +275,8 @@ class EventModel
   // REGISTRATIONS
 
 
-  // GET ALL REGISTRATIONS BY EVENT
 
-  public function getRegistrationsByEvent($eventId)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $eventId);
-    $stmt->execute();
-    $subscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $subscriptions;
-  }
-
-  // GET REGISTERED USER DATA BY ID
-  public function getRegisteredUser($id)
-  {
-    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-      $stmt = $this->pdo->prepare("SELECT * FROM registration_dates WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $user["dates"] = $dates;
-
-      $stmt = $this->pdo->prepare("SELECT * FROM registration_documents WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $user["documents"] = $documents;
-
-      $stmt = $this->pdo->prepare("SELECT * FROM registration_tasks WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $user["tasks"] = $tasks;
-
-      $stmt = $this->pdo->prepare("SELECT * FROM registration_languages WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
-      $stmt->execute();
-      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $user["langs"] = $tasks;
-    }
-
-    return $user;
-  }
 
 
 
@@ -347,21 +297,7 @@ class EventModel
 
 
 
-  // Send email to registered users public function!
-  public function sendEmailToRegisteredUsers($body, $subscriptions, $eventId)
-  {
-    foreach ($subscriptions as $subscription) {
-      if ($subscription["lang"] === "Hu") {
-        $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Üzenet");
-      } else if ($subscription["lang"] === "Sp") {
-        $this->mailer->send($subscription["email"], $body["mail-body-Sp"], "");
-      } else {
-        $this->mailer->send($subscription["email"], $body["mail-body-En"], "Message");
-      }
-    }
 
-    $this->alert->set('Emailek sikeresen kiküldve!','Emailek sikeresen kiküldve!','Emailek sikeresen kiküldve!', "success", "/admin/event/$eventId");
-  }
 
 
 
@@ -424,20 +360,7 @@ class EventModel
   }
 
 
-  public function sendMailToSub($body, $subId)
-  {
 
-    $sub = self::getRegisteredUser($subId);
-    $this->mailer->send($sub["email"], $body["mail-body"], $sub["lang"] === "Hu" ? "Üzenet" : "Message");
-
-    $this->alert->set(
-      'Email kiküldése sikeres!',
-      'Successful email sent!',
-      null,
-      'success',
-      "/admin/event/subscriber/$subId"
-    );
-  }
 
 
 
@@ -538,23 +461,7 @@ class EventModel
       $stmt->execute();
     }
   }
-  public function acceptUserSubscription($subId)
-  {
-    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
-    $stmt->bindParam(":subId", $subId);
-    $stmt->execute();
 
-    $this->alert->set('Eseményre való regisztráció elfogadva!', null, null, "success", "/admin/event/subscriber/$subId");
-  }
-
-  public function deleteUserSubscription($subId)
-  {
-    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '0' WHERE `registrations`.`id` = :subId;");
-    $stmt->bindParam(":subId", $subId);
-    $stmt->execute();
-
-    $this->alert->set('Elfogadott regisztráció visszavonva!', null, null, "success", "/admin/event/subscriber/$subId");
-  }
 
 
 

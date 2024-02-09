@@ -40,8 +40,8 @@ define('DASHBOARD', [
   ],
   "subscriptions" => [
     "next_event" => [
-      "Hu" => "Következő eseményünk",
-      "En" => "Next event",
+      "Hu" => "Következő eseményeink",
+      "En" => "Next events",
       "Sp" => ""
     ],
     "no_events" => [

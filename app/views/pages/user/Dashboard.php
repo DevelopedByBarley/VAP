@@ -91,21 +91,21 @@ $events = $params["event"] ?? null;
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-body d-flex align-items-center justify-content-center flex-column" style="overflow-y: scroll; min-height: 350px">
-          <div id="subscriptions" class="p-2 d-flex align-items-center justify-content-center flex-column">
+          <div id="subscriptions" class="p-2 d-flex align-items-center justify-content-center flex-column w-100">
             <h2 class="text-center"><?= PROFILE["subscriptions"]["title"][$lang] ?? 'Név' ?></h2>
 
             <?php if (!isset($subscriptions) || count($subscriptions) === 0) : ?>
-              <h5 class="text-center mb-3"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Név' ?></h5>
+              <h5 class="text-center mb-3"><?= PROFILE["subscriptions"]["no_subscriptions"][$lang] ?? 'Hiba' ?></h5>
               <!--EVENT ROW -->
               <?php if ($events) : ?>
                 <div class="btn-group text-center">
-                  <a href="/event/<?= $events[0]["eventId"] ?>" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?></a>
+                  <a href="/#latest-events" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?? 'Hiba' ?></a>
                 </div>
               <?php else : ?>
                 <h6><?= DASHBOARD["subscriptions"]["no_events"][$lang] ?></h6>
               <?php endif ?>
             <?php else : ?>
-              <div class="row d-flex align-items-center justify-content-center">
+              <div class="row w-100">
                 <?php foreach ($subscriptions as $subscription) : ?>
 
                   <div class="col-12 mt-3">
@@ -139,6 +139,12 @@ $events = $params["event"] ?? null;
                     </div>
                   </div>
                 <?php endforeach ?>
+              </div>
+              <div class="row mt-5">
+                <div class="col-12">
+                  <a href="/#latest-events" class="btn primary-btn"><?= DASHBOARD["subscriptions"]["next_event"][$lang] ?? 'Hiba' ?></a>
+
+                </div>
               </div>
             <?php endif ?>
           </div>

@@ -8,6 +8,20 @@ class HomeRender extends HomeController
 		parent::__construct();
 	}
 
+	public function cookieInfo()
+	{
+		session_start();
+
+		$user =  $this->userModel->getMe();
+		echo $this->renderer->render("Layout.php", [
+			"user" => $user,
+			"content" => $this->renderer->render("/pages/public/Cookie_Info.php", [
+				"user" => $user ?? null,
+			]),
+			"user" => $user ?? null,
+		]);
+	}
+
 	public function partners()
 	{
 		session_start();
@@ -57,26 +71,5 @@ class HomeRender extends HomeController
 			]),
 			"user" => $user ?? null,
 		]);
-	}
-
-	public function success()
-	{
-		session_start();
-		$lang = $_COOKIE["lang"] ?? null;
-		$success = $_SESSION["success"] ?? null;
-		$user = $this->userModel->getMe();
-
-		echo $this->renderer->render("Layout.php", [
-			"user" => $user,
-			"content" => $this->renderer->render("/pages/public/Success.php", [
-				"lang" => $lang,
-				"title" => $success["title"] ?? '',
-				"button_message" => $success["button_message"] ?? '',
-				"message" => $success["message"] ?? '',
-				"path" => $success["path"] ?? ''
-			]),
-		]);
-
-		if (isset($_SESSION["success"])) unset($_SESSION["success"]);
 	}
 }

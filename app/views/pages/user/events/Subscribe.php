@@ -4,7 +4,6 @@ $dates = $params["dates"];
 $tasks = $params["tasks"];
 $user = $params["user"];
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
-$errors = $params["errors"];
 $prev = $params["prev"];
 
 $userLanguages = $prev["userLanguages"] ?? null;

@@ -6,7 +6,7 @@ require_once 'app/helpers/Validate.php';
 
 // ONLY USER NOT ADMIN!
 
-class UserEventModel
+class Subscription_Model
 {
   private $pdo;
   private $fileSaver;
@@ -29,7 +29,7 @@ class UserEventModel
 
 
   // USER REGISTER TO EVENT
-  public function register($eventId, $body, $files, $user)
+  public function subscribe($eventId, $body, $files, $user)
   {
     $languages = $body["langs"] ?? [];
     $levels = $body["levels"] ?? [];
@@ -104,10 +104,10 @@ class UserEventModel
 
 
       if ($lastInsertedId) {
-        self::copyDocumentFromUserToRegister($lastInsertedId, $user["documents"]);
-        self::copyLanguagesFromUserToRegister($lastInsertedId, $user["langs"]);
-        self::insertDatesOfRegistration($lastInsertedId, $dates);
-        self::insertTasksOfRegistration($lastInsertedId, $tasks);
+        self::copyDocumentFromUserToSubscribe($lastInsertedId, $user["documents"]);
+        self::copyLanguagesFromUserToSubscribe($lastInsertedId, $user["langs"]);
+        self::insertDatesOfSubscription($lastInsertedId, $dates);
+        self::insertTasksOfSubscription($lastInsertedId, $tasks);
       }
 
 
@@ -208,8 +208,8 @@ class UserEventModel
 
     if ($lastInsertedId) {
       self::insertLanguages($lastInsertedId, $languages, $levels);
-      self::insertDatesOfRegistration($lastInsertedId, $dates);
-      self::insertTasksOfRegistration($lastInsertedId, $tasks);
+      self::insertDatesOfSubscription($lastInsertedId, $dates);
+      self::insertTasksOfSubscription($lastInsertedId, $tasks);
       self::insertDocuments($lastInsertedId, $documents);
     }
 
@@ -234,20 +234,10 @@ class UserEventModel
     $this->alert->set("Az eseményre ön sikeresen regisztrált!", "You have successfully registered for the event!", null, "success", "/");
   }
 
-  // USER DELETE SELF FROM EVENT
-  public function delete($eventId)
-  {
 
-    $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
-    $stmt->bindParam(":eventId", $eventId);
-    $stmt->execute();
-
-
-    header("Location: /user/dashboard");
-  }
 
   // USER DELETE SELF FROM EVENT WITH MAIL URL
-  public function deleteRegistrationFromMailUrl($id)
+  public function deleteSubscriptionFromMailUrl($id)
   {
 
     $stmt = $this->pdo->prepare("SELECT  `registrationId` FROM `registrations` WHERE `registrationId` = :id");
@@ -266,6 +256,154 @@ class UserEventModel
 
     $this->alert->set("Esemény regisztráció sikeresen törölve!", "Event subscription deleted succesfully!", null, "success", "/");
   }
+
+
+  public function acceptUserSubscription($subId)
+  {
+    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
+    $stmt->bindParam(":subId", $subId);
+    $stmt->execute();
+
+    $this->alert->set('Eseményre való regisztráció elfogadva!', 'Eseményre való regisztráció elfogadva!', 'Eseményre való regisztráció elfogadva!', "success", "/admin/event/subscriber/$subId");
+  }
+
+
+  public function declineUserSubscription($subId)
+  {
+    $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '0' WHERE `registrations`.`id` = :subId;");
+    $stmt->bindParam(":subId", $subId);
+    $stmt->execute();
+
+    $this->alert->set('Elfogadott regisztráció visszavonva!', 'Elfogadott regisztráció visszavonva!', 'Elfogadott regisztráció visszavonva!', "success", "/admin/event/subscriber/$subId");
+  }
+
+  // GET ALL REGISTRATIONS BY EVENT
+
+  public function getSubscriptionsByEvent($eventId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE eventRefId = :id");
+    $stmt->bindParam(":id", $eventId);
+    $stmt->execute();
+    $subscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $subscriptions;
+  }
+
+  // Send email to registered users public function!
+  public function sendEmailToSubbedUsers($body, $subscriptions, $eventId)
+  {
+    foreach ($subscriptions as $subscription) {
+      if ($subscription["lang"] === "Hu") {
+        $this->mailer->send($subscription["email"], $body["mail-body-Hu"], "Üzenet");
+      } else if ($subscription["lang"] === "Sp") {
+        $this->mailer->send($subscription["email"], $body["mail-body-Sp"], "");
+      } else {
+        $this->mailer->send($subscription["email"], $body["mail-body-En"], "Message");
+      }
+    }
+
+    $this->alert->set('Emailek sikeresen kiküldve!', 'Emailek sikeresen kiküldve!', 'Emailek sikeresen kiküldve!', "success", "/admin/event/$eventId");
+  }
+
+  public function sendMailToSub($body, $subId)
+  {
+
+    $sub = self::getSubbedUserById($subId); // ez volt getRegisteredUser
+    $this->mailer->send($sub["email"], $body["mail-body"], $sub["lang"] === "Hu" ? "Üzenet" : "Message");
+
+    $this->alert->set(
+      'Email kiküldése sikeres!',
+      'Successful email sent!',
+      null,
+      'success',
+      "/admin/event/subscriber/$subId"
+    );
+  }
+
+
+
+  // USER DELETE SELF FROM EVENT
+  public function deleteSubscription($eventId)
+  {
+
+    $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
+    $stmt->bindParam(":eventId", $eventId);
+    $stmt->execute();
+
+
+    header("Location: /user/dashboard");
+  }
+
+
+
+
+
+
+
+  public function getSubscriptionsByUser($userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :id");
+    $stmt->bindParam(":id", $userId);
+    $stmt->execute();
+    $email = $stmt->fetch(PDO::FETCH_ASSOC)["email"];
+
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email");
+
+    $stmt->bindParam(":email", $email);
+    $stmt->execute();
+    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $registrations;
+  }
+
+
+
+
+
+  // GET REGISTERED USER DATA BY ID
+  public function getSubbedUserById($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_dates WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["dates"] = $dates;
+
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_documents WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["documents"] = $documents;
+
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_tasks WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["tasks"] = $tasks;
+
+      $stmt = $this->pdo->prepare("SELECT * FROM registration_languages WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $user["id"]);
+      $stmt->execute();
+      $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $user["langs"] = $tasks;
+    }
+
+    return $user;
+  }
+
+
+
 
   // INSERT LANGUAGES WHEN USER REGISTER TO EVENT
 
@@ -294,7 +432,7 @@ class UserEventModel
   }
 
   // COPY LANGUAGES FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
-  private function copyLanguagesFromUserToRegister($registerId, $languages)
+  private function copyLanguagesFromUserToSubscribe($registerId, $languages)
   {
     foreach ($languages as $language) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
@@ -307,7 +445,7 @@ class UserEventModel
 
 
   // COPY DOCUMENTS FROM REGISTRATIONS TABLE WHEN USER EXIST INTO REGISTRATIONS
-  private function copyDocumentFromUserToRegister($registerId, $documents)
+  private function copyDocumentFromUserToSubscribe($registerId, $documents)
   {
     foreach ($documents as $document) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
@@ -323,7 +461,7 @@ class UserEventModel
 
   // INSERT DATES WHEN USER REGISTER TO EVENT
 
-  private function insertDatesOfRegistration($registerId, $registration_dates)
+  private function insertDatesOfSubscription($registerId, $registration_dates)
   {
 
     foreach ($registration_dates as $date) {
@@ -337,7 +475,7 @@ class UserEventModel
   // INSERT TASKS WHEN USER REGISTER TO EVENT
 
 
-  private function insertTasksOfRegistration($registerId, $tasks)
+  private function insertTasksOfSubscription($registerId, $tasks)
   {
     foreach ($tasks as $task) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_tasks` VALUES (NULL, :task, :registerRefId);");

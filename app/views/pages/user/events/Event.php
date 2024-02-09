@@ -114,7 +114,7 @@ $isRegistered = $params["isRegistered"] ?? null;
 
         <?php if (!isset($_SESSION["userId"])) : ?>
           <button type="button" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-            Regisztráció
+            <?= EVENT["registration"][$lang] ?? 'HIBA' ?>
           </button>
         <?php else : ?>
           <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn primary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
@@ -143,18 +143,17 @@ $isRegistered = $params["isRegistered"] ?? null;
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Önkéntes profil regisztrációja</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"> <?= EVENT["modal"]["title"][$lang] ?? 'HIBA' ?></h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Önkéntes profil regisztráció után lehetősege nyílik arra hogy értesítést kapjon következő
-        eseményinkről, kezelheti és módosíthatja adatait, és egy kattintással regisztrálhat bármelyik leendő eseményünkre!
+        <?= EVENT["modal"]["desc"][$lang] ?? 'HIBA' ?>
       </div>
       <div class="modal-footer">
-        <a href="/user/registration" class="btn btn-primary">Profilt regisztrálok</button>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn btn-secondary\">" . (EVENT['registration_without_profile'][$lang] ?? 'HIBA') . "</a>" ?>
+        <a href="/user/registration" class="btn btn-primary"><?= EVENT["modal"]["accept"][$lang] ?? 'HIBA' ?></button>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn btn-secondary\">" . (EVENT['modal']['decline'][$lang] ?? 'HIBA') . "</a>" ?>
       </div>
     </div>
   </div>

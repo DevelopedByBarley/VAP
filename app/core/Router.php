@@ -3,7 +3,7 @@
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
         
     
-    require_once 'app/routes/protected/user/event_routes.php';
+    require_once 'app/routes/protected/user/subscription_routes.php';
     require_once 'app/routes/protected/admin/admin_routes.php';
     require_once 'app/routes/protected/admin/volunteer_routes.php';
     require_once 'app/routes/protected/admin/partner_routes.php';
@@ -15,13 +15,14 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
 
     require_once 'app/routes/protected/user/user_routes.php';
-    require_once 'app/routes/protected/user/event_routes.php';
+    require_once 'app/routes/protected/user/subscription_routes.php';
     
     
     
     require_once 'app/routes/public/home/home_routes.php';
     require_once 'app/routes/public/user/event_routes.php';
     require_once 'app/routes/public/user/user_routes.php';
+    require_once 'app/routes/public/user/subscription_routes.php';
 });
 
 // Fetch method and URI from somewhere

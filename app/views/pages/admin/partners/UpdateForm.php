@@ -37,7 +37,7 @@
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-warning text-light btn-block mb-4">Partner frissitése</button>
+          <button type="submit" class="btn btn-warning text-light btn-block mb-4">Partner frissítése</button>
         </div>
       </form>
     </div>

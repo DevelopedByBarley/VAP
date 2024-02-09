@@ -1,6 +1,6 @@
 <?php
 require_once 'app/models/Event_Model.php';
-require_once 'app/models/User_Event_Model.php';
+require_once 'app/models/Subscription_Model.php';
 require_once 'app/helpers/ExportExcel.php';
 
 
@@ -10,7 +10,7 @@ class EventController
   protected $userModel;
   protected $renderer;
   protected $adminModel;
-  protected $userEventModel;
+  protected $subModel;
 
 
   public function __construct()
@@ -19,25 +19,12 @@ class EventController
     $this->userModel = new UserModel();
     $this->renderer = new Renderer();
     $this->adminModel = new AdminModel();
-    $this->userEventModel = new UserEventModel;
+    $this->subModel = new Subscription_Model();
   }
 
 
   /** PROTECTED */
 
-  public function acceptSubscription($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $subId = $vars["id"];
-    $this->eventModel->acceptUserSubscription($subId);
-  }
-
-  public function deleteSubscription($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $subId = $vars["id"];
-    $this->eventModel->deleteUserSubscription($subId);
-  }
 
   // ADD NEW EVENT
   public function newEvent()
@@ -69,59 +56,4 @@ class EventController
     $this->eventModel->state($vars["id"], $state);
   }
 
-
-  public function sendMailsToRegisteredUsers($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $subscriptions = $this->eventModel->getRegistrationsByEvent($vars["id"]);
-    $this->eventModel->sendEmailToRegisteredUsers($_POST, $subscriptions, $vars["id"]);
-  }
-
-  public function sendMailToSub($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-
-    $this->eventModel->sendMailToSub($_POST, $vars["id"]);
-  }
-
-  public function deleteRegistration($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->userEventModel->delete($vars["id"]);
-  }
-
-
-
-  /** PUBLIC */
-
-  public function deleteRegistrationFromMail($vars)
-  {
-    $this->userEventModel->deleteRegistrationFromMailUrl($vars["id"]);
-  }
-
-  public function registerUserToEvent($vars)
-  {
-    session_start();
-    $user = $this->userModel->getMe();
-
-    if ($user) {
-      LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
-      $user["documents"] = $this->userModel->getDocumentsByUser($user["id"]);
-      $user["langs"] = $this->userModel->getLanguagesByUser($user["id"]);
-    }
-
-    $this->userEventModel->register($vars["id"], $_POST, $_FILES, $user);
-  }
-
-  public function exportSubs()
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-
-    $XLSX = new XLSX();
-    $data = $XLSX->getAcceptedSubs($_GET["id"]);
-
-  
-    $XLSX->write($data);
-    exit;
-  }
 }

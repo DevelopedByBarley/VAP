@@ -39,8 +39,16 @@ class EventRender extends EventController
     $dates = $this->eventModel->getEventDates($eventId);
     $tasks = $this->eventModel->getEventTasks($eventId);
     $links = $this->eventModel->getEventLinks($eventId);
-    $subscriptions = $this->eventModel->getRegistrationsByEvent($eventId);
+    $subscriptions = $this->subModel->getSubscriptionsByEvent($eventId);
     $countOfRegistrations = count($subscriptions);
+
+    $anyAccepted = false;
+    foreach ($subscriptions as $item) {
+      if ((int)$item["isAccepted"] === 1) {
+        $anyAccepted = true;
+        break;
+      }
+    }
 
     echo $this->renderer->render("Layout.php", [
       "content" => $this->renderer->render("/pages/admin/events/Event.php", [
@@ -50,6 +58,7 @@ class EventRender extends EventController
         "tasks" => $tasks ?? null,
         "links" => $links ?? null,
         "subscriptions" => $subscriptions ?? null,
+        "anyAccepted" => $anyAccepted ?? null,
         "countOfRegistrations" => $countOfRegistrations ?? null,
         "countOfUserByEmailStates" => $countOfUserByEmailStates ?? null,
       ]),
@@ -61,51 +70,7 @@ class EventRender extends EventController
 
 
 
-  // GET ALL SUBSCRIPTIONS FOR ADMIN
-  public function subscriptions($vars)
-  {;
 
-
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-
-
-    $eventId = $vars["id"] ?? null;
-    $admin = $this->adminModel->admin();
-    $event = $this->eventModel->getEventById($eventId);
-
-    $subscriptions = $this->eventModel->getRegistrationsByEvent($eventId);
-
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/Subscriptions.php", [
-        "admin" => $admin ?? null,
-        "event" => $event ?? null,
-        "subscriptions" => $subscriptions ?? null,
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
-
-  // RENDER SINGLE SUBSCRIBER FOR ADMIN
-  public function subscriber($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $admin = $this->adminModel->admin();
-    $subscriptionId = $vars["id"] ?? null;
-    $user = $this->eventModel->getRegisteredUser($subscriptionId);
-    $eventId = $user["eventRefId"];
-
-    $tasks = $this->eventModel->getEventTasks($eventId);
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/Subscriber.php", [
-        "admin" => $admin ?? null,
-        "tasks" => $tasks ?? null,
-        "user" => $user ?? null
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
 
   // RENDER EVENT REGISTRATION FORM FOR ADMIN
   public function eventForm()
@@ -149,40 +114,9 @@ class EventRender extends EventController
     ]);
   }
 
-  // RENDER MAIL FORM FOR ADMIN WITH CK EDITOR  FOR ADMIN
-  public function mailForm($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $admin = $this->adminModel->admin();
-    $event = $this->eventModel->getEventById($vars["id"]);
-
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/MailForm.php", [
-        "admin" => $admin ?? null,
-        "event" => $event ?? null,
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
 
 
 
-  public function subMailForm($vars)
-  {
-    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
-    $admin = $this->adminModel->admin();
-    $subId = $vars["id"];
-    $sub = $this->eventModel->getRegisteredUser($subId);
-
-    echo $this->renderer->render("Layout.php", [
-      "content" => $this->renderer->render("/pages/admin/events/MailToSub.php", [
-        "admin" => $admin ?? null,
-        "sub" => $sub ?? null,
-      ]),
-      "admin" => $admin ?? null
-    ]);
-  }
 
 
 
@@ -226,46 +160,10 @@ class EventRender extends EventController
   }
 
 
-  // RENDER REGISTER TO EVENT FORM FOR USERS
-  public function subscribeForm($vars)
+
+
+  public function events()
   {
-    session_start();
-    $id = $vars["id"];
-
-
-    $event = $this->eventModel->getEventById($id);
-    $user = $this->userModel->getMe();
-
-    if (!$event) {
-      header("Location: /");
-      exit;
-    }
-    $dates = $this->eventModel->getEventDates($id);
-    $links = $this->eventModel->getEventLinks($id);
-    $tasks = $this->eventModel->getEventTasks($id);
-    $user = $this->userModel->getMe();
-    $lang = $_COOKIE["lang"] ?? null;
-    $prev = $_SESSION["prevSubContent"] ?? null;
-
-
-    echo $this->renderer->render("Layout.php", [
-      "user" => $user,
-      "content" => $this->renderer->render("/pages/user/events/Subscribe.php", [
-        "user" => $user ?? null,
-        "event" => $event ?? null,
-        "dates" => $dates ?? null,
-        "links" => $links ?? null,
-        "tasks" => $tasks ?? null,
-        "lang" => $lang,
-        "prev" => $prev ?? null
-      ]),
-    ]);
-
-    
-  }
-
-
-  public function events() {
 
     $lang = $_COOKIE["lang"] ?? null;
     $user = $this->userModel->getMe();

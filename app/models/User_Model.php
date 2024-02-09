@@ -343,32 +343,44 @@ class UserModel
   }
 
 
-    public function deleteExpiredRegistrations()
-    {
-      $now = time();
-      $stmt = $this->pdo->prepare("SELECT id, fileName FROM `users` WHERE expires < :currentTime AND isActivated = 0");
+  public function deleteExpiredRegistrations()
+  {
+    $now = time();
+    $stmt = $this->pdo->prepare("SELECT id, fileName FROM `users` WHERE expires < :currentTime AND isActivated = 0");
+    $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    if (!empty($users)) {
+      foreach ($users as $user) {
+        $documents = self::getDocumentsByUser($user["id"]);
+        self::deleteUserLanguages($user["id"]);
+        unlink("./public/assets/uploads/images/users/" . $user["fileName"]);
+      }
+
+      // Ha a $documents üres, akkor ne próbáljuk törölni
+      if (!empty($documents)) {
+        self::deleteUserDocuments($documents);
+      }
+
+      // A DELETE lekérdezéshez hozzá kell adni az "FROM" kulcsszót
+      $stmt = $this->pdo->prepare("DELETE FROM `users` WHERE expires < :currentTime AND isActivated = 0");
       $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
       $stmt->execute();
-      $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
+    }
+  }
 
-      if (!empty($users)) {
-        foreach ($users as $user) {
-          $documents = self::getDocumentsByUser($user["id"]);
-          self::deleteUserLanguages($user["id"]);
-          unlink("./public/assets/uploads/images/users/" . $user["fileName"]);
-        }
 
-        // Ha a $documents üres, akkor ne próbáljuk törölni
-        if (!empty($documents)) {
-          self::deleteUserDocuments($documents);
-        }
-
-        // A DELETE lekérdezéshez hozzá kell adni az "FROM" kulcsszót
-        $stmt = $this->pdo->prepare("DELETE FROM `users` WHERE expires < :currentTime AND isActivated = 0");
-        $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
-        $stmt->execute();
-      }
+    public function deleteExpiresPasswordResetTokens()
+    {
+      $now = date('Y-m-d H:i:s');
+      $stmt = $this->pdo->prepare("DELETE FROM `password_reset_tokens` WHERE expires < :currentTime");
+      $stmt->bindParam(":currentTime", $now, PDO::PARAM_STR);
+      $stmt->execute();
+      
+      
+      
     }
 
 
@@ -699,27 +711,6 @@ class UserModel
   }
 
 
-
-  /**SUBSCRIBER??????? --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // GET ALL EVENT DATA BY SUBSCRIBER
-
-  public function getRegistrationsByUser($userId)
-  {
-    $stmt = $this->pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :id");
-    $stmt->bindParam(":id", $userId);
-    $stmt->execute();
-    $email = $stmt->fetch(PDO::FETCH_ASSOC)["email"];
-
-
-    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email");
-
-    $stmt->bindParam(":email", $email);
-    $stmt->execute();
-    $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $registrations;
-  }
 
 
   /**PRIVATES ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */

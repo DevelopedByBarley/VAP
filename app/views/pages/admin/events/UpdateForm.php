@@ -90,7 +90,7 @@ $event_tasks = $params["event_tasks"];
         </div>
 
 
-        <button type="submit" class="btn btn-primary btn-block mb-4">Hozzáad</button>
+        <button type="submit" class="btn btn-warning text-light btn-block mb-4">Frissítés</button>
       </form>
     </div>
   </div>

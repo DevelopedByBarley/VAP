@@ -9,14 +9,13 @@ class XLSX
     {
         $db = new Database();
         $this->pdo = $db->getConnect();
-        $this->alert =new Alert();
+        $this->alert = new Alert();
     }
 
 
     public function write($data)
     {
         $uri = $_SERVER["REQUEST_URI"];
-      
 
         if (empty($data) || !is_array($data)) {
             $this->alert->set("Még nincs egy elfogadott regisztráció sem, ezért az exportálás nem lehetséges", "Még nincs egy elfogadott regisztráció sem, ezért az exportálás nem lehetséges", "Még nincs egy elfogadott regisztráció sem, ezért az exportálás nem lehetséges", "danger", $uri);
@@ -25,7 +24,6 @@ class XLSX
         $excel = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $excel->getActiveSheet();
 
-        // Módosított kód kezdete
         $headers = [
             "id",
             "regisztráció ID",
@@ -39,18 +37,18 @@ class XLSX
             "dátumok",
             "nyelvek"
         ];
-        $columnIndex = 1;
 
+        // Először beírjuk a fejléceket
+        $columnIndex = 1;
         foreach ($headers as $header) {
             $sheet->setCellValueByColumnAndRow($columnIndex, 1, $header);
             $columnIndex++;
         }
 
-        $rowIndex = count($data);  // Kezd a második sorral
-
+        // Ezután beírjuk az adatokat
+        $rowIndex = 2; // A második sorral kezdünk
         foreach ($data as $rowData) {
             $columnIndex = 1;
-
             foreach ($rowData as $key => $value) {
                 if ($key === 'dates') {
                     $formattedDates = implode(', ', explode(' ', $value));
@@ -66,11 +64,10 @@ class XLSX
                 }
                 $columnIndex++;
             }
-
-            $rowIndex++;  // Növelje az indexet a következő sorra
+            $rowIndex++;
         }
 
-
+        // Exportálás
         ob_end_clean();
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="export_data_' . time() . '.xlsx"');
@@ -80,6 +77,7 @@ class XLSX
         $xlsxWriter->save('php://output');
         exit;
     }
+
 
 
     public function getAcceptedSubs($id)

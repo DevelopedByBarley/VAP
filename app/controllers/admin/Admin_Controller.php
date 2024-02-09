@@ -38,4 +38,19 @@ class AdminController
   {
     $this->authService->loginAdmin($_POST);
   }
+
+  // BAN USER /// MEG KELL CSINÁLNI MINDEN USER ADAT TÖRLÉSÉT!
+  public function banUser($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+
+    $this->adminModel->ban($vars["id"]);
+  }
+
+  public function sendMailToUser($vars)
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $this->adminModel->sendMailToUser($_POST, $vars["id"]);
+  }
+
 }
