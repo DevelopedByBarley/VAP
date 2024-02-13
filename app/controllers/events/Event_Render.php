@@ -144,8 +144,9 @@ class EventRender extends EventController
   {
 
     session_start();
-    $eventId = $vars["id"] ?? null;
-    $event = $this->eventModel->getEventById($eventId);
+    $slug = $vars["slug"] ?? null;
+    $event = $this->eventModel->getEventBySlug($slug);
+    $eventId = $event["eventId"] ?? null;
     $user = $this->userModel->getMe();
     $isRegistered = null;
     if ($user) {
@@ -163,10 +164,6 @@ class EventRender extends EventController
     $links = $this->eventModel->getEventLinks($eventId);
 
     echo $this->renderer->render("Layout.php", [
-      "nav" => [
-        "link" => "/admin/events",
-        "slug" => getStringByLang("Vissza az eseményekhez", "Vissza a eseményekhez", "Vissza a eseményekhez")
-      ],
       "title" => getStringByLang("Esemény", "Event", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Event.php", [

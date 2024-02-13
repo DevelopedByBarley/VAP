@@ -12,7 +12,6 @@ $tasks = $params["tasks"] ?? null;
 $isRegistered = $params["isRegistered"] ?? null;
 
 
-
 ?>
 
 <div class="container-fluid mt-b" style="position: relative; z-index: 0;">
@@ -117,8 +116,7 @@ $isRegistered = $params["isRegistered"] ?? null;
             <?= EVENT["registration"][$lang] ?? 'HIBA' ?>
           </button>
         <?php else : ?>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn primary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
-
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn primary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
         <?php endif ?>
 
 
@@ -138,6 +136,8 @@ $isRegistered = $params["isRegistered"] ?? null;
 
 
 
+<?php if(!$isRegistered):?>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -153,8 +153,10 @@ $isRegistered = $params["isRegistered"] ?? null;
       </div>
       <div class="modal-footer">
         <a href="/user/registration" class="btn btn-primary"><?= EVENT["modal"]["accept"][$lang] ?? 'HIBA' ?></button>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['eventId']}\" class=\"btn btn-secondary\">" . (EVENT['modal']['decline'][$lang] ?? 'HIBA') . "</a>" ?>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn btn-secondary\">" . (EVENT['modal']['decline'][$lang] ?? 'HIBA') . "</a>" ?>
       </div>
     </div>
   </div>
 </div>
+
+<?php endif?>

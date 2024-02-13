@@ -71,13 +71,14 @@ class EventModel
     $date = filter_var($body["date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $end_date = filter_var($body["end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $slug = filter_var($body["slug"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
     $isPublic = 1;
     $tasks = $body["task"] ?? [];
     $createdAt = time();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :isPublic, :fileName, :createdAt)");
+    $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :isPublic, :fileName, :createdAt, :slug)");
     $stmt->bindParam(":nameInHu", $nameInHu);
     $stmt->bindParam(":nameInEn", $nameInEn);
     $stmt->bindParam(":descriptionInHu", $descriptionInHu);
@@ -88,6 +89,7 @@ class EventModel
     $stmt->bindParam(":isPublic", $isPublic);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
+    $stmt->bindParam(":slug", $slug);
 
     $stmt->execute();
 
@@ -139,6 +141,7 @@ class EventModel
     $date = filter_var($body["date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $end_date = filter_var($body["end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $reg_end_date = filter_var($body["reg_end_date"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $slug = filter_var($body["slug"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $links = $body["links"] ?? [];
     $event_dates = $body["event_dates"] ?? [];
 
@@ -169,7 +172,8 @@ class EventModel
     `end_date` = :end_date, 
     `reg_end_date` = :reg_end_date, 
     `fileName` = :fileName, 
-    `createdAt` = :createdAt 
+    `createdAt` = :createdAt, 
+    `slug` = :slug
     WHERE `events`.`eventId` = :id");
 
     $stmt->bindParam(":nameInHu", $nameInHu);
@@ -181,6 +185,7 @@ class EventModel
     $stmt->bindParam(":reg_end_date", $reg_end_date);
     $stmt->bindParam(":fileName", $fileName);
     $stmt->bindParam(":createdAt", $createdAt);
+    $stmt->bindParam(":slug", $slug);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
@@ -238,6 +243,14 @@ class EventModel
 
   // GET EVENT BY ID IF ADMIN | USER
 
+  public function getEventBySlug($slug)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE slug = :slug");
+    $stmt->bindParam(":slug", $slug);
+    $stmt->execute();
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $event;
+  }
 
 
   public function getEventById($id, $admin = null)
@@ -358,7 +371,6 @@ class EventModel
       $body = str_replace('{{id}}', $eventId, $body);
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Új esemény" : "New event!");
     }
-
   }
 
 
@@ -463,12 +475,4 @@ class EventModel
       $stmt->execute();
     }
   }
-
-
-
-
-
-
 }
-
-

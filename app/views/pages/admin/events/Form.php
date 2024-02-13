@@ -68,10 +68,12 @@
         </div>
         <div class="form-outline border p-3">
           <label class="form-check-label">
-            <span><b>Időzítő beállítása</b> <i> (Az esemény csak a beállított időpont után lesz publikus!)</i></span>
+            <span><b>Slug beállítása</b> <i> (Ez fog megjelenni a / jel után egy szám helyett. PL: /event/muegyetem-ejszakaja), <b>
+              Fontos hogy space és ékezetes betű ne legyen benne! Az egység kedvéért angolul javasolnám!
+            </b></i></span>
           </label>
           <div class="mt-3">
-            <input type="datetime-local" id="meeting-time" name="timer" />
+            <input type="text" id="slug" name="slug" />
           </div>
         </div>
 

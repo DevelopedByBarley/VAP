@@ -12,10 +12,12 @@ class SubscriptionsRender extends SubscriptionsController
    public function subscribeForm($vars)
    {
      session_start();
-     $id = $vars["id"];
- 
- 
-     $event = $this->eventModel->getEventById($id);
+     $slug = $vars["slug"];
+
+     
+     
+     $event = $this->eventModel->getEventBySlug($slug);
+     $id = $event["eventId"];
      $user = $this->userModel->getMe();
  
      if (!$event) {

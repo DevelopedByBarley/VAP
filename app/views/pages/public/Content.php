@@ -191,7 +191,7 @@ $user = $params["user"];
 				<?php foreach ($latestEvents as $event) : ?>
 					<div class="col-12">
 						<div class="card-group event-card mb-4">
-							<a class="w-100" href="/event/<?= $event["eventId"] ?>" style="text-decoration: none;">
+							<a class="w-100" href="/event/<?= $event["slug"] ?>" style="text-decoration: none;">
 								<div class="card mb-0 p-3">
 									<div class="card-body py-1">
 										<div class="row">

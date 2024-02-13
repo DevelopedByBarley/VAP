@@ -7,7 +7,6 @@
   $r->addRoute('GET', '/admin/subscription/delete/{id}', [SubscriptionsRender::class, 'declineSubscription']);
   $r->addRoute('GET', '/admin/event/subscriber/email/{id}', [SubscriptionsRender::class, 'subMailForm']);
   $r->addRoute('GET', '/admin/event/email/{id}', [SubscriptionsRender::class, 'mailForm']);
-  $r->addRoute('GET', '/event/subscribe/{id}', [SubscriptionsRender::class, 'subscribeForm']);
 
 
   $r->addRoute('GET', '/admin/subscription/accept/{id}', [SubscriptionsController::class, 'acceptSubscription']);

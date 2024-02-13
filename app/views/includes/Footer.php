@@ -1,9 +1,9 @@
-<div class="row mt-5 w-100 p-0 m-0" id="footer">
-    <footer class="text-center text-lg-start text-white sc-color d-flex align-items-center justify-content-center p-0 m-0">
+<div class="row mt-5" id="footer">
+    <footer class="text-center text-lg-start text-white sc-color d-flex align-items-center justify-content-center">
         <!-- Grid container -->
-        <div class="container-fluid p-4 pb-0 p-0 m-0">
+        <div class="container-fluid p-4 pb-0">
             <!-- Section: Links -->
-            <section class="">
+            <section>
                 <!--Grid row-->
                 <div class="row reveal">
                     <!-- Grid column -->
