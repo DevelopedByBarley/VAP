@@ -20,7 +20,7 @@ $user = $params["user"];
 
 	<!-- HEADER ROW -->
 
-	<div class="row">
+	<div class="row p-0 m-0">
 		<div class="col-12 col-lg-8 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
 			<h1 class="text-center mb-3">Volunteer Art Programs</h1>
 			<p class="text-center"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
@@ -50,6 +50,10 @@ $user = $params["user"];
 			</p>
 		</div>
 	</div>
+
+
+
+
 
 
 	<!-- RECOMMENDATION ROW-->
@@ -99,7 +103,7 @@ $user = $params["user"];
 				<div class="row d-flex align-items-center justify-content-center" id="v-cards" style="min-height: 60vh">
 					<?php foreach ($volunteers as $volunteer) : ?>
 						<div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center mt-2">
-							<div class="card p-4 volunteer-card r-border" style="width: 25rem;">
+							<div class="card p-lg-4 volunteer-card r-border" style="width: 25rem;">
 								<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
 								<div class="card-body volunteer-card-body mt-3">
 									<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
@@ -181,14 +185,14 @@ $user = $params["user"];
 
 	<!--EVENT ROW -->
 	<?php if (!empty($latestEvents)) : ?>
-		<div class="container">
-			<div class="row mt-5 text-dark d-flex align-items-center justify-content-center r-border" id="latest-events" style="min-height: 500px;">
+		<div class="container p-0">
+			<div class="row  mt-5 text-dark d-flex align-items-center justify-content-center r-border" id="latest-events" style="min-height: 500px;">
 				<h1 class="text-center mb-5">Eseményeink</h1>
 				<?php foreach ($latestEvents as $event) : ?>
 					<div class="col-12">
 						<div class="card-group event-card mb-4">
 							<a class="w-100" href="/event/<?= $event["eventId"] ?>" style="text-decoration: none;">
-								<div class="card mb-0 p-2">
+								<div class="card mb-0 p-3">
 									<div class="card-body py-1">
 										<div class="row">
 											<div class="col-12 col-xl-3">
@@ -231,18 +235,18 @@ $user = $params["user"];
 		<div class="row mt-5 reveal" id="partners">
 			<div class="col-xs-12">
 				<h1 class="text-center mt-5 mb-5 text-uppercase"><?= CONTENT["partners"]["title"][$lang] ?? '' ?></h1>
-				<div class="row mb-5 d-flex align-items-center justify-content-center p-3">
+				<div class="row mb-5 d-flex align-items-center justify-content-center">
 					<?php $counter = 0; ?>
 					<?php foreach ($partners as $index => $partner) : ?>
 						<?php if ($counter < 9) : ?>
 							<a href="<?= $partner["link"] ?? '' ?>" class="card p-2 m-4 shadow d-flex align-items-center justify-content-center text-decoration-none text-dark" style="max-width: 540px; min-height: 150px;">
 								<div class="row g-0">
-									<div class="col-md-4 d-flex align-items-center justify-content-center">
+									<div class="col-md-4 my-3 my-lg-0 d-flex align-items-center justify-content-center">
 										<div style="background: url('/public/assets/uploads/images/partners/<?= $partner["fileName"] ?>') center center/cover; height: 100px; width: 100px;" class="card-img-top"></div>
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
-											<h5 class="card-title"><?= $partner["name"] ?></h5>
+											<h5 class="card-title my-3 my-lg-0"><?= $partner["name"] ?></h5>
 											<p class="card-text"><?= $partner[languageSwitcher("description")] ?></p>
 										</div>
 									</div>
@@ -267,13 +271,13 @@ $user = $params["user"];
 		<!-- FAQ ROW -->
 
 
-		<div class="container shadow d-flex align-items-center justify-content-center flex-column border r-border reveal mb-5" id="faq">
+		<div class="container p-0 shadow d-flex align-items-center justify-content-center flex-column border r-border reveal mb-5" id="faq">
 			<h1 class="text-center mt-5 mb-5 reveal text-uppercase"><?= CONTENT["faq"][$lang] ?? '' ?></h1>
 			<div class="row w-100">
-				<div class="col-xs-12 mb-5 reveal d-flex align-items-center justify-content-center flex-column" style="min-height: 40vh;">
-					<div class="accordion mb-5 w-100" id="questionAccordion">
+				<div class="col-xs-12 mb-5 reveal d-flex align-items-center justify-content-center flex-column p-0" style="min-height: 40vh;">
+					<div class="accordion mb-5 w-100 " id="questionAccordion">
 						<?php foreach ($questions as $index => $question) : ?>
-							<div class="accordion-item">
+							<div class="accordion-item ">
 								<h2 class="accordion-header">
 									<button style="font-size: 1.2rem" class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $question["q_id"] ?>"><?= $question[languageSwitcher("question")] ?> </button>
 								</h2>
@@ -290,10 +294,11 @@ $user = $params["user"];
 		</div>
 
 		</div>
+		
 	</div>
-	
-	
 	<?php include './app/views/includes/Footer.php' ?>
+	
+	
 
 
 

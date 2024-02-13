@@ -13,9 +13,7 @@ $subscriptions = $params["subscriptions"];
 
 <div class="container-fluid">
   <div class="p-4 container">
-    <div class="col-12 my-5">
-      <a href="/user/dashboard">Vissza a irányítópultba</a>
-    </div>
+
     <form id="update-form" action="/user/update" method="POST">
       <div class="row mb-4 mt-5">
         <h2 class="text-center mb-5"><?= PROFILE["profile_settings"]["title"][$lang] ?? 'Név' ?></h2>
@@ -25,14 +23,9 @@ $subscriptions = $params["subscriptions"];
           <div class="form-outline">
             <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="name" name="name" class="form-control" value="<?= $user["name"] ?? '' ?>" required />
-            <?php if (isset($errors["name"])) : ?>
-              <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors["name"] as $error) : ?>
-                  <?= $error ?>
-                <?php endforeach ?>
+            <small id="nameInputAlert" class="text-danger">
 
-              </div>
-            <?php endif ?>
+            </small>
           </div>
         </div>
 
@@ -62,13 +55,8 @@ $subscriptions = $params["subscriptions"];
           <div class="form-outline mb-4">
             <label class="form-label required" for="city"><b><?= REGISTRATION["form"]["address"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="address" name="address" class="form-control" required value="<?= $user["address"] ?? '' ?>" />
-            <?php if (isset($errors["address"])) : ?>
-              <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors["address"] as $error) : ?>
-                  <?= $error ?>
-                <?php endforeach ?>
-              </div>
-            <?php endif ?>
+            <small id="addressInputAlert" class="text-danger"></small>
+
           </div>
         </div>
 
@@ -79,13 +67,7 @@ $subscriptions = $params["subscriptions"];
           <div class="form-outline mb-4">
             <label class="form-label" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'Név' ?></b></label>
             <input type="text" id="phone" name="mobile" class="form-control" value="<?= $user["mobile"] ?? '' ?>" />
-            <?php if (isset($errors["mobile"])) : ?>
-              <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors["mobile"] as $error) : ?>
-                  <?= $error ?>
-                <?php endforeach ?>
-              </div>
-            <?php endif ?>
+            <small id="phoneInputAlert" class="text-danger"></small>  
           </div>
         </div>
 
@@ -383,3 +365,6 @@ $subscriptions = $params["subscriptions"];
 
   })
 </script>
+
+
+<script src="/public/js/validators/Register.js?v=<?php echo time() ?>"></script>

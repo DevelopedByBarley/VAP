@@ -25,16 +25,16 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
                   <div class="form-outline mb-4">
                     <label for="email" class="form-label"><?= LOGIN["email"][$lang] ?? 'Email cim' ?></label>
-                    <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= $langs["loginForm"]["email"][$lang] ?? 'Email cim' ?>">
+                    <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= LOGIN["email"][$lang] ?? 'HIBA' ?>">
                   </div>
 
                   <div class="form-outline mb-4">
                     <label for="password" class="form-label"><?= LOGIN["password"][$lang] ?? 'Jelszó' ?></label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="<?= $langs["loginForm"]["password"][$lang] ?? 'Email cim' ?>">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="<?= LOGIN["password"][$lang] ?? 'HIBA' ?>">
                   </div>
 
                   <div class="text-center pt-1 mb-2 pb-1">
-                    <button type="submit" class="btn secondary-btn"><?= LOGIN["loginBtn"][$lang] ?? 'Bejelentkezés' ?></button>
+                    <button type="submit" class="btn secondary-btn"><?= LOGIN["loginBtn"][$lang] ?? 'HIBA' ?></button>
                     <p class="mt-3"><?= LOGIN["forgot"][$lang] ?? 'HIBA' ?></p>
                   </div>
 
@@ -50,7 +50,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
             <div class="col-lg-6 bg-dark d-none d-lg-flex align-items-center">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h4 class="mb-4 text-uppercase"><?= LOGIN["description_title"][$lang] ?? 'HIBA' ?></h4>
-                <p class="small mb-0">
+                <p class="mb-0">
                   <?= LOGIN["description_content"][$lang] ?? 'HIBA' ?>
                 </p>
               </div>

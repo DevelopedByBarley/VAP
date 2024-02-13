@@ -16,8 +16,8 @@ define("NAVBAR", [
     "Sp" => ""
   ],
   "partners" => [
-    "En" => "Partner sites",
-    "Hu" => "Partner oldalak",
+    "En" => "Partners",
+    "Hu" => "Partnereink  ",
     "Sp" => ""
   ],
   "contact" => [

@@ -38,9 +38,9 @@ define('EVENT', [
     ],
     "description" => [
       "Hu" => "Ha jelentkezel egy eseményre önkéntesnek, akkor a regisztrációt követően emailben küldünk értesítést a minden elérhető információról, ami az önkéntes feladathoz kapcsolódik. Ha még nem önkénteskedtél velünk az előző években, akkor első lépésként egy interjú időpontot fogunk egyeztetni. Ha már dolgoztunk együtt, akkor az eligazítás és időbeosztás, valamint az előzetes feladatokat fogjuk egyeztetni. 
-      Ne félj, minden információt, feladatot előzetesen emailen, messengeren is küldeni fogunk! Bármilyen kérdésed, kérésed van elérsz minket a <b>hello@artnesz.hu<b/> címen.",
+      Ne félj, minden információt, feladatot előzetesen emailen, messengeren is küldeni fogunk! Bármilyen kérdésed, kérésed van elérsz minket a hello@artnesz.hu címen.",
       "En" => "If you sign up to volunteer for an event, we will send you an email after registration with all the information available about the volunteering task. If you haven't volunteered with us before, we'll schedule an interview as a first step. If you have worked with us before, we will agree on a briefing and schedule, as well as preliminary tasks. 
-      Don't worry, we will send you all information and tasks in advance via email or messenger! If you have any questions or requests, you can reach us at <b>hello@artnesz.hu.</b>",
+      Don't worry, we will send you all information and tasks in advance via email or messenger! If you have any questions or requests, you can reach us at hello@artnesz.hu.",
       "Sp" => ""
     ],
   ],

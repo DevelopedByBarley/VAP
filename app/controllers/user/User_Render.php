@@ -19,6 +19,7 @@ class UserRender extends UserController
     }
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Bejelentkezés", "Login", ""),
       "content" => $this->renderer->render("/pages/user/Login.php", []),
     ]);
   }
@@ -38,10 +39,13 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Regisztráció", "Registration", ""),
       "content" => $this->renderer->render("/pages/user/Register.php", [
         "prev" => $prev ?? null,
         "errors" => $errors ?? null
-      ])
+      ],
+      
+      )
     ]);
 
   }
@@ -58,6 +62,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Irányítópult", "Dashboard", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/Dashboard.php", [
         "user" => $user ?? null,
@@ -72,10 +77,11 @@ class UserRender extends UserController
 
   // RENDER RESET PASSWORD FORM FROM USER SETTINGS
   public function resetPasswordForm()
-  {
+  {    
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
     $user =  $this->userModel->getMe();
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Új jelszó", "New password", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/ResetPassword.php", [
         "user" => $user ?? null,
@@ -92,6 +98,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Dokumentumok", "Documents", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/Documents.php", [
         "user" => $user ?? null,
@@ -109,6 +116,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Dokument frissítése", "Update document", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/UpdateDocumentForm.php", [
         "user" => $user ?? null,
@@ -121,11 +129,13 @@ class UserRender extends UserController
   public function documentForm()
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
+  
     $user =  $this->userModel->getMe();
     $document = $this->userModel->getDocumentsByUser($user["id"]);
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Új dokumentum", "New document", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/DocumentForm.php", [
         "user" => $user ?? null,
@@ -139,10 +149,11 @@ class UserRender extends UserController
   public function forgotPwForm()
   {
     session_start();
-    $errors = $_SESSION["forgotPwFormErrors"] ?? null;
+    $errors = $_SESSION["forgotPwFormErrors"] ?? null;  
 
   
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Elfelejtett jelszó", "Forgotten password", ""),
       "content" => $this->renderer->render("/pages/user/Forgot_Pw_Form.php", [
         "errors" => $errors
       ]),
@@ -170,6 +181,7 @@ class UserRender extends UserController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Új jelszó", "New password", ""),
       "content" => $this->renderer->render("/pages/user/Reset_Pw_Form.php", [
         "emailByToken" => $emailByToken,
         "token" => $token
@@ -189,6 +201,7 @@ class UserRender extends UserController
     
     $subscriptions = $this->subModel->getSubscriptionsByUser($user["id"]);
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Profil beállítások", "Profil settings", ""),
       "user" => $user ?? null,
       "content" => $this->renderer->render("/pages/user/Profile_Settings.php", [
         "user" => $user ?? null,

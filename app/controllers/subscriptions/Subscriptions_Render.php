@@ -31,6 +31,7 @@ class SubscriptionsRender extends SubscriptionsController
  
  
      echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Felíratkozás", "Subscription", ""),
        "user" => $user,
        "content" => $this->renderer->render("/pages/user/events/Subscribe.php", [
          "user" => $user ?? null,
@@ -59,6 +60,10 @@ class SubscriptionsRender extends SubscriptionsController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/event/". $eventId,
+        "slug" => getStringByLang("Vissza az eseményhez", "Vissza a eseményhez", "Vissza a eseményhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/Subscriptions.php", [
         "admin" => $admin ?? null,
         "event" => $event ?? null,
@@ -76,11 +81,15 @@ class SubscriptionsRender extends SubscriptionsController
     $admin = $this->adminModel->admin();
     $subscriptionId = $vars["id"] ?? null;
     $user = $this->subModel->getSubbedUserById($subscriptionId);
-    $eventId = $user["eventRefId"];
+    $tasks = $this->subModel->getSubbedUserById($user["id"])["tasks"];
 
-    $tasks = $this->eventModel->getEventTasks($eventId);
+  
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/event/subscriptions/" . $user["eventRefId"],
+        "slug" => getStringByLang("Vissza az feliratkozókhoz", "Vissza a feliratkozókhoz", "Vissza a feliratkozókhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/Subscriber.php", [
         "admin" => $admin ?? null,
         "tasks" => $tasks ?? null,
@@ -120,6 +129,10 @@ class SubscriptionsRender extends SubscriptionsController
     $sub = $this->subModel->getSubbedUserById($subId);
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/event/subscriber/" . $subId,
+        "slug" => getStringByLang("Vissza a feliratkozóhoz", "Vissza a feliratkozóhoz", "Vissza a feliratkozóhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/MailToSub.php", [
         "admin" => $admin ?? null,
         "sub" => $sub ?? null,

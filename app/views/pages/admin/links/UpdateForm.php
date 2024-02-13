@@ -1,9 +1,6 @@
 <?php $link = $params["link"] ?>
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/links">Vissza a linkekhez</a>
-    </div>
     <div class="col-12">
       <form enctype="multipart/form-data" action="/admin/links/update/<?= $link["id"] ?>" method="POST" class="form">
 

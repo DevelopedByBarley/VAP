@@ -226,12 +226,12 @@ li {
 }
 
 #parallax-wrapper {
-  height: 40vh;
+  height: 70vh;
   position: relative;
 }
 
 #parallax-filter {
-  height: 40vh;
+  height: 70vh;
   width: 100%;
   background-color: rgba(0, 168, 157, 0.30);
   position: absolute;
@@ -261,4 +261,5 @@ li {
 
 #footer {
   min-height: 40vh;
+  width: 100% !important;
 }

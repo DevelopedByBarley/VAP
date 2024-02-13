@@ -1,8 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/events">Vissza az eseményekhez</a>
-    </div>
 
     <div class="col-12">
       <form enctype="multipart/form-data" action="/admin/events/new" method="POST">

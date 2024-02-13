@@ -2,6 +2,7 @@
 require_once 'app/helpers/Alert.php';
 require_once 'app/services/AuthService.php';
 require_once 'app/helpers/Validate.php';
+require_once 'app/models/Subscription_Model.php';
 
 
 class UserModel
@@ -10,6 +11,7 @@ class UserModel
   private $fileSaver;
   private $mailer;
   private $alert;
+  private $subModel;
 
   public function __construct()
   {
@@ -18,6 +20,7 @@ class UserModel
     $this->fileSaver = new FileSaver();
     $this->mailer = new Mailer();
     $this->alert = new Alert();
+    $this->subModel = new Subscription_Model();
   }
 
   // GET USER BY SESSION
@@ -166,8 +169,9 @@ class UserModel
   // UPDATE USER FROM USER SETTINGS
   public function update($body)
   {
-
+    
     $userId = $_SESSION["userId"] ?? null;
+    $this->subModel->updateUserDataOfSubscription($body, $userId);
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -221,8 +225,6 @@ class UserModel
       self::updateUserLanguages($userId, $languages, $levels);
       self::updateTasks($userId, $tasks);
 
-      if (isset($_SESSION["profileUpdateError"])) unset($_SESSION["profileUpdateError"]);
-
       $this->alert->set('Profil frissítése sikeres!', 'You updating your profile successfully!', null, 'success', '/user/settings');
     }
   }
@@ -232,6 +234,7 @@ class UserModel
   public function delete($body)
   {
     $userId = $_SESSION["userId"] ?? null;
+    $this->subModel->userDeleteSubsAndSelf($userId);
     $userName = self::getMe()["name"];
     $idForDelete = $body["idForDelete"] ?? null;
     $documents = self::getDocumentsByUser($userId);
@@ -365,23 +368,20 @@ class UserModel
       }
 
       // A DELETE lekérdezéshez hozzá kell adni az "FROM" kulcsszót
-      $stmt = $this->pdo->prepare("DELETE FROM `users` WHERE expires < :currentTime AND isActivated = 0");
+      $stmt = $this->pdo->prepare("DELETE FROM `users` WHERE expires <= :currentTime AND isActivated = 0");
       $stmt->bindParam(":currentTime", $now, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
 
 
-    public function deleteExpiresPasswordResetTokens()
-    {
-      $now = date('Y-m-d H:i:s');
-      $stmt = $this->pdo->prepare("DELETE FROM `password_reset_tokens` WHERE expires < :currentTime");
-      $stmt->bindParam(":currentTime", $now, PDO::PARAM_STR);
-      $stmt->execute();
-      
-      
-      
-    }
+  public function deleteExpiresPasswordResetTokens()
+  {
+    $now = date('Y-m-d H:i:s');
+    $stmt = $this->pdo->prepare("DELETE FROM `password_reset_tokens` WHERE expires < :currentTime");
+    $stmt->bindParam(":currentTime", $now, PDO::PARAM_STR);
+    $stmt->execute();
+  }
 
 
 
@@ -441,6 +441,7 @@ class UserModel
   public function deleteDocument($id)
   {
     $documentName = self::getDocumentById($id)["name"];
+    $this->subModel->deleteDocumentOfSubscription($documentName);
 
     if ($documentName) {
       unlink("./public/assets/uploads/documents/users/$documentName");
@@ -449,6 +450,7 @@ class UserModel
     $stmt = $this->pdo->prepare("DELETE FROM `user_documents` where `id` = :id");
     $stmt->bindParam(":id", $id);
     $isSuccess = $stmt->execute();
+
 
     if ($isSuccess) {
       header("Location: /user/documents");
@@ -470,10 +472,17 @@ class UserModel
   {
     $userRefId = $_SESSION["userId"] ?? null;
     $fileName = $this->fileSaver->saver($files["document"], "/uploads/documents/users", null, null);
+    if (!$fileName) {
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/user/documents/new");
+    }
+
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
+    $extension =  pathinfo($fileName, PATHINFO_EXTENSION);
+    $this->subModel->addDocumentOfSubscriptions($fileName, $typeOfDocument, $extension, $userRefId);
 
     $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
-    $extension =  pathinfo($fileName, PATHINFO_EXTENSION);
+
+
     // Paraméterek kötése
     $stmt->bindParam(':name', $fileName);
     $stmt->bindParam(':type', $typeOfDocument);
@@ -482,17 +491,20 @@ class UserModel
 
     $isSuccesS = $stmt->execute();
 
+
+
     if ($isSuccesS) {
-      header("Location: /user/documents");
+
+      $this->alert->set("Dokumentum sikeresen hozzáadva!", "Document added successfully!", null, "success", "/user/documents");
     }
   }
 
   // UPDATE DOCUMENT FROM USER SETTINGS
   public function updateDocument($id, $files, $body)
   {
+    $userId = $_SESSION["userId"];
     $typeOfDocument = filter_var((int)$body["typeOfDocument"] ?? '', FILTER_SANITIZE_NUMBER_INT);
 
-    //$prevImage = $this->getDocumentById($id)["name"];
     $prevImage = self::getDocumentById($id)["name"];
     $fileName = '';
     if ($files["document"]["name"] !== '') {
@@ -500,10 +512,11 @@ class UserModel
     } else {
       $fileName = $prevImage;
     }
-
     $extension =  pathinfo($fileName, PATHINFO_EXTENSION);
-
-
+    
+    if (!$fileName) {
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/user/documents/update/" . $id);
+    }
 
     $stmt = $this->pdo->prepare("UPDATE `user_documents` SET 
     `name` = :name, 
@@ -518,7 +531,10 @@ class UserModel
 
     $isSuccess = $stmt->execute();
 
-    if ($isSuccess) header("Location: /user/documents");
+    if ($isSuccess) {
+      $this->subModel->updateSubDocument($prevImage, $fileName, $typeOfDocument, $extension, $userId);
+      $this->alert->set("Dokumentum sikeresen frissítve!", "Document updated successfully!", null, "success", "/user/documents");
+    };
   }
 
   // GET DOCUMENTS BY USER ID
@@ -688,7 +704,7 @@ class UserModel
 
     if (!$isVerified || !$compared) {
       $this->alert->set(
-        "Jelszó megváltoztatása sikertelen, ön hibás adatokat adott meg!",
+        "Jelszó megváltoztatása sikertelen, bizonyosodj meg róla hogy helyes adatokat adtál meg!",
         "Password change unsuccessful, you provided incorrect data!",
         null,
         "danger",

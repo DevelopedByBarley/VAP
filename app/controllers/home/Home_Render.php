@@ -14,6 +14,11 @@ class HomeRender extends HomeController
 
 		$user =  $this->userModel->getMe();
 		echo $this->renderer->render("Layout.php", [
+			"nav" => [
+				"link" => "/",
+				"slug" => "Vissza a kezdőoldalra!"
+			],
+			"title" => getStringByLang("Süti info", "Cookie info", ""),
 			"user" => $user,
 			"content" => $this->renderer->render("/pages/public/Cookie_Info.php", [
 				"user" => $user ?? null,
@@ -29,6 +34,11 @@ class HomeRender extends HomeController
 
 		$user =  $this->userModel->getMe();
 		echo $this->renderer->render("Layout.php", [
+			"nav" => [
+				"link" => "/",
+				"slug" => "Vissza a kezdőoldalra!"
+			],
+			"title" => getStringByLang("Partnereink", "Partners", ""),
 			"user" => $user,
 			"content" => $this->renderer->render("/pages/public/Partners.php", [
 				"user" => $user ?? null,
@@ -60,6 +70,7 @@ class HomeRender extends HomeController
 
 
 		echo $this->renderer->render("Layout.php", [
+			"title" => getStringByLang("Kezdőlap", "Home", ""),
 			"content" => $this->renderer->render("/pages/public/Content.php", [
 				"user" => $user ?? null,
 				"volunteers" => $volunteers ?? null,

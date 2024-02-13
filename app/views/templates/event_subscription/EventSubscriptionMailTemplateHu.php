@@ -13,15 +13,15 @@
       </div>
       <hr>
       <h2 class="h3 mb-2">Kedves {{name}}</h2>
-      <h5 class="text-teal-700">Az eseményre való regisztrációja sikeres volt!</h5>
+      <h5 class="text-teal-700">Az eseményre való regisztrációd sikeres volt!</h5>
       <div class="space-y-3">
         <p class="text-gray-700"></p>
         <h3 class="text-gray-700">
-          <b>Köszönjük, hogy kitöltötte a jelentkezési lapot.</b>
+          <b>Köszönjük, hogy kitöltötted a jelentkezési lapot.</b>
         </h3>
 
         <div style="border: 1px solid">
-          <h3>Regisztrációs adatai a következők voltak!</h3>
+          <h3>Regisztrációs adataid a következők voltak!</h3>
           <p><b>Név</b>: {{name}}</p>
           <p><b>E-mail cím</b>: {{email}}</p>
           <p><b>Lakhely</b>: {{address}}</p>
@@ -31,9 +31,9 @@
         </div>
 
         <p>
-          <b> Kérjük ellenőrizze le, hogy az email címét jól adta meg, mert a további információt arra küldjük!</b>
+          <b> Kérjük ellenőrizd le, hogy az email címét jól adtál meg, mert a további információt arra küldjük!</b>
         </p>
-        <p>Az eseményre való jelentkezést a profiljából követheti vagy törörlheti!</p>
+        <p>Az eseményre való jelentkezést a profilodból követheted vagy törörlheted!</p>
         <p>Ha a jelentkezés profil nélkül történt akkor a lemondás a következő linken lehetséges
           <a href="https://vap.max.hu/subscription/delete/{{id}}">https://vap.max.hu/subscription/delete/{{id}}</a>.
         </p>

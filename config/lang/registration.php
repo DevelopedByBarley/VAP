@@ -496,7 +496,7 @@ define('MONTHS_IN_LANGUAGE', [
 
 
 define('PROTECTION_DECLARATION', [
-  "Hu" => 'Elfogadom az <a href="#">adatvédelmi nyilatkozatot</a>',
-  "En" => 'I accept the <a href="#">data protection declaration</a>',
+  "Hu" => 'Elfogadom az <a href="public/files/adatkezeles.hu.docx.pdf">Adatvédelmi nyiltkozatot</a>',
+  "En" => 'I accept the <a href="public/files/privacy_policy.docx.pdf">Privacy policy</a>',
   "Sp" => ""
 ]);

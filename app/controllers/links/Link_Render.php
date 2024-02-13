@@ -33,6 +33,10 @@ class LinkRender extends LinkController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/links",
+        "slug" => getStringByLang("Vissza az linkekhez", "Vissza a linkekhez", "Vissza a linkekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/links/Form.php", [
         "admin" => $admin ?? null
       ]),
@@ -47,6 +51,10 @@ class LinkRender extends LinkController
     $link = $this->linkModel->getLinkById($vars["id"]);
     
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/links",
+        "slug" => getStringByLang("Vissza az linkekhez", "Vissza a linkekhez", "Vissza a linkekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/links/UpdateForm.php", [
         "admin" => $admin ?? null,
         "link" => $link ?? null

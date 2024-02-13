@@ -31,8 +31,8 @@ define('LOGIN', [
     "Sp" => ""
   ],
   "description_content" => [
-    "Hu" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "En" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "Hu" => "Bízunk benne, hogy az önkéntes munka és feladatok mellett sok élményben, remek programokban lesz részed és nem utolsó sorban egy szuper csapat tagja leszel.",
+    "En" => "We hope that in addition to the work and tasks, you'll have lots of fun, participate in great programmes and, last but not least, be part of a great team.",
     "Sp" => ""
   ],
   "email" => [

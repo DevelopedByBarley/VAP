@@ -59,6 +59,10 @@ class AdminRender extends AdminController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/registrations",
+        "slug" => getStringByLang("Vissza a regisztráltakhoz", "Vissza a regisztráltakhoz", "Vissza a regisztráltakhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/registrations/User.php", [
         "admin" => $admin ?? null,
         "user" => $user ?? null,

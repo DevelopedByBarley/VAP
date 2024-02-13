@@ -1,7 +1,7 @@
-<div class="row mt-5 w-100" id="footer">
-    <footer class="text-center text-lg-start text-white sc-color d-flex align-items-center justify-content-center">
+<div class="row mt-5 w-100 p-0 m-0" id="footer">
+    <footer class="text-center text-lg-start text-white sc-color d-flex align-items-center justify-content-center p-0 m-0">
         <!-- Grid container -->
-        <div class="container-fluid p-4 pb-0">
+        <div class="container-fluid p-4 pb-0 p-0 m-0">
             <!-- Section: Links -->
             <section class="">
                 <!--Grid row-->
@@ -27,11 +27,24 @@
                         <?php endforeach ?>
 
                     </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">
+                            <?= CONTENT["footer"]["privacy_policy"][$lang] ?? 'HIBA' ?> </h6>
+
+                        </h6>
+
+                        <?php if ($lang === "Hu") : ?>
+                            <a href="/public/files/adatkezeles.hu.docx.pdf" class="text-light">Adatkezelési tájékoztató</a>
+                        <?php elseif ($lang === "Sp") : ?>
+                        <?php else : ?>
+                            <a href="/public/files/privacy_policy.docx.pdf" class="text-light">Privacy policy</a>
+                        <?php endif ?>
+                    </div>
                     <!-- Grid column -->
 
                     <hr class="w-100 clearfix d-md-none" />
 
-                
+
 
                     <!-- Grid column -->
                     <hr class="w-100 clearfix d-md-none" />
@@ -39,6 +52,7 @@
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <p><b>ArtNESZ Képzőművészeti Ügynökség Kft.</b></p>
+                        <p><a class="d-block text-light" href="https://www.artnesz.hu">www.artnesz.hu</a></p>
                         <p><a class="d-block text-light" href="mailto:hello@artnesz.hu">E-mail: hello@artnesz.hu</a></p>
                         <p> <?= CONTENT["footer"]["address"][$lang] ?? 'HIBA' ?> </h6>: 2030 Érd Murányi utca 20</p>
                         <p> <?= CONTENT["footer"]["company_registration_number"][$lang] ?? 'HIBA' ?> </h6>: 13-09-197718</p>

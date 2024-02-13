@@ -27,7 +27,6 @@ class Subscription_Model
   }
 
 
-
   // USER REGISTER TO EVENT
   public function subscribe($eventId, $body, $files, $user)
   {
@@ -128,7 +127,7 @@ class Subscription_Model
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Esemény regisztráció!" : "Event registration");
 
-      $this->alert->set("Az eseményre ön sikeresen regisztrált!", "You have successfully registered for the event!", null, "success", "/");
+      $this->alert->set("Az eseményre sikeresen regisztráltál!", "You have successfully registered for the event!", null, "success", "/");
     }
 
 
@@ -231,7 +230,7 @@ class Subscription_Model
     if (isset($_SESSION["subErrors"])) unset($_SESSION["subErrors"]);
     if (isset($_SESSION["prevSubContent"])) unset($_SESSION["prevSubContent"]);
 
-    $this->alert->set("Az eseményre ön sikeresen regisztrált!", "You have successfully registered for the event!", null, "success", "/");
+    $this->alert->set("Az eseményre sikeresen regisztráltál!", "You have successfully registered for the event!", null, "success", "/");
   }
 
 
@@ -240,19 +239,28 @@ class Subscription_Model
   public function deleteSubscriptionFromMailUrl($id)
   {
 
-    $stmt = $this->pdo->prepare("SELECT  `registrationId` FROM `registrations` WHERE `registrationId` = :id");
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.registrationId = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
+    $sub = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$isSubExist) {
+    echo "<pre>";
+
+    var_dump($sub);
+
+    if (!$sub) {
       $this->alert->set("Ilyen regisztráció nem létezik!", "Registratinon doesn't exist!", null, "danger", "/");
-    }
+    };
+
+    self::checkIsEventRegistrationExpired(array($sub), 7);
 
 
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
+
+
 
     $this->alert->set("Esemény regisztráció sikeresen törölve!", "Event subscription deleted succesfully!", null, "success", "/");
   }
@@ -322,17 +330,34 @@ class Subscription_Model
 
 
 
+
   // USER DELETE SELF FROM EVENT
   public function deleteSubscription($eventId)
   {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.eventRefId = :eventRefId");
+
+    $stmt->bindParam(":eventRefId", $eventId);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
     $stmt->bindParam(":eventId", $eventId);
     $stmt->execute();
 
+    self::checkIsEventRegistrationExpired($subs, 6);
+
 
     header("Location: /user/dashboard");
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -405,8 +430,273 @@ class Subscription_Model
 
 
 
-  // INSERT LANGUAGES WHEN USER REGISTER TO EVENT
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public function addDocumentOfSubscriptions($documentName, $typeOfDocument, $extension, $userRefId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE `registrations`.`userRefId` = :userRefId");
+    $stmt->bindParam(':userRefId', $userRefId, PDO::PARAM_STR);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($subs as $sub) {
+      $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
+      $stmt->bindParam(':name', $documentName);
+      $stmt->bindParam(':type', $typeOfDocument);
+      $stmt->bindParam(':extension',  $extension);
+      $stmt->bindParam(':registerRefId', $sub["id"]);
+
+      $stmt->execute();
+    }
+    self::checkIsEventRegistrationExpired($subs, 5);
+  }
+
+
+  public function deleteDocumentOfSubscription($documentName)
+  {
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registration_documents` 
+    INNER JOIN registrations ON registration_documents.registerRefId = registrations.id 
+    INNER JOIN events ON registrations.eventRefId = events.eventId
+    WHERE `registration_documents`.`name` = :documentName");
+
+    $stmt->bindParam(':documentName', $documentName, PDO::PARAM_STR);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    self::checkIsEventRegistrationExpired($subs, 3);
+
+
+    $stmt = $this->pdo->prepare("DELETE FROM `registration_documents` WHERE `registration_documents`.`name` = :documentName");
+    $stmt->bindParam(":documentName", $documentName);
+    $stmt->execute();
+  }
+
+
+  public function updateSubDocument($prevImage, $documentName,  $typeOfDocument, $extension, $userId)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM `registration_documents` 
+    INNER JOIN registrations ON registration_documents.registerRefId = registrations.id 
+    INNER JOIN events ON registrations.eventRefId = events.eventId
+    WHERE `registration_documents`.`name` = :prevImage");
+
+    $stmt->bindParam(':prevImage', $prevImage, PDO::PARAM_STR);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+    foreach ($subs as $sub) {
+      $stmt = $this->pdo->prepare("UPDATE `registration_documents`
+    SET `name` = :name,
+        `type` = :type,
+        `extension` = :extension
+    WHERE `registration_documents`.`name` = :prevImage 
+    AND `registration_documents`.`registerRefId` = :registerRefId ");
+
+
+      $stmt->bindParam(":name", $documentName);
+      $stmt->bindParam(":type", $typeOfDocument);
+      $stmt->bindParam(":extension", $extension);
+      $stmt->bindParam(":prevImage", $prevImage);
+      $stmt->bindParam(":registerRefId", $sub["registerRefId"]);
+      $stmt->execute();
+    }
+
+
+    self::checkIsEventRegistrationExpired($subs, 4);
+  }
+
+
+
+
+  public function checkIsEventRegistrationExpired($subs, $state)
+  {
+    echo "<pre>";
+    $now = date('Y-m-d');
+
+    switch ($state) {
+      case 1:
+        $state = "Frissítette a profilját!"; // DONE
+        break;
+
+      case 2:
+        $state = "Törölte a profilját!"; // 
+        break;
+
+      case 3:
+        $state = "Törölte egy dokumentumát!"; // DONE
+        break;
+
+      case 4:
+        $state = "Frissítette egy dokumentumát"; // DONE
+        break;
+      case 5:
+        $state =  "Új dokumentumot adott hozzá"; // DONE
+        break;
+      case 6:
+        $state =  "Törölte az esemény regisztrációját"; // DONE
+        break;
+      case 7:
+        $state =  "Törölte az esemény regisztrációját emailből"; // DONE
+        break;
+      default:
+        $state = "Valami nem ok";
+        break;
+    }
+
+
+    foreach ($subs as $sub) {
+      if ($sub["reg_end_date"] <= $now) {
+        $body = "
+          <div style='background: #ec0677; color: white; padding: 3rem' >
+          <h1>
+          Kedves admin!
+          </h1> 
+         <p style='font-size: 1.2rem'>
+          Tájékoztatlak hogy a <b>" . $sub["id"] . " id</b>-val rendelkező 
+          <b>" . $sub["name"] .  " nevű</b> <br>
+          felhasználó a regisztráció lezárta után <b>$state</b>. 
+          <br>
+          Ez érinti  a
+          <b>" .  $sub["eventRefId"]  . " id</b>-jú
+          <b>" .  $sub["nameInHu"]  . " </b> eseményt!.
+         </p>
+          </div>";
+        $this->mailer->send("developedbybarley@gmail.com", $body, "Tájékoztatás");
+      }
+    }
+  }
+
+  public function userDeleteSubsAndSelf($userId)
+  {
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE `registrations`.`userRefId` = :id");
+
+
+    $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    self::checkIsEventRegistrationExpired($subs, 2);
+
+  }
+
+  public function updateUserDataOfSubscription($body, $userId)
+  {
+
+
+    $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $address = filter_var($body["address"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $mobile = filter_var($body["mobile"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $profession = filter_var($body["profession"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $school_name = filter_var($body["school_name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $otherLanguages = filter_var($body["other_languages"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $informedBy = filter_var(INFORMED_BY["inform"][$body["informed_by"]]["Hu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $permission = filter_var((isset($body["permission"]) && $body["permission"] === 'on') ? 1 : 0, FILTER_SANITIZE_NUMBER_INT);
+    $languages = $body["langs"] ?? [];
+    $levels = $body["levels"] ?? [];
+
+    $lang = $_COOKIE["lang"] ?? null;
+
+
+    // Prepare statement
+    $stmt = $this->pdo->prepare("
+    UPDATE `registrations`
+    SET 
+        `name` = :name,
+        `address` = :address,
+        `mobile` = :mobile,
+        `profession` = :profession,
+        `schoolName` = :schoolName,
+        `otherLanguages` = :otherLanguages,
+        `informedBy` = :informedBy,
+        `permission` = :permission,
+        `lang` = :lang
+    WHERE `registrations`.`userRefId` = :id
+");
+
+    // Bind parameters
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+    $stmt->bindParam(':mobile', $mobile, PDO::PARAM_STR);
+    $stmt->bindParam(':profession', $profession, PDO::PARAM_STR);
+    $stmt->bindParam(':schoolName', $school_name, PDO::PARAM_STR);
+    $stmt->bindParam(':otherLanguages', $otherLanguages, PDO::PARAM_STR);
+    $stmt->bindParam(':informedBy', $informedBy, PDO::PARAM_STR);
+    $stmt->bindParam(':permission', $permission, PDO::PARAM_INT);
+    $stmt->bindParam(':lang', $lang, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+
+    // Execute statement
+    $stmt->execute();
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE `registrations`.`userRefId` = :id");
+
+    $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+    self::updateSubLanguages($languages, $levels, array_column($subs, "id"));
+
+    self::checkIsEventRegistrationExpired($subs, 1);
+  }
+
+
+
+
+  function updateSubLanguages($languages, $levels, $arrayOfSubId)
+  {
+
+    foreach ($arrayOfSubId as $subId) {
+
+      $stmt = $this->pdo->prepare("DELETE FROM `registration_languages` WHERE `registration_languages`.`registerRefId` = :id");
+      $stmt->bindParam(":id", $subId);
+      $stmt->execute();
+
+      self::insertLanguages($subId, $languages, $levels);
+    }
+  }
+
+
+
+
+
+  // INSERT LANGUAGES WHEN USER REGISTER TO EVENT
 
 
   private function insertLanguages($registerId, $languages, $levels)

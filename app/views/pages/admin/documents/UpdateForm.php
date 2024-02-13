@@ -6,9 +6,6 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/documents">Vissza a dokumentumokhoz</a>
-    </div>
     <form enctype="multipart/form-data" action="/admin/document/update/<?= $document["id"] ?>" method="POST" class="form">
 
       <h1>Dokumentum frissitése</h1>

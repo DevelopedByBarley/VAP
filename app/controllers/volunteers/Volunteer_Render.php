@@ -17,6 +17,7 @@ class VolunteerRender extends VolunteerController
     $admin = $this->adminModel->admin();
 
     echo $this->renderer->render("Layout.php", [
+  
       "content" => $this->renderer->render("/pages/admin/volunteers/Volunteers.php", [
         "volunteers" => $volunteers ?? null,
         "descriptionInLang" => $descriptionInLang ?? null
@@ -33,6 +34,10 @@ class VolunteerRender extends VolunteerController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/volunteers",
+        "slug" => getStringByLang("Vissza az önkéntesekhez", "Vissza a önkéntesekhez", "Vissza a önkéntesekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/volunteers/Form.php", [
       ]),
       "admin" => $admin
@@ -48,6 +53,10 @@ class VolunteerRender extends VolunteerController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/volunteers",
+        "slug" => getStringByLang("Vissza az önkéntesekhez", "Vissza a önkéntesekhez", "Vissza a önkéntesekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/volunteers/UpdateForm.php", [
         "admin" => $admin ?? null,
         "volunteer" => $volunteer ?? null

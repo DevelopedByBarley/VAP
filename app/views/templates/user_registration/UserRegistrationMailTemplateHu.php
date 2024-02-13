@@ -13,13 +13,13 @@
       <div class="space-y-3">
         <p class="text-gray-700"></p>
         <h3 class="text-gray-700">
-          <b>Köszönjük, hogy kitöltötte a regisztrációs lapot.</b>
+          <b>Köszönjük, hogy kitöltötted a regisztrációs lapot.</b>
         </h3>
         <p>
-          Az alábbi linkre kattintva megerősítheti regisztrációját: https://vap.max.hu/activate?code={{code}}
+          Az alábbi linkre kattintva megerősítheted regisztrációdat: https://vap.max.hu/activate?code={{code}}
         </p>
         <p>
-          A bejelentkezést követően követheti profilját, eseményekre tett regisztrácóit, illetve
+          A bejelentkezést követően követheted profilodat, eseményekre tett regisztrácóid, illetve
           ha elfogadja, akkor önkéntes és gyakornok lehetőségekről emailen értesítést küldünk!
         </p>
         <br>

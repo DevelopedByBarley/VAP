@@ -2,9 +2,6 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/partners">Vissza a partnerekhez</a>
-    </div>
 
     <div class="col-12">
       <form enctype="multipart/form-data" action="/admin/partners/update/<?= $partner["id"] ?>" method="POST" class="form">

@@ -17,7 +17,7 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "reg_volunteer_btn" => [
-      "Hu" => "Regisztráljon önkéntesnek",
+      "Hu" => "Regisztrálj önkéntesnek",
       "En" => "Volunteer registration",
       "Sp" => ""
     ],
@@ -281,6 +281,11 @@ define('CONTENT', [
     "company_registration_number" => [
       "En" => "Company registration number",
       "Hu" => "Cégjegyzékszám",
+      "Sp" => ""
+    ],
+    "privacy_policy" => [
+      "En" => "Privacy policy",
+      "Hu" => "Adatkezelési tájékoztató",
       "Sp" => ""
     ]
   ]

@@ -5,9 +5,6 @@ $question = $params["question"];
 
 <div class="container">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/questions">Vissza a kérdésekhez</a>
-    </div>
     <div class="col-12">
       <form action="/admin/questions/update/<?= $question["q_id"] ?>" method="POST" class="form">
 

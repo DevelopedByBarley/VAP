@@ -19,6 +19,10 @@ class EventRender extends EventController
     $eventsData = $this->eventModel->index($admin);
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/registrations",
+        "slug" => getStringByLang("Vissza a regisztráltakhoz", "Vissza a regisztráltakhoz", "Vissza a regisztráltakhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/Events.php", [
         "admin" => $admin ?? null,
         "events" => $eventsData["events"] ?? null,
@@ -51,6 +55,10 @@ class EventRender extends EventController
     }
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/events",
+        "slug" => getStringByLang("Vissza az eseményekhez", "Vissza a eseményekhez", "Vissza a eseményekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/Event.php", [
         "admin" => $admin ?? null,
         "event" => $event ?? null,
@@ -80,6 +88,10 @@ class EventRender extends EventController
     $prev = $_SESSION["prevEventContent"] ?? null;
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/events",
+        "slug" => getStringByLang("Vissza az eseményekhez", "Vissza a eseményekhez", "Vissza a eseményekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/Form.php", [
         "admin" => $admin ?? null,
         "prev" => $prev ?? null
@@ -103,6 +115,10 @@ class EventRender extends EventController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/events",
+        "slug" => getStringByLang("Vissza az eseményekhez", "Vissza a eseményekhez", "Vissza a eseményekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/events/UpdateForm.php", [
         "admin" => $admin ?? null,
         "event" => $event ?? null,
@@ -147,6 +163,11 @@ class EventRender extends EventController
     $links = $this->eventModel->getEventLinks($eventId);
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/events",
+        "slug" => getStringByLang("Vissza az eseményekhez", "Vissza a eseményekhez", "Vissza a eseményekhez")
+      ],
+      "title" => getStringByLang("Esemény", "Event", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Event.php", [
         "event" => $event ?? null,
@@ -171,6 +192,7 @@ class EventRender extends EventController
 
 
     echo $this->renderer->render("Layout.php", [
+      "title" => getStringByLang("Eseményeink", "Events", ""),
       "user" => $user,
       "content" => $this->renderer->render("/pages/user/events/Events.php", [
         "user" => $user ?? null,

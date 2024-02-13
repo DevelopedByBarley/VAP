@@ -2,7 +2,7 @@
 $partners = $params["partners"] ?? null;
 ?>
 
-<div class="container mt-b">
+<div class="container">
   <div class="row">
     <div class="col-12 my-5">
       <h1 class="text-center">TOVÁBBI PARTNEREINK</h1>

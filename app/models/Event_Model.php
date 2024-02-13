@@ -20,6 +20,8 @@ class EventModel
     $this->alert = new Alert();
   }
 
+
+
   // SET EVENT PRIVATE WHEN IT IS EXPIRED
   public function setEventsPrivateIfExpired()
   {
@@ -264,7 +266,7 @@ class EventModel
   {
     $today = date("Y-m-d");
 
-    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 3");
+    $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 6");
     $stmt->bindParam(":today", $today);
     $stmt->execute();
     $event = $stmt->fetchAll(PDO::FETCH_ASSOC);

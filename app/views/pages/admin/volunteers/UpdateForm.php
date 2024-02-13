@@ -3,9 +3,6 @@
 
 <div class="container vh-100">
   <div class="row">
-    <div class="col-12 my-5">
-      <a href="/admin/volunteers">Vissza az önkéntesekhez</a>
-    </div>
     <div class="col-12">
       <form enctype="multipart/form-data" action="/admin/volunteers/update/<?= $volunteer["id"] ?>" method="POST">
 

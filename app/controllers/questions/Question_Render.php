@@ -29,6 +29,10 @@ class QuestionRender extends QuestionController
     $admin = $this->adminModel->admin();
     
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/questions",
+        "slug" => getStringByLang("Vissza az kérdésekhez", "Vissza a kérdésekhez", "Vissza a kérdésekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/questions/Form.php", [
         "admin" => $admin ?? null,
         "questions" =>  $questions ?? null
@@ -43,6 +47,10 @@ class QuestionRender extends QuestionController
     $admin = $this->adminModel->admin();
     $question = $this->questionModel->question($vars["id"]);
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/questions",
+        "slug" => getStringByLang("Vissza az kérdésekhez", "Vissza a kérdésekhez", "Vissza a kérdésekhez")
+      ],
       "content" => $this->renderer->render("/pages/admin/questions/UpdateForm.php", [
         "admin" => $admin ?? null,
         "question" =>  $question ?? null

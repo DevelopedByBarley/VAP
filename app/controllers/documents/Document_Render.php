@@ -34,6 +34,10 @@ class DocumentRender extends DocumentController
 
 
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/documents",
+        "slug" => getStringByLang("Vissza az dokumentumokhoz", "Vissza a dokumentumokhoz", "Vissza a dokumentumokhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/documents/Form.php", [
         "admin" => $admin ?? null,
       ]),
@@ -47,6 +51,10 @@ class DocumentRender extends DocumentController
     $admin = $this->adminModel->admin();
     $document = $this->documentModel->getDocumentById($vars["id"]);
     echo $this->renderer->render("Layout.php", [
+      "nav" => [
+        "link" => "/admin/documents",
+        "slug" => getStringByLang("Vissza az dokumentumokhoz", "Vissza a dokumentumokhoz", "Vissza a dokumentumokhoz")
+      ],
       "content" => $this->renderer->render("/pages/admin/documents/UpdateForm.php", [
         "admin" => $admin ?? null,
         "document" => $document ?? null
