@@ -77,8 +77,8 @@ define('PROFILE_SETTINGS', [
 
 define('DOCUMENTS', [
   "title" => [
-    "En" => "Upload CV or Cover letter (PDF, PNG, JPEG)",
-    "Hu" => "Önéletrajz vagy motivációs levél feltöltése (PDF, PNG, JPEG)",
+    "En" => "Upload CV or Cover letter (PDF, PNG, JPEG). <span class='text-danger'>The file name cannot contain special characters! </span> accepted example: mydocument.pdf",
+    "Hu" => "Önéletrajz vagy motivációs levél feltöltése (PDF, PNG, JPEG). <span class='text-danger'>A file neve nem tartalmazhat speciális karaktereket.</span> Elfogadott példa: mydocument.pdf",
     "sp" => ""
   ],
   "types" => [

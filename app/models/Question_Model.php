@@ -20,7 +20,7 @@ class QuestionModel extends AdminModel
   public function question($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `questions` WHERE `q_id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $question = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -38,12 +38,12 @@ class QuestionModel extends AdminModel
     $createdAt = time();
 
     $stmt = $this->pdo->prepare("INSERT INTO `questions` VALUES (NULL, :q_id, :questionInHu, :questionInEn, :answerInHu, :answerInEn, :createdAt)");
-    $stmt->bindParam(":q_id", $q_id);
-    $stmt->bindParam(":questionInHu", $questionInHu);
-    $stmt->bindParam(":questionInEn", $questionInEn);
-    $stmt->bindParam(":answerInHu", $answerInHu);
-    $stmt->bindParam(":answerInEn", $answerInEn);
-    $stmt->bindParam(":createdAt", $createdAt);
+    $stmt->bindParam(":q_id", $q_id, PDO::PARAM_INT);
+    $stmt->bindParam(":questionInHu", $questionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":questionInEn", $questionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":answerInHu", $answerInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":answerInEn", $answerInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
 
     $stmt->execute();
 
@@ -56,7 +56,7 @@ class QuestionModel extends AdminModel
   public function delete($id)
   {
     $stmt = $this->pdo->prepare("DELETE  FROM `questions` WHERE `q_id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Kérdés sikeresen törölve!', 'Kérdés sikeresen törölve!', 'Kérdés sikeresen törölve!', "success", "/admin/questions");
@@ -79,11 +79,11 @@ class QuestionModel extends AdminModel
     `answerInEn` = :answerInEn
     WHERE `questions`.`q_id` = :id;");
 
-    $stmt->bindParam(":questionInHu", $questionInHu);
-    $stmt->bindParam(":questionInEn", $questionInEn);
-    $stmt->bindParam(":answerInHu", $answerInHu);
-    $stmt->bindParam(":answerInEn", $answerInEn);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":questionInHu", $questionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":questionInEn", $questionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":answerInHu", $answerInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":answerInEn", $answerInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
     $stmt->execute();
 

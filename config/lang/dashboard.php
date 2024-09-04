@@ -48,6 +48,39 @@ define('DASHBOARD', [
       "Hu" => "Jelenleg nincs egy eseményünk sem",
       "En" => "We currently do not have any events",
       "Sp" => ""
+    ],
+
+    "modals" => [
+      "overview" => [
+        "Hu" => "Jelentkezés áttekintése",
+        "En" => "Subscription overview",
+        "Sp" => ""
+      ],
+      "delete_sub" => [
+        "Hu" => "Jelentkezés törlése",
+        "En" => "Delete subscription",
+        "Sp" => ""
+      ],
+      "delete_perm" => [
+        "Hu" => "Biztosan törlöd a következő jelentkezésedet?",
+        "En" => "Are you sure you want to cancel that subscription?",
+        "Sp" => ""
+      ],
+      "back" => [
+        "Hu" => "Vissza",
+        "En" => "Back",
+        "Sp" => ""
+      ],
+      "interest" => [
+        "Hu" => "Érdeklődés",
+        "En" => "Interest",
+        "Sp" => ""
+      ],
+      "dates" => [
+        "Hu" => "Megjelölt dátumok",
+        "En" => "Marked dates",
+        "Sp" => ""
+      ]
     ]
   ]
 ]);

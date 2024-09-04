@@ -1,33 +1,9 @@
-<div id="error">
-  <h1>404</h1>
-  <p>Az oldal nem található vagy fejlesztés alatt van</p>
+
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div class="row"> 
+        <div class="col-12 text-center">
+            <h1 style="font-size: 4rem">HOPPÁ   &#128549;  </h1>
+            <h2 class=" pr-font-200" style="font-size: 2.2rem;">SAJNOS EZ AZ OLDAL NEM TALÁLHATÓ!</h2>
+        </div>
+    </div>
 </div>
-
-
-<style>
-  *{
-    box-sizing: border-box;
-  }
-
-  #error {
-    height: 100vh;
-    width: 100%;
-    background-color: black;
-    color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  h1 {
-    font-size: 8rem;
-    margin: 0;
-    padding: 0;
-  }
-  p {
-    font-size: 2rem;
-  }
-</style>

@@ -14,7 +14,7 @@
         <p class="text-gray-700"></p>
         <p class="text-gray-700">
           Tájékoztatjuk hogy a VAP egy új eseményt hozott létre, bővebb információért látogass el a
-          <a href="https://vap.max.hu/">https://vap.max.hu</a> weboldalára.
+          <a href="{{url}}">{{url}}</a> weboldalára.
         </p>
       </div>
     </div>

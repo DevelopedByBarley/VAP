@@ -24,6 +24,10 @@ p {
   font-family: var(--sc-font);
 }
 
+.title {
+  font-size: 2.5rem;
+}
+
 .r-border {
   border-radius: 15px;
 }

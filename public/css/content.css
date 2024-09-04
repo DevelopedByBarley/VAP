@@ -64,7 +64,7 @@
 }
 
 #header-image {
-  background: url('/public/assets/images/header.jpg') center center/cover;
+  background: url('/public/assets/images/vap.max.hu_about-us-01-01.jpg') center center/cover;
   filter: grayscale(100);
   transition: all .4s ease-in-out;
 }
@@ -96,7 +96,7 @@
 }
 
 #recommendation-bg {
-  background: url("/public/assets/images/2.jpg") center center/cover;
+  background: url("/public/assets/images/vap.max.hu_about-us-02-01.jpg") center center/cover;
   min-height: 500px;
 }
 
@@ -115,7 +115,7 @@
 }
 
 #advantages-bg {
-  background: url("/public/assets/images/4.jpg") center center/cover;
+  background: url("/public/assets/images/Önkéntes fotó_AMB2021_VIP reg_2.jpg") center center/cover;
   min-height: 500px;
 }
 

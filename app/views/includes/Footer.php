@@ -1,11 +1,11 @@
-<div class="row mt-5" id="footer">
+<div class="row reveal bg-danger" style="margin-top: 150px;" id="footer">
     <footer class="text-center text-lg-start text-white sc-color d-flex align-items-center justify-content-center">
         <!-- Grid container -->
         <div class="container-fluid p-4 pb-0">
             <!-- Section: Links -->
             <section>
                 <!--Grid row-->
-                <div class="row reveal">
+                <div class="row">
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h3 class="text-uppercase mb-4 font-weight-bold">
@@ -56,20 +56,31 @@
                         <p><a class="d-block text-light" href="mailto:hello@artnesz.hu">E-mail: hello@artnesz.hu</a></p>
                         <p> <?= CONTENT["footer"]["address"][$lang] ?? 'HIBA' ?> </h6>: 2030 Érd Murányi utca 20</p>
                         <p> <?= CONTENT["footer"]["company_registration_number"][$lang] ?? 'HIBA' ?> </h6>: 13-09-197718</p>
+
+
                     </div>
                     <!-- Grid column -->
                 </div>
                 <!--Grid row-->
                 <div class="row d-flex align-items-center">
                     <!-- Grid column -->
-                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                    <div class="col-md-6 col-lg-6 text-center text-md-start">
                         <!-- Copyright -->
                         <div class="p-3">
                             © 2023 Copyright:
-                            <a class="text-white" href="https://vap.max.hu/">https://vap.max.hu/</a>
+                            <a class="text-white" href="<?= CURRENT_URL ?>"><?= CURRENT_URL ?></a>
                         </div>
                         <!-- Copyright -->
                     </div>
+                    <div class="col-md-6 col-lg-6 text-center text-md-end">
+                        <!-- Copyright -->
+                        <div class="p-3">
+                            Készítette:
+                            <a class="text-white" href="https://max.hu/">Max & Future csapata</a>
+                        </div>
+                        <!-- Copyright -->
+                    </div>
+
                 </div>
             </section>
         </div>

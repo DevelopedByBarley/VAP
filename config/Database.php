@@ -5,7 +5,7 @@ class Database
     {
         $servername = "localhost";
         $username = "Barley";
-        $password = "Csak1enter";
+        $password = "*********";
         $dbName = "vap";
         
         try {

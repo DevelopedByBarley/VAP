@@ -14,23 +14,29 @@ class PartnerModel extends AdminModel
       'image/png',
       'image/jpeg',
     ]);
+
+    if (!$fileName) {
+      $this->alert->set("File típus elutasítva", "File típus elutasítva", null, "danger", "/admin/partners/new");
+    }
     
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $type = filter_var($body["type"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $createdAt = time();
 
-    $stmt = $this->pdo->prepare("INSERT INTO `partners` VALUES (NULL, :name, :descriptionInHu, :descriptionInEn, :link, :fileName, :createdAt)");
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":descriptionInHu", $descriptionInHu);
-    $stmt->bindParam(":descriptionInEn", $descriptionInEn);
-    $stmt->bindParam(":link", $link);
-    $stmt->bindParam(":fileName", $fileName);
-    $stmt->bindParam(":createdAt", $createdAt);
+    $stmt = $this->pdo->prepare("INSERT INTO `partners` VALUES (NULL, :name, :descriptionInHu, :descriptionInEn, :link, :type, :fileName, :createdAt)");
+    $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInHu", $descriptionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInEn", $descriptionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":link", $link, PDO::PARAM_STR);
+    $stmt->bindParam(":type", $type, PDO::PARAM_STR);
+    $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
 
     $stmt->execute();
-    $this->alert->set('Új partner sikeresen hozzáadva!', 'Új partner sikeresen hozzáadva!', 'Partner sikeresen törölve!', "success", "/admin/partners");
+    $this->alert->set('Új partner sikeresen hozzáadva!', 'Új partner sikeresen hozzáadva!', 'Partner sikeresen hozzáadva!', "success", "/admin/partners");
   }
 
 
@@ -79,7 +85,7 @@ class PartnerModel extends AdminModel
     unlink("./public/assets/uploads/images/partners/$fileNameForDelete");
 
     $stmt = $this->pdo->prepare("DELETE FROM `partners` WHERE `id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Partner sikeresen törölve!', 'Partner sikeresen törölve!', 'Partner sikeresen törölve!', "success", "/admin/partners");
@@ -92,17 +98,21 @@ class PartnerModel extends AdminModel
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInEn = filter_var($body["descriptionInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $link = filter_var($body["link"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
+    $type = filter_var($body["type"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $prevImage = self::getPartnerById($id)["fileName"];
     $fileName = '';
 
 
 
     if ($files["p_image"]["name"] !== '') {
-      unlink("./public/assets/uploads/images/partners/$prevImage");
       $fileName = $this->fileSaver->saver($files["p_image"], "/uploads/images/partners", null, [
         'image/png',
         'image/jpeg',
       ]);
+      if (!$fileName) {
+        $this->alert->set("File típus elutasítva", "File típus elutasítva", null, "danger", "/admin/partners/update/" . $id);
+      }
+      unlink("./public/assets/uploads/images/partners/$prevImage");
     } else {
       $fileName = $prevImage;
     }
@@ -114,15 +124,17 @@ class PartnerModel extends AdminModel
     `descriptionInHu` = :descriptionInHu, 
     `descriptionInEn` = :descriptionInEn, 
     `link` = :link, 
+    `type` = :type, 
     `fileName` = :fileName 
     WHERE `partners`.`id` = :id");
 
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":descriptionInHu", $descriptionInHu);
-    $stmt->bindParam(":descriptionInEn", $descriptionInEn);
-    $stmt->bindParam(":link", $link);
-    $stmt->bindParam(":fileName", $fileName);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInHu", $descriptionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInEn", $descriptionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":link", $link, PDO::PARAM_STR);
+    $stmt->bindParam(":type", $type, PDO::PARAM_STR);
+    $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Partner sikeresen frissítve!', 'Partner sikeresen frissítve!', 'Partner sikeresen frissítve!', "success", "/admin/partners");
@@ -134,7 +146,7 @@ class PartnerModel extends AdminModel
   {
 
     $stmt = $this->pdo->prepare("SELECT * FROM `partners` WHERE `id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $partner = $stmt->fetch(PDO::FETCH_ASSOC);
 

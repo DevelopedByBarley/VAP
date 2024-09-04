@@ -1,3 +1,4 @@
+
 <?php
 class HomeRender extends HomeController
 {
@@ -7,6 +8,29 @@ class HomeRender extends HomeController
 	{
 		parent::__construct();
 	}
+
+
+	public function maintenance()
+	{
+		echo $this->renderer->render("pages/public/Maintenance.php", []);
+	}
+
+
+	public function errorPage()
+	{
+		session_start();
+
+		$user =  $this->userModel->getMe();
+		echo $this->renderer->render("Layout.php", [
+			"title" => getStringByLang("404", "404", ""),
+			"user" => $user,
+			"content" => $this->renderer->render("/pages/error/404.php", [
+				"user" => $user ?? null,
+			]),
+			"user" => $user ?? null,
+		]);
+	}
+
 
 	public function cookieInfo()
 	{
@@ -34,10 +58,6 @@ class HomeRender extends HomeController
 
 		$user =  $this->userModel->getMe();
 		echo $this->renderer->render("Layout.php", [
-			"nav" => [
-				"link" => "/",
-				"slug" => "Vissza a kezdőoldalra!"
-			],
 			"title" => getStringByLang("Partnereink", "Partners", ""),
 			"user" => $user,
 			"content" => $this->renderer->render("/pages/public/Partners.php", [
@@ -48,6 +68,7 @@ class HomeRender extends HomeController
 			"user" => $user ?? null,
 		]);
 	}
+
 
 	public function home()
 	{
@@ -63,9 +84,19 @@ class HomeRender extends HomeController
 		$documents = $this->documentModel->index()["documents"];
 		$questions = $this->questionModel->questions();
 
+		$supportive_partners = array_filter($partners, function ($item) {
+			return $item['type'] === 'support';
+		});
+
+		$cooperative_partners = array_filter($partners, function ($item) {
+			return $item['type'] === 'cooperative';
+		});
+
+
 		$links = $this->linkModel->index();
 		$events = $this->eventModel->getLatestEvents();
 		$this->eventModel->setEventsPrivateIfExpired();
+
 
 
 
@@ -74,7 +105,8 @@ class HomeRender extends HomeController
 			"content" => $this->renderer->render("/pages/public/Content.php", [
 				"user" => $user ?? null,
 				"volunteers" => $volunteers ?? null,
-				"partners" => $partners ?? null,
+				"coop_partners" => $cooperative_partners ?? null,
+				"sup_partners" => $supportive_partners ?? null,
 				"documents" => $documents ?? null,
 				"links" => $links ?? null,
 				"latestEvents" => $events ?? null,

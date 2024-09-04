@@ -3,7 +3,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $user = $params["user"] ?? null;
 ?>
 
-<div class="container-fluid w-100">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
@@ -18,34 +18,34 @@ $user = $params["user"] ?? null;
                                 <li class="nav-item m-1 mt-3">
 
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#about-us' : '#about-us' ?>">
-                                        <?= NAVBAR["aboutMe"][$lang] ?? 'Rólunk' ?>
+                                        <?= NAVBAR["aboutMe"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
 
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#latest-events' : '#latest-events' ?>">
-                                        <?= NAVBAR["events"][$lang] ?? 'Eseményeink' ?>
+                                        <?= NAVBAR["events"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
-                                        <?= NAVBAR["VoluntaryReports"][$lang] ?? 'Önkéntes beszámolók' ?>
+                                        <?= NAVBAR["VoluntaryReports"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#partners' : '#partners' ?>">
-                                        <?= NAVBAR["partners"][$lang] ?? 'Partner Oldalak' ?>
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#sup_partners' : '#sup_partners' ?>">
+                                        <?= NAVBAR["partners"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
 
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#faq' : '#faq' ?>">
-                                        <?= NAVBAR["faq"][$lang] ?? 'Gyakori kérdések' ?>
+                                        <?= NAVBAR["faq"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="#footer">
-                                        <?= NAVBAR["contact"][$lang] ?? 'Kapcsolat' ?>
+                                        <?= NAVBAR["contact"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
@@ -126,6 +126,7 @@ $user = $params["user"] ?? null;
                 </div>
                 <div>
                     <span class="navbar-text">
+                        <a href="/admin/patch-notes" target='_blank' class="btn btn-primary text-light">Fejlesztések</a>
                         <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
                     </span>
                 </div>
@@ -135,11 +136,16 @@ $user = $params["user"] ?? null;
 
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel"><?= $params["admin"]["name"] ?></h5>
+                <div class="offcanvas-title" id="offcanvasWithBackdropLabel">
+                    <a href="/admin" class="border p-2 px-4 rounded rounded-pill bg-info text-decoration-none text-light mt-3"> <?= $params["admin"]["name"] ?></a>
+                </div>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="list-group">
+                    <a href="/admin/dashboard" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Vezérlőpult</li>
+                    </a>
                     <a href="/admin/registrations" class="nav-link">
                         <li class="list-group-item bg-primary text-light">Regisztrációk</li>
                     </a>
@@ -147,7 +153,7 @@ $user = $params["user"] ?? null;
                         <li class="list-group-item bg-primary text-light">Események</li>
                     </a>
                     <a href="/admin/volunteers" class="nav-link">
-                        <li class="list-group-item bg-primary text-light">Önkéntesek</li>
+                        <li class="list-group-item bg-primary text-light">Önkénteseink voltak</li>
                     </a>
                     <a href="/admin/partners" class="nav-link">
                         <li class="list-group-item bg-primary text-light">Partnerek</li>

@@ -48,6 +48,18 @@ class PartnerRender extends PartnerController
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $partner = $this->partnerModel->getPartnerById($vars["id"]);
+
+    $types = [
+      [
+        "value" => "support",
+        "type"  => "Támogató"
+      ],
+      [
+        "value" => "cooperative",
+        "type"  => "Együttműködő"
+      ]
+    ];
+
     echo $this->renderer->render("Layout.php", [
       "nav" => [
         "link" => "/admin/partners",
@@ -55,7 +67,8 @@ class PartnerRender extends PartnerController
       ],
       "content" => $this->renderer->render("/pages/admin/partners/UpdateForm.php", [
         "admin" => $admin ?? null,
-        "partner" => $partner ?? null
+        "partner" => $partner ?? null,
+        "types" => $types ?? null
       ]),
       "admin" => $admin ?? null
     ]);

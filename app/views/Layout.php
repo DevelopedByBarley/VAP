@@ -32,7 +32,7 @@ $nav = $params['nav'] ?? null;
             <a class="link text-dark" href="<?= $nav['link'] ?>"><?= $nav['slug'] ?></a>
         </div>
     <?php endif ?>
-    <div class="mt-5 w-100">
+    <div class="mt-5 w-100" id="root">
         <?= $params["content"] ?>
     </div>
     <?php include 'app/views/components/Cookie.php' ?>

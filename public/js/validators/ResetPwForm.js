@@ -1,7 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
   const labels = document.querySelectorAll(".required");
 
-  console.log(labels);
+
+  const lang = getCookie('lang');
+
+  const text = {
+    passwordText: {
+      0: {
+        Hu: "A jelszónak legalább 8 karakterből, kis- és nagybetűből, valamint számból kell állnia!",
+        En: "The password must consist of at least 8 characters, uppercase and lowercase letters, and numbers!"
+      },
+      1: {
+        Hu: "Kérlek add meg a jelszavadat!",
+        En: "Please enter your password!"
+      },
+      2: {
+        Hu: "A két jelszó értéknek meg kell egyeznie!",
+        En: "The two password values ​​must match"
+      },
+    },
+  }
 
   labels.forEach((label) => {
     const star = document.createElement("span");
@@ -33,13 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
       (!hasUpperCase || !hasLowerCase || !hasNumber || !isLengthValid)
     ) {
       this.setCustomValidity(
-        "A jelszónak legalább 8 karakterből, kis- és nagybetűből, valamint számból kell állnia!"
+        text.passwordText[0][lang]
       );
       pwInputAlert.innerHTML =
-        "A jelszónak legalább 8 karakterből, kis- és nagybetűből, valamint számból kell állnia!";
+        text.passwordText[0][lang]
     } else if (passwordValue === "") {
-      this.setCustomValidity("Kérlek add meg a jelszavadat!");
-      pwInputAlert.innerHTML = "Kérlek add meg a jelszavadat!";
+      this.setCustomValidity(text.passwordText[1][lang]);
+      pwInputAlert.innerHTML = text.passwordText[1][lang];
     } else {
       this.setCustomValidity("");
       pwInputAlert.innerHTML = "";
@@ -51,11 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
   pwRepeat.addEventListener("input", function () {
     if (pwInput.value !== this.value) {
       console.log("Hello");
-      this.setCustomValidity("A két jelszó értéknek meg kell egyeznie");
-      pwRepeatInputAlert.innerHTML = "A két jelszó értéknek meg kell egyeznie";
+      this.setCustomValidity(text.passwordText[2][lang]);
+      pwRepeatInputAlert.innerHTML = text.passwordText[2][lang];
     } else {
-        this.setCustomValidity("");
-        pwRepeatInputAlert.innerHTML = "";
+      this.setCustomValidity("");
+      pwRepeatInputAlert.innerHTML = "";
     }
 
     checkCurrentValidility(this.checkValidity(), this);

@@ -16,7 +16,7 @@
           <b>Köszönjük, hogy kitöltötted a regisztrációs lapot.</b>
         </h3>
         <p>
-          Az alábbi linkre kattintva megerősítheted regisztrációdat: https://vap.max.hu/activate?code={{code}}
+          Az alábbi linkre kattintva megerősítheted regisztrációdat {{url}}/activate?code={{code}}
         </p>
         <p>
           A bejelentkezést követően követheted profilodat, eseményekre tett regisztrácóid, illetve

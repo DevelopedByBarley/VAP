@@ -12,7 +12,7 @@ $subscriptions = $params["subscriptions"];
 ?>
 
 <div class="container-fluid">
-  <div class="p-4 container">
+  <div class="p-xxl-4 container">
 
     <form id="update-form" action="/user/update" method="POST">
       <div class="row mb-4 mt-5">

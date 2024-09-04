@@ -11,47 +11,46 @@ $links = $params["links"] ?? null;
 $tasks = $params["tasks"] ?? null;
 $isRegistered = $params["isRegistered"] ?? null;
 
-
 ?>
-
-<div class="container-fluid mt-b" style="position: relative; z-index: 0;">
+<div class="container-fluid mt-b" style="position: relative; z-index: 0; margin-top: 0;">
   <div class="row">
-    <div class="col-12 m-0 p-0" style='min-height: 70vh; background: url("/public/assets/uploads/images/events/<?php echo $event["fileName"]; ?>") center center/cover;' id="event-fixed-bg">
-      <div class="text-light text-center h-100 w-100 d-flex align-items-center justify-content-center flex-column" style="background-color:hsla(176, 0%, 0%, 0.6)">
-        <h1 class="text-light"><?= $event["nameInHu"] ?></h1>
-        <h3 class="text-light"><?= $event["date"] ?> - <?= $event["end_date"] ?></h3>
-        <p class="text-light mt-4"><?= EVENT["scrollDown"][$lang] ?? 'HIBA' ?></p>
-
-      </div>
+    <div class="col-12 d-none d-xxl-block m-0 p-0" style='min-height: 70vh; background: url("/public/assets/uploads/images/events/<?php echo $event["fileName"]; ?>") center center/cover;' id="event-fixed-bg">
+    </div>
+    <div class="col-12 d-xxl-none m-0 p-0 mt-4">
+      <img src="/public/assets/uploads/images/events/<?php echo $event["fileName"] ?>" class="img-fluid" alt="">
     </div>
   </div>
   <div class="row d-flex justify-content-center align-items-center mt-3">
+    <div class="col-12">
+      <h2 class="text-uppercase mb-4 text-center mt-5 mb-2 title"><?= $event["nameInHu"] ?></h2>
+    </div>
+    <span>
+      <?php foreach ($dates as $date) : ?>
+        <?php
+        $dateTime = new DateTime($date["date"]);
+        $year = $dateTime->format('Y');
+        $month = $dateTime->format('n');
+        $day = $dateTime->format('d');
+        ?>
+    </span>
 
-    <?php foreach ($dates as $date) : ?>
-      <?php
-      $dateTime = new DateTime($date["date"]);
-      $year = $dateTime->format('Y');
-      $month = $dateTime->format('n');
-      $day = $dateTime->format('d');
-      ?>
-      <!--
+    <!--
            <div class="col-6 col-lg-1 bg-dark py-4 text-light d-flex justify-content-center align-items-center">
              <i class="bi bi-calendar2-week-fill text-light" style="font-size: 2.2rem;"></i>
           </div>
          -->
-      <div class="col-4 col-lg-1 m-1 py-3 px-5 pr-color text-light d-flex justify-content-center align-items-center flex-column">
-        <h1 class="text-light"><?= $day ?></h1>
-        <h6 class="text-light" style="margin-top: -10px;"><?= MONTHS_IN_LANGUAGE[$month][$lang] ?></h6>
-      </div>
-    <?php endforeach ?>
+    <div class="col-4 col-lg-1 m-1 py-3 px-5 pr-color text-light d-flex justify-content-center align-items-center flex-column">
+      <h1 class="text-light"><?= $day ?></h1>
+      <h6 class="text-light" style="margin-top: -10px;"><?= MONTHS_IN_LANGUAGE[$month][$lang] ?></h6>
+    </div>
+  <?php endforeach ?>
 
   </div>
 </div>
 
 <div class="container">
   <div class="row">
-    <div class="col-12 text-center my-5 d-flex justify-content-center flex-column reveal" style="min-height: 30vh;">
-      <h2 class="text-uppercase mb-4"><?= $event["nameInHu"] ?></h2>
+    <div class="col-12 text-center mb-5 mt-3 d-flex justify-content-center flex-column reveal">
       <p><?= $event[languageSwitcher("description")] ?></p>
     </div>
   </div>
@@ -136,27 +135,27 @@ $isRegistered = $params["isRegistered"] ?? null;
 
 
 
-<?php if(!$isRegistered):?>
+<?php if (!$isRegistered) : ?>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"> <?= EVENT["modal"]["title"][$lang] ?? 'HIBA' ?></h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <?= EVENT["modal"]["desc"][$lang] ?? 'HIBA' ?>
-      </div>
-      <div class="modal-footer">
-        <a href="/user/registration" class="btn btn-primary"><?= EVENT["modal"]["accept"][$lang] ?? 'HIBA' ?></button>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn btn-secondary\">" . (EVENT['modal']['decline'][$lang] ?? 'HIBA') . "</a>" ?>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"> <?= EVENT["modal"]["title"][$lang] ?? 'HIBA' ?></h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <?= EVENT["modal"]["desc"][$lang] ?? 'HIBA' ?>
+        </div>
+        <div class="modal-footer">
+          <a href="/user/registration" class="btn btn-primary"><?= EVENT["modal"]["accept"][$lang] ?? 'HIBA' ?></button>
+            <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn btn-secondary\">" . (EVENT['modal']['decline'][$lang] ?? 'HIBA') . "</a>" ?>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<?php endif?>
+<?php endif ?>

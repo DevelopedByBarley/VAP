@@ -52,7 +52,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
           <label class="form-label required" for="password"><b><?= REGISTRATION["form"]["password"][$lang] ?? 'HIBA' ?></b></label>
           <input type="password" id="password" name="password" class="form-control" required placeholder="<?= REGISTRATION["form"]["password"][$lang] ?? 'HIBA' ?>" value="<?= $prev["password"] ?? '' ?>"" />
 
-          <small id=" pwInputAlert" class="text-danger">
+          <small id="pwInputAlert" class="text-danger">
 
           </small>
         </div>
@@ -74,7 +74,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
-          <label class="form-label" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?></b></label>
+          <label class="form-label required" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?></b></label>
           <input type="number" id="phone" name="mobile" class="form-control" value="<?= $prev["mobile"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?>" required />
 
           <small id="phoneInputAlert" class="text-danger"></small>
@@ -261,7 +261,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
         <div class="col-xs-12 mt-3">
           <div class="mb-3">
             <label for="file" class="form-label"><b><?= UPLOAD_IMAGE["title"][$lang] ?? 'HIBA ' ?></b></label>
-            <input class="form-control" type="file" name="file" />
+            <input class="form-control" type="file" name="file" required/>
           </div>
         </div>
         <div class="col-xs-12 mt-3 border p-3">

@@ -107,7 +107,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
 
 
 
-      <form id="register-form" class="p-3" style="background-color: white;;" action="/event/subscribe/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
+      <form id="register-form" class="p-xxl-3" style="background-color: white;;" action="/event/subscribe/<?= $event["eventId"] ?>" method="POST" enctype="multipart/form-data">
         <h3 class="text-center mb-5 mt-5 text-uppercase">Regisztráció kitöltése</h3>
 
         <div class="row mb-4 mt-5">

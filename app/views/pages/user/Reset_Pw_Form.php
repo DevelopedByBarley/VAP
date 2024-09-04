@@ -3,8 +3,6 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 $email = $params["emailByToken"] ?? null;
 $token = $params["token"] ?? null;
 
-var_dump($token);
-var_dump($email);
 ?>
 
 
@@ -48,4 +46,5 @@ var_dump($email);
   </div>
 </div>
 
+<script src="/public/js/GetCookie.js"></script>
 <script src="/public/js/validators/ResetPwForm.js"></script>

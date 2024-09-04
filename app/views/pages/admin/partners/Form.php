@@ -27,6 +27,16 @@
         </div>
         <div class="form-outline mb-4">
           <div class="mb-3">
+          <label class="form-label" for="link"><b>Típus beállítása</b></label>
+            <select class="form-select" aria-label="Default select example" name="type" required>
+              <option selected value="">Kiválasztás</option>
+              <option value="support">Támogató</option>
+              <option value="cooperative">Együttműködő</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-outline mb-4">
+          <div class="mb-3">
             <label for="formFile" class="form-label"><b>Logo feltöltése</b></label>
             <input class="form-control" type="file" id="formFile" name="p_image" required>
           </div>

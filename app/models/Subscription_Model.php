@@ -50,28 +50,29 @@ class Subscription_Model
     $tasksInString = implode(",<br>", $tasksInLang);
 
     if (!$dates || !$tasks) {
-      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/subscribe/$eventId");
+      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/subscribe/" . $event["slug"]);
     }
 
     // CHECK USER IS EXIST
 
     if ($user) {
-      $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email AND `eventRefId` = :eventId");
-      $stmt->bindParam(":name", $user["name"]);
-      $stmt->bindParam(":email", $user["email"]);
-      $stmt->bindParam(":eventId", $eventId);
+      $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `email` = :email AND `eventRefId` = :eventId");
+      $stmt->bindParam(":email", $user["email"], PDO::PARAM_STR);
+      $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
       $stmt->execute();
-      $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
+      $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      if (!empty($isUserExist)) {
+      if (!empty($isSubExist)) {
         $this->alert->set(
           "Ezzel a profillal már regisztráltál erre az eseményre!",
           "You have already registered for this event with this profile!",
           null,
           "danger",
-          "/event/subscribe/$eventId"
+          "/event/subscribe/" . $event["slug"]
         );
       }
+
+
 
 
 
@@ -79,23 +80,22 @@ class Subscription_Model
       VALUES 
       (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :isAccepted ,:fileName, :userRefId, :eventRefId);");
 
-      $stmt->bindParam(":name", $user["name"]);
-      $stmt->bindParam(":registrationId", $rand);
-      $stmt->bindParam(":email",  $user["email"]);
-      $stmt->bindParam(":address", $user["address"]);
-      $stmt->bindParam(":mobile", $user["mobile"]);
-      $stmt->bindParam(":profession", $user["profession"]);
-      $stmt->bindParam(":schoolName", $user["schoolName"]);
-      $stmt->bindParam(":otherLanguages", $user["otherLanguages"]);
-      $stmt->bindParam(":participation", $user["participation"]);
-      $stmt->bindParam(":informedBy", $user["informedBy"]);
-      $stmt->bindParam(":permission", $user["permission"]);
-      $stmt->bindParam(":lang", $lang);
-      $stmt->bindParam(":isAccepted", $isAccepted);
-      $stmt->bindParam(":fileName", $user["fileName"]);
-      $stmt->bindParam(":userRefId", $user["id"]);
-      $stmt->bindParam(":eventRefId", $eventId);
-      $stmt->bindParam(":eventRefId", $eventId);
+      $stmt->bindParam(":name", $user["name"], PDO::PARAM_STR);
+      $stmt->bindParam(":registrationId", $rand, PDO::PARAM_STR);
+      $stmt->bindParam(":email",  $user["email"], PDO::PARAM_STR);
+      $stmt->bindParam(":address", $user["address"], PDO::PARAM_STR);
+      $stmt->bindParam(":mobile", $user["mobile"], PDO::PARAM_INT);
+      $stmt->bindParam(":profession", $user["profession"], PDO::PARAM_STR);
+      $stmt->bindParam(":schoolName", $user["schoolName"], PDO::PARAM_STR);
+      $stmt->bindParam(":otherLanguages", $user["otherLanguages"], PDO::PARAM_STR);
+      $stmt->bindParam(":participation", $user["participation"], PDO::PARAM_INT);
+      $stmt->bindParam(":informedBy", $user["informedBy"], PDO::PARAM_STR);
+      $stmt->bindParam(":permission", $user["permission"], PDO::PARAM_INT);
+      $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
+      $stmt->bindParam(":isAccepted", $isAccepted, PDO::PARAM_INT);
+      $stmt->bindParam(":fileName", $user["fileName"], PDO::PARAM_STR);
+      $stmt->bindParam(":userRefId", $user["id"], PDO::PARAM_INT);
+      $stmt->bindParam(":eventRefId", $eventId, PDO::PARAM_INT);
 
       $stmt->execute();
 
@@ -123,6 +123,7 @@ class Subscription_Model
       $body = str_replace('{{end_date}}', $event["end_date"], $body);
       $body = str_replace('{{tasks}}', $tasksInString, $body);
       $body = str_replace('{{id}}', $rand, $body);
+      $body = str_replace('{{url}}', CURRENT_URL, $body);
 
 
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Esemény regisztráció!" : "Event registration");
@@ -130,14 +131,7 @@ class Subscription_Model
       $this->alert->set("Az eseményre sikeresen regisztráltál!", "You have successfully registered for the event!", null, "success", "/");
     }
 
-
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
-
-    if (in_array(false, $documentName)) {
-      self::setPrevContent();
-
-      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/event/subscribe/$eventId");
-    }
+    // IF USER DOESNT EXIST------------------------------------------------------------------------------------------------------------------------------------
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
@@ -153,52 +147,82 @@ class Subscription_Model
     $typeOfDocuments = $body["typeOfDocument"] ?? [];
     $levels = $body["levels"] ?? [];
 
-    $documents = self::formatDocuments($documentName, $typeOfDocuments);
-
-
-
-
-    $stmt = $this->pdo->prepare("SELECT `name`, `email` FROM `registrations` WHERE `name` = :name AND `email` = :email");
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":email", $email);
+    // CHECK PROFILE AND SUB EXIST
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE email = :email");
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
     $stmt->execute();
     $isUserExist = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
     if (!empty($isUserExist)) {
       $this->setPrevContent();
       $this->alert->set(
-        "Ezzel az email címmel már regisztráltál erre az eseményre!",
-        "You have already registered for this event with this profile!",
+        "Ezekkel az adatokkal nem tudsz regisztrálni erre az eseményre! Kérlek jelentkezz be vagy ellenőrizd az adataidat.",
+        "You cannot register for this event with these details! Please log in or check your details.",
         null,
         "danger",
-        "/event/subscribe/$eventId"
+        "/event/subscribe/" . $event["slug"]
+      );
+    }
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` WHERE email = :email");
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $isSubExist = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+    if (!empty($isSubExist)) {
+      $this->setPrevContent();
+      $this->alert->set(
+        "Ezzekkel az adatokkal már regisztráltak erre az eseményre!",
+        "You have already registered for this event with these details!",
+        null,
+        "danger",
+        "/event/subscribe/" . $event["slug"]
       );
     }
 
 
     if (!$dates || !$tasks) {
-      header("Location: /event/subscribe/" . $eventId);
-      exit;
+      $this->setPrevContent();
+      $this->alert->set("Minden mező kitöltése kötelező!", "Filling out every field is mandatory!", null, "danger", "/event/subscribe/" . $event["slug"]);
     }
+
+
+
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
+
+    if (in_array(false, $documentName)) {
+      self::setPrevContent();
+      $this->fileSaver->deleteDeclinedFiles($documentName);
+
+
+      $this->alert->set("Feltöltött dokumentum file típus elutasítva", "Uploaded document file type rejected", null, "danger", "/event/subscribe/" . $event["slug"]);
+    }
+
+    $documents = self::formatDocuments($documentName, $typeOfDocuments);
+
 
     $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
     VALUES 
     (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :isAccepted, NULL, NULL, :eventRefId);");
 
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":registrationId", $rand);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":address", $address);
-    $stmt->bindParam(":mobile", $mobile);
-    $stmt->bindParam(":profession", $profession);
-    $stmt->bindParam(":schoolName", $school_name);
-    $stmt->bindParam(":otherLanguages", $otherLanguages);
-    $stmt->bindParam(":participation", $participation);
-    $stmt->bindParam(":informedBy", $informedBy);
-    $stmt->bindParam(":permission", $permission);
-    $stmt->bindParam(":lang", $lang);
-    $stmt->bindParam(":isAccepted", $isAccepted);
-    $stmt->bindParam(":eventRefId", $eventId);
+    $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+    $stmt->bindParam(":registrationId", $rand, PDO::PARAM_STR);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->bindParam(":address", $address, PDO::PARAM_STR);
+    $stmt->bindParam(":mobile", $mobile, PDO::PARAM_INT);
+    $stmt->bindParam(":profession", $profession, PDO::PARAM_STR);
+    $stmt->bindParam(":schoolName", $school_name, PDO::PARAM_STR);
+    $stmt->bindParam(":otherLanguages", $otherLanguages, PDO::PARAM_STR);
+    $stmt->bindParam(":participation", $participation, PDO::PARAM_INT);
+    $stmt->bindParam(":informedBy", $informedBy, PDO::PARAM_STR);
+    $stmt->bindParam(":permission", $permission, PDO::PARAM_INT);
+    $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
+    $stmt->bindParam(":isAccepted", $isAccepted, PDO::PARAM_INT);
+    $stmt->bindParam(":eventRefId", $eventId, PDO::PARAM_INT);
 
     $stmt->execute();
 
@@ -223,6 +247,7 @@ class Subscription_Model
     $body = str_replace('{{end_date}}', $event["end_date"], $body);
     $body = str_replace('{{tasks}}', $tasksInString, $body);
     $body = str_replace('{{id}}', $rand, $body);
+    $body = str_replace('{{url}}', CURRENT_URL, $body);
 
     $this->mailer->send($email, $body, $lang === "Hu" ? "Event regisztráció!" : "Event registration");
 
@@ -241,13 +266,15 @@ class Subscription_Model
 
 
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.registrationId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $sub = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "<pre>";
+    $stmt = $this->pdo->prepare("SELECT * FROM `registration_documents`  WHERE registerRefId = :id");
+    $stmt->bindParam(":id", $sub["id"], PDO::PARAM_INT);
+    $stmt->execute();
+    $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    var_dump($sub);
 
     if (!$sub) {
       $this->alert->set("Ilyen regisztráció nem létezik!", "Registratinon doesn't exist!", null, "danger", "/");
@@ -256,10 +283,15 @@ class Subscription_Model
     self::checkIsEventRegistrationExpired(array($sub), 7);
 
 
+    
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
+
+    foreach ($documents as $document) {
+      unlink("./public/assets/uploads/documents/users/" . $document["name"]);
+    }
 
 
     $this->alert->set("Esemény regisztráció sikeresen törölve!", "Event subscription deleted succesfully!", null, "success", "/");
@@ -269,7 +301,7 @@ class Subscription_Model
   public function acceptUserSubscription($subId)
   {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '1' WHERE `registrations`.`id` = :subId;");
-    $stmt->bindParam(":subId", $subId);
+    $stmt->bindParam(":subId", $subId, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Eseményre való regisztráció elfogadva!', 'Eseményre való regisztráció elfogadva!', 'Eseményre való regisztráció elfogadva!', "success", "/admin/event/subscriber/$subId");
@@ -279,7 +311,7 @@ class Subscription_Model
   public function declineUserSubscription($subId)
   {
     $stmt = $this->pdo->prepare("UPDATE `registrations` SET `isAccepted` = '0' WHERE `registrations`.`id` = :subId;");
-    $stmt->bindParam(":subId", $subId);
+    $stmt->bindParam(":subId", $subId, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Elfogadott regisztráció visszavonva!', 'Elfogadott regisztráció visszavonva!', 'Elfogadott regisztráció visszavonva!', "success", "/admin/event/subscriber/$subId");
@@ -290,7 +322,7 @@ class Subscription_Model
   public function getSubscriptionsByEvent($eventId)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $eventId);
+    $stmt->bindParam(":id", $eventId, PDO::PARAM_INT);
     $stmt->execute();
     $subscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -336,13 +368,13 @@ class Subscription_Model
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.eventRefId = :eventRefId");
 
-    $stmt->bindParam(":eventRefId", $eventId);
+    $stmt->bindParam(":eventRefId", $eventId, PDO::PARAM_INT);
     $stmt->execute();
     $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
-    $stmt->bindParam(":eventId", $eventId);
+    $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
     $stmt->execute();
 
     self::checkIsEventRegistrationExpired($subs, 6);
@@ -368,16 +400,30 @@ class Subscription_Model
   public function getSubscriptionsByUser($userId)
   {
     $stmt = $this->pdo->prepare("SELECT `email` FROM `users` WHERE `id` = :id");
-    $stmt->bindParam(":id", $userId);
+    $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
     $stmt->execute();
     $email = $stmt->fetch(PDO::FETCH_ASSOC)["email"];
 
-
-    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email");
-
-    $stmt->bindParam(":email", $email);
+    $stmt = $this->pdo->prepare("SELECT * FROM `registrations` 
+    INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.email = :email AND registrations.userRefId = :id");
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
     $stmt->execute();
     $registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    foreach ($registrations as $index => $registration) {
+      $stmt = $this->pdo->prepare("SELECT * FROM `registration_tasks` WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $registration["id"], PDO::PARAM_STR);
+      $stmt->execute();
+      $registrations[$index]["tasks"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $stmt = $this->pdo->prepare("SELECT * FROM `registration_dates` WHERE registerRefId = :id");
+      $stmt->bindParam(":id", $registration["id"], PDO::PARAM_STR);
+      $stmt->execute();
+      $registrations[$index]["dates"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     return $registrations;
   }
@@ -390,34 +436,34 @@ class Subscription_Model
   public function getSubbedUserById($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM registrations WHERE id = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
       $stmt = $this->pdo->prepare("SELECT * FROM registration_dates WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
+      $stmt->bindParam(":id", $user["id"], PDO::PARAM_INT);
       $stmt->execute();
       $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       $user["dates"] = $dates;
 
       $stmt = $this->pdo->prepare("SELECT * FROM registration_documents WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
+      $stmt->bindParam(":id", $user["id"], PDO::PARAM_INT);
       $stmt->execute();
       $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       $user["documents"] = $documents;
 
       $stmt = $this->pdo->prepare("SELECT * FROM registration_tasks WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
+      $stmt->bindParam(":id", $user["id"], PDO::PARAM_INT);
       $stmt->execute();
       $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       $user["tasks"] = $tasks;
 
       $stmt = $this->pdo->prepare("SELECT * FROM registration_languages WHERE registerRefId = :id");
-      $stmt->bindParam(":id", $user["id"]);
+      $stmt->bindParam(":id", $user["id"], PDO::PARAM_INT);
       $stmt->execute();
       $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -466,16 +512,16 @@ class Subscription_Model
   public function addDocumentOfSubscriptions($documentName, $typeOfDocument, $extension, $userRefId)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE `registrations`.`userRefId` = :userRefId");
-    $stmt->bindParam(':userRefId', $userRefId, PDO::PARAM_STR);
+    $stmt->bindParam(':userRefId', $userRefId, PDO::PARAM_INT);
     $stmt->execute();
     $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($subs as $sub) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
-      $stmt->bindParam(':name', $documentName);
-      $stmt->bindParam(':type', $typeOfDocument);
-      $stmt->bindParam(':extension',  $extension);
-      $stmt->bindParam(':registerRefId', $sub["id"]);
+      $stmt->bindParam(':name', $documentName, PDO::PARAM_STR);
+      $stmt->bindParam(':type', $typeOfDocument, PDO::PARAM_STR);
+      $stmt->bindParam(':extension',  $extension, PDO::PARAM_STR);
+      $stmt->bindParam(':registerRefId', $sub["id"], PDO::PARAM_INT);
 
       $stmt->execute();
     }
@@ -500,7 +546,7 @@ class Subscription_Model
 
 
     $stmt = $this->pdo->prepare("DELETE FROM `registration_documents` WHERE `registration_documents`.`name` = :documentName");
-    $stmt->bindParam(":documentName", $documentName);
+    $stmt->bindParam(":documentName", $documentName, PDO::PARAM_STR);
     $stmt->execute();
   }
 
@@ -527,11 +573,11 @@ class Subscription_Model
     AND `registration_documents`.`registerRefId` = :registerRefId ");
 
 
-      $stmt->bindParam(":name", $documentName);
-      $stmt->bindParam(":type", $typeOfDocument);
-      $stmt->bindParam(":extension", $extension);
-      $stmt->bindParam(":prevImage", $prevImage);
-      $stmt->bindParam(":registerRefId", $sub["registerRefId"]);
+      $stmt->bindParam(":name", $documentName, PDO::PARAM_STR);
+      $stmt->bindParam(":type", $typeOfDocument, PDO::PARAM_STR);
+      $stmt->bindParam(":extension", $extension, PDO::PARAM_STR);
+      $stmt->bindParam(":prevImage", $prevImage, PDO::PARAM_STR);
+      $stmt->bindParam(":registerRefId", $sub["registerRefId"], PDO::PARAM_INT);
       $stmt->execute();
     }
 
@@ -544,7 +590,6 @@ class Subscription_Model
 
   public function checkIsEventRegistrationExpired($subs, $state)
   {
-    echo "<pre>";
     $now = date('Y-m-d');
 
     switch ($state) {
@@ -596,6 +641,7 @@ class Subscription_Model
          </p>
           </div>";
         $this->mailer->send("developedbybarley@gmail.com", $body, "Tájékoztatás");
+        $this->mailer->send("hello@artnesz.hu", $body, "Tájékoztatás");
       }
     }
   }
@@ -610,7 +656,6 @@ class Subscription_Model
     $stmt->execute();
     $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     self::checkIsEventRegistrationExpired($subs, 2);
-
   }
 
   public function updateUserDataOfSubscription($body, $userId)
@@ -685,7 +730,7 @@ class Subscription_Model
     foreach ($arrayOfSubId as $subId) {
 
       $stmt = $this->pdo->prepare("DELETE FROM `registration_languages` WHERE `registration_languages`.`registerRefId` = :id");
-      $stmt->bindParam(":id", $subId);
+      $stmt->bindParam(":id", $subId, PDO::PARAM_INT);
       $stmt->execute();
 
       self::insertLanguages($subId, $languages, $levels);
@@ -714,9 +759,9 @@ class Subscription_Model
 
     foreach ($ret as $language) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
-      $stmt->bindParam(':lang', $language["lang"]);
-      $stmt->bindParam(':level', $language["level"]);
-      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->bindParam(':lang', $language["lang"], PDO::PARAM_INT);
+      $stmt->bindParam(':level', $language["level"], PDO::PARAM_INT);
+      $stmt->bindParam(':registerRefId', $registerId, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -726,8 +771,8 @@ class Subscription_Model
   {
     foreach ($languages as $language) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_languages` VALUES (NULL, :lang, :level, :registerRefId);");
-      $stmt->bindParam(':lang', $language["lang"]);
-      $stmt->bindParam(':level', $language["level"]);
+      $stmt->bindParam(':lang', $language["lang"], PDO::PARAM_INT);
+      $stmt->bindParam(':level', $language["level"], PDO::PARAM_INT);
       $stmt->bindParam(':registerRefId', $registerId);
       $stmt->execute();
     }
@@ -739,10 +784,10 @@ class Subscription_Model
   {
     foreach ($documents as $document) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
-      $stmt->bindParam(':name', $document["name"]);
-      $stmt->bindParam(':type', $document["type"]);
-      $stmt->bindParam(':extension',  $document["extension"]);
-      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->bindParam(':name', $document["name"], PDO::PARAM_STR);
+      $stmt->bindParam(':type', $document["type"], PDO::PARAM_STR);
+      $stmt->bindParam(':extension',  $document["extension"], PDO::PARAM_STR);
+      $stmt->bindParam(':registerRefId', $registerId, PDO::PARAM_INT);
 
       // INSERT parancs végrehajtása
       $stmt->execute();
@@ -756,8 +801,8 @@ class Subscription_Model
 
     foreach ($registration_dates as $date) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_dates` VALUES (NULL, :date, :registerRefId);");
-      $stmt->bindParam(':date', $date);
-      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->bindParam(':date', $date, PDO::PARAM_STR);
+      $stmt->bindParam(':registerRefId', $registerId, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -769,8 +814,8 @@ class Subscription_Model
   {
     foreach ($tasks as $task) {
       $stmt = $this->pdo->prepare("INSERT INTO `registration_tasks` VALUES (NULL, :task, :registerRefId);");
-      $stmt->bindParam(':task', $task);
-      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->bindParam(':task', $task, PDO::PARAM_INT);
+      $stmt->bindParam(':registerRefId', $registerId, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -787,10 +832,10 @@ class Subscription_Model
       $stmt = $this->pdo->prepare("INSERT INTO `registration_documents` VALUES (NULL, :name, :type, :extension, :registerRefId);");
       $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
       // Paraméterek kötése
-      $stmt->bindParam(':name', $document["file"]);
-      $stmt->bindParam(':type', $document["type"]);
-      $stmt->bindParam(':extension',  $extension);
-      $stmt->bindParam(':registerRefId', $registerId);
+      $stmt->bindParam(':name', $document["file"], PDO::PARAM_STR);
+      $stmt->bindParam(':type', $document["type"], PDO::PARAM_STR);
+      $stmt->bindParam(':extension',  $extension, PDO::PARAM_STR);
+      $stmt->bindParam(':registerRefId', $registerId, PDO::PARAM_INT);
 
       // INSERT parancs végrehajtása
       $stmt->execute();

@@ -23,10 +23,10 @@ class AuthService
         $createdAt = time();
 
         $stmt = $this->pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `name`, `password`, `createdAt`) VALUES (NULL, :adminId, :name, :password, :createdAt)");
-        $stmt->bindParam(":adminId", $adminId);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":password", $pw);
-        $stmt->bindParam(":createdAt", $createdAt);
+        $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":password", $pw, PDO::PARAM_STR);
+        $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
         $stmt->execute();
     }
 
@@ -37,7 +37,7 @@ class AuthService
         $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $stmt = $this->pdo->prepare("SELECT * FROM `admins` WHERE `name` = :name");
-        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
         $stmt->execute();
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -56,7 +56,7 @@ class AuthService
 
         $_SESSION["adminId"] = $admin["adminId"];
 
-        header("Location: /admin/registrations");
+        header("Location: /admin/dashboard");
     }
 
     public function logoutAdmin()
@@ -71,18 +71,6 @@ class AuthService
         header("Location: /admin");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function loginUser($body)
     {
         session_start();
@@ -90,7 +78,7 @@ class AuthService
         $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
-        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

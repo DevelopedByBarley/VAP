@@ -1,13 +1,11 @@
 <?php
 require_once 'app/helpers/Alert.php';
-require_once 'app/helpers/Validate.php';
 
 class ResetPw
 {
     private $pdo;
     private $mailer;
     private $alert;
-    private $validator;
 
     public function __construct()
     {
@@ -15,22 +13,19 @@ class ResetPw
         $this->pdo = $db->getConnect();
         $this->mailer = new Mailer();
         $this->alert = new Alert();
-        $this->validator = new Validator();
     }
-    
+
     public function pwRequest($body)
     {
         session_start();
-        
-        $url = $_SERVER["REFERER"];
         $email = $body["email"];
 
-        
+
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE email = :email");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         $token = uniqid();
         $current_time = time();
         $expires = date('Y-m-d H:i:s', strtotime('+10 minutes', $current_time));
@@ -54,24 +49,25 @@ class ResetPw
 
 
 
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':token', $token);
-        $stmt->bindParam(':expires', $expires);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->bindParam(':expires', $expires, PDO::PARAM_STR);
 
         $stmt->execute();
 
 
 
-        $body = "$url/user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
+        $body = CURRENT_URL . "/user/reset-pw?token=" . $token . "&expires=" . strtotime($expires);
         $subject = "Jelszó megváltoztatása!";
         !$user ? "" : $this->mailer->send($email, $body, $subject);
+        
 
         if (isset($_SESSION["forgotPwFormErrors"])) unset($_SESSION["forgotPwFormErrors"]);
         $this->alert->set('A jelszó változtatásához szükséges levelet az e-mail címére küldtük', 'The letter to change the password has been sent to your e-mail address', null, "success", "/login");
     }
 
 
-   
+
 
 
     public function checkTokenData($token)
@@ -80,7 +76,7 @@ class ResetPw
 
         $stmt = $this->pdo->prepare("SELECT * FROM `password_reset_tokens` WHERE token = :token AND isUsed = 0");
 
-        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
         $stmt->execute();
         $token = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -116,13 +112,13 @@ class ResetPw
         $hashedPw = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :hashedPw WHERE `users`.`email` = :email;");
 
-        $stmt->bindParam(':hashedPw', $hashedPw);
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':hashedPw', $hashedPw, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
 
         $stmt = $this->pdo->prepare("UPDATE `password_reset_tokens` SET `isUsed` = '1' WHERE `password_reset_tokens`.`token` = :token;");
 
-        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
         $stmt->execute();
 
 

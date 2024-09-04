@@ -16,7 +16,7 @@
           <b>Thank you for completing the registration form.</b>
         </h3>
         <p>
-          By clicking the link below, you can confirm your registration: https://vap.max.hu/activate?code={{code}}
+          By clicking the link below, you can confirm your registration: {{url}}/activate?code={{code}}
         </p>
         <p>
           After logging in, you can manage your profile, view your registered events, and, if accepted,

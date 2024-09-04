@@ -1,4 +1,10 @@
-<?php $partner = $params["partner"]; ?>
+<?php
+
+
+$partner = $params["partner"];
+$types =   $params["types"];
+
+?>
 
 <div class="container">
   <div class="row">
@@ -24,7 +30,19 @@
         </div>
         <div class="form-outline mb-4">
           <label class="form-label" for="descriptionInEn">Partner link</label>
-          <input type="text" class="form-control" id="link" name="link" required placeholder="Partner link" value="<?= $partner["link"]  ?? '' ?>"/>
+          <input type="text" class="form-control" id="link" name="link" required placeholder="Partner link" value="<?= $partner["link"]  ?? '' ?>" />
+        </div>
+
+        <div class="form-outline mb-4">
+          <div class="mb-3">
+            <label class="form-label" for="link"><b>Típus beállítása</b></label>
+            <select class="form-select" aria-label="Default select example" name="type" required>
+              <option selected value="">Kiválasztás</option>
+              <?php foreach ($types as $type) : ?>
+                <option value="<?= $type["value"] ?>" <?= $partner["type"] === $type["value"] ? 'selected' : '' ?>><?= $type["type"] ?></option>
+              <?php endforeach ?>
+            </select>
+          </div>
         </div>
         <div class="form-outline mb-4">
           <div class="mb-3">

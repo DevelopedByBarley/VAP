@@ -40,6 +40,7 @@ class DocumentModel extends AdminModel
 
     $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", null, null);
 
+
   
     if (!$documentName) {
       $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/admin/documents/new");
@@ -49,11 +50,11 @@ class DocumentModel extends AdminModel
 
 
     $stmt = $this->pdo->prepare("INSERT INTO `documents` VALUES (NULL, :nameInHu, :nameInEn, :fileName, :extension, :createdAt)");
-    $stmt->bindParam(":nameInHu", $nameInHu);
-    $stmt->bindParam(":nameInEn", $nameInEn);
-    $stmt->bindParam(":fileName", $documentName);
-    $stmt->bindParam(":extension", $extension);
-    $stmt->bindParam(":createdAt", $createdAt);
+    $stmt->bindParam(":nameInHu", $nameInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":nameInEn", $nameInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":fileName", $documentName, PDO::PARAM_STR);
+    $stmt->bindParam(":extension", $extension, PDO::PARAM_STR);
+    $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
 
     $stmt->execute();
 
@@ -70,7 +71,7 @@ class DocumentModel extends AdminModel
     unlink("./public/assets/uploads/documents/admin/$fileNameForDelete");
 
     $stmt = $this->pdo->prepare("DELETE FROM `documents` WHERE `id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Dokumentum sikeresen törölve!', 'Dokumentum sikeresen törölve!', 'Dokumentum sikeresen törölve!', "success", "/admin/documents");
@@ -87,12 +88,13 @@ class DocumentModel extends AdminModel
     $extension = '';
 
     if (!empty($files["document"]["name"])) {
-      $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", $prevImage, [
-        'application/pdf',
-        'application/msword',
-      ]);
+      $documentName = $this->fileSaver->saver($files["document"], "/uploads/documents/admin", $prevImage, null);
     } else {
       $documentName = $prevImage;
+    }
+
+    if (!$documentName) {
+      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/admin/documents/update/" . $id);
     }
 
     $extension = pathinfo($documentName, PATHINFO_EXTENSION);
@@ -105,11 +107,11 @@ class DocumentModel extends AdminModel
     `extension` = :extension
     WHERE `documents`.`id` = :id");
 
-    $stmt->bindParam(":nameInHu", $nameInHu);
-    $stmt->bindParam(":nameInEn", $nameInEn);
-    $stmt->bindParam(":fileName", $documentName);
-    $stmt->bindParam(":extension", $extension);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":nameInHu", $nameInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":nameInEn", $nameInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":fileName", $documentName, PDO::PARAM_STR);
+    $stmt->bindParam(":extension", $extension, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Dokumentum sikeresen frissítve!', 'Dokumentum sikeresen frissítve!', 'Dokumentum sikeresen frissítve!', "success", "/admin/documents");
@@ -123,7 +125,7 @@ class DocumentModel extends AdminModel
   {
 
     $stmt = $this->pdo->prepare("SELECT * FROM `documents` WHERE `id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $partner = $stmt->fetch(PDO::FETCH_ASSOC);
 

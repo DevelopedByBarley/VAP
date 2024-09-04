@@ -28,7 +28,7 @@ class UserModel
   {
     $userId = $_SESSION["userId"] ?? null;
     $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `id` = :id");
-    $stmt->bindParam(":id", $userId);
+    $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -40,18 +40,7 @@ class UserModel
   // REGISTER USER 
   public function registerUser($files, $body)
   {
-    $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null, [
-      'image/png',
-      'image/jpeg',
-    ]);
-    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
 
-
-    if (!$fileName || in_array(false, $documentName)) {
-      self::setPrevContent();
-
-      $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/user/registration");
-    }
 
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
@@ -76,7 +65,6 @@ class UserModel
     $languages = $body["langs"] ?? [];
     $levels = $body["levels"] ?? [];
 
-    $documents = self::formatDocuments($documentName, $typeOfDocument);
 
 
 
@@ -90,14 +78,43 @@ class UserModel
     if ($isUserExist) {
       self::setPrevContent();
       $this->alert->set(
-        "Ezzel az email címmel már regisztráltak!",
-        "This email is already exist!",
+        "Valami probléma merült fel a regisztrációval, kérünk jelentkezz be vagy próbálkozz más adatokkal!",
+        "There was a problem with the registration, please log in or try using other data!",
         null,
         "danger",
         "/user/registration"
       );
     }
 
+
+
+
+    $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null, [
+      'image/png',
+      'image/jpeg',
+    ]);
+
+    if (!$fileName) {
+      self::setPrevContent();
+      $this->alert->set("Feltöltött fénykép file típus elutasítva", "Uploaded profile picture file type rejected!", null, "danger", "/user/registration");
+    }
+
+
+    $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
+
+
+    
+
+    if (in_array(false, $documentName)) {
+      self::setPrevContent();
+      $this->fileSaver->deleteDeclinedFiles($documentName);
+      unlink("./public/assets/uploads/images/users/$fileName");
+
+
+      $this->alert->set("Feltöltött dokumentum file típus elutasítva", "Uploaded document file type rejected", null, "danger", "/user/registration");
+    }
+
+    $documents = self::formatDocuments($documentName, $typeOfDocument);
 
 
 
@@ -125,24 +142,24 @@ class UserModel
         )");
 
     // Paraméterek kötése
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $pw);
-    $stmt->bindParam(':address', $address);
-    $stmt->bindParam(':mobile', $mobile);
-    $stmt->bindParam(':profession', $profession);
-    $stmt->bindParam(':schoolName', $school_name);
-    $stmt->bindParam(':programs', $programs);
-    $stmt->bindParam(':otherLanguages', $otherLanguages);
-    $stmt->bindParam(':participation', $participation);
-    $stmt->bindParam(':informedBy', $informedBy);
-    $stmt->bindParam(':permission', $permission);
-    $stmt->bindParam(':lang', $lang);
-    $stmt->bindParam(':fileName', $fileName);
-    $stmt->bindParam(':createdAt', $createdAt);
-    $stmt->bindParam(':activation_code', $code);
-    $stmt->bindParam(':expires', $expires);
-    $stmt->bindParam(':isActivated', $isActivated);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':password', $pw, PDO::PARAM_STR);
+    $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+    $stmt->bindParam(':mobile', $mobile, PDO::PARAM_STR);
+    $stmt->bindParam(':profession', $profession, PDO::PARAM_STR);
+    $stmt->bindParam(':schoolName', $school_name, PDO::PARAM_STR);
+    $stmt->bindParam(':programs', $programs, PDO::PARAM_STR);
+    $stmt->bindParam(':otherLanguages', $otherLanguages, PDO::PARAM_STR);
+    $stmt->bindParam(':participation', $participation, PDO::PARAM_INT);
+    $stmt->bindParam(':informedBy', $informedBy, PDO::PARAM_STR);
+    $stmt->bindParam(':permission', $permission, PDO::PARAM_INT);
+    $stmt->bindParam(':lang', $lang, PDO::PARAM_STR);
+    $stmt->bindParam(':fileName', $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(':createdAt', $createdAt, PDO::PARAM_INT);
+    $stmt->bindParam(':activation_code', $code, PDO::PARAM_STR);
+    $stmt->bindParam(':expires', $expires, PDO::PARAM_INT);
+    $stmt->bindParam(':isActivated', $isActivated, PDO::PARAM_INT);
 
     // INSERT parancs végrehajtása
     $stmt->execute();
@@ -156,6 +173,8 @@ class UserModel
       $body = file_get_contents("./app/views/templates/user_registration/UserRegistrationMailTemplate" . $lang . ".php");
       $body = str_replace('{{name}}', $name, $body);
       $body = str_replace('{{code}}', $code, $body);
+      $body = str_replace('{{url}}', CURRENT_URL, $body);
+
 
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
 
@@ -169,7 +188,7 @@ class UserModel
   // UPDATE USER FROM USER SETTINGS
   public function update($body)
   {
-    
+
     $userId = $_SESSION["userId"] ?? null;
     $this->subModel->updateUserDataOfSubscription($body, $userId);
     $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -205,18 +224,18 @@ class UserModel
         `lang` = :lang
          WHERE `users`.`id` = :userId;");
 
-    $stmt->bindParam(':userId', $userId);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':address', $address);
-    $stmt->bindParam(':mobile', $mobile);
-    $stmt->bindParam(':profession', $profession);
-    $stmt->bindParam(':schoolName', $school_name);
-    $stmt->bindParam(':programs', $programs);
-    $stmt->bindParam(':otherLanguages', $otherLanguages);
-    $stmt->bindParam(':participation', $participation);
-    $stmt->bindParam(':informedBy', $informedBy);
-    $stmt->bindParam(':permission', $permission);
-    $stmt->bindParam(':lang', $lang);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+    $stmt->bindParam(':mobile', $mobile, PDO::PARAM_STR);
+    $stmt->bindParam(':profession', $profession, PDO::PARAM_STR);
+    $stmt->bindParam(':schoolName', $school_name, PDO::PARAM_STR);
+    $stmt->bindParam(':programs', $programs, PDO::PARAM_STR);
+    $stmt->bindParam(':otherLanguages', $otherLanguages, PDO::PARAM_STR);
+    $stmt->bindParam(':participation', $participation, PDO::PARAM_INT);
+    $stmt->bindParam(':informedBy', $informedBy, PDO::PARAM_STR);
+    $stmt->bindParam(':permission', $permission, PDO::PARAM_INT);
+    $stmt->bindParam(':lang', $lang, PDO::PARAM_STR);
 
     // INSERT parancs végrehajtása
     $isSuccess = $stmt->execute();
@@ -245,21 +264,19 @@ class UserModel
       unlink("./public/assets/uploads/images/users/$fileNameForDelete");
 
       $stmt = $this->pdo->prepare("DELETE FROM `users` where `id` = :id");
-      $stmt->bindParam(":id", $userId);
+      $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
       $isSuccess = $stmt->execute();
 
 
 
       if ($isSuccess) {
 
-        $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
-        $stmt->bindParam(":id", $userId);
-        $stmt->execute();
+        self::deleteUserLanguages($userId);
+        self::deleteUserDocuments($documents);
 
-        if ($isSuccess) {
-          self::deleteUserLanguages($userId);
-          self::deleteUserDocuments($documents);
-        }
+        $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
+        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
+        $stmt->execute();
       }
     }
   }
@@ -269,7 +286,7 @@ class UserModel
   {
 
     $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
-    $stmt->bindParam(":id", $userId);
+    $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
     $stmt->execute();
   }
 
@@ -448,7 +465,7 @@ class UserModel
     }
 
     $stmt = $this->pdo->prepare("DELETE FROM `user_documents` where `id` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $isSuccess = $stmt->execute();
 
 
@@ -484,10 +501,10 @@ class UserModel
 
 
     // Paraméterek kötése
-    $stmt->bindParam(':name', $fileName);
-    $stmt->bindParam(':type', $typeOfDocument);
-    $stmt->bindParam(':extension',  $extension);
-    $stmt->bindParam(':userRefId', $userRefId);
+    $stmt->bindParam(':name', $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(':type', $typeOfDocument, PDO::PARAM_STR);
+    $stmt->bindParam(':extension',  $extension, PDO::PARAM_STR);
+    $stmt->bindParam(':userRefId', $userRefId, PDO::PARAM_INT);
 
     $isSuccesS = $stmt->execute();
 
@@ -513,7 +530,7 @@ class UserModel
       $fileName = $prevImage;
     }
     $extension =  pathinfo($fileName, PATHINFO_EXTENSION);
-    
+
     if (!$fileName) {
       $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/user/documents/update/" . $id);
     }
@@ -524,10 +541,10 @@ class UserModel
     `extension` = :extension 
     WHERE `user_documents`.`id` = :id");
 
-    $stmt->bindParam(":name", $fileName);
-    $stmt->bindParam(":type", $typeOfDocument);
-    $stmt->bindParam(":extension", $extension);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":name", $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(":type", $typeOfDocument, PDO::PARAM_STR);
+    $stmt->bindParam(":extension", $extension, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
     $isSuccess = $stmt->execute();
 
@@ -543,7 +560,7 @@ class UserModel
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_documents` WHERE `userRefId` = :id");
 
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -556,7 +573,7 @@ class UserModel
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_documents` WHERE `id` = :id");
 
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $document = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -570,10 +587,10 @@ class UserModel
       $stmt = $this->pdo->prepare("INSERT INTO `user_documents` (`id`, `name`, `type`, `extension`, `userRefId`) VALUES (NULL, :name, :type, :extension, :userRefId);");
       $extension =  pathinfo($document["file"], PATHINFO_EXTENSION);
       // Paraméterek kötése
-      $stmt->bindParam(':name', $document["file"]);
-      $stmt->bindParam(':type', $document["type"]);
-      $stmt->bindParam(':extension',  $extension);
-      $stmt->bindParam(':userRefId', $id);
+      $stmt->bindParam(':name', $document["file"], PDO::PARAM_STR);
+      $stmt->bindParam(':type', $document["type"], PDO::PARAM_STR);
+      $stmt->bindParam(':extension',  $extension, PDO::PARAM_STR);
+      $stmt->bindParam(':userRefId', $id, PDO::PARAM_INT);
 
       // INSERT parancs végrehajtása
       $stmt->execute();
@@ -607,7 +624,7 @@ class UserModel
   private function updateTasks($id, $tasks)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `user_tasks` where `userRefId` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::insertTasks($id, $tasks);
@@ -617,8 +634,8 @@ class UserModel
   {
     foreach ($tasks as $task) {
       $stmt = $this->pdo->prepare("INSERT INTO `user_tasks` VALUES (NULL, :task, :userRefId)");
-      $stmt->bindParam(':task', $task);
-      $stmt->bindParam(':userRefId', $id);
+      $stmt->bindParam(':task', $task, PDO::PARAM_INT);
+      $stmt->bindParam(':userRefId', $id, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -627,7 +644,7 @@ class UserModel
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_tasks` WHERE `userRefId` = :id");
 
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -644,7 +661,7 @@ class UserModel
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `user_languages` WHERE `userRefId` = :id");
 
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $languages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -667,9 +684,9 @@ class UserModel
 
     foreach ($ret as $language) {
       $stmt = $this->pdo->prepare("INSERT INTO `user_languages` (`id`, `lang`, `level`, `userRefId`) VALUES (NULL, :lang, :level, :userRefId);");
-      $stmt->bindParam(':lang', $language["lang"]);
-      $stmt->bindParam(':level', $language["level"]);
-      $stmt->bindParam(':userRefId', $id);
+      $stmt->bindParam(':lang', $language["lang"], PDO::PARAM_INT);
+      $stmt->bindParam(':level', $language["level"], PDO::PARAM_INT);
+      $stmt->bindParam(':userRefId', $id, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -679,7 +696,7 @@ class UserModel
   private function updateUserLanguages($id, $languages, $levels)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `user_languages` where `userRefId` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::insertLanguages($id, $languages, $levels);
@@ -713,8 +730,8 @@ class UserModel
     }
 
     $stmt = $this->pdo->prepare("UPDATE `users` SET `password` = :password WHERE `users`.`id` = :userId;");
-    $stmt->bindParam(":password", $hashed);
-    $stmt->bindParam(":userId", $userId);
+    $stmt->bindParam(":password", $hashed, PDO::PARAM_STR);
+    $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set(
@@ -736,7 +753,7 @@ class UserModel
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
 
-    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

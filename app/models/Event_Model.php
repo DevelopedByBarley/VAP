@@ -29,7 +29,7 @@ class EventModel
 
 
     $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '0' WHERE `isPublic` = '1' AND (`date` <= :today OR `reg_end_date` <= :today)");
-    $stmt->bindParam(":today", $today);
+    $stmt->bindParam(":today", $today, PDO::PARAM_STR);
     $stmt->execute();
   }
 
@@ -39,7 +39,7 @@ class EventModel
 
 
     $stmt = $this->pdo->prepare("UPDATE events SET `isPublic` = '1' WHERE `isPublic` = '0' AND (`date` > :today OR `reg_end_date` > :today)");
-    $stmt->bindParam(":today", $today);
+    $stmt->bindParam(":today", $today, PDO::PARAM_STR);
     $stmt->execute();
   }
 
@@ -47,8 +47,8 @@ class EventModel
   public function state($id, $state)
   {
     $stmt = $this->pdo->prepare("UPDATE `events` SET `isPublic` = :state WHERE `events`.`eventId` = :id");
-    $stmt->bindParam(":state", $state);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":state", $state, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     header("Location: /admin/event/$id");
@@ -64,6 +64,11 @@ class EventModel
       'image/png',
       'image/jpeg',
     ]);
+
+     if (!$fileName) {
+        $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/admin/events/new");
+      }
+
     $nameInHu = filter_var($body["nameInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $nameInEn = filter_var($body["nameInEn"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
     $descriptionInHu = filter_var($body["descriptionInHu"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -79,17 +84,17 @@ class EventModel
     $createdAt = time();
 
     $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :nameInHu, :nameInEn, :descriptionInHu, :descriptionInEn, :date, :end_date, :reg_end_date, :isPublic, :fileName, :createdAt, :slug)");
-    $stmt->bindParam(":nameInHu", $nameInHu);
-    $stmt->bindParam(":nameInEn", $nameInEn);
-    $stmt->bindParam(":descriptionInHu", $descriptionInHu);
-    $stmt->bindParam(":descriptionInEn", $descriptionInEn);
-    $stmt->bindParam(":date", $date);
-    $stmt->bindParam(":end_date", $end_date);
-    $stmt->bindParam(":reg_end_date", $reg_end_date);
-    $stmt->bindParam(":isPublic", $isPublic);
-    $stmt->bindParam(":fileName", $fileName);
-    $stmt->bindParam(":createdAt", $createdAt);
-    $stmt->bindParam(":slug", $slug);
+    $stmt->bindParam(":nameInHu", $nameInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":nameInEn", $nameInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInHu", $descriptionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInEn", $descriptionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+    $stmt->bindParam(":end_date", $end_date, PDO::PARAM_STR);
+    $stmt->bindParam(":reg_end_date", $reg_end_date, PDO::PARAM_STR);
+    $stmt->bindParam(":isPublic", $isPublic, PDO::PARAM_INT);
+    $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
 
     $stmt->execute();
 
@@ -103,7 +108,7 @@ class EventModel
 
     self::sendMailForRegisteredUsers($lastId);
 
-    $this->alert->set('Új esemény sikeresen hozzáadva!', null, null, "success", "/admin/events");
+    $this->alert->set('Új esemény sikeresen hozzáadva!', 'Új esemény sikeresen hozzáadva!', 'Új esemény sikeresen hozzáadva!', "success", "/admin/events");
   }
 
 
@@ -117,7 +122,7 @@ class EventModel
 
 
     $stmt = $this->pdo->prepare("DELETE FROM events WHERE eventId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $this->alert->set('Esemény sikeresen törölve!', null, null, "success", "/admin/events");
@@ -152,11 +157,14 @@ class EventModel
 
 
     if ($files["image"]["name"] !== '') {
-      unlink("./public/assets/uploads/images/events/$prevImage");
       $fileName = $this->fileSaver->saver($files["image"], "/uploads/images/events", null, [
         'image/png',
         'image/jpeg',
       ]);
+      if (!$fileName) {
+        $this->alert->set("File típus elutasítva", "File type rejected", null, "danger", "/admin/events/update/" . $id);
+      }
+      unlink("./public/assets/uploads/images/events/$prevImage");
     } else {
       $fileName = $prevImage;
     }
@@ -176,17 +184,17 @@ class EventModel
     `slug` = :slug
     WHERE `events`.`eventId` = :id");
 
-    $stmt->bindParam(":nameInHu", $nameInHu);
-    $stmt->bindParam(":nameInEn", $nameInEn);
-    $stmt->bindParam(":descriptionInHu", $descriptionInHu);
-    $stmt->bindParam(":descriptionInEn", $descriptionInEn);
-    $stmt->bindParam(":date", $date);
-    $stmt->bindParam(":end_date", $end_date);
-    $stmt->bindParam(":reg_end_date", $reg_end_date);
-    $stmt->bindParam(":fileName", $fileName);
-    $stmt->bindParam(":createdAt", $createdAt);
-    $stmt->bindParam(":slug", $slug);
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":nameInHu", $nameInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":nameInEn", $nameInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInHu", $descriptionInHu, PDO::PARAM_STR);
+    $stmt->bindParam(":descriptionInEn", $descriptionInEn, PDO::PARAM_STR);
+    $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+    $stmt->bindParam(":end_date", $end_date, PDO::PARAM_STR);
+    $stmt->bindParam(":reg_end_date", $reg_end_date, PDO::PARAM_STR);
+    $stmt->bindParam(":fileName", $fileName, PDO::PARAM_STR);
+    $stmt->bindParam(":createdAt", $createdAt, PDO::PARAM_INT);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::updateEventLinks($id, $links);
@@ -194,7 +202,7 @@ class EventModel
     self::updateEventTasks($id, $tasks);
     self::setEventsPublic();
 
-    $this->alert->set('Új esemény sikeresen frissítve!', null, null, "success", "/admin/events");
+    $this->alert->set('Esemény sikeresen frissítve!', 'Esemény sikeresen frissítve!', 'Esemény sikeresen frissítve!', "success", "/admin/events");
   }
 
 
@@ -229,7 +237,7 @@ class EventModel
 
     foreach ($events as $index => $event) {
       $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `registrations` WHERE eventRefId = :id");
-      $stmt->bindParam(":id", $event["eventId"]);
+      $stmt->bindParam(":id", $event["eventId"], PDO::PARAM_INT);
       $stmt->execute();
       $events[$index]["subscriptions"] = $stmt->fetch(PDO::FETCH_ASSOC)["COUNT(*)"];
     }
@@ -246,7 +254,7 @@ class EventModel
   public function getEventBySlug($slug)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM events WHERE slug = :slug");
-    $stmt->bindParam(":slug", $slug);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
     return $event;
@@ -258,7 +266,7 @@ class EventModel
 
     if (!$admin || !isset($admin)) {
       $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id AND `isPublic` = '1'");
-      $stmt->bindParam(":id", $id);
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
       $stmt->execute();
       $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -266,7 +274,7 @@ class EventModel
     }
 
     $stmt = $this->pdo->prepare("SELECT * FROM events WHERE eventId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
     return $event;
@@ -280,7 +288,7 @@ class EventModel
     $today = date("Y-m-d");
 
     $stmt = $this->pdo->prepare("SELECT * FROM events WHERE (`isPublic` = '1') AND (`date` > :today OR `reg_end_date` > :today) ORDER BY `date` ASC LIMIT 6");
-    $stmt->bindParam(":today", $today);
+    $stmt->bindParam(":today", $today, PDO::PARAM_STR);
     $stmt->execute();
     $event = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -300,8 +308,8 @@ class EventModel
   public function checkIsUserRegisteredToEvent($eventId, $userId)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` WHERE `userRefId` = :userId AND `eventRefId` = :eventId");
-    $stmt->bindParam(":userId", $userId);
-    $stmt->bindParam(":eventId", $eventId);
+    $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
+    $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::PARAM_BOOL);
 
@@ -321,7 +329,7 @@ class EventModel
   public function getEventDates($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM event_dates WHERE eventRefId = :id ORDER BY date ASC");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -369,6 +377,7 @@ class EventModel
       $body = file_get_contents("./app/views/templates/event_notification/EventNotificationMailTemplate" . $user["lang"] . ".php");
       $body = str_replace('{{name}}', $user["name"], $body);
       $body = str_replace('{{id}}', $eventId, $body);
+      $body = str_replace('{{url}}', CURRENT_URL, $body);
       $this->mailer->send($user["email"], $body, $user["lang"] === "Hu" ? "Új esemény" : "New event!");
     }
   }
@@ -384,7 +393,7 @@ class EventModel
   private function updateEventDates($id, $event_dates)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `event_dates` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::insertDatesOfEvent($id, $event_dates);
@@ -398,8 +407,8 @@ class EventModel
 
     foreach ($event_dates as $date) {
       $stmt = $this->pdo->prepare("INSERT INTO `event_dates` VALUES (NULL, :date, :eventRefId);");
-      $stmt->bindParam(':date', $date);
-      $stmt->bindParam(':eventRefId', $id);
+      $stmt->bindParam(':date', $date, PDO::PARAM_STR);
+      $stmt->bindParam(':eventRefId', $id, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -409,7 +418,7 @@ class EventModel
   public function getEventLinks($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM event_links WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -421,7 +430,7 @@ class EventModel
   private function updateEventLinks($id, $links)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `event_links` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::insertLinksOfEvent($id, $links);
@@ -433,8 +442,8 @@ class EventModel
   {
     foreach ($links as $link) {
       $stmt = $this->pdo->prepare("INSERT INTO `event_links` VALUES (NULL, :link, :eventRefId);");
-      $stmt->bindParam(':link', $link);
-      $stmt->bindParam(':eventRefId', $id);
+      $stmt->bindParam(':link', $link, PDO::PARAM_STR);
+      $stmt->bindParam(':eventRefId', $id, PDO::PARAM_INT);
       $stmt->execute();
     }
   }
@@ -447,7 +456,7 @@ class EventModel
   public function getEventTasks($id)
   {
     $stmt = $this->pdo->prepare("SELECT * FROM event_tasks WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -459,7 +468,7 @@ class EventModel
   private function updateEventTasks($id, $tasks)
   {
     $stmt = $this->pdo->prepare("DELETE FROM `event_tasks` WHERE eventRefId = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
 
     self::insertTasksOfEvent($id, $tasks);
@@ -470,8 +479,8 @@ class EventModel
   {
     foreach ($tasks as $task) {
       $stmt = $this->pdo->prepare("INSERT INTO `event_tasks` VALUES (NULL, :task, :eventRefId);");
-      $stmt->bindParam(':task', $task);
-      $stmt->bindParam(':eventRefId', $id);
+      $stmt->bindParam(':task', $task, PDO::PARAM_INT);
+      $stmt->bindParam(':eventRefId', $id, PDO::PARAM_INT);
       $stmt->execute();
     }
   }

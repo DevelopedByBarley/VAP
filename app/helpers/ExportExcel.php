@@ -84,7 +84,7 @@ class XLSX
     {
 
         $stmt = $this->pdo->prepare("SELECT id, registrationId, name, email, address, mobile, profession, schoolName, otherLanguages FROM `registrations` WHERE eventRefId = :id AND isAccepted = 1");
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $subData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -106,7 +106,7 @@ class XLSX
     {
 
         $stmt = $this->pdo->prepare("SELECT *  FROM `registration_dates` WHERE registerRefId = :id");
-        $stmt->bindParam(":id", $sub["id"]);
+        $stmt->bindParam(":id", $sub["id"], PDO::PARAM_INT);
         $stmt->execute();
         $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -119,7 +119,7 @@ class XLSX
     {
 
         $stmt = $this->pdo->prepare("SELECT task FROM `registration_tasks` WHERE registerRefId = :id");
-        $stmt->bindParam(":id", $sub["id"]);
+        $stmt->bindParam(":id", $sub["id"], PDO::PARAM_INT);
         $stmt->execute();
         $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -138,7 +138,7 @@ class XLSX
     {
 
         $stmt = $this->pdo->prepare("SELECT lang, level FROM `registration_languages` WHERE registerRefId = :id");
-        $stmt->bindParam(":id", $sub["id"]);
+        $stmt->bindParam(":id", $sub["id"], PDO::PARAM_INT);
         $stmt->execute();
         $langs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

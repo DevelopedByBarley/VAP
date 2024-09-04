@@ -3,9 +3,11 @@ require_once 'app/controllers/admin/Admin_Controller.php';
 require_once 'app/controllers/admin/Admin_Render.php';
 
 $r->addRoute('GET', '/admin', [AdminRender::class, 'adminLoginPage']);
+$r->addRoute('GET', '/admin/dashboard', [AdminRender::class, 'adminDashboard']);
 $r->addRoute('GET', '/admin/registrations', [AdminRender::class, 'registrations']); 
 $r->addRoute('GET', '/admin/user/{id}', [AdminRender::class, 'profile']); 
 $r->addRoute('GET', '/admin/user/mail/{id}', [AdminRender::class, 'userMailPage']);
+$r->addRoute('GET', '/admin/patch-notes', [AdminRender::class, 'patchNotes']);
 
 
 

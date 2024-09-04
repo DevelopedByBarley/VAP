@@ -35,7 +35,7 @@
         </p>
         <p>Az eseményre való jelentkezést a profilodból követheted vagy törörlheted!</p>
         <p>Ha a jelentkezés profil nélkül történt akkor a lemondás a következő linken lehetséges
-          <a href="https://vap.max.hu/subscription/delete/{{id}}">https://vap.max.hu/subscription/delete/{{id}}</a>.
+          <a href="{{url}}/subscription/delete/{{id}}">{{url}}/subscription/delete/{{id}}</a>
         </p>
         <br>
         <p>Örömmel várjuk a találkozást és a közös munkát!</p>

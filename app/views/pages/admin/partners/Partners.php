@@ -8,9 +8,9 @@ $num_of_page = (int)$params["numOfPage"];
 $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
 ?>
 
-<div class="container my-5">
-  <div class="row">
-    <div id="admin-partners">
+<div class="container my-5 vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100">
+    <div id="admin-partners" class="w-100">
       <?php if (!isset($partners) || count($partners) === 0) : ?>
         <div id="no-partners" class="text-center">
           <h1 class="mb-3">Jelenleg nincs egy partner sem!</h1>
@@ -33,7 +33,7 @@ $active_page = isset($_GET["offset"]) ? (int)$_GET["offset"] : 1;
         </nav>
         </ul>
         <div class="table-responsive w-100 rounded" id="partners-table">
-          <table class="table align-middle mb-0 bg-white">
+          <table class="table align-middle mb-0">
             <thead class="bg-dark text-light">
               <tr>
                 <th>Név</th>

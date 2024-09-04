@@ -29,41 +29,41 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "description" => [
-      "En" => "Our goal is to create an online platform in the cultural sphere,
-    within the field of fine arts, through which opportunity
-    we provide for young people who are studying art
-    (primarily in higher education) or are interested in fine arts
-    towards that at various artistic events (festivals,
-    exhibitions, fairs, etc.), internships or volunteering
-    gain experience through programs, get involved
-    preparatory, organizational and administrative tasks, thereby
-    discovering which area or type of institution a
-    most suitable for them, thus helping them to find their way in
-    that when they enter the labor market, with practical knowledge a
-    behind them, choose your career with confidence.
-    We provide a separate interface for the faculties of art and art theory
-    universities to provide internships
-    for their students, offering cooperation in the art
-    with organizations and art festivals for which
-    looking for volunteers or interns.",
-      "Hu" => "Célunk egy olyan online platform létrehozása a kulturális szférában,
-    azon belül képzőművészeti területen, amelyen keresztül lehetőséget
-    biztosítunk a fiataloknak, akik művészeti tanulmányokat folytatnak
-    (elsősorban a felsőoktatásban) vagy érdeklődnek a képzőművészet
-    iránt, hogy változatos művészeti eseményeken (fesztiválok,
-    kiállítások, vásárok stb.), szakmai gyakorlatok vagy önkéntes
-    programok révén tapasztalatot szerezzenek, bekapcsolódjanak az
-    előkészítő, szervező és adminisztratív feladatokba, ezáltal
-    felfedezve, hogy melyik terület vagy intézménytípus a
-    legmegfelelőbb számukra, így segítve a tájékozódásukat abban,
-    hogy amikor belépnek a munkaerőpiacra, gyakorlati ismeretekkel a
-    hátuk mögött, magabiztosan válasszák meg a pályájukat.
-    Külön felületet biztosítunk a művészeti és művészetelméleti karokkal
-    rendelkező egyetemeknek, hogy gyakorlatot biztosítsanak
-    hallgatóik részére, együttműködést ajánlva a művészeti
-    szervezetekkel és művészeti fesztiválokkal, amelyeknek
-    önkénteseket vagy gyakornokokat keresnek.",
-      "Sp" => ""
+      1 => [
+        "En" => "Our goal is to create a unique online platform in Hungary in the cultural sphere, 
+        specifically in the field of visual arts, through which we provide opportunities 
+        for art enthusiasts of all ages to glimpse into and become part of the cultural, mainly contemporary visual arts community",
+
+        "Hu" => "Célunk egy Magyarországon egyedülálló online platform létrehozása a kulturális szférában, 
+        azon belül képzőművészeti területen, amelyen keresztül lehetőséget biztosítunk a művészetkedvelők minden korosztályának, 
+        hogy betekintsenek és részei legyenek a kulturális, főként kortárs képzőművészeti közösségnek.",
+        "Sp" => ""
+      ],
+      2 => [
+        "En" => "Our goal is to create a unique online platform in Hungary in the cultural sphere, 
+        specifically in the field of visual arts, through which we provide opportunities for art enthusiasts
+         of all ages to glimpse into and become part of the cultural, 
+        mainly contemporary visual arts community",
+
+        "Hu" => "Fontos küldetésünknek tartjuk, hogy azoknak a fiataloknak, 
+        akik művészeti tanulmányaikat folytatják (elsősorban a felsőoktatásban) 
+        biztosítsunk lehetőséget arra, hogy változatos művészeti eseményeken (fesztiválok, kiállítások, vásárok stb.), 
+        szakmai gyakorlat vagy önkéntes program keretében tapasztalatot szerezzenek, bekapcsolódjanak az előkészítő, 
+        szervező és adminisztratív feladatokba, ezáltal felfedezve, hogy melyik terület vagy intézménytípus a 
+        legmegfelelőbb számukra, így segítve a tájékozódásukat, hogy amikor belépnek a munkaerőpiacra,
+        gyakorlati ismeretekkel a hátuk mögött,
+        magabiztosan válasszák meg a pályájukat.",
+        "Sp" => ""
+      ],
+      3 => [
+        "En" => "We provide a separate platform for universities with arts and art theory departments 
+        to offer practice opportunities for their students, offering collaboration 
+        with arts organizations and art festivals where they seek volunteers or interns.",
+        "Hu" => "Külön felületet biztosítunk a művészeti és művészetelméleti karokkal rendelkező egyetemeknek,
+         hogy gyakorlatot biztosítsanak hallgatóik részére, együttműködést 
+        ajánlva a művészeti szervezetekkel és művészeti fesztiválokkal, ahol önkénteseket vagy gyakornokokat keresnek.",
+        "Sp" => ""
+      ],
     ]
   ],
 
@@ -74,10 +74,18 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "content" => [
-      "Hu" => "Minden művészet rajongónak, de kiemeltem <b>NEKED</b>, ha a kulturális szférában, azon belül képzőművészeti területen tanulsz vagy itt képzeled el a karriered és tapasztalatot, kapcsolatot szeretnél építeni intézmények, galériák képviselőivel, kulturális szakemberekkel, művészekkel. ",
+      "Hu" => "Minden művészet rajongónak, de kiemeltem <b>NEKED</b>, ha a kulturális szférában, azon belül képzőművészeti területen tanulsz vagy itt képzeled el a karriered, és tapasztalatot, kapcsolatot szeretnél építeni intézmények, galériák képviselőivel, kulturális szakemberekkel, művészekkel. ",
       "En" => "All art enthusiasts, but especially <b>YOU</b>, if you are studying fine arts or if you are considering a career in the cultural sector and want to build experience and contacts with institutions, galleries, cultural professionals and artists.",
       "Sp" => ""
     ]
+  ],
+
+  "events" => [
+    "title" => [
+      "Hu" => "Eseményeink",
+      "En" => "Events",
+      "Sp" => ""
+    ],
   ],
 
 
@@ -112,6 +120,11 @@ define('CONTENT', [
         "Sp" => ""
       ],
       4 => [
+        "Hu" => "<b><u>Kommunikációs feladatokban való részvételt</u></b>: PR szövegek átnézése, közösségi felületek kezelése, posztolás, rövid szöveg megírása",
+        "En" => "<b><u>Take part in communication tasks</u></b>: reviewing PR texts, managing social media, posting, writing short texts",
+        "Sp" => ""
+      ],
+      5 => [
         "Hu" => "<b><u>Kiállítás felügyelet</u></b>",
         "En" => "<b><u>Exhibition supervision</u></b>",
         "Sp" => ""
@@ -192,16 +205,43 @@ define('CONTENT', [
     "Sp" => ""
   ],
   "partners" => [
-    "title" => [
-      "En" => "Partners",
-      "Hu" => "Partnereink",
+    "other_partners" => [
+
+      "En" => "OTHER PARTNERS",
+      "Hu" => "TOVÁBBI PARTNEREINK",
       "Sp" => ""
+
+    ],
+    "sup_partners" => [
+      "title" => [
+        "En" => "Supportive parners",
+        "Hu" => "Támogató partnereink",
+        "Sp" => ""
+      ],
+      "short" => [
+        "En" => "Supportive",
+        "Hu" => "Támogató",
+        "Sp" => ""
+      ]
+    ],
+    "coop_partners" => [
+      "title" => [
+        "En" => "Cooperative partners",
+        "Hu" => "Együttműködő partnereink",
+        "Sp" => ""
+      ],
+      "short" => [
+        "En" => "Cooperative",
+        "Hu" => "Együttműködő",
+        "Sp" => ""
+      ]
     ],
     "partner-btn" => [
-      "En" => "More partners",
+      "En" => "More Partners",
       "Hu" => "További partnerek",
       "Sp" => ""
     ]
+
   ],
   "edu" => [
     "title" => [

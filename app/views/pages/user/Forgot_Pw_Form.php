@@ -34,4 +34,5 @@ $errors = $params["errors"] ?? null;
   </div>
 </div>
 
+<script src="/public/js/GetCookie.js?v=<?php echo time() ?>"></script>
 <script src="/public/js/validators/ForgotPw.js"></script>

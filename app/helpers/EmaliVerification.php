@@ -17,7 +17,7 @@
         session_start();
         $verificationCode = uniqid(1000, 9999);
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         $subject = "Email cím megerősítése!";

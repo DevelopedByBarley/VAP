@@ -13,7 +13,7 @@ class AdminRender extends AdminController
   {
     session_start();
     if (isset($_SESSION["adminId"])) {
-      header("Location: /admin/registrations");
+      header("Location: /admin/dashboard");
       return;
     }
 
@@ -26,6 +26,35 @@ class AdminRender extends AdminController
   }
 
 
+  public function patchNotes() {
+		LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $usersData = $this->adminModel->dashboarData();
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/PatchNotes.php", [
+        "admin" => $admin ?? null,
+        "usersData" => $usersData ?? null,
+      ]),
+      "admin" => $admin ?? null
+    ]);
+	}
+
+  public function adminDashboard() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+    $admin = $this->adminModel->admin();
+    $usersData = $this->adminModel->dashboarData();
+
+
+    echo $this->renderer->render("Layout.php", [
+      "content" => $this->renderer->render("/pages/admin/Dashboard.php", [
+        "admin" => $admin ?? null,
+        "usersData" => $usersData ?? null,
+      ]),
+      "admin" => $admin ?? null
+    ]);
+  }
 
 
   // RENDER OF REGISTERED PROFILES

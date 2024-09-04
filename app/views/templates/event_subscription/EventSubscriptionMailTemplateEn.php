@@ -34,7 +34,7 @@
           <b>Please verify that you have entered your email address correctly, as further information will be sent there!</b>
         </p>
         <p>You can track or cancel your event registration from your profile.</p>
-        <p>If you registered without a profile, you can cancel by following this link: <a href="https://vap.max.hu/subscription/delete/{{id}}">https://vap.max.hu/subscription/delete/{{id}}</a>.</p>
+        <p>If you registered without a profile, you can cancel by following this link: <a href="{{url}}/subscription/delete/{{id}}">{{url}}/subscription/delete/{{id}}</a></p>
         <br>
         <p>We look forward to meeting you and working together!</p>
         <p><b>VAP Team</b></p>
