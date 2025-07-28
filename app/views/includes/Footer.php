@@ -78,7 +78,7 @@ $documents = $params['documents'] ?? [];
                         <div class="col-md-6 col-lg-6 text-center text-md-start">
                             <!-- Copyright -->
                             <div class="p-3">
-                                © 2023 Copyright:
+                                © 2025 Copyright:
                                 <a class="text-white" href="<?= CURRENT_URL ?>"><?= CURRENT_URL ?></a>
                             </div>
                             <!-- Copyright -->

@@ -36,10 +36,10 @@ foreach ($images as $image) {
 
 <link rel="stylesheet" href="/public/css/gallery.css?v=<?= time() ?>">
 
-<div class="container-fluid py-5">
+<div class="container-fluid py-5 mt-5">
   <div class="row">
-    <div class="col-12 text-center mb-5">
-      <h1 class="display-4 fw-bold text-dark">Galéria</h1>
+    <div class="col-12 text-center mt-5">
+      <h1 class="volunteers-title">Galéria</h1>
       <p class="lead text-muted">Programjaink és eseményeink pillanatai</p>
     </div>
   </div>

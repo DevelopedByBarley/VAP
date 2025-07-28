@@ -4,8 +4,8 @@ class Database
     public function getConnect()
     {
         $servername = "localhost";
-        $username = "Barley";
-        $password = "Csak1enter";
+        $username = "root";
+        $password = "";
         $dbName = "vap";
         
         try {

@@ -1,0 +1,312 @@
+/* Import variables */
+@import url('/public/css/initial/variables.css');
+
+/* Event page styles with backward compatibility */
+.event-hero {
+    background: linear-gradient(135deg, var(--light-bg));
+    padding: 2rem 0;
+    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23e83e8c" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
+    z-index: 1;
+}
+
+.event-hero .container-fluid {
+    position: relative;
+    z-index: 2;
+}
+
+.event-image {
+    max-width: 100%;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.event-image:hover {
+    transform: scale(1.02);
+}
+
+.event-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.event-date-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.event-date-card {
+    background: var(--pr-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 166, 155, 0.3);
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.event-date-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 166, 155, 0.4);
+}
+
+.event-date-day {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+}
+
+.event-date-month {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0.5rem 0 0 0;
+    opacity: 0.9;
+}
+
+.event-description {
+    background: white;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin: 3rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.event-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin: 2rem 0;
+    transition: transform 0.3s ease;
+}
+
+.event-section:hover {
+    transform: translateY(-3px);
+}
+
+.event-section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--pr-color);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-section-description {
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.event-task-item {
+    padding: 1rem 0;
+    border-bottom: 2px solid #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.event-task-item:hover {
+    background: #f8f9fa;
+    margin: 0 -1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.event-task-item:last-child {
+    border-bottom: none;
+}
+
+.event-link-item {
+    padding: 1rem 0;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.event-link-item a {
+    color: var(--sc-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.event-link-item a:hover {
+    color: var(--sc-color-hover);
+    text-decoration: underline;
+}
+
+.event-link-item:last-child {
+    border-bottom: none;
+}
+
+/* Button styles - supporting both old and new classes */
+.event-btn,
+.primary-btn,
+.secondary-btn {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.event-btn-primary,
+.primary-btn {
+    background: var(--pr-color);
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 166, 155, 0.3);
+}
+
+.event-btn-primary:hover,
+.primary-btn:hover {
+    background: var(--pr-color-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 166, 155, 0.4);
+}
+
+.event-btn-secondary,
+.secondary-btn {
+    background: var(--sc-color);
+    color: white;
+    box-shadow: 0 8px 25px rgba(235, 12, 119, 0.3);
+}
+
+.event-btn-secondary:hover,
+.secondary-btn:hover {
+    background: var(--sc-color-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(235, 12, 119, 0.4);
+}
+
+.event-status-badge {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-status-closed {
+    background: #dc3545;
+    color: white;
+}
+
+.event-status-registered {
+    background: #28a745;
+    color: white;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .event-title {
+        font-size: 2rem;
+    }
+    
+    .event-image {
+        max-height: 250px;
+    }
+    
+    .event-description,
+    .event-section {
+        padding: 2rem;
+        margin: 1.5rem 0;
+    }
+    
+    .event-btn,
+    .primary-btn,
+    .secondary-btn {
+        padding: 0.8rem 2rem;
+        margin: 0.3rem;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .event-image {
+        max-height: 200px;
+    }
+    
+    .event-date-card {
+        min-width: 100px;
+        padding: 1rem;
+    }
+    
+    .event-date-day {
+        font-size: 2rem;
+    }
+}
+
+/* Modal customization */
+.modal-content {
+    border-radius: 1.5rem;
+    border: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background: var(--sc-color);
+    color: white;
+    border-radius: 1.5rem 1.5rem 0 0;
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-body {
+    padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 1rem 2rem 2rem;
+}
+
+.modal-footer .btn {
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+}

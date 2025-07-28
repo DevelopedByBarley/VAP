@@ -21,7 +21,7 @@ class AdminGalleryController extends AdminController
         $this->renderer = new Renderer();
         $this->adminModel = new AdminModel();
         $this->authService = new AuthService();
-        $this->galleryModel = new Gallery_Model();
+        $this->galleryModel = new GalleryModel();
         $this->eventModel = new EventModel();
     }
 

@@ -192,7 +192,7 @@ class UserModel
       $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
       $this->mailer->send('arpadsz@max.hu', $notify_body, "Új profil regisztráció");
       $this->mailer->send('hello@artnesz.hu', $notify_body, "Új profil regisztráció");
-      
+
       $this->alert->set("Sikeres regisztráció! Az ön e-mail címére visszaigazoló e-mailt küldtünk!", "Successful registration! We have sent a confirmation email to your email address!", null, "success", "/login");
     }
   }
@@ -303,6 +303,13 @@ class UserModel
     $stmt->execute();
   }
 
+  public function all() {
+    $stmt = $this->pdo->prepare("SELECT * FROM `users`");
+    $stmt->execute();
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $users;
+  }
 
 
 

@@ -13,7 +13,7 @@ class GalleryController
 
   public function __construct()
   {
-    $this->galleryModel = new Gallery_Model();
+    $this->galleryModel = new GalleryModel();
     $this->renderer = new Renderer();
   }
   public function index()

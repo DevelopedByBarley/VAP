@@ -5,7 +5,7 @@ require_once 'app/services/AuthService.php';
 require_once 'app/helpers/FileSaver.php';
 require_once 'app/models/Admin_Model.php';
 
-class Gallery_Model extends AdminModel
+class GalleryModel extends AdminModel
 {
   public function __construct()
   {
@@ -13,7 +13,7 @@ class Gallery_Model extends AdminModel
   }
 
   public function getGallery($offset = 1)
-  {
+{
     $limit = 12; // Az oldalanként megjelenített képek száma
     $calculated = ($offset - 1) * $limit; // Az OFFSET értékének kiszámítása
 

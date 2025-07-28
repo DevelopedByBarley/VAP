@@ -9,7 +9,7 @@ class HomeRender extends HomeController
 	public function __construct()
 	{
 		parent::__construct();
-		$this->galleryModel = new Gallery_Model();
+		$this->galleryModel = new GalleryModel();
 	}
 
 
@@ -99,6 +99,8 @@ class HomeRender extends HomeController
 		$links = $this->linkModel->index();
 		$events = $this->eventModel->getLatestEvents();
 		$galleryImages = $this->galleryModel->getAllGalleryImages();
+		$users = $this->userModel->all();
+		$randomGalleryImages = array_slice($galleryImages, 0, count($galleryImages) > 3 ? 3 : count($galleryImages));
 		$this->eventModel->setEventsPrivateIfExpired();
 
 
@@ -116,7 +118,10 @@ class HomeRender extends HomeController
 				"links" => $links ?? null,
 				"latestEvents" => $events ?? null,
 				"questions" => $questions ?? null,
-				"galleryImages" => $galleryImages ?? null
+				"galleryImages" => $galleryImages ?? null,
+				'users' => $users ?? null,
+				'events' => $events ?? null,
+				'randomGalleryImages' => $randomGalleryImages ?? null,
 			]),
 			"user" => $user ?? null,
 		]);
