@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://volunteerartprograms.hu/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /config/
+Disallow: /vendor/
+Disallow: /app/
+
+# Allow important directories
+Allow: /public/
+Allow: /events/
+Allow: /gallery/
+Allow: /partners/
+Allow: /documents/
+Allow: /user/
+
+# Crawl-delay
+Crawl-delay: 1

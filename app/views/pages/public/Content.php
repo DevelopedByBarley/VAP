@@ -21,31 +21,33 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 <div class="container-fluid p-0 m-0">
 
 	<!-- HEADER ROW -->
-	<div class="row p-0 m-0 light-bg">
+	<header class="row p-0 m-0 light-bg" itemscope itemtype="https://schema.org/Organization">
 		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5 hero-section" id="header-intro">
 			<div class="hero-content text-center">
-				<h1 class="hero-title mb-4">
-					<span class="text-gradient">Volunteer Art Programs</span>
+				<h1 class="hero-title mb-4" itemprop="name">
+					<span class="volunteers-title">Volunteer Art Programs</span>
 				</h1>
-				<p class="hero-description lead mb-4"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
-				<div class="d-flex flex-wrap justify-content-center gap-3">
+				<p class="hero-description lead mb-4" itemprop="description"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
+				<nav class="d-flex flex-wrap justify-content-center gap-3" aria-label="<?= $lang === 'Hu' ? 'Fő műveletek' : 'Main actions' ?>">
 					<?php if (!$user) : ?>
-						<a href="/user/registration" class="btn btn-pink btn-lg px-4 py-3">
-							<i class="bi bi-person-plus me-2"></i>
+						<a href="/user/registration" class="btn btn-pink btn-lg px-4 py-3" 
+						   aria-label="<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Register as volunteer' ?>">
+							<i class="bi bi-person-plus me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Problem' ?>
 						</a>
 					<?php endif ?>
 					<?php if (!empty($latestEvents)) : ?>
-						<a href="#latest-events" class="btn btn-blue btn-lg px-4 py-3">
-							<i class="bi bi-calendar-event me-2"></i>
+						<a href="#latest-events" class="btn btn-blue btn-lg px-4 py-3"
+						   aria-label="<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'View next event' ?>">
+							<i class="bi bi-calendar-event me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?>
 						</a>
 					<?php endif ?>
-				</div>
+				</nav>
 			</div>
 		</div>
 		<div class="col-12 col-lg-5 d-flex align-items-center justify-content-center flex-column hero-image" id="header-image">
-			<div class="floating-elements">
+			<div class="floating-elements" aria-hidden="true">
 				<div class="float-1"></div>
 				<div class="float-2"></div>
 				<div class="float-3"></div>
@@ -54,18 +56,17 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 	</div>
 
 	<!-- ABOUT US ROW-->
-
-	<div class="row" id="about-us">
+	<section class="row" id="about-us" itemscope itemtype="https://schema.org/AboutPage">
 		<div class="col-12 col-lg-6 mx-auto text-center" id="about-us-content">
 			<div class="about-us-text-container">
-				<div class="about-us-icon">
+				<div class="about-us-icon" aria-hidden="true">
 					<i class="bi bi-heart-fill"></i>
 				</div>
-				<h2 class="about-us-title reveal">
+				<h2 class="about-us-title section-title reveal" itemprop="name">
 					<?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?>
 				</h2>
-				<div class="about-us-divider reveal"></div>
-				<div class="about-us-description">
+				<div class="about-us-divider reveal" aria-hidden="true"></div>
+				<div class="about-us-description" itemprop="description">
 					<p class="reveal about-us-paragraph">
 						<?= CONTENT["aboutUs"]["description"][1][$lang] ?? '' ?>
 					</p>
@@ -76,9 +77,9 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 						<?= CONTENT["aboutUs"]["description"][3][$lang] ?? '' ?>
 					</p>
 				</div>
-				<div class="about-us-stats reveal">
+				<div class="about-us-stats reveal" itemscope itemtype="https://schema.org/Organization">
 					<div class="stat-item">
-						<div class="stat-number"><?= count($users) - 2 ?>+</div>
+						<div class="stat-number" itemprop="numberOfEmployees"><?= count($users) - 2 ?>+</div>
 						<div class="stat-label"><?= CONTENT["stats"]["volunteers"][$lang] ?? 'Önkéntesek' ?></div>
 					</div>
 					<div class="stat-item">
@@ -92,7 +93,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 
 
@@ -664,3 +665,52 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 		</div>
 	</div>
 </div>
+
+<!-- SEO Structured Data for Events -->
+<?php if (!empty($events)) : ?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "<?= CONTENT["events"]["title"][$lang] ?? 'Events' ?>",
+  "itemListElement": [
+    <?php foreach ($events as $index => $event) : ?>
+    {
+      "@type": "Event",
+      "name": "<?= htmlspecialchars($event[languageSwitcher("name")]) ?>",
+      "description": "<?= htmlspecialchars(strip_tags($event[languageSwitcher("description")])) ?>",
+      "startDate": "<?= $event['event_date'] ?>",
+      "location": {
+        "@type": "Place",
+        "name": "<?= htmlspecialchars($event[languageSwitcher("location")]) ?>"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Volunteer Art Programs"
+      },
+      "url": "/events/<?= $event['id'] ?>"
+    }<?= $index < count($events) - 1 ? ',' : '' ?>
+    <?php endforeach ?>
+  ]
+}
+</script>
+<?php endif ?>
+
+<!-- SEO Structured Data for Service -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "<?= CONTENT["aboutUs"]["title"][$lang] ?? 'Volunteer Art Programs' ?>",
+  "description": "<?= htmlspecialchars(strip_tags(CONTENT["aboutUs"]["description"][1][$lang] ?? '')) ?>",
+  "provider": {
+    "@type": "Organization",
+    "name": "Volunteer Art Programs"
+  },
+  "serviceType": "<?= $lang === 'Hu' ? 'Művészeti önkéntes programok' : ($lang === 'En' ? 'Art volunteer programs' : 'Programas de voluntariado artístico') ?>",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Hungary"
+  }
+}
+</script>
