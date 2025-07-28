@@ -18,6 +18,8 @@ $nav = $params['nav'] ?? null;
     <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/public/css/main.css?v=<?php echo time() ?>" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- SimpleLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.2/dist/simple-lightbox.min.css">
     <script src="/public/bootstrap/js/bootstrap.js"></script>
     <script src="/public/ckeditor5/ckeditor.js"></script>
     <title><?= $title !== '' ? $title . ' - ' : '' ?>Voluntary Art Programs </title>
@@ -35,7 +37,9 @@ $nav = $params['nav'] ?? null;
     <div class="mt-5 w-100" id="root">
         <?= $params["content"] ?>
     </div>
+
     <?php include 'app/views/components/Cookie.php' ?>
+    <?php include './app/views/includes/Footer.php' ?>
 
     <script src="/public/js/UUID.js"></script>
     <script src="/public/js/CkEditor.js"></script>
@@ -43,6 +47,9 @@ $nav = $params['nav'] ?? null;
     <script src="/public/js/AOS.js"></script>
     <script src="/public/js/MMParallax.js"></script>
     <script src="/public/js/Cookie.js"></script>
+    <!-- SimpleLightbox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.2/dist/simple-lightbox.min.js"></script>
+    <script src="/public/js/Lightbox.js"></script>
 </body>
 
 </html>

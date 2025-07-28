@@ -28,6 +28,12 @@ $user = $params["user"] ?? null;
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
+
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#gallery' : '#gallery' ?>">
+                                        <?= NAVBAR["gallery"][$lang] ?? 'HIBA' ?>
+                                    </a>
+                                </li>
+                                <li class="nav-item m-1 mt-3">
                                     <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
                                         <?= NAVBAR["VoluntaryReports"][$lang] ?? 'HIBA' ?>
                                     </a>
@@ -126,7 +132,8 @@ $user = $params["user"] ?? null;
                 </div>
                 <div>
                     <span class="navbar-text">
-                        <a href="/admin/patch-notes" target='_blank' class="btn btn-primary text-light">Fejlesztések</a>
+                        <a href="/admin/export-all" target='_blank' class="btn btn-success text-light">Regisztrációk exportálása</a>
+                        <!-- <a href="/admin/patch-notes" target='_blank' class="btn btn-primary text-light">Fejlesztések</a> -->
                         <a href="/admin/logout" class="btn btn-danger text-light">Kijelentkezés</a>
                     </span>
                 </div>

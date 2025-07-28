@@ -109,7 +109,6 @@ $events = $params["event"] ?? null;
             <?php else : ?>
               <div class="row w-100">
                 <?php foreach ($subscriptions as $subscription) : ?>
-
                   <div class="col-12 mt-3">
                     <div class="card">
                       <a class="link" href="/event/<?= $subscription['slug'] ?>">

@@ -13,7 +13,19 @@ class XLSX
     }
 
 
-    public function write($data)
+    public function write($data, $headers = [
+        "id",
+        "regisztráció ID",
+        "név",
+        "email",
+        "cím",
+        "mobil",
+        "foglalkozás",
+        "iskola",
+        "további nyelvek",
+        "dátumok",
+        "nyelvek"
+    ])
     {
         $uri = $_SERVER["REQUEST_URI"];
 
@@ -24,19 +36,6 @@ class XLSX
         $excel = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $excel->getActiveSheet();
 
-        $headers = [
-            "id",
-            "regisztráció ID",
-            "név",
-            "email",
-            "cím",
-            "mobil",
-            "foglalkozás",
-            "iskola",
-            "további nyelvek",
-            "dátumok",
-            "nyelvek"
-        ];
 
         // Először beírjuk a fejléceket
         $columnIndex = 1;
@@ -78,7 +77,21 @@ class XLSX
         exit;
     }
 
+    public function getAllReg() {
+        $stmt = $this->pdo->prepare("SELECT id, name, email, address, mobile, profession, schoolName, otherLanguages FROM `users`");
+        $stmt->execute();
+        $regData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+        foreach ($regData as $index => $reg) {
+            $subData[$index]["dates"] = self::getDatesOfSub($reg);
+            $subData[$index]["tasks"] = self::getTaskOfSub($reg);
+            $subData[$index]["langs"] = self::getLangsOfSub($reg);
+        }
+
+        return $regData;
+    }
 
     public function getAcceptedSubs($id)
     {

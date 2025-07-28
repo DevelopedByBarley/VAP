@@ -1,0 +1,61 @@
+/* Galéria admin oldal stílusok */
+
+.gallery-thumbnail {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #e9ecef;
+}
+
+.gallery-thumbnail:hover {
+  transform: scale(1.05);
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table .btn-sm {
+  margin: 0 2px;
+}
+
+.pagination {
+  margin-bottom: 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+}
+
+/* Responsive thumbnail méret */
+@media (max-width: 768px) {
+  .gallery-thumbnail {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+/* Modal kép stílusok */
+.modal-body img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Üres állapot stílusok */
+.table tbody tr td i.bi-images {
+  opacity: 0.3;
+}
+
+/* Akciógombok hover effekt */
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

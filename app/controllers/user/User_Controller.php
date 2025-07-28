@@ -31,7 +31,27 @@ class UserController
   }
 
 
-  // PROTECTED
+  public function exportAll() {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+
+    $XLSX = new XLSX();
+    $data = $XLSX->getAllReg();
+
+
+    $XLSX->write($data, [
+      "id",
+      "név",
+      "email",
+      "cím",
+      "mobil",
+      "foglalkozás",
+      "iskola",
+      "további nyelvek",
+      "dátumok",
+      "nyelvek"
+    ]);
+    exit;
+  }
 
   public function updateUser()
   {

@@ -12,14 +12,47 @@ $tasks = $params["tasks"] ?? null;
 $isRegistered = $params["isRegistered"] ?? null;
 
 ?>
+
+
+
 <div class="container-fluid mt-b" style="position: relative; z-index: 0; margin-top: 0;">
   <div class="row">
-    <div class="col-12 d-none d-xxl-block m-0 p-0" style='min-height: 70vh; background: url("/public/assets/uploads/images/events/<?php echo $event["fileName"]; ?>") center center/cover;' id="event-fixed-bg">
-    </div>
-    <div class="col-12 d-xxl-none m-0 p-0 mt-4">
-      <img src="/public/assets/uploads/images/events/<?php echo $event["fileName"] ?>" class="img-fluid" alt="">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <img src="/public/assets/uploads/images/events/<?php echo $event["fileName"] ?>" class="event-image img-fluid w-25 mt-5" alt="<?= htmlspecialchars($event["nameInHu"]) ?>">
     </div>
   </div>
+  
+  <style>
+
+    @media (max-width: 576px) {
+      .event-image-container {
+        min-height: 200px;
+        max-height: 400px;
+        margin-top: 1rem;
+      }
+    }
+    
+    @media (min-width: 577px) and (max-width: 768px) {
+      .event-image-container {
+        min-height: 250px;
+        max-height: 450px;
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 992px) {
+      .event-image-container {
+        min-height: 300px;
+        max-height: 500px;
+      }
+    }
+    
+    @media (min-width: 993px) {
+      .event-image-container {
+        min-height: 350px;
+        max-height: 600px;
+      }
+    }
+  </style>
   <div class="row d-flex justify-content-center align-items-center mt-3">
     <div class="col-12">
       <h2 class="text-uppercase mb-4 text-center mt-5 mb-2 title"><?= $event["nameInHu"] ?></h2>
@@ -85,6 +118,7 @@ $isRegistered = $params["isRegistered"] ?? null;
     </div>
   </div>
 
+
   <div class="row">
     <div class="col-12 text-center d-flex align-items-center justify-content-center flex-column" style="min-height: 30vh;">
       <h1 class="reveal"><?= EVENT["after_registration"]["title"][$lang] ?? 'HIBA' ?></h1>
@@ -101,7 +135,6 @@ $isRegistered = $params["isRegistered"] ?? null;
         <h1 class="text-center"><?= EVENT['registrated'][$lang] ?? 'HIBA' ?></h1>
       <?php else : ?>
         <h1 class="text-center"><?= EVENT["go_to_reg"]["title"][$lang] ?? 'HIBA' ?></h1>
-        <p class="text-center"><i><?= EVENT["go_to_reg"]["description"][$lang] ?? 'HIBA' ?></i></p>
       <?php endif ?>
 
     </div>
@@ -111,19 +144,14 @@ $isRegistered = $params["isRegistered"] ?? null;
       <?php else : ?>
 
         <?php if (!isset($_SESSION["userId"])) : ?>
-          <button type="button" class="btn primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+          <button type="button" class="btn secondary-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
             <?= EVENT["registration"][$lang] ?? 'HIBA' ?>
           </button>
         <?php else : ?>
-          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn primary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
+          <?= $isRegistered ? '' : "<a href=\"/event/subscribe/{$event['slug']}\" class=\"btn secondary-btn\">" . (EVENT['registration'][$lang] ?? 'HIBA') . "</a>" ?>
         <?php endif ?>
 
-
-
-
-
-
-        <a href="mailto:developedbybarley@gmail.com" class="btn secondary-btn ms-1"><?= EVENT['send_message'][$lang] ?? 'HIBA' ?></a>
+        <a href="mailto:developedbybarley@gmail.com" class="btn primary-btn ms-1"><?= EVENT['send_message'][$lang] ?? 'HIBA' ?></a>
 
       <?php endif ?>
     </div>

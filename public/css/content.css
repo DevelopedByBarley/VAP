@@ -160,52 +160,272 @@
 
 
 
-/* ABOUT ME SECTION */
-
-#about-us {
-  min-height: 50vh;
-  width: 100;
+/* VOLUNTEERS SECTION - Modern Design */
+.volunteers-section {
+  background: #f8f9fa;
+  padding: 5rem 0;
+  position: relative;
 }
 
-@media(min-width: 1024px) {
-  #about-me-dc {
-    width: 80%;
-    margin: 0 auto;
-  }
-
-  #about-us-content {
-    width: 65%;
-    margin: 0 auto;
-  }
+.volunteers-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e91e63;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2rem;
 }
 
+.volunteers-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
+.volunteers-subtitle p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 #volunteers-header {
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
-
-
-.volunteer-card {
-  border: none !important;
-  min-height: 500px;
+/* VOLUNTEER CARDS */
+.volunteer-card-modern {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-.volunteer-profile-image {
-  height: 140px;
-  width: 140px;
-  border-radius: 100%;
-  ;
+.volunteer-card-modern:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.volunteer-image-container {
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.05) 0%, rgba(33, 150, 243, 0.05) 100%);
+}
+
+.volunteer-profile-image-modern {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
   margin: 0 auto;
-  transition: all .4s ease-in-out;
+  border: 4px solid white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
 }
 
-.volunteer-card:hover .volunteer-profile-image {
-  transform: scale(1.020);
+.volunteer-card-modern:hover .volunteer-profile-image-modern {
+  transform: scale(1.05);
+  border-color: #e91e63;
+}
 
+.volunteer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1rem;
+}
 
+.volunteer-quote-icon {
+  background: #e91e63;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.volunteer-card-modern:hover .volunteer-quote-icon {
+  transform: scale(1);
+}
+
+.volunteer-content {
+  padding: 2rem;
+}
+
+.volunteer-quote {
+  margin-bottom: 1.5rem;
+}
+
+.volunteer-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  position: relative;
+}
+
+.volunteer-description::before {
+  content: '"';
+  font-size: 3rem;
+  color: #e91e63;
+  position: absolute;
+  top: -15px;
+  left: -10px;
+  font-family: serif;
+  opacity: 0.3;
+}
+
+.volunteer-description::after {
+  content: '"';
+  font-size: 3rem;
+  color: #e91e63;
+  position: absolute;
+  bottom: -25px;
+  right: -5px;
+  font-family: serif;
+  opacity: 0.3;
+}
+
+.volunteer-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.author-divider {
+  width: 30px;
+  height: 2px;
+  background: #e91e63;
+}
+
+.volunteer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ANIMÁCIÓK */
+.volunteer-card-modern {
+  animation: fadeInUp 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.volunteer-card-modern:nth-child(1) { animation-delay: 0.1s; }
+.volunteer-card-modern:nth-child(2) { animation-delay: 0.2s; }
+.volunteer-card-modern:nth-child(3) { animation-delay: 0.3s; }
+.volunteer-card-modern:nth-child(4) { animation-delay: 0.4s; }
+.volunteer-card-modern:nth-child(5) { animation-delay: 0.5s; }
+.volunteer-card-modern:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESZPONZÍV DESIGN */
+@media (max-width: 991.98px) {
+  .volunteers-section {
+    padding: 3rem 0;
+  }
+  
+  .volunteers-title {
+    font-size: 2.2rem;
+  }
+  
+  .volunteers-subtitle p {
+    font-size: 1.1rem;
+  }
+  
+  #volunteers-header {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .volunteers-title {
+    font-size: 1.9rem;
+  }
+  
+  .volunteers-subtitle p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .volunteer-card-modern {
+    max-width: 300px;
+  }
+  
+  .volunteer-content {
+    padding: 1.5rem;
+  }
+  
+  .volunteer-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .volunteers-section {
+    padding: 2rem 0;
+  }
+  
+  .volunteers-title {
+    font-size: 1.6rem;
+  }
+  
+  .volunteers-badge {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .volunteer-profile-image-modern {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .volunteer-card-modern {
+    max-width: 280px;
+  }
 }
 
 
@@ -261,4 +481,1109 @@ li {
 
 #footer {
   min-height: 40vh;
+}
+
+/* Hero szekció és modern stílusok */
+.hero-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3e6ff 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+/* .text-gradient {
+    background: linear-gradient(135deg, #e91e63, #00A69B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 1.2;
+} */
+
+.hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Modern gombok */
+.btn-pink {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-pink:hover {
+    background: linear-gradient(135deg, #d81b60, #ad1457) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    color: white !important;
+}
+
+.btn-pink:active,
+.btn-pink:focus {
+    background: linear-gradient(135deg, #d81b60, #ad1457) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3f51b5, #303f9f) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(63, 81, 181, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #3949ab, #283593) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(63, 81, 181, 0.4);
+    color: white !important;
+    border-color: transparent !important;
+}
+
+.btn-secondary:active,
+.btn-secondary:focus {
+    background: linear-gradient(135deg, #3949ab, #283593) !important;
+    color: white !important;
+    border-color: transparent !important;
+    box-shadow: 0 4px 15px rgba(63, 81, 181, 0.3);
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active,
+.btn-secondary:not(:disabled):not(.disabled).active {
+    background: linear-gradient(135deg, #3949ab, #283593) !important;
+    border-color: transparent !important;
+    color: white !important;
+}
+
+/* Floating elemek a hero szekcióban */
+.hero-image {
+    position: relative;
+    background: url('/public/assets/images/vap.max.hu_about-us-01-01.jpg') center center/cover;
+    transition: all 0.4s ease-in-out;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.float-1, .float-2, .float-3 {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(63, 81, 181, 0.1));
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-1 {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.float-2 {
+    width: 80px;
+    height: 80px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.float-3 {
+    width: 40px;
+    height: 40px;
+    top: 80%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Galéria promó szekció */
+.gallery-promo {
+    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+    padding: 4rem 0;
+    margin: 3rem 0;
+}
+
+.gallery-promo h2 {
+    color: #e91e63;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.gallery-promo p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.gallery-preview-item {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-preview-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .text-gradient {
+        font-size: 2.5rem;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+    }
+    
+    .btn-pink, .btn-secondary {
+        padding: 0.75rem 2rem;
+        font-size: 0.9rem;
+    }
+    
+    .gallery-preview {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .text-gradient {
+        font-size: 2rem;
+    }
+    
+    .d-flex.gap-3 {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-pink, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Reveal animáció */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Modern szekciók */
+.advantages-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid #e91e63;
+}
+
+.advantages-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.advantages-card h3 {
+    color: #e91e63;
+    margin-bottom: 1rem;
+}
+
+.recommendation-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Modernizált about us szekció - Sötét háttér, egyszerű, reszponzív */
+#about-us {
+    background: #2c3e50;
+    position: relative;
+    padding: 4rem 0;
+    min-height: 100vh;
+}
+
+#about-us::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/public/assets/images/pattern.png') repeat;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.about-us-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+
+.about-us-icon {
+    margin-bottom: 2rem;
+}
+
+.about-us-icon i {
+    font-size: 4rem;
+    color: #e91e63;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.about-us-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ecf0f1;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.about-us-divider {
+    width: 80px;
+    height: 4px;
+    background: #e91e63;
+    margin: 0 auto 2rem auto;
+    border-radius: 2px;
+}
+
+.about-us-description {
+    margin-bottom: 3rem;
+}
+
+.about-us-paragraph {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #bdc3c7;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.about-us-stats {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #e91e63;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #95a5a6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* ABOUT US VISUAL SECTION */
+.about-us-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.about-us-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+}
+
+.about-us-main-image {
+    width: 100%;
+    height: 100%;
+    background: url('/public/assets/images/vap.max.hu_about-us-01-01.jpg') center center/cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: float 6s ease-in-out infinite;
+}
+
+.about-us-main-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(233, 30, 99, 0.1);
+    border-radius: 20px;
+}
+
+.about-us-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.deco-circle-1, .deco-circle-2, .deco-circle-3 {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.deco-circle-1 {
+    width: 60px;
+    height: 60px;
+    background: #e91e63;
+    top: -20px;
+    right: -20px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.deco-circle-2 {
+    width: 40px;
+    height: 40px;
+    background: #2196f3;
+    bottom: -15px;
+    left: -15px;
+    animation: float 5s ease-in-out infinite reverse;
+}
+
+.deco-circle-3 {
+    width: 80px;
+    height: 80px;
+    background: #e91e63;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+/* SZEBB SZÖVEGEK A RECOMMENDATION ÉS ADVANTAGES SZEKCIÓKHOZ */
+
+/* RECOMMENDATION SZÖVEG STÍLUSOK */
+.recommendation-text-wrapper {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.recommendation-badge, .advantages-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.recommendation-title, .advantages-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+.recommendation-quote {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border-left: 5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.quote-icon {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.recommendation-text {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.author-line {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.author-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ADVANTAGES SZÖVEG STÍLUSOK */
+
+
+.advantages-description {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.advantages-intro {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.advantages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.advantage-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.advantage-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(10px);
+  border-left-color: rgba(255, 255, 255, 0.5);
+}
+
+.advantage-bullet {
+  background: rgba(255, 255, 255, 0.2);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  backdrop-filter: blur(10px);
+}
+
+.advantage-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ANIMÁCIÓK */
+.recommendation-text-wrapper, .advantages-text-wrapper {
+  animation: fadeInUp 1s ease-out;
+}
+
+.advantage-item {
+  animation: slideInLeft 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.advantage-item:nth-child(1) { animation-delay: 0.1s; }
+.advantage-item:nth-child(2) { animation-delay: 0.2s; }
+.advantage-item:nth-child(3) { animation-delay: 0.3s; }
+.advantage-item:nth-child(4) { animation-delay: 0.4s; }
+.advantage-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESZPONZÍV DESIGN */
+@media (max-width: 991.98px) {
+  .recommendation-text-wrapper, .advantages-text-wrapper {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .recommendation-title, .advantages-title {
+    font-size: 2.2rem;
+  }
+  
+  .recommendation-quote {
+    padding: 2rem;
+  }
+  
+  .recommendation-text {
+    font-size: 1.2rem;
+  }
+  
+  .advantages-intro {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .advantages-list {
+    text-align: left;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .recommendation-title, .advantages-title {
+    font-size: 1.9rem;
+  }
+  
+  .recommendation-text-wrapper, .advantages-text-wrapper {
+    padding: 1rem;
+  }
+  
+  .recommendation-quote {
+    padding: 1.5rem;
+  }
+  
+  .recommendation-text {
+    font-size: 1.1rem;
+  }
+  
+  .advantage-item {
+    padding: 1.2rem;
+  }
+  
+  .advantage-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .recommendation-title, .advantages-title {
+    font-size: 1.6rem;
+  }
+  
+  .recommendation-badge, .advantages-badge {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .quote-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ANIMÁCIÓK */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* HOVER EFFEKTEK */
+.stat-item:hover .stat-number {
+    color: #2196f3;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.about-us-main-image:hover {
+    transform: translateY(-5px) scale(1.02);
+    transition: all 0.4s ease;
+}
+
+.about-us-icon:hover i {
+    color: #2196f3;
+    transform: rotate(360deg);
+    transition: all 0.3s ease;
+}
+
+/* Események szekció modernizálása */
+#event-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+#event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.event-date {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.event-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+/* Partners szekció */
+.partner-logo {
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+.partner-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* FAQ szekció modernizálása */
+.accordion-item {
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-button {
+    background: linear-gradient(135deg, #f8f9fa, #e3e6ff);
+    border: none;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 1.25rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.accordion-body {
+    background: white;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Animációk javítása */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideInUp 0.6s ease forwards;
+}
+
+/* Scroll smooth */
+html {
+    scroll-behavior: smooth;
+}
+
+/* BENEFITS SECTION - Modern Design */
+.benefits-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 5rem 0;
+  position: relative;
+}
+
+.benefits-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e91e6310" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.5;
+}
+
+.benefits-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.benefits-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--pr-color);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2rem;
+}
+
+.benefits-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.benefits-subtitle {
+  font-size: 1.3rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* BENEFIT CARDS */
+.benefit-card-modern {
+  background: white;
+  border-radius: 25px;
+  padding: 0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.benefit-card-modern:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.benefit-icon-container {
+  background: linear-gradient(135deg, rgba(233, 30, 99, 0.1) 0%, rgba(33, 150, 243, 0.1) 100%);
+  padding: 3rem 2rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-icon-wrapper {
+  position: relative;
+  z-index: 2;
+  background: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.benefit-card-modern:hover .benefit-icon-wrapper {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.benefit-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.benefit-card-modern:hover .benefit-icon {
+  transform: scale(1.05);
+}
+
+.benefit-decoration {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #e91e63, #2196f3);
+  border-radius: 50%;
+  opacity: 0.1;
+  transition: opacity 0.2s ease;
+}
+
+.benefit-card-modern:hover .benefit-decoration {
+  opacity: 0.15;
+}
+
+.benefit-content {
+  padding: 2rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.benefit-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.benefit-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #6c757d;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+/* EGYSZERŰSÍTETT ANIMÁCIÓK - OPTIMALIZÁLT */
+.benefit-card-modern {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.benefit-card-modern:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card-modern:nth-child(2) { animation-delay: 0.2s; }
+.benefit-card-modern:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESZPONZÍV DESIGN */
+@media (max-width: 991.98px) {
+  .benefits-section {
+    padding: 3rem 0;
+  }
+  
+  .benefits-title {
+    font-size: 2.2rem;
+  }
+  
+  .benefits-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .benefit-card-modern {
+    max-width: 280px;
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .benefits-title {
+    font-size: 1.9rem;
+  }
+  
+  .benefits-subtitle {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+  
+  .benefit-card-modern {
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+  
+  .benefit-icon-container {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+  }
+  
+  .benefit-icon-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .benefit-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .benefit-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .benefits-section {
+    padding: 2rem 0;
+  }
+  
+  .benefits-title {
+    font-size: 1.6rem;
+  }
+  
+  .benefits-badge {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .benefit-card-modern {
+    max-width: 280px;
+    min-height: 320px;
+  }
+  
+  .benefit-title {
+    font-size: 1.2rem;
+  }
+  
+  .benefit-description {
+    font-size: 0.95rem;
+  }
 }

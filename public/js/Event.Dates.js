@@ -27,7 +27,7 @@ regEndDate.addEventListener('change', (event) => {
   dateOfEvent.regEndDate = event.target.value;
 
   if(dateOfEvent.startDate === '') {
-    alert('A regisztráció lezárása előtt válassza ki a kezdő dátumot!');
+    alert('A regisztráció lezárása előtt válaszd ki a kezdő dátumot!');
     regEndDate.value = '';
     dateOfEvent.regEndDate = event.target.value;
     return;
@@ -83,8 +83,6 @@ endDate.addEventListener('change', (event) => {
   reset[0].date = ''
   eventDateState = reset;
   renderDatesOfEvent();
-
-
 })
 
 

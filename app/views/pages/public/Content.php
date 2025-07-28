@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="/public/css/content.css?v=<?php echo time() ?>" />
-
 <?php
 $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
@@ -18,44 +17,82 @@ $user = $params["user"];
 ?>
 
 
+
+
+
 <div class="container-fluid p-0 m-0">
 
 	<!-- HEADER ROW -->
-
-	<div class="row p-0 m-0">
-		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5" id="header-intro">
-			<h1 class="text-center mb-3">Volunteer Art Programs</h1>
-			<p class="text-center"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
-			<div class="btn-group">
-				<?php if (!$user) : ?>
-					<a href="/user/registration" class="btn pr-color btn text-light mx-2"><?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Problem' ?></a>
-				<?php endif ?>
-				<?php if (!empty($latestEvents)) : ?>
-
-					<a href="#latest-events" class="btn sc-color btn text-light mx-2"><?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?></a>
-				<?php endif ?>
+	<div class="row p-0 m-0 light-bg">
+		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5 hero-section" id="header-intro">
+			<div class="hero-content text-center">
+				<h1 class="hero-title mb-4">
+					<span class="text-gradient">Volunteer Art Programs</span>
+				</h1>
+				<p class="hero-description lead mb-4"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
+				<div class="d-flex flex-wrap justify-content-center gap-3">
+					<?php if (!$user) : ?>
+						<a href="/user/registration" class="btn btn-pink btn-lg px-4 py-3">
+							<i class="bi bi-person-plus me-2"></i>
+							<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Problem' ?>
+						</a>
+					<?php endif ?>
+					<?php if (!empty($latestEvents)) : ?>
+						<a href="#latest-events" class="btn btn-blue btn-lg px-4 py-3">
+							<i class="bi bi-calendar-event me-2"></i>
+							<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?>
+						</a>
+					<?php endif ?>
+				</div>
 			</div>
-
-
 		</div>
-		<div class="col-12 col-lg-5 d-flex align-items-center justify-content-center flex-column" id="header-image"></div>
+		<div class="col-12 col-lg-5 d-flex align-items-center justify-content-center flex-column hero-image" id="header-image">
+			<div class="floating-elements">
+				<div class="float-1"></div>
+				<div class="float-2"></div>
+				<div class="float-3"></div>
+			</div>
+		</div>
 	</div>
 
 	<!-- ABOUT US ROW-->
 
-	<div class="row bg-dark text-light" id="about-us">
-		<div class="col-12 d-flex align-items-center justify-content-center flex-column mt-5 mb-5 p-4" id="about-us-content">
-			<h1 class="reveal text-uppercase"> <?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?></h1>
-			<hr class="line mt-1 mb-5 reveal">
-			<p class="reveal px-1">
-				<?= CONTENT["aboutUs"]["description"][1][$lang] ?? '' ?>
-			</p>
-			<p class="reveal px-1 mt-2">
-				<?= CONTENT["aboutUs"]["description"][2][$lang] ?? '' ?>
-			</p>
-			<p class="reveal px-1 mt-2">
-				<?= CONTENT["aboutUs"]["description"][3][$lang] ?? '' ?>
-			</p>
+	<div class="row" id="about-us">
+		<div class="col-12 col-lg-6 mx-auto text-center" id="about-us-content">
+			<div class="about-us-text-container">
+				<div class="about-us-icon">
+					<i class="bi bi-heart-fill"></i>
+				</div>
+				<h2 class="about-us-title reveal">
+					<?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?>
+				</h2>
+				<div class="about-us-divider reveal"></div>
+				<div class="about-us-description">
+					<p class="reveal about-us-paragraph">
+						<?= CONTENT["aboutUs"]["description"][1][$lang] ?? '' ?>
+					</p>
+					<p class="reveal about-us-paragraph">
+						<?= CONTENT["aboutUs"]["description"][2][$lang] ?? '' ?>
+					</p>
+					<p class="reveal about-us-paragraph">
+						<?= CONTENT["aboutUs"]["description"][3][$lang] ?? '' ?>
+					</p>
+				</div>
+				<div class="about-us-stats reveal">
+					<div class="stat-item">
+						<div class="stat-number">500+</div>
+						<div class="stat-label">Önkéntesek</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-number">50+</div>
+						<div class="stat-label">Események</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-number">5+</div>
+						<div class="stat-label">Év tapasztalat</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -68,10 +105,27 @@ $user = $params["user"];
 
 	<div class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center" id="recommendation">
 		<div class="col-12 col-lg-7 reveal py-5 text-center text-lg-start" id="recommendation-content">
-			<h1 class="text-light mb-1 text-uppercase px-lg-5"><?= CONTENT["recommendation"]["title"][$lang] ?? 'HIBA' ?></h1>
-			<p class="text-light text-start px-3 px-lg-5 mt-4">
-				<?= CONTENT["recommendation"]["content"][$lang] ?? 'HIBA' ?>
-			</p>
+			<div class="recommendation-text-wrapper">
+				<!-- <div class="recommendation-badge">
+					<i class="bi bi-star-fill me-2"></i>
+					<span>Ajánlás</span>
+				</div> -->
+				<h1 class="recommendation-title text-light mb-4 text-uppercase">
+					<?= CONTENT["recommendation"]["title"][$lang] ?? 'HIBA' ?>
+				</h1>
+				<div class="recommendation-quote">
+					<div class="quote-icon">
+						<i class="bi bi-quote"></i>
+					</div>
+					<p class="recommendation-text text-light">
+						<?= CONTENT["recommendation"]["content"][$lang] ?? 'HIBA' ?>
+					</p>
+					<div class="quote-author">
+						<div class="author-line"></div>
+						<span class="author-name">Volunteer Art Programs csapata</span>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-12 col-lg-5" id="recommendation-bg"></div>
 	</div>
@@ -79,20 +133,61 @@ $user = $params["user"];
 
 	<!-- ADVANTAGES  ROW-->
 
-
 	<div class="row d-flex align-items-center justify-content-center" id="advantages">
 		<div class="col-12 col-lg-5" id="advantages-bg"></div>
 		<div class="col-12 col-lg-7 reveal d-flex justify-content-center flex-column p-4 text-center">
-			<h1 class="text-light text-uppercase text-lg-start mb-2"><?= CONTENT["advantages"]["title"][$lang] ?? 'HIBA' ?></h1>
-			<h6 class="text-light text-lg-start text-uppercase">
-				<?= CONTENT["advantages"]["content"][$lang] ?? 'HIBA' ?>
-			</h6>
-			<div class="text-start px-lg-3 mt-4 mt-lg-4">
-				<p class="text-light">&#x2022; <?= CONTENT["advantages"]["advantages"][1][$lang] ?? 'HIBA' ?></p>
-				<p class="text-light">&#x2022; <?= CONTENT["advantages"]["advantages"][2][$lang] ?? 'HIBA' ?></p>
-				<p class="text-light">&#x2022; <?= CONTENT["advantages"]["advantages"][3][$lang] ?? 'HIBA' ?></p>
-				<p class="text-light">&#x2022; <?= CONTENT["advantages"]["advantages"][4][$lang] ?? 'HIBA' ?></p>
-				<p class="text-light">&#x2022; <?= CONTENT["advantages"]["advantages"][5][$lang] ?? 'HIBA' ?></p>
+			<h1 class="advantages-title text-light text-uppercase mb-4">
+				<?= CONTENT["advantages"]["title"][$lang] ?? 'HIBA' ?>
+			</h1>
+			<div class="advantages-description">
+				<p class="advantages-intro text-light text-lg-start">
+					<?= CONTENT["advantages"]["content"][$lang] ?? 'HIBA' ?>
+				</p>
+			</div>
+			<div class="advantages-text-wrapper">
+
+				<div class="advantages-list text-start px-lg-3 mt-4">
+					<div class="advantage-item">
+						<div class="advantage-bullet">
+							<i class="bi bi-check-circle-fill"></i>
+						</div>
+						<p class="advantage-text text-light">
+							<?= CONTENT["advantages"]["advantages"][1][$lang] ?? 'HIBA' ?>
+						</p>
+					</div>
+					<div class="advantage-item">
+						<div class="advantage-bullet">
+							<i class="bi bi-check-circle-fill"></i>
+						</div>
+						<p class="advantage-text text-light">
+							<?= CONTENT["advantages"]["advantages"][2][$lang] ?? 'HIBA' ?>
+						</p>
+					</div>
+					<div class="advantage-item">
+						<div class="advantage-bullet">
+							<i class="bi bi-check-circle-fill"></i>
+						</div>
+						<p class="advantage-text text-light">
+							<?= CONTENT["advantages"]["advantages"][3][$lang] ?? 'HIBA' ?>
+						</p>
+					</div>
+					<div class="advantage-item">
+						<div class="advantage-bullet">
+							<i class="bi bi-check-circle-fill"></i>
+						</div>
+						<p class="advantage-text text-light">
+							<?= CONTENT["advantages"]["advantages"][4][$lang] ?? 'HIBA' ?>
+						</p>
+					</div>
+					<div class="advantage-item">
+						<div class="advantage-bullet">
+							<i class="bi bi-check-circle-fill"></i>
+						</div>
+						<p class="advantage-text text-light">
+							<?= CONTENT["advantages"]["advantages"][5][$lang] ?? 'HIBA' ?>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -102,26 +197,49 @@ $user = $params["user"];
 
 	<!-- VOLUNTEERS ROW -->
 
-
-	<div class="container p-0">
-		<div class="row reveal mt-5 r-border" id="volunteers">
-			<div class="col-xs-12">
-				<div id="volunteers-header" class="mb-5">
-					<h1 class="text-center mt-5 mb-4 text-uppercase"><?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?></h1>
-				</div>
-				<div class="row" id="v-cards" style="min-height: 60vh">
-					<?php foreach ($volunteers as $volunteer) : ?>
-						<div class="col-xs-12 col-sm-6 col-lg-4 mt-2">
-							<div class="card p-lg-4 volunteer-card r-border" style="width: 25rem;">
-								<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="card-img-top volunteer-profile-image"> </div>
-								<div class="card-body volunteer-card-body mt-3">
-									<p class="card-text"><i class="bi bi-quote m-2" style="font-size: 1.2rem;"></i><?= $volunteer[languageSwitcher("description")]  ?></p>
-									<hr>
-									<i><?= $volunteer["name"] ?></i>
+	<div class="volunteers-section">
+		<div class="container p-0">
+			<div class="row reveal mt-5" id="volunteers">
+				<div class="col-xs-12">
+					<div id="volunteers-header" class="mb-5">
+						<div class="volunteers-badge">
+							<i class="bi bi-people-fill me-2"></i>
+							<span>Csapatunk</span>
+						</div>
+						<h1 class="volunteers-title text-center mb-4 text-uppercase">
+							<?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?>
+						</h1>
+						<div class="volunteers-subtitle">
+							<p class="text-center text-muted">Ismerje meg az elkötelezett önkénteseinket, akik szenvedélyesen dolgoznak a művészeti programokért</p>
+						</div>
+					</div>
+					<div class="row justify-content-center" id="v-cards" style="min-height: 60vh">
+						<?php foreach ($volunteers as $volunteer) : ?>
+							<div class="col-xs-12 col-sm-6 col-lg-4 mt-3 d-flex justify-content-center">
+								<div class="volunteer-card-modern">
+									<div class="volunteer-image-container">
+										<div style="background: url(/public/assets/uploads/images/volunteers/<?= $volunteer["fileName"] ?>) center center/cover" class="volunteer-profile-image-modern"></div>
+										<div class="volunteer-overlay">
+											<div class="volunteer-quote-icon">
+												<i class="bi bi-quote"></i>
+											</div>
+										</div>
+									</div>
+									<div class="volunteer-content">
+										<div class="volunteer-quote">
+											<p class="volunteer-description">
+												<?= $volunteer[languageSwitcher("description")]  ?>
+											</p>
+										</div>
+										<div class="volunteer-author">
+											<div class="author-divider"></div>
+											<span class="volunteer-name"><?= $volunteer["name"] ?></span>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					<?php endforeach ?>
+						<?php endforeach ?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -193,7 +311,7 @@ $user = $params["user"];
 	<?php if (!empty($latestEvents)) : ?>
 		<div class="container p-0">
 			<div class="row  mt-5 text-dark d-flex align-items-center justify-content-center r-border" id="latest-events" style="min-height: 500px;">
-				<h1 class="text-center mb-5 text-uppercase"><?=CONTENT['events']['title'][$lang]?></h1>
+				<h1 class="text-center mb-5 text-uppercase"><?= CONTENT['events']['title'][$lang] ?></h1>
 				<?php foreach ($latestEvents as $event) : ?>
 					<div class="col-12">
 						<div class="card-group event-card mb-4">
@@ -232,6 +350,185 @@ $user = $params["user"];
 			</div>
 		</div>
 	<?php endif ?>
+
+	<!-- GALLERY PROMOTION SECTION -->
+	<div class="container-fluid py-5 mt-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-12 col-lg-6">
+					<div class="gallery-promo-content">
+						<h2 class="display-5 fw-bold text-dark mb-4">
+							<i class="bi bi-images text-pink me-3"></i>
+							Tekintsd meg galériánkat
+						</h2>
+						<p class="lead text-muted mb-4">
+							Fedezd fel programjaink és eseményeink legszebb pillanatait!
+							Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.
+						</p>
+						<div class="d-flex flex-wrap gap-3 mb-4">
+							<div class="feature-item d-flex align-items-center">
+								<i class="bi bi-calendar-event text-pink me-2"></i>
+								<span class="small text-muted">Esemény fotók</span>
+							</div>
+							<div class="feature-item d-flex align-items-center">
+								<i class="bi bi-people text-pink me-2"></i>
+								<span class="small text-muted">Közösségi pillanatok</span>
+							</div>
+							<div class="feature-item d-flex align-items-center">
+								<i class="bi bi-heart text-pink me-2"></i>
+								<span class="small text-muted">Inspiráló élmények</span>
+							</div>
+						</div>
+						<a href="/gallery" class="btn btn-pink btn-lg px-4 py-3 shadow-sm">
+							<i class="bi bi-collection me-2"></i>
+							Galéria megtekintése
+							<i class="bi bi-arrow-right ms-2"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-12 col-lg-6 mt-4 mt-lg-0">
+					<div class="gallery-preview position-relative">
+						<!-- Galéria előnézet grid -->
+						<div class="row g-2">
+							<div class="col-6">
+								<div class="preview-item preview-large">
+									<img src="/public/assets/uploads/images/gallery/sample1.jpg"
+										alt="Galéria előnézet"
+										class="img-fluid rounded shadow"
+										style="height: 200px; width: 100%; object-fit: cover;">
+									<div class="preview-overlay">
+										<i class="bi bi-zoom-in"></i>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="row g-2">
+									<div class="col-12">
+										<div class="preview-item">
+											<img src="/public/assets/uploads/images/gallery/sample2.jpg"
+												alt="Galéria előnézet"
+												class="img-fluid rounded shadow"
+												style="height: 95px; width: 100%; object-fit: cover;">
+											<div class="preview-overlay">
+												<i class="bi bi-zoom-in"></i>
+											</div>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="preview-item">
+											<img src="/public/assets/uploads/images/gallery/sample3.jpg"
+												alt="Galéria előnézet"
+												class="img-fluid rounded shadow"
+												style="height: 95px; width: 100%; object-fit: cover;">
+											<div class="preview-overlay">
+												<i class="bi bi-zoom-in"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- "Több kép" overlay -->
+						<div class="more-images-overlay position-absolute top-0 end-0 m-3">
+							<span class="badge bg-dark bg-opacity-75 px-3 py-2">
+								<i class="bi bi-plus-circle me-1"></i>
+								+100 kép
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		/* Rózsaszín színek definiálása */
+		.text-pink {
+			color: #e91e63 !important;
+		}
+
+		.btn-pink {
+			background-color: #e91e63;
+			border-color: #e91e63;
+			color: white;
+			transition: all 0.3s ease;
+		}
+
+		.btn-pink:hover {
+			background-color: #c2185b;
+			border-color: #c2185b;
+			color: white;
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+		}
+
+		.btn-pink:active,
+		.btn-pink:focus {
+			background-color: #ad1457;
+			border-color: #ad1457;
+			color: white;
+			box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25);
+		}
+
+		.gallery-promo-content {
+			padding: 2rem 0;
+		}
+
+		.preview-item {
+			position: relative;
+			overflow: hidden;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: transform 0.3s ease;
+		}
+
+		.preview-item:hover {
+			transform: scale(1.05);
+		}
+
+		.preview-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(233, 30, 99, 0.8);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+			color: white;
+			font-size: 1.5rem;
+		}
+
+		.preview-item:hover .preview-overlay {
+			opacity: 1;
+		}
+
+		.feature-item {
+			background: rgba(255, 255, 255, 0.8);
+			padding: 0.5rem 1rem;
+			border-radius: 20px;
+			border: 1px solid rgba(233, 30, 99, 0.2);
+		}
+
+		.more-images-overlay {
+			z-index: 2;
+		}
+
+		@media (max-width: 768px) {
+			.gallery-promo-content {
+				text-align: center;
+				padding: 1rem 0;
+			}
+
+			.feature-item {
+				font-size: 0.875rem;
+			}
+		}
+	</style>
 
 
 
@@ -323,7 +620,6 @@ $user = $params["user"];
 
 </div>
 
-<?php include './app/views/includes/Footer.php' ?>
 
 
 

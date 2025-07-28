@@ -1,0 +1,264 @@
+.line {
+  width: 50%;
+  margin: 0 auto
+}
+
+
+@media(max-width: 1200px) {
+  #secondary-header-nav {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+
+  #secondary-header-list .nav-link {
+    width: 100% !important;
+  }
+
+}
+
+.char {
+  transform: translateY(315px);
+  transition: transform .5s;
+}
+
+
+
+
+#secondary-header-nav #secondary-header-list .nav-link {
+  width: 50%;
+  margin: 0 auto;
+  color: var(--pr-color);
+  border: 1px solid var(--pr-color);
+  border-radius: 7px;
+  margin: 0 auto;
+  transition: all .4s ease-in-out;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+#secondary-header-nav #secondary-header-list .nav-link:hover {
+  color: white;
+  background-color: var(--pr-color);
+}
+
+.registration-btn {
+  background-color: var(--sc-color);
+  border: none;
+  text-align: center;
+}
+
+
+
+
+
+
+@media(min-width: 1200px) {
+  #header h1 {
+    font-size: 3rem;
+  }
+}
+
+#header-intro {
+  min-height: 100vh;
+  position: relative;
+}
+
+#header-image {
+  background: url('/public/assets/images/vap.max.hu_about-us-01-01.jpg') center center/cover;
+  filter: grayscale(100);
+  transition: all .4s ease-in-out;
+}
+
+#header-image:hover {
+  filter: grayscale(0);
+}
+
+#header-nav {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+#go-down {
+  font-size: 2rem;
+  color: black;
+}
+
+
+#header-intro h1 {
+  font-size: 4rem;
+}
+
+#recommendation {
+  min-height: 30vh;
+  background-color: var(--pr-color);
+}
+
+#recommendation-bg {
+  background: url("/public/assets/images/vap.max.hu_about-us-02-01.jpg") center center/cover;
+  min-height: 500px;
+}
+
+
+@media(min-width: 1800px) {
+  #recommendation-content .rec-text {
+    position: relative;
+    left: 50%;
+    transform: translate(-25%);
+  }
+}
+
+#advantages {
+  min-height: 30vh;
+  background-color: var(--sc-color);
+}
+
+#advantages-bg {
+  background: url("/public/assets/images/Önkéntes fotó_AMB2021_VIP reg_2.jpg") center center/cover;
+  min-height: 500px;
+}
+
+
+.list-component {
+  border-radius: 15px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.list-component .list-group-item {
+  border: none !important;
+}
+
+
+
+
+
+
+
+/* EVENT SECTION   */
+
+#event-card {
+  transition: all .4s ease-in-out;
+}
+
+#event-card:hover {
+  transform: scale(1.02);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ABOUT ME SECTION */
+
+#about-us {
+  min-height: 50vh;
+  width: 100;
+}
+
+@media(min-width: 1024px) {
+  #about-me-dc {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  #about-us-content {
+    width: 65%;
+    margin: 0 auto;
+  }
+}
+
+
+
+#volunteers-header {
+  width: 75%;
+  margin: 0 auto;
+}
+
+
+
+.volunteer-card {
+  border: none !important;
+  min-height: 500px;
+}
+
+.volunteer-profile-image {
+  height: 140px;
+  width: 140px;
+  border-radius: 100%;
+  ;
+  margin: 0 auto;
+  transition: all .4s ease-in-out;
+}
+
+.volunteer-card:hover .volunteer-profile-image {
+  transform: scale(1.020);
+
+
+}
+
+
+
+
+
+#faq-image {
+  background: url("/public/assets/images/header.jpg") center center/cover;
+}
+
+
+li {
+  list-style-type: none;
+}
+
+#recommend {
+  min-height: 50vh
+}
+
+#parallax-wrapper {
+  height: 70vh;
+  position: relative;
+}
+
+#parallax-filter {
+  height: 70vh;
+  width: 100%;
+  background-color: rgba(0, 168, 157, 0.30);
+  position: absolute;
+  top: 0;
+}
+
+#parallax {
+  height: 100%;
+  width: 100%;
+  background: url("/public/assets/images/parallax.jpg") center center/cover;
+  object-fit: cover;
+  background-attachment: fixed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#footer {
+  min-height: 40vh;
+}

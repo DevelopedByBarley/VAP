@@ -26,7 +26,6 @@ class SubscriptionsController
     $this->userModel = new UserModel();
     $this->subModel = new Subscription_Model();
     $this->eventModel = new EventModel();
-
   }
 
 
@@ -68,11 +67,11 @@ class SubscriptionsController
   }
 
 
-  // EZT át is kell nevezni sub
   public function deleteSubscription($vars)
   {
     LoginChecker::checkUserIsLoggedInOrRedirect("userId", "/login");
-    $this->subModel->deleteSubscription($vars["id"]);
+    $user = (int)$_SESSION['userId'] ?? null;
+    $this->subModel->deleteSubscription($user, (int)$vars["id"]);
   }
 
   /** PUBLIC */

@@ -2,7 +2,7 @@
 
 define('EVENT', [
   "scrollDown" => [
-    "Hu" => "Görgessen tovább a részletekért és a jelentkezésért",
+    "Hu" => "Görgess tovább a részletekért és a jelentkezésért",
     "En" => "Scroll down for more details and to apply",
     "Sp" => ""
   ],
@@ -13,7 +13,7 @@ define('EVENT', [
       "Sp" => ""
     ],
     "description" => [
-      "Hu" => "Válassza ki jelentkezésnél hogy mely feladatkörök érdeklik önt a legjobban!",
+      "Hu" => "Válaszd ki jelentkezésnél hogy mely feladatkörök érdeklik önt a legjobban!",
       "En" => "Choose your preferred roles when registering, indicating which tasks interest you the most",
       "Sp" => ""
     ]
@@ -25,7 +25,7 @@ define('EVENT', [
       "Sp" => ""
     ],
     "description" => [
-      "Hu" => "Tekintse meg az eseményhez kapcsolódó online felületeinket további információkért!",
+      "Hu" => "Tekintsd meg az eseményhez kapcsolódó online felületeinket további információkért!",
       "En" => "Check out our online resources related to the event for more information!",
       "Sp" => ""
     ]
@@ -83,7 +83,7 @@ define('EVENT', [
       "Sp" => ""
     ],
     "desc" => [
-      "Hu" => "Önkéntes profil regisztráció után lehetősege nyílik arra hogy értesítést kapjon következő eseményinkről, kezelheti és módosíthatja adatait, és egy kattintással regisztrálhat bármelyik leendő eseményünkre!",
+      "Hu" => "Önkéntes profil regisztráció után lehetőseged nyílik arra hogy értesítést kapj következő eseményinkről, kezelheted és módosíthatod adataid, és egy kattintással regisztrálhatsz bármelyik leendő eseményünkre!",
       "En" => "After registering a volunteer profile, it is possible to receive notifications about the next event and change your data, and you can register for all our future events with one click!",
       "Sp" => ""
     ],

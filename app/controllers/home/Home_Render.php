@@ -1,12 +1,15 @@
 
 <?php
+require_once 'app/models/Gallery_Model.php';
+
 class HomeRender extends HomeController
 {
-
+	protected $galleryModel;
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->galleryModel = new Gallery_Model();
 	}
 
 
@@ -95,12 +98,14 @@ class HomeRender extends HomeController
 
 		$links = $this->linkModel->index();
 		$events = $this->eventModel->getLatestEvents();
+		$galleryImages = $this->galleryModel->getAllGalleryImages();
 		$this->eventModel->setEventsPrivateIfExpired();
 
 
 
 
 		echo $this->renderer->render("Layout.php", [
+			"documents" => $documents ?? null,
 			"title" => getStringByLang("Kezdőlap", "Home", ""),
 			"content" => $this->renderer->render("/pages/public/Content.php", [
 				"user" => $user ?? null,
@@ -110,7 +115,8 @@ class HomeRender extends HomeController
 				"documents" => $documents ?? null,
 				"links" => $links ?? null,
 				"latestEvents" => $events ?? null,
-				"questions" => $questions ?? null
+				"questions" => $questions ?? null,
+				"galleryImages" => $galleryImages ?? null
 			]),
 			"user" => $user ?? null,
 		]);

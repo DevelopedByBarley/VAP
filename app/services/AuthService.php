@@ -77,22 +77,22 @@ class AuthService
         $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
         $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
+        
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
+        
+        
         if (!$user || count($user) === 0) {
             $this->alert->set("Hibás email vagy jelszó",  "Email or password is wrong", null, "danger", "/login");
         }
-
+        
         $isVerified = password_verify($pw, $user["password"]);
-
         if (!$isVerified) {
             $this->alert->set("Hibás email vagy jelszó", "Email or password is wrong", null, "danger", "/login");
         }
-
+        
         if ((int)$user["isActivated"] !== 1) {
             $this->alert->set("Hibás email vagy jelszó", "Email or password is wrong", null, "danger", "/login");
         }

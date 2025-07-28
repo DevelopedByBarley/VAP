@@ -30,7 +30,7 @@ let langState = localStorage.getItem('langs') !== null ? JSON.parse(localStorage
 
 let basicLangsOfUserLanguages = {
   selectLevel: {
-    Hu: "Válassza ki a nyelvtudás szintjét!",
+    Hu: "Válaszd ki a nyelvtudás szintjét!",
     En: "Choose your language level!",
     Sp: ""
   },

@@ -7,7 +7,7 @@ define('CONTENT', [
       "En" => "Volunteering in Art Programs is a platform where if you are interested in the visual arts, you can volunteer for multiple art projects and events with a single registration."
     ],
     "reg_volunteer_btn" => [
-      "Hu" => "Regisztráljon önkéntesnek",
+      "Hu" => "Regisztrálj önkéntesnek",
       "En" => "Volunteer registration",
       "Sp" => ""
     ],
@@ -40,10 +40,7 @@ define('CONTENT', [
         "Sp" => ""
       ],
       2 => [
-        "En" => "Our goal is to create a unique online platform in Hungary in the cultural sphere, 
-        specifically in the field of visual arts, through which we provide opportunities for art enthusiasts
-         of all ages to glimpse into and become part of the cultural, 
-        mainly contemporary visual arts community",
+        "En" => "We consider it an important mission to provide young people (especially those in the area of culture and academic studies) with the opportunity to participate in a variety of artistic events (festivals, exhibitions, fairs, etc.) and to be active in the arts. ), through internships or voluntary work, to get involved in preparatory, organisational and administrative tasks, thus discovering which field or type of institution is best suited to them, helping them to find their way around so that when they enter the labour market, with practical skills behind them, they can choose their career with confidence.",
 
         "Hu" => "Fontos küldetésünknek tartjuk, hogy azoknak a fiataloknak, 
         akik művészeti tanulmányaikat folytatják (elsősorban a felsőoktatásban) 
@@ -99,34 +96,34 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "content" => [
-      "Hu" => "Eseményenként (kiállítás, vásár, fesztivál, galériában gyakornok) változnak a meghirdetett önkéntes pozíciók és feladatok, minden rendezvény előtt részletes leírást küldünk.",
+      "Hu" => "Eseményenként (kiállítás, vásár, fesztivál, galériában gyakornok) változnak a meghirdetett önkéntes pozíciók és feladatok, minden rendezvény előtt részletes leírást küldünk emailben.",
       "En" => "The volunteer positions and tasks will vary from event to event (exhibition, fair, festival, gallery intern), and a detailed description will be sent before each event. A few typical examples.",
       "Sp" => ""
     ],
     "advantages" => [
       1 => [
-        "Hu" => "<b><u>Előkészítési feladatokban segítségnyújtás</u></b>: kiállításépítés; csomag összeállítás; helyszínekre szóróanyag kivitel.",
-        "En" => "<b><u>Assisting in preparation tasks</u></b>: exhibition set-up; package assembly; distribution of promotional material to the venues. ",
+        "Hu" => "<b>Előkészítési feladatokban segítségnyújtás</u></b>: kiállításépítés; csomag összeállítás; helyszínekre szóróanyag kivitel.",
+        "En" => "<b>Assisting in preparation tasks</u></b>: exhibition set-up; package assembly; distribution of promotional material to the venues. ",
         "Sp" => ""
       ],
       2 => [
-        "Hu" => "<b><u>Rendezvényszervező asszisztens</u></b>: eseményeken ez előkészületekben részvétel, pl. helyszín dekoráció; vendégfogadás, regisztráció; ruhatár üzemeltetés; ",
-        "En" => "<b><u>Assistant event organiser</u></b>: assisting with preparations for events, e.g. venue decoration, reception, registration, cloakroom management;",
+        "Hu" => "<b>Rendezvényszervező asszisztens</u></b>: eseményeken ez előkészületekben részvétel, pl. helyszín dekoráció; vendégfogadás, regisztráció; ruhatár üzemeltetés; ",
+        "En" => "<b>Assistant event organiser</u></b>: assisting with preparations for events, e.g. venue decoration, reception, registration, cloakroom management;",
         "Sp" => ""
       ],
       3 => [
-        "Hu" => "<b><u>Programkoordinátor, túra kísérő önkéntes</u></b>: vendégek fogadása, regisztrációja és végig kísérése az útvonalon",
-        "En" => "<b><u>Programme coordinator</u></b>: tour guide volunteer: welcome guests, register them and escort them on the tour.",
+        "Hu" => "<b>Programkoordinátor, túra kísérő önkéntes</u></b>: vendégek fogadása, regisztrációja és végig kísérése az útvonalon",
+        "En" => "<b>Programme coordinator</u></b>: tour guide volunteer: welcome guests, register them and escort them on the tour.",
         "Sp" => ""
       ],
       4 => [
-        "Hu" => "<b><u>Kommunikációs feladatokban való részvételt</u></b>: PR szövegek átnézése, közösségi felületek kezelése, posztolás, rövid szöveg megírása",
-        "En" => "<b><u>Take part in communication tasks</u></b>: reviewing PR texts, managing social media, posting, writing short texts",
+        "Hu" => "<b>Kommunikációs feladatokban való részvételt</u></b>: PR szövegek átnézése, közösségi felületek kezelése, posztolás, rövid szöveg megírása",
+        "En" => "<b>Take part in communication tasks</u></b>: reviewing PR texts, managing social media, posting, writing short texts",
         "Sp" => ""
       ],
       5 => [
-        "Hu" => "<b><u>Kiállítás felügyelet</u></b>",
-        "En" => "<b><u>Exhibition supervision</u></b>",
+        "Hu" => "<b>Kiállítás felügyelet</u></b>",
+        "En" => "<b>Exhibition supervision</u></b>",
         "Sp" => ""
       ],
     ]

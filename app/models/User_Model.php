@@ -92,7 +92,12 @@ class UserModel
     $fileName = $this->fileSaver->saver($files["file"], "/uploads/images/users", null, [
       'image/png',
       'image/jpeg',
+      'image/jpg',
     ]);
+
+
+
+
 
     if (!$fileName) {
       self::setPrevContent();
@@ -103,14 +108,12 @@ class UserModel
     $documentName = $this->fileSaver->saver($files["documents"], "/uploads/documents/users", null, null);
 
 
-    
+
 
     if (in_array(false, $documentName)) {
       self::setPrevContent();
       $this->fileSaver->deleteDeclinedFiles($documentName);
       unlink("./public/assets/uploads/images/users/$fileName");
-
-
       $this->alert->set("Feltöltött dokumentum file típus elutasítva", "Uploaded document file type rejected", null, "danger", "/user/registration");
     }
 
@@ -176,10 +179,20 @@ class UserModel
       $body = str_replace('{{url}}', CURRENT_URL, $body);
 
 
-      $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
+      $notify_body = file_get_contents("./app/views/templates/user_registration/NotifyMailTemplate.php");
+      $notify_body = str_replace('{{name}}', $name, $notify_body);
+      $notify_body = str_replace('{{id}}', $lastInsertedId, $notify_body);
+      $notify_body = str_replace('{{email}}', $email, $notify_body);
+
+
+
 
       if (isset($_SESSION["prevRegContent"])) unset($_SESSION["prevRegContent"]);
 
+      $this->mailer->send($email, $body, $lang === "Hu" ? "Profil regisztráció" : "Profile registration");
+      $this->mailer->send('arpadsz@max.hu', $notify_body, "Új profil regisztráció");
+      $this->mailer->send('hello@artnesz.hu', $notify_body, "Új profil regisztráció");
+      
       $this->alert->set("Sikeres regisztráció! Az ön e-mail címére visszaigazoló e-mailt küldtünk!", "Successful registration! We have sent a confirmation email to your email address!", null, "success", "/login");
     }
   }

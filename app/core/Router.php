@@ -12,6 +12,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     require_once 'app/routes/protected/admin/link_routes.php';
     require_once 'app/routes/protected/admin/event_routes.php';
     require_once 'app/routes/protected/admin/subscription_routes.php';
+    require_once 'app/routes/protected/admin/gallery_routes.php';
 
 
     require_once 'app/routes/protected/user/user_routes.php';

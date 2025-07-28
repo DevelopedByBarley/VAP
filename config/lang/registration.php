@@ -227,8 +227,8 @@ define('REGISTRATION', [
       "Sp" => ""
     ],
     2  => [
-      "En" => "After registration and logging in with the provided information, you can sign up for events (we will come up with something meaningful for this).",
-      "Hu" => "Regisztrációt követően és a megadott adatokkal való bejelentkezés után az eseményekre lehet jelentkezni (Erre majd valami értelmeset kitalálunk).",
+      "En" => "You can apply for the events after registration and after logging in with the recommended data. After registration and after logging in to confirm it, you can apply for the individual events (remember, until you choose an event, we will not assign you to a volunteer task.)",
+      "Hu" => "A regisztrációt és az azt megerősítő bejelentkezést követően tudsz az egyes eseményekre jelentkezni (ne felejtsd el, ameddig nem választasz eseményt, addig önkéntes feladatra nem osztunk be).",
       "Sp" => ""
     ],
   ],

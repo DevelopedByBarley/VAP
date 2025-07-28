@@ -15,6 +15,11 @@ define("NAVBAR", [
     "Hu" => "Eseményeink",
     "Sp" => ""
   ],
+  "gallery" => [
+    "En" => "Gallery",
+    "Hu" => "Galéria",
+    "Sp" => ""
+  ],
   "partners" => [
     "En" => "Partners",
     "Hu" => "Partnereink  ",

@@ -8,6 +8,7 @@ $r->addRoute('GET', '/admin/registrations', [AdminRender::class, 'registrations'
 $r->addRoute('GET', '/admin/user/{id}', [AdminRender::class, 'profile']); 
 $r->addRoute('GET', '/admin/user/mail/{id}', [AdminRender::class, 'userMailPage']);
 $r->addRoute('GET', '/admin/patch-notes', [AdminRender::class, 'patchNotes']);
+$r->addRoute('GET', '/admin/export-all', [UserRender::class, 'exportAll']);
 
 
 

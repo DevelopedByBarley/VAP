@@ -1,0 +1,106 @@
+
+
+
+input {
+  border-radius: 0 !important;
+  border-radius: none !important;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--pr-font);
+  font-weight: bolder;
+}
+
+p {
+  font-family: var(--sc-font);
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.r-border {
+  border-radius: 15px;
+}
+
+
+.shadow {
+  box-shadow: var(--shadow);
+}
+
+
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all .8s ease-in-out;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.sc-color {
+  background-color: var(--sc-color);
+}
+.sc-color-tr {
+  background-color: var(--sc-color-tr);
+}
+
+.pr-color {
+  background-color: var(--pr-color);
+}
+
+.primary-btn {
+  border-radius: 0px !important;
+  background-color: var(--pr-color);
+  color: white;
+  padding: .7rem;
+}
+.primary-btn:hover {
+  border-radius: 0px !important;
+  background-color: var(--pr-color-hover);
+  color: white;
+  padding: .7rem;
+}
+
+
+.secondary-btn {
+  border-radius: 0px !important;
+  background-color: var(--sc-color);
+  color: white;
+  padding: .7rem;
+}
+
+.secondary-btn:hover {
+  background-color: var(--sc-color-hover);
+  color: white;
+}
+
+.mt-b {
+  margin-top: 93px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

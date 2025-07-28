@@ -26,8 +26,9 @@ class AdminRender extends AdminController
   }
 
 
-  public function patchNotes() {
-		LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
+  public function patchNotes()
+  {
+    LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $usersData = $this->adminModel->dashboarData();
 
@@ -39,9 +40,10 @@ class AdminRender extends AdminController
       ]),
       "admin" => $admin ?? null
     ]);
-	}
+  }
 
-  public function adminDashboard() {
+  public function adminDashboard()
+  {
     LoginChecker::checkUserIsLoggedInOrRedirect("adminId", "/admin");
     $admin = $this->adminModel->admin();
     $usersData = $this->adminModel->dashboarData();
@@ -115,4 +117,5 @@ class AdminRender extends AdminController
       "admin" => $admin ?? null
     ]);
   }
+
 }

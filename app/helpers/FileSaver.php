@@ -56,35 +56,26 @@ class FileSaver
 
   private function save($file, $path, $whiteList, $prevImages)
   {
-      // MIME típus meghatározása a `finfo_open` használatával
-      $finfo = finfo_open(FILEINFO_MIME_TYPE);
-      $fileType = finfo_file($finfo, $file["tmp_name"]);
-      finfo_close($finfo);
-  
-      // MIME típus ellenőrzése
-      if (!in_array($fileType, $whiteList)) {
-          return false;
-          exit;
-      }
-  
-      // Egyedi fájlnév generálása
-      $rand = uniqid(rand(), true);
-      $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-      $originalFileName =  $rand . '.' . $ext;
-      $directoryPath = "./public/assets/$path/";
-  
-      // Fájl feltöltése a megadott útvonalra
-      $destination = $directoryPath . $originalFileName;
-      move_uploaded_file($file["tmp_name"], $destination);
-  
-      // Korábbi képek törlése, ha szükséges
-      $this->unlinkPrevImages($prevImages, $path);
-  
-      // Cookie törlése
-      setcookie("prevContent", "", time() - 1, "/");  
-      return $originalFileName;
+    $fileType = mime_content_type($file["tmp_name"]);
+
+    if (!in_array($fileType, $whiteList)) {
+      return false;
+      exit;
+    }
+
+    $rand = uniqid(rand(), true);
+    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $originalFileName =  $rand . '.' . $ext;
+    $directoryPath = "./public/assets/$path/";
+    
+    $destination = $directoryPath . $originalFileName;
+    move_uploaded_file($file["tmp_name"], $destination);
+    
+    $this->unlinkPrevImages($prevImages, $path);
+    
+    setcookie("prevContent", "", time() - 1, "/");  
+    return $originalFileName;
   }
-  
 
   private function unlinkPrevImages($prevImages, $path)
   {

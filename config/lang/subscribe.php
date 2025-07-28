@@ -15,12 +15,12 @@
     "Sp" => ""
   ],
   "choose_time" => [
-    "Hu" => "Válassza ki az önnek megfelelő időpontot",
+    "Hu" => "Válaszd ki a számodra megfelelő időpontot",
     "En" => "Choose the time that suits you best.",
     "Sp" => ""
   ],
   "choose_task" => [
-    "Hu" => "Válassza ki az ön számára megfelelő feladatokat",
+    "Hu" => "Válaszd ki a számodra megfelelő feladatokat",
     "En" => "Select tasks that are suitable for you.",
     "Sp" => ""
   ],

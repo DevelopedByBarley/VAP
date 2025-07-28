@@ -34,7 +34,7 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
                   </div>
 
                   <div class="text-center pt-1 mb-2 pb-1">
-                    <button type="submit" class="btn secondary-btn"><?= LOGIN["loginBtn"][$lang] ?? 'HIBA' ?></button>
+                    <button type="submit" class="btn primary-btn"><?= LOGIN["loginBtn"][$lang] ?? 'HIBA' ?></button>
                     <p class="mt-3"><?= LOGIN["forgot"][$lang] ?? 'HIBA' ?></p>
                   </div>
 

@@ -206,6 +206,13 @@ class EventModel
   }
 
 
+  public function all() {
+    $stmt = $this->pdo->prepare("SELECT * FROM events");
+    $stmt->execute();
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $events;
+  }
 
 
 

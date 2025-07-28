@@ -30,6 +30,7 @@ class Subscription_Model
   // USER REGISTER TO EVENT
   public function subscribe($eventId, $body, $files, $user)
   {
+
     $languages = $body["langs"] ?? [];
     $levels = $body["levels"] ?? [];
     $tasks = $body["tasks"] ?? null;
@@ -72,10 +73,6 @@ class Subscription_Model
         );
       }
 
-
-
-
-
       $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
       VALUES 
       (NULL, :registrationId, :name, :email, :address , :mobile, :profession, :schoolName, :otherLanguages, :participation, :informedBy, :permission, :lang, :isAccepted ,:fileName, :userRefId, :eventRefId);");
@@ -116,7 +113,7 @@ class Subscription_Model
       $body = str_replace('{{name}}', $user["name"], $body);
       $body = str_replace('{{email}}', $user["email"], $body);
       $body = str_replace('{{address}}', $user["address"], $body);
-      $body = str_replace('{{mobile}}', $user["email"], $body);
+      $body = str_replace('{{mobile}}', $user["mobile"], $body);
       $body = str_replace('{{dates}}', implode(", ", $dates), $body);
       $body = str_replace('{{event_name}}', $event["nameIn" . $user["lang"]], $body);
       $body = str_replace('{{start_date}}', $event["date"], $body);
@@ -264,9 +261,14 @@ class Subscription_Model
   public function deleteSubscriptionFromMailUrl($id)
   {
 
+    filter_var($id, FILTER_SANITIZE_SPECIAL_CHARS); // NEM VOLT FILTER VAR HASZNÁLVA!
+
+    if (!preg_match('/^[0-9a-fA-F\-]{36}$/', $id)) {  // ------------------------------------ EZ SEM VOLT ITT IDÁIG!
+      $this->alert->set("Invalid id formátum!", "Invalid id format!", null, "danger", "/");
+    }
 
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.registrationId = :id");
-    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    $stmt->bindParam(":id", $id, PDO::PARAM_STR); //------------------------------------------- Itt véletlenül PARAM_INT volt, ezért ha jó volt az id ha nem akkor talált embert ami probléma!
     $stmt->execute();
     $sub = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -276,23 +278,20 @@ class Subscription_Model
     $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-    if (!$sub) {
+    if (!$sub['id']) {
       $this->alert->set("Ilyen regisztráció nem létezik!", "Registratinon doesn't exist!", null, "danger", "/");
     };
 
     self::checkIsEventRegistrationExpired(array($sub), 7);
 
-
-    
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `registrationId` = :id");
-    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":id", $id, PDO::PARAM_STR); // --------------- ------------------ ITT NEM VOLT PARAM_STR meghatározva
     $stmt->execute();
 
-
+    // DELETE DOCUMENTS
     foreach ($documents as $document) {
       unlink("./public/assets/uploads/documents/users/" . $document["name"]);
     }
-
 
     $this->alert->set("Esemény regisztráció sikeresen törölve!", "Event subscription deleted succesfully!", null, "success", "/");
   }
@@ -362,25 +361,68 @@ class Subscription_Model
 
 
 
-
-  // USER DELETE SELF FROM EVENT
-  public function deleteSubscription($eventId)
+  // USER DELETE SELF FROM EVENT ----------------------------- ITT VALAMI NAGY GOND VAN
+/*     public function deleteSubscription($user, $eventId)
   {
+
+    // Szedjük ki azt a regisztrációt, ami userRefId-ja a user
+    $userId = filter_var($user, FILTER_SANITIZE_NUMBER_INT); // Itt user id nem volt
+    filter_var($eventId, FILTER_SANITIZE_NUMBER_INT); // NEM VOLT FILTER VAR HASZNÁLVA!
+
     $stmt = $this->pdo->prepare("SELECT * FROM `registrations` INNER JOIN events ON registrations.eventRefId = events.eventId WHERE registrations.eventRefId = :eventRefId");
 
     $stmt->bindParam(":eventRefId", $eventId, PDO::PARAM_INT);
     $stmt->execute();
-    $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sub = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    var_dump($sub);
 
+    
     $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `eventRefId` = :eventId");
     $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
     $stmt->execute();
 
-    self::checkIsEventRegistrationExpired($subs, 6);
+
+    self::checkIsEventRegistrationExpired(array($sub), 6);
 
 
     header("Location: /user/dashboard");
+  } */
+
+
+  public function deleteSubscription($user, $eventId)
+  {
+
+
+    try {
+      // Szedjük ki azt a regisztrációt, ami userRefId-ja a user id-ja és az eventRefId-ja az eventId-ja
+      $userId = filter_var($user, FILTER_SANITIZE_NUMBER_INT); // Itt user id nem volt
+      filter_var($eventId, FILTER_SANITIZE_NUMBER_INT); // NEM VOLT FILTER VAR HASZNÁLVA!
+  
+      $stmt = $this->pdo->prepare("SELECT * FROM `registrations`  WHERE `userRefId` = :userId AND `eventRefId` = :eventId");
+      $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
+      $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
+      $stmt->execute();
+      $sub = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+      if (!$sub) {
+        $this->alert->set('Ilyen regisztráció nem létezik!', 'This registration is doesnt exist!', 'Eseményre való regisztráció elfogadva!', "danger", "/user/dashboard");
+      }
+  
+      $stmt = $this->pdo->prepare("DELETE FROM `registrations` WHERE `userRefId` = :userId AND `eventRefId` = :eventId");
+      $stmt->bindParam(":userId", $userId, PDO::PARAM_INT);
+      $stmt->bindParam(":eventId", $eventId, PDO::PARAM_INT);
+      $stmt->execute();
+  
+  
+      self::checkIsEventRegistrationExpired(array($sub), 6);
+  
+  
+      $this->alert->set("Az eseményről való regisztrációd törlése sikeres volt!", "You have successfully deleted yourself from the event!", null, "success", "/user/dashboard");
+    } catch (Exception $e) {
+      throw New Error($e);
+      exit;
+    }
   }
 
 
@@ -592,6 +634,8 @@ class Subscription_Model
   {
     $now = date('Y-m-d');
 
+
+
     switch ($state) {
       case 1:
         $state = "Frissítette a profilját!"; // DONE
@@ -623,6 +667,7 @@ class Subscription_Model
     }
 
 
+
     foreach ($subs as $sub) {
       if ($sub["reg_end_date"] <= $now) {
         $body = "
@@ -640,8 +685,9 @@ class Subscription_Model
           <b>" .  $sub["nameInHu"]  . " </b> eseményt!.
          </p>
           </div>";
-        $this->mailer->send("developedbybarley@gmail.com", $body, "Tájékoztatás");
-        $this->mailer->send("hello@artnesz.hu", $body, "Tájékoztatás");
+        $this->mailer->send("arpadsz@max.hu", $body, "Tájékoztatás");
+
+        //$this->mailer->send("hello@artnesz.hu", $body, "Tájékoztatás");  ------------------------------------ Állítsuk vissza majd az emailjüket!
       }
     }
   }

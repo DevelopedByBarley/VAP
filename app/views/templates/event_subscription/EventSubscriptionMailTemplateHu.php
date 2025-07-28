@@ -31,7 +31,7 @@
         </div>
 
         <p>
-          <b> Kérjük ellenőrizd le, hogy az email címét jól adtál meg, mert a további információt arra küldjük!</b>
+          <b>Kérjük ellenőrizd le, hogy ezen az email címen szeretnél-e levelezni önkéntes témában!</b>
         </p>
         <p>Az eseményre való jelentkezést a profilodból követheted vagy törörlheted!</p>
         <p>Ha a jelentkezés profil nélkül történt akkor a lemondás a következő linken lehetséges
