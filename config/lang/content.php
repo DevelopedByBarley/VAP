@@ -141,6 +141,11 @@ define('CONTENT', [
 
 
   "benefits" => [
+    "badge" => [
+      "Hu" => "Előnyök",
+      "En" => "Benefits", 
+      "Sp" => ""
+    ],
     "title" => [
       "Hu" => "Önkéntesség előnyei",
       "En" => "Benefits of volunteering",
@@ -323,6 +328,103 @@ define('CONTENT', [
     "privacy_policy" => [
       "En" => "Privacy policy",
       "Hu" => "Adatkezelési tájékoztató",
+      "Sp" => ""
+    ]
+  ],
+
+  "stats" => [
+    "volunteers" => [
+      "Hu" => "Önkéntesek",
+      "En" => "Volunteers",
+      "Sp" => ""
+    ],
+    "events" => [
+      "Hu" => "Események", 
+      "En" => "Events",
+      "Sp" => ""
+    ],
+    "experience" => [
+      "Hu" => "Év tapasztalat",
+      "En" => "Years experience", 
+      "Sp" => ""
+    ]
+  ],
+
+  "team" => [
+    "badge" => [
+      "Hu" => "Csapatunk",
+      "En" => "Our Team",
+      "Sp" => ""
+    ],
+    "description" => [
+      "Hu" => "Ismerje meg az elkötelezett önkénteseinket, akik szenvedélyesen dolgoznak a művészeti programokért",
+      "En" => "Meet our dedicated volunteers who work passionately for art programs",
+      "Sp" => ""
+    ]
+  ],
+
+  "upcoming_events" => [
+    "badge" => [
+      "Hu" => "Közelgő események",
+      "En" => "Upcoming Events",
+      "Sp" => ""
+    ],
+    "details" => [
+      "Hu" => "Részletek",
+      "En" => "Details",
+      "Sp" => ""
+    ],
+    "gallery_btn" => [
+      "Hu" => "Galéria",
+      "En" => "Gallery", 
+      "Sp" => ""
+    ]
+  ],
+
+  "gallery_section" => [
+    "title" => [
+      "Hu" => "Tekintsd meg galériánkat",
+      "En" => "Check out our gallery",
+      "Sp" => ""
+    ],
+    "description" => [
+      "Hu" => "Fedezd fel programjaink és eseményeink legszebb pillanatait! Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.",
+      "En" => "Discover the most beautiful moments of our programs and events! Browse through our photo collection and see what experiences you can have with us.",
+      "Sp" => ""
+    ],
+    "features" => [
+      "event_photos" => [
+        "Hu" => "Esemény fotók",
+        "En" => "Event photos",
+        "Sp" => ""
+      ],
+      "community_moments" => [
+        "Hu" => "Közösségi pillanatok", 
+        "En" => "Community moments",
+        "Sp" => ""
+      ],
+      "inspiring_experiences" => [
+        "Hu" => "Inspiráló élmények",
+        "En" => "Inspiring experiences",
+        "Sp" => ""
+      ]
+    ],
+    "view_gallery_btn" => [
+      "Hu" => "Galéria megtekintése",
+      "En" => "View gallery",
+      "Sp" => ""
+    ],
+    "more_images" => [
+      "Hu" => "Kép",
+      "En" => "Images",
+      "Sp" => ""
+    ]
+  ],
+
+  "modal" => [
+    "close" => [
+      "Hu" => "Bezárás",
+      "En" => "Close",
       "Sp" => ""
     ]
   ]

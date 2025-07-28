@@ -79,15 +79,15 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				<div class="about-us-stats reveal">
 					<div class="stat-item">
 						<div class="stat-number"><?= count($users) - 2 ?>+</div>
-						<div class="stat-label">Önkéntesek</div>
+						<div class="stat-label"><?= CONTENT["stats"]["volunteers"][$lang] ?? 'Önkéntesek' ?></div>
 					</div>
 					<div class="stat-item">
 						<div class="stat-number"><?= count($events) ?>+</div>
-						<div class="stat-label">Események</div>
+						<div class="stat-label"><?= CONTENT["stats"]["events"][$lang] ?? 'Események' ?></div>
 					</div>
 					<div class="stat-item">
 						<div class="stat-number">5+</div>
-						<div class="stat-label">Év tapasztalat</div>
+						<div class="stat-label"><?= CONTENT["stats"]["experience"][$lang] ?? 'Év tapasztalat' ?></div>
 					</div>
 				</div>
 			</div>
@@ -120,7 +120,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					</p>
 					<div class="quote-author">
 						<div class="author-line"></div>
-						<span class="author-name">Volunteer Art Programs csapata</span>
+						<span class="author-name"><?= CONTENT["recommendation"]["author"][$lang] ?? 'Volunteer Art Programs csapata' ?></span>
 					</div>
 				</div>
 			</div>
@@ -204,13 +204,13 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					<div id="volunteers-header" class="mb-5">
 						<div class="volunteers-badge">
 							<i class="bi bi-people-fill me-2"></i>
-							<span>Csapatunk</span>
+							<span><?= CONTENT["team"]["badge"][$lang] ?? 'Csapatunk' ?></span>
 						</div>
 						<h1 class="volunteers-title text-center mb-4 text-uppercase">
 							<?= CONTENT["volunteers"]["title"][$lang] ?? 'Önkénteseink voltak' ?>
 						</h1>
 						<div class="volunteers-subtitle">
-							<p class="text-center text-muted">Ismerje meg az elkötelezett önkénteseinket, akik szenvedélyesen dolgoznak a művészeti programokért</p>
+							<p class="text-center text-muted"><?= CONTENT["team"]["description"][$lang] ?? 'Ismerje meg az elkötelezett önkénteseinket, akik szenvedélyesen dolgoznak a művészeti programokért' ?></p>
 						</div>
 					</div>
 					<div class="row justify-content-center" id="v-cards" style="min-height: 60vh">
@@ -254,7 +254,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 			<div class="benefits-header reveal">
 				<div class="benefits-badge">
 					<i class="bi bi-star-fill"></i>
-					<span>Előnyök</span>
+					<span><?= CONTENT["benefits"]["badge"][$lang] ?? 'Előnyök' ?></span>
 				</div>
 				<h1 class="benefits-title">
 					<?= CONTENT["benefits"]["title"][$lang] ?>
@@ -334,9 +334,9 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 		<div class="events-section py-5" id="latest-events">
 			<div class="container">
 				<div class="events-header text-center mb-5 reveal">
-					<div class="events-badge mb-3">
+					<div class="partners-badge mb-3">
 						<i class="bi bi-calendar-event"></i>
-						<span>Közelgő események</span>
+						<span><?= CONTENT["upcoming_events"]["badge"][$lang] ?? 'Közelgő események' ?></span>
 					</div>
 					<h1 class="events-title text-uppercase">
 						<?= CONTENT['events']['title'][$lang] ?>
@@ -382,14 +382,14 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 												<a href="/event/<?= $event["slug"] ?>" class="event-link">
 
 													<div class="event-cta">
-														<span class="read-more">Részletek</span>
+														<span class="read-more"><?= CONTENT["upcoming_events"]["details"][$lang] ?? 'Részletek' ?></span>
 														<i class="bi bi-arrow-right"></i>
 													</div>
 												</a>
 												<a href="/gallery" class="event-link">
 
 													<div class="event-cta">
-														<span class="read-more">Galéria</span>
+														<span class="read-more"><?= CONTENT["upcoming_events"]["gallery_btn"][$lang] ?? 'Galéria' ?></span>
 														<i class="bi bi-arrow-right"></i>
 													</div>
 												</a>
@@ -415,29 +415,28 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					<div class="gallery-promo-content">
 						<h2 class="display-5 fw-bold text-dark mb-4 ">
 							<i class="bi bi-images text-pink me-3"></i>
-							Tekintsd meg galériánkat
+							<?= CONTENT["gallery_section"]["title"][$lang] ?? 'Tekintsd meg galériánkat' ?>
 						</h2>
 						<p class="lead text-muted mb-4">
-							Fedezd fel programjaink és eseményeink legszebb pillanatait!
-							Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.
+							<?= CONTENT["gallery_section"]["description"][$lang] ?? 'Fedezd fel programjaink és eseményeink legszebb pillanatait! Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.' ?>
 						</p>
 						<div class="d-flex flex-wrap gap-3 mb-4">
 							<div class="feature-item d-flex align-items-center">
 								<i class="bi bi-calendar-event text-pink me-2"></i>
-								<span class="small text-muted">Esemény fotók</span>
+								<span class="small text-muted"><?= CONTENT["gallery_section"]["features"]["event_photos"][$lang] ?? 'Esemény fotók' ?></span>
 							</div>
 							<div class="feature-item d-flex align-items-center">
 								<i class="bi bi-people text-pink me-2"></i>
-								<span class="small text-muted">Közösségi pillanatok</span>
+								<span class="small text-muted"><?= CONTENT["gallery_section"]["features"]["community_moments"][$lang] ?? 'Közösségi pillanatok' ?></span>
 							</div>
 							<div class="feature-item d-flex align-items-center">
 								<i class="bi bi-heart text-pink me-2"></i>
-								<span class="small text-muted">Inspiráló élmények</span>
+								<span class="small text-muted"><?= CONTENT["gallery_section"]["features"]["inspiring_experiences"][$lang] ?? 'Inspiráló élmények' ?></span>
 							</div>
 						</div>
 						<a href="/gallery" class="btn btn-pink btn-lg px-4 py-3 shadow-sm">
 							<i class="bi bi-collection me-2"></i>
-							Galéria megtekintése
+							<?= CONTENT["gallery_section"]["view_gallery_btn"][$lang] ?? 'Galéria megtekintése' ?>
 							<i class="bi bi-arrow-right ms-2"></i>
 						</a>
 					</div>
@@ -481,7 +480,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 						<div class="more-images-overlay position-absolute top-0 end-0 m-3">
 							<span class="badge bg-dark bg-opacity-75 px-3 py-2">
 								<i class="bi bi-plus-circle me-1"></i>
-								<?= $galleryImagesCount - 1 ?> + Kép
+								<?= $galleryImagesCount - 1 ?> + <?= CONTENT["gallery_section"]["more_images"][$lang] ?? 'Kép' ?>
 							</span>
 						</div>
 					</div>
@@ -503,8 +502,8 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 			<div class="partners-category mb-5 reveal" id="sup_partners">
 				<div class="partners-header text-center mb-5">
 					<div class="partners-badge mb-3">
-						<i class="bi bi-handshake"></i>
-						<span>Támogatók</span>
+						<i class="bi bi-people"></i>
+						<span><?= CONTENT["partners"]["sup_partners"]["badge"][$lang] ?? 'Támogatók' ?></span>
 					</div>
 					<h2 class="volunteers-title text-center mb-4 text-uppercase">
 						<?= CONTENT["partners"]["sup_partners"]["title"][$lang] ?? '' ?>
@@ -541,7 +540,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				<div class="partners-header text-center mb-5">
 					<div class="partners-badge mb-3">
 						<i class="bi bi-people"></i>
-						<span>Együttműködők</span>
+						<span><?= CONTENT["partners"]["coop_partners"]["badge"][$lang] ?? 'Együttműködők' ?></span>
 					</div>
 					<h2 class="volunteers-title text-center mb-4 text-uppercase">
 						<?= CONTENT["partners"]["coop_partners"]["title"][$lang] ?? '' ?>
