@@ -34,7 +34,7 @@ $user = $params["user"] ?? null;
                                     </a>
                                 </li>
                                 <li class="nav-item m-1 mt-3">
-                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteerss' : '#volunteers' ?>">
+                                    <a class="navigation-link" href="<?php echo $_SERVER["REQUEST_URI"] !== "/" ?  '/#volunteers' : '#volunteers' ?>">
                                         <?= NAVBAR["VoluntaryReports"][$lang] ?? 'HIBA' ?>
                                     </a>
                                 </li>
@@ -161,6 +161,9 @@ $user = $params["user"] ?? null;
                     </a>
                     <a href="/admin/volunteers" class="nav-link">
                         <li class="list-group-item bg-primary text-light">Önkénteseink voltak</li>
+                    </a>
+                    <a href="/admin/gallery" class="nav-link">
+                        <li class="list-group-item bg-primary text-light">Galéria</li>
                     </a>
                     <a href="/admin/partners" class="nav-link">
                         <li class="list-group-item bg-primary text-light">Partnerek</li>

@@ -303,10 +303,10 @@ class UserModel
     $stmt->execute();
   }
 
-  public function all() {
-    $stmt = $this->pdo->prepare("SELECT * FROM `users`");
+  public function countAll() {
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `users`");
     $stmt->execute();
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $users = $stmt->fetchColumn();
 
     return $users;
   }

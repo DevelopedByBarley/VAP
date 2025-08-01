@@ -13,7 +13,7 @@ $questions = $params["questions"];
 $events = $params["events"] ?? [];
 
 $user = $params["user"];
-$users = $params["users"] ?? [];
+$user_count = $params["user_count"] ?? [];
 $galleryImagesCount = count($params["galleryImages"] ?? 0);
 $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 ?>
@@ -23,7 +23,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 	<!-- HEADER ROW -->
 	<header class="row p-0 m-0 light-bg" itemscope itemtype="https://schema.org/Organization">
 		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5 hero-section" id="header-intro">
-			<div class="hero-content text-center">
+			<div class="hero-content text-center text-xl-start">
 				<h1 class="hero-title mb-4" itemprop="name">
 					<span class="volunteers-title">Volunteer Art Programs</span>
 				</h1>
@@ -37,7 +37,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 						</a>
 					<?php endif ?>
 					<?php if (!empty($latestEvents)) : ?>
-						<a href="#latest-events" class="btn btn-blue btn-lg px-4 py-3"
+						<a href="#latest-events" class="btn btn-blue btn-lg rounded-pill px-4 py-3"
 						   aria-label="<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'View next event' ?>">
 							<i class="bi bi-calendar-event me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?>
@@ -60,26 +60,26 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 		<div class="col-12 col-lg-6 mx-auto text-center" id="about-us-content">
 			<div class="about-us-text-container">
 				<div class="about-us-icon" aria-hidden="true">
-					<i class="bi bi-heart-fill"></i>
+					<img src="/public/assets/icons/logo.png" alt="Volunteer Art Programs Logo" style="height: 80px; width: auto;">
 				</div>
 				<h2 class="about-us-title section-title reveal" itemprop="name">
 					<?= CONTENT["aboutUs"]["title"][$lang] ?? '' ?>
 				</h2>
 				<div class="about-us-divider reveal" aria-hidden="true"></div>
 				<div class="about-us-description" itemprop="description">
-					<p class="reveal about-us-paragraph">
+					<p class="reveal about-us-paragraph fs-5 fw-normal">
 						<?= CONTENT["aboutUs"]["description"][1][$lang] ?? '' ?>
 					</p>
-					<p class="reveal about-us-paragraph">
+					<p class="reveal about-us-paragraph fs-5 fw-normal">
 						<?= CONTENT["aboutUs"]["description"][2][$lang] ?? '' ?>
 					</p>
-					<p class="reveal about-us-paragraph">
+					<p class="reveal about-us-paragraph fs-5 fw-normal">
 						<?= CONTENT["aboutUs"]["description"][3][$lang] ?? '' ?>
 					</p>
 				</div>
 				<div class="about-us-stats reveal" itemscope itemtype="https://schema.org/Organization">
 					<div class="stat-item">
-						<div class="stat-number" itemprop="numberOfEmployees"><?= count($users) - 2 ?>+</div>
+						<div class="stat-number" itemprop="numberOfEmployees"><?= $user_count - 2 ?>+</div>
 						<div class="stat-label"><?= CONTENT["stats"]["volunteers"][$lang] ?? 'Önkéntesek' ?></div>
 					</div>
 					<div class="stat-item">
@@ -109,7 +109,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					<i class="bi bi-star-fill me-2"></i>
 					<span>Ajánlás</span>
 				</div> -->
-				<h1 class="recommendation-title text-light mb-4 text-uppercase">
+				<h1 class="recommendation-title text-light text-center mb-4 text-uppercase">
 					<?= CONTENT["recommendation"]["title"][$lang] ?? 'HIBA' ?>
 				</h1>
 				<div class="recommendation-quote">
@@ -134,7 +134,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 
 	<div class="row d-flex align-items-center justify-content-center" id="advantages">
 		<div class="col-12 col-lg-10 mx-auto mt-3 text-center reveal">
-			<h1 class="advantages-title text-light text-uppercase mb-4">
+			<h1 class="advantages-title text-light text-uppercase mb-4 mt-5">
 				<?= CONTENT["advantages"]["title"][$lang] ?? 'HIBA' ?>
 			</h1>
 			<div class="advantages-description">
@@ -416,7 +416,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					<div class="gallery-promo-content">
 						<h2 class="display-5 fw-bold text-dark mb-4 ">
 							<i class="bi bi-images text-pink me-3"></i>
-							<?= CONTENT["gallery_section"]["title"][$lang] ?? 'Tekintsd meg galériánkat' ?>
+							<?= CONTENT["gallery_section"]["title"][$lang] ?? 'TEKINTSD MEG GALÉRIÁNKAT' ?>
 						</h2>
 						<p class="lead text-muted mb-4">
 							<?= CONTENT["gallery_section"]["description"][$lang] ?? 'Fedezd fel programjaink és eseményeink legszebb pillanatait! Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.' ?>

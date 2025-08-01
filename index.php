@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 
 require 'vendor/autoload.php';
 require 'config/Database.php';
+require 'app/helpers/functions.php';
 require 'app/helpers/LanguageSwitcher.php';
 require 'app/helpers/Renderer.php';
 require 'app/helpers/GetTitle.php';

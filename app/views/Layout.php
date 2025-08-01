@@ -54,6 +54,11 @@ $canonical_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "http
     <link rel="icon" type="image/x-icon" href="/public/assets/icons/logo.png">
     <link rel="apple-touch-icon" href="/public/assets/icons/logo.png">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/public/css/main.css?v=<?php echo time() ?>" />

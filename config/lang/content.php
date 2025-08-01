@@ -383,8 +383,8 @@ define('CONTENT', [
 
   "gallery_section" => [
     "title" => [
-      "Hu" => "Tekintsd meg galériánkat",
-      "En" => "Check out our gallery",
+      "Hu" => "TEKINTSD MEG GALÉRIÁNKAT",
+      "En" => "CHECK OUT OUR GALLERY",
       "Sp" => ""
     ],
     "description" => [

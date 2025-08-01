@@ -99,7 +99,7 @@ class HomeRender extends HomeController
 		$links = $this->linkModel->index();
 		$events = $this->eventModel->getLatestEvents();
 		$galleryImages = $this->galleryModel->getAllGalleryImages();
-		$users = $this->userModel->all();
+		$user_count = $this->userModel->countAll();
 		$randomGalleryImages = array_slice($galleryImages, 0, count($galleryImages) > 3 ? 3 : count($galleryImages));
 		$this->eventModel->setEventsPrivateIfExpired();
 
@@ -119,7 +119,7 @@ class HomeRender extends HomeController
 				"latestEvents" => $events ?? null,
 				"questions" => $questions ?? null,
 				"galleryImages" => $galleryImages ?? null,
-				'users' => $users ?? null,
+				'user_count' => $user_count ?? null,
 				'events' => $events ?? null,
 				'randomGalleryImages' => $randomGalleryImages ?? null,
 			]),
