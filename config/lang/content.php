@@ -410,8 +410,8 @@ define('CONTENT', [
       ]
     ],
     "view_gallery_btn" => [
-      "Hu" => "Galéria megtekintése",
-      "En" => "View gallery",
+      "Hu" => "Galéria",
+      "En" => "Gallery",
       "Sp" => ""
     ],
     "more_images" => [
