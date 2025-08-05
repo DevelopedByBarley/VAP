@@ -36,7 +36,7 @@ foreach ($images as $image) {
 
 <link rel="stylesheet" href="/public/css/gallery.css?v=<?= time() ?>">
 
-<div class="container-fluid py-5 mt-5">
+<div class="container-fluid p-5 mt-5">
   <div class="row">
     <div class="col-12 text-center mt-5">
       <h1 class="volunteers-title">Galéria</h1>
@@ -63,11 +63,9 @@ foreach ($images as $image) {
             <div class="event-section">
               <!-- Esemény címe -->
               <div class="d-flex align-items-center mb-4">
-                <div class="event-icon me-3">
-                  <i class="bi bi-calendar-event"></i>
-                </div>
+
                 <div>
-                  <h2 class="h3 mb-1"><?= htmlspecialchars($eventGroup['event']['nameInHu']) ?></h2>
+                  <h2 class="h3 mb-1 pr-text-color"><?= htmlspecialchars($eventGroup['event']['nameInHu']) ?></h2>
                   <p class="text-muted mb-0">
                     <i class="bi bi-calendar3 me-1"></i>
                     <?= date('Y. m. d.', strtotime($eventGroup['event']['date'])) ?>
@@ -96,6 +94,12 @@ foreach ($images as $image) {
                         </div>
                       </a>
                     </div>
+
+                    <?php if (isset($image['credit'])): ?>
+                      <div>
+                        <small class="text-muted">Kredit: <?= htmlspecialchars($image['credit']) ?></small>
+                      </div>
+                    <?php endif; ?>
                   </div>
                 <?php endforeach; ?>
               </div>
@@ -112,11 +116,11 @@ foreach ($images as $image) {
           <div class="general-section">
             <!-- Általános galéria címe -->
             <div class="d-flex align-items-center mb-4">
-              <div class="event-icon me-3">
+              <!-- <div class="event-icon me-3">
                 <i class="bi bi-images"></i>
-              </div>
+              </div> -->
               <div>
-                <h2 class="h3 mb-1">Általános galéria</h2>
+                <h2 class="h3 mb-1 pr-text-color">Általános galéria</h2>
                 <p class="text-muted mb-0">Egyéb pillanatok és képek</p>
               </div>
             </div>
@@ -139,6 +143,11 @@ foreach ($images as $image) {
                       </div>
                     </a>
                   </div>
+                  <?php if (isset($image['credit'])): ?>
+                    <div>
+                      <small class="text-muted">A fényképet készítette: <span class="fw-bold"><?= htmlspecialchars($image['credit']) ?></span></small>
+                    </div>
+                  <?php endif; ?>
                 </div>
               <?php endforeach; ?>
             </div>
@@ -180,27 +189,27 @@ foreach ($images as $image) {
 
       console.log('Lightbox initialized successfully');
     }
-    
+
     // Anchor link kezelése (eseményhez görgetés)
     if (window.location.hash) {
-        const targetId = window.location.hash.substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            setTimeout(function() {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                
-                // Kiemelő animáció
-                targetElement.style.transform = 'scale(1.02)';
-                targetElement.style.transition = 'transform 0.3s ease';
-                setTimeout(function() {
-                    targetElement.style.transform = 'scale(1)';
-                }, 500);
-            }, 100);
-        }
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        setTimeout(function() {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+          // Kiemelő animáció
+          targetElement.style.transform = 'scale(1.02)';
+          targetElement.style.transition = 'transform 0.3s ease';
+          setTimeout(function() {
+            targetElement.style.transform = 'scale(1)';
+          }, 500);
+        }, 100);
+      }
     }
   });
 </script>

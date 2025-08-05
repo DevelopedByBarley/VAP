@@ -143,7 +143,7 @@ define('CONTENT', [
   "benefits" => [
     "badge" => [
       "Hu" => "Előnyök",
-      "En" => "Benefits", 
+      "En" => "Benefits",
       "Sp" => ""
     ],
     "title" => [
@@ -339,13 +339,13 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "events" => [
-      "Hu" => "Események", 
+      "Hu" => "Események",
       "En" => "Events",
       "Sp" => ""
     ],
     "experience" => [
       "Hu" => "Év tapasztalat",
-      "En" => "Years experience", 
+      "En" => "Years experience",
       "Sp" => ""
     ]
   ],
@@ -357,7 +357,7 @@ define('CONTENT', [
       "Sp" => ""
     ],
     "description" => [
-      "Hu" => "Ismerje meg az elkötelezett önkénteseinket, akik szenvedélyesen dolgoznak a művészeti programokért",
+      "Hu" => "Ismerd meg elkötelezett önkénteseinket, akik jelenlétükkel és munkájukkal támogatták művészeti programjainkat.",
       "En" => "Meet our dedicated volunteers who work passionately for art programs",
       "Sp" => ""
     ]
@@ -376,19 +376,19 @@ define('CONTENT', [
     ],
     "gallery_btn" => [
       "Hu" => "Galéria",
-      "En" => "Gallery", 
+      "En" => "Gallery",
       "Sp" => ""
     ]
   ],
 
   "gallery_section" => [
     "title" => [
-      "Hu" => "TEKINTSD MEG GALÉRIÁNKAT",
-      "En" => "CHECK OUT OUR GALLERY",
+      "Hu" => "FOTÓK AZ ESEMÉNYEKRŐL",
+      "En" => "PHOTOS FROM EVENTS",
       "Sp" => ""
     ],
     "description" => [
-      "Hu" => "Fedezd fel programjaink és eseményeink legszebb pillanatait! Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.",
+      "Hu" => "Less be programjaink és eseményeink pár vidám és dolgos pillanatába. Reméljük, hogy kedvet kapsz csatlakozni hozzánk!",
       "En" => "Discover the most beautiful moments of our programs and events! Browse through our photo collection and see what experiences you can have with us.",
       "Sp" => ""
     ],
@@ -399,7 +399,7 @@ define('CONTENT', [
         "Sp" => ""
       ],
       "community_moments" => [
-        "Hu" => "Közösségi pillanatok", 
+        "Hu" => "Közösségi pillanatok",
         "En" => "Community moments",
         "Sp" => ""
       ],

@@ -42,6 +42,11 @@ $admin = $params["admin"] ?? null;
           <textarea class="form-control" id="description" rows="3" name="description" placeholder="Opcionális leírás a képhez..."></textarea>
         </div>
 
+        <div class="form-outline mb-4">
+          <label class="form-label" for="location"><b>Kredit</b></label>
+          <input type="text" id="credit" class="form-control" name="credit" placeholder="Kredit megadása" />
+        </div>
+
         <!-- Esemény kiválasztása -->
         <div class="form-outline mb-4">
           <label class="form-label" for="event_id"><b>Eseményhez rendelés (opcionális)</b></label>

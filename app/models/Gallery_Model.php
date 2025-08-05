@@ -47,15 +47,15 @@ class GalleryModel extends AdminModel
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function addImage($fileName, $description, $is_public, $event_id = null)
+  public function addImage($fileName, $description, $is_public, $event_id = null, $credit = null)
   {
-    var_dump($event_id);
-    $query = "INSERT INTO gallery (fileName, description, is_public, event_id) VALUES (:fileName, :description, :is_public, :event_id)";
+    $query = "INSERT INTO gallery (fileName, description, is_public, event_id, credit) VALUES (:fileName, :description, :is_public, :event_id, :credit)";
     $stmt = $this->pdo->prepare($query);
     $stmt->bindParam(':fileName', $fileName);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':is_public', $is_public, PDO::PARAM_INT);
     $stmt->bindParam(':event_id', $event_id, PDO::PARAM_INT);
+    $stmt->bindParam(':credit', $credit);
     return $stmt->execute();
   }
 

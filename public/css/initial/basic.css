@@ -61,6 +61,15 @@ p {
   background-color: var(--pr-color);
 }
 
+.pr-text-color {
+  color: var(--pr-color);
+}
+
+.sc-text-color {
+  color: var(--sc-color);
+}
+
+
 .primary-btn {
   border-radius: 0px !important;
   background-color: var(--pr-color);

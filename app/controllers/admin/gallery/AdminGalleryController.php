@@ -76,7 +76,8 @@ class AdminGalleryController extends AdminController
                 $description = $_POST['description'] ?? '';
                 $is_public = isset($_POST['is_public']) ? 1 : 0; // Check if the image should be public
                 $event_id = isset($_POST['event_id']) && !empty($_POST['event_id']) ? (int)$_POST['event_id'] : null;
-                $this->galleryModel->addImage($imagePath, $description, $is_public, $event_id);
+                $credit = $_POST['credit'] ?? null; 
+                $this->galleryModel->addImage($imagePath, $description, $is_public, $event_id, $credit);
                 header("Location: /admin/gallery");
             } else {
                 // Handle file save error

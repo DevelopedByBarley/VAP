@@ -22,35 +22,35 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 
 	<!-- HEADER ROW -->
 	<header class="row p-0 m-0 light-bg" itemscope itemtype="https://schema.org/Organization">
+		<div class="col-12 col-lg-5 d-flex align-items-center justify-content-center flex-column hero-image" id="header-image">
+			<div class="floating-elements" aria-hidden="true">
+				<div class="float-1"></div>
+				<div class="float-2"></div>
+				<div class="float-3"></div>
+			</div>
+		</div>
 		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5 hero-section" id="header-intro">
 			<div class="hero-content">
-				<h1 class="hero-title mb-4" itemprop="name">
+				<h1 class="hero-title mb-4 text-center text-xl-start" itemprop="name">
 					<span class="volunteers-title">Volunteer Art Programs</span>
 				</h1>
-				<p class="hero-description lead mb-4" itemprop="description"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
+				<p class="hero-description lead mb-4 text-center text-xl-start" itemprop="description"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
 				<nav class="d-flex flex-wrap justify-content-center gap-3" aria-label="<?= $lang === 'Hu' ? 'Fő műveletek' : 'Main actions' ?>">
 					<?php if (!$user) : ?>
-						<a href="/user/registration" class="btn btn-pink btn-lg px-4 py-3"
+						<a href="/user/registration" class="btn btn-pink rounded btn-lg px-4 py-3"
 							aria-label="<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Register as volunteer' ?>">
 							<i class="bi bi-person-plus me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Problem' ?>
 						</a>
 					<?php endif ?>
 					<?php if (!empty($latestEvents)) : ?>
-						<a href="#latest-events" class="btn btn-blue btn-lg rounded-pill px-4 py-3"
+						<a href="#latest-events" class="btn btn-blue btn-lg rounded px-4 py-3"
 							aria-label="<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'View next event' ?>">
 							<i class="bi bi-calendar-event me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?>
 						</a>
 					<?php endif ?>
 				</nav>
-			</div>
-		</div>
-		<div class="col-12 col-lg-5 d-flex align-items-center justify-content-center flex-column hero-image" id="header-image">
-			<div class="floating-elements" aria-hidden="true">
-				<div class="float-1"></div>
-				<div class="float-2"></div>
-				<div class="float-3"></div>
 			</div>
 		</div>
 </div>
@@ -418,19 +418,27 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 										<div class="event-header">
 											<h3 class="event-title"><?= $event[languageSwitcher("name")] ?></h3>
 											<div class="event-date-info">
-												<?php 
+												<?php
 												// Magyar hónapnevek
 												$hungarianMonths = [
-													'January' => 'január', 'February' => 'február', 'March' => 'március',
-													'April' => 'április', 'May' => 'május', 'June' => 'június',
-													'July' => 'július', 'August' => 'augusztus', 'September' => 'szeptember',
-													'October' => 'október', 'November' => 'november', 'December' => 'december'
+													'January' => 'január',
+													'February' => 'február',
+													'March' => 'március',
+													'April' => 'április',
+													'May' => 'május',
+													'June' => 'június',
+													'July' => 'július',
+													'August' => 'augusztus',
+													'September' => 'szeptember',
+													'October' => 'október',
+													'November' => 'november',
+													'December' => 'december'
 												];
-												
+
 												// Dátum tartomány generálása a date és end_date mezőkből
 												$startDate = $event["date"];
 												$endDate = $event["end_date"] ?? $event["date"];
-												
+
 												if ($startDate === $endDate) {
 													// Egynapos esemény
 													$monthEn = date("F", strtotime($startDate));
@@ -452,7 +460,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 														$endMonthEn = date("F", strtotime($endDate));
 														$startMonthHu = $lang === 'Hu' ? $hungarianMonths[$startMonthEn] : $startMonthEn;
 														$endMonthHu = $lang === 'Hu' ? $hungarianMonths[$endMonthEn] : $endMonthEn;
-														
+
 														$startFormatted = date("Y", strtotime($startDate)) . ". " . $startMonthHu . " " . date("j", strtotime($startDate)) . ".";
 														$endFormatted = date("Y", strtotime($endDate)) . ". " . $endMonthHu . " " . date("j", strtotime($endDate)) . ".";
 														$eventDate = $startFormatted . " - " . $endFormatted;
@@ -464,7 +472,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 													<?= $eventDate ?>
 												</span>
 											</div>
-											
+
 										</div>
 										<div class="event-description">
 											<?= $event[languageSwitcher("description")] ?>
@@ -511,7 +519,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 					<p class="lead text-muted mb-4">
 						<?= CONTENT["gallery_section"]["description"][$lang] ?? 'Fedezd fel programjaink és eseményeink legszebb pillanatait! Böngészd át képgyűjteményünket, és lásd, milyen élményekben lehet részed nálunk.' ?>
 					</p>
-<!-- 					<div class="d-flex flex-wrap gap-3 mb-4">
+					<!-- 					<div class="d-flex flex-wrap gap-3 mb-4">
 						<div class="feature-item d-flex align-items-center">
 							<i class="bi bi-calendar-event text-pink me-2"></i>
 							<span class="small text-muted"><?= CONTENT["gallery_section"]["features"]["event_photos"][$lang] ?? 'Esemény fotók' ?></span>
@@ -627,7 +635,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				<?php endforeach ?>
 			</div>
 		</div>
-		
+
 		<br>
 
 		<!-- Cooperation Partners -->
