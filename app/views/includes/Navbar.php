@@ -5,7 +5,7 @@ $user = $params["user"] ?? null;
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col sc-font">
             <?php if (strpos($_SERVER['REQUEST_URI'], '/admin') === false || !isset($_SESSION["adminId"])) : ?>
                 <nav class="navbar navbar-expand-xl navbar-light border-bottom fixed-top" style="background-color: white; max-width: 2300px; margin: 0 auto;" id="public-navbar">
                     <div class="container-fluid">

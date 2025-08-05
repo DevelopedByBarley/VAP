@@ -51,14 +51,14 @@ $isRegistered = $params["isRegistered"] ?? null;
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="event-description text-center reveal">
+      <div class="event-description reveal">
         <p><?= $event[languageSwitcher("description")] ?></p>
       </div>
     </div>
   </div>
   
   <div class="row">
-    <div class="col-12 text-center text-lg-end offset-lg-2 col-lg-10 my-5">
+    <div class="col-12  text-lg-end offset-lg-2 col-lg-10 my-5">
       <div class="event-section">
         <h2 class="event-section-title reveal"><?= EVENT["tasks"]["title"][$lang] ?? 'HIBA' ?></h2>
         <p class="event-section-description reveal"><i><?= EVENT["tasks"]["description"][$lang] ?? 'HIBA' ?></i></p>
@@ -76,7 +76,7 @@ $isRegistered = $params["isRegistered"] ?? null;
   </div>
 
   <div class="row">
-    <div class="col-12 text-center text-lg-start col-lg-10 my-5">
+    <div class="col-12 text-lg-start col-lg-10 my-5">
       <div class="event-section">
         <h2 class="event-section-title reveal"><?= EVENT["links"]["title"][$lang] ?? 'HIBA' ?></h2>
         <p class="event-section-description reveal"><i><?= EVENT["links"]["description"][$lang] ?? 'HIBA' ?></i></p>
@@ -94,7 +94,7 @@ $isRegistered = $params["isRegistered"] ?? null;
   </div>
 
   <div class="row">
-    <div class="col-12 text-center d-flex align-items-center justify-content-center flex-column" style="min-height: 30vh;">
+    <div class="col-12 d-flex align-items-center justify-content-center flex-column" style="min-height: 30vh;">
       <div class="event-section">
         <h1 class="event-section-title reveal"><?= EVENT["after_registration"]["title"][$lang] ?? 'HIBA' ?></h1>
         <p class="reveal">

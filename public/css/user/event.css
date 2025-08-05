@@ -44,7 +44,7 @@
 .event-title {
     font-size: 3rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #213f5d;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
     text-transform: uppercase;
@@ -170,23 +170,21 @@
 .event-btn,
 .primary-btn,
 .secondary-btn {
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    text-transform: uppercase;
+    padding: .5rem .7rem;
+    border-radius: 5px;
     letter-spacing: 1px;
     transition: all 0.3s ease;
     border: none;
     text-decoration: none;
     display: inline-block;
     margin: 0.5rem;
+    font-family: var(--sc-font);
 }
 
 .event-btn-primary,
 .primary-btn {
     background: var(--pr-color);
     color: white;
-    box-shadow: 0 8px 25px rgba(0, 166, 155, 0.3);
 }
 
 .event-btn-primary:hover,
@@ -201,7 +199,6 @@
 .secondary-btn {
     background: var(--sc-color);
     color: white;
-    box-shadow: 0 8px 25px rgba(235, 12, 119, 0.3);
 }
 
 .event-btn-secondary:hover,

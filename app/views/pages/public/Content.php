@@ -32,7 +32,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 		<div class="col-12 col-lg-7 d-flex align-items-center justify-content-center flex-column p-5 hero-section" id="header-intro">
 			<div class="hero-content">
 				<h1 class="hero-title mb-4 text-center text-xl-start" itemprop="name">
-					<span class="volunteers-title">Volunteer Art Programs</span>
+					<span class="volunteers-title" style="font-size: 3.5rem;">Volunteer Art Programs</span>
 				</h1>
 				<p class="hero-description lead mb-4 text-center text-xl-start" itemprop="description"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
 				<nav class="d-flex flex-wrap justify-content-center gap-3" aria-label="<?= $lang === 'Hu' ? 'Fő műveletek' : 'Main actions' ?>">
@@ -109,7 +109,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 						<i class="bi bi-star-fill me-2"></i>
 						<span>Ajánlás</span>
 					</div> -->
-			<h1 class="recommendation-title text-dark text-center mb-4 text-uppercase">
+			<h1 class="recommendation-title text-center mb-4 text-uppercase">
 				<?= CONTENT["recommendation"]["title"][$lang] ?? 'HIBA' ?>
 			</h1>
 			<div class="recommendation-quote">
@@ -132,10 +132,9 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 
 <div class="row d-flex align-items-center justify-content-center" id="advantages">
 	<div class="col-12 col-lg-10 mx-auto mt-3 text-center reveal">
-		<h1 class="advantages-title text-dark text-uppercase mb-4 mt-5">
+		<h1 class="advantages-title text-uppercase mb-4 mt-5">
 			<?= CONTENT["advantages"]["title"][$lang] ?? 'HIBA' ?>
 		</h1>
-
 	</div>
 	<div class="col-12 col-lg-5 reveal">
 		<!-- Advantages Carousel -->
@@ -205,7 +204,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 			<div class="advantages-list text-start px-lg-3 mt-4">
 				<div class="advantage-item">
 					<div class="advantage-bullet">
-						<i class="bi bi-check-circle-fill text-success"></i>
+						<i class="bi bi-check-circle-fill pr-text-color"></i>
 					</div>
 					<p class="advantage-text text-dark">
 						<?= CONTENT["advantages"]["advantages"][1][$lang] ?? 'HIBA' ?>
@@ -213,7 +212,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				</div>
 				<div class="advantage-item">
 					<div class="advantage-bullet">
-						<i class="bi bi-check-circle-fill text-success"></i>
+						<i class="bi bi-check-circle-fill pr-text-color"></i>
 					</div>
 					<p class="advantage-text text-dark">
 						<?= CONTENT["advantages"]["advantages"][2][$lang] ?? 'HIBA' ?>
@@ -221,7 +220,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				</div>
 				<div class="advantage-item">
 					<div class="advantage-bullet">
-						<i class="bi bi-check-circle-fill text-success"></i>
+						<i class="bi bi-check-circle-fill pr-text-color"></i>
 					</div>
 					<p class="advantage-text text-dark">
 						<?= CONTENT["advantages"]["advantages"][3][$lang] ?? 'HIBA' ?>
@@ -229,7 +228,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				</div>
 				<div class="advantage-item">
 					<div class="advantage-bullet">
-						<i class="bi bi-check-circle-fill text-success"></i>
+						<i class="bi bi-check-circle-fill pr-text-color"></i>
 					</div>
 					<p class="advantage-text text-dark">
 						<?= CONTENT["advantages"]["advantages"][4][$lang] ?? 'HIBA' ?>
@@ -237,7 +236,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				</div>
 				<div class="advantage-item">
 					<div class="advantage-bullet">
-						<i class="bi bi-check-circle-fill text-success"></i>
+						<i class="bi bi-check-circle-fill pr-text-color"></i>
 					</div>
 					<p class="advantage-text text-dark">
 						<?= CONTENT["advantages"]["advantages"][5][$lang] ?? 'HIBA' ?>
@@ -475,7 +474,9 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 
 										</div>
 										<div class="event-description">
-											<?= $event[languageSwitcher("description")] ?>
+											<p>
+												<?= $event[languageSwitcher("description")] ?>
+											</p>
 										</div>
 										<div class="event-footer">
 											<a href="/event/<?= $event["slug"] ?>" class="event-link">
@@ -512,7 +513,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 		<div class="row align-items-center">
 			<div class="col-12 col-lg-6">
 				<div class="gallery-promo-content">
-					<h2 class="display-5 fw-bold text-dark mb-4 ">
+					<h2 class="display-5 fw-bold gallery-title mb-4 ">
 						<i class="bi bi-images text-pink me-3"></i>
 						<?= CONTENT["gallery_section"]["title"][$lang] ?? 'TEKINTSD MEG GALÉRIÁNKAT' ?>
 					</h2>

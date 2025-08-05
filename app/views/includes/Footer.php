@@ -14,7 +14,7 @@ $documents = $params['documents'] ?? [];
                     <div class="row">
                         <!-- Grid column -->
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h3 class="text-uppercase font-weight-bold">
+                            <h3 class="text-uppercase font-weight-bold ">
                                 Volunteer Art Programs
                             </h3>
                             <a href="https://www.facebook.com/profile.php?id=61565061561678" target="_blank">
@@ -30,19 +30,19 @@ $documents = $params['documents'] ?? [];
 
                         <!-- Grid column -->
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                <?= CONTENT["footer"]["docs"][$lang] ?? 'HIBA' ?> </h6>
-                            </h6>
+                            <p class="text-uppercase mb-4 fw-bold ">
+                                <?= CONTENT["footer"]["docs"][$lang] ?? 'HIBA' ?> </p>
+                            </p>
                             <?php foreach ($documents as $index => $document) : ?>
                                 <p><a class="link-offset-2 link-underline link-underline-opacity-10 text-light" href="/public/assets/uploads/documents/admin/<?= $document["fileName"] ?>" download><?= $document[languageSwitcher("name")] ?></a></p>
                             <?php endforeach ?>
 
                         </div>
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">
-                                <?= CONTENT["footer"]["privacy_policy"][$lang] ?? 'HIBA' ?> </h6>
+                            <p class="text-uppercase mb-4 fw-bold">
+                                <?= CONTENT["footer"]["privacy_policy"][$lang] ?? 'HIBA' ?> </p>
 
-                            </h6>
+                            </p>
 
                             <?php if ($lang === "Hu") : ?>
                                 <a href="/public/files/adatkezeles.hu.docx.pdf" class="text-light">Adatkezelési tájékoztató</a>
