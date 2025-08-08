@@ -1,8 +1,9 @@
 <?php
 require_once 'app/helpers/Alert.php';
 require_once 'app/services/AuthService.php';
-require_once 'app/helpers/Validate.php';
 require_once 'app/models/Subscription_Model.php';
+require_once 'app/core/Validator.php';
+require_once 'app/core/ValidationException.php';
 
 
 class UserModel
@@ -73,7 +74,23 @@ class UserModel
 
 
 
+
     $isUserExist = self::checkIsUserExist($email);
+
+    \Core\Validator::validate($body, [
+      'name' => ['required', 'min:3', 'max:50'],
+      'email' => ['required', 'email', 'min:5'],
+      'password' => ['required', 'min:8', 'password'],
+      'address' => ['required', 'min:5', 'max:100'],
+      'mobile' => ['required', 'phone'],
+      'profession' => ['required'],
+      'programs' => ['required'],
+      'participation' => ['required'],
+      'informed_by' => ['required'],
+      'documents' => ['required'],
+      'file' => ['required'],
+      'privacy_statement' => ['required'],
+    ]);
 
     if ($isUserExist) {
       self::setPrevContent();
@@ -303,7 +320,8 @@ class UserModel
     $stmt->execute();
   }
 
-  public function countAll() {
+  public function countAll()
+  {
     $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `users`");
     $stmt->execute();
     $users = $stmt->fetchColumn();

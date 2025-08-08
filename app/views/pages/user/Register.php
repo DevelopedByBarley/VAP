@@ -26,7 +26,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12">
         <div class="form-outline">
           <label class="form-label required" for="name"><b><?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="text" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" />
+          <input type="text" id="name" name="name" class="form-control" value="<?= $prev["name"] ?? '' ?>" required placeholder="<?= REGISTRATION["form"]["name"][$lang] ?? 'HIBA' ?>" data-validate="required|min:3|max:50" />
           <small id="nameInputAlert" class="text-danger">
 
           </small>
@@ -39,7 +39,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
           <label class="form-label required" for="email"><b><?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="email" id="email" name="email" class="form-control" required value="<?= $prev["email"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?>" />
+          <input type="email" id="email" name="email" class="form-control" required value="<?= $prev["email"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["email"][$lang] ?? 'HIBA' ?>" data-validate="required|email|min:5" />
           <small id="emailInputAlert" class="text-danger"></small>
 
         </div>
@@ -50,7 +50,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
           <label class="form-label required" for="password"><b><?= REGISTRATION["form"]["password"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="password" id="password" name="password" class="form-control" required placeholder="<?= REGISTRATION["form"]["password"][$lang] ?? 'HIBA' ?>" value="<?= $prev["password"] ?? '' ?>"" />
+          <input type="password" id="password" name="password" class="form-control" required placeholder="<?= REGISTRATION["form"]["password"][$lang] ?? 'HIBA' ?>" value="<?= $prev["password"] ?? '' ?>" data-validate="required|min:8|password" />
 
           <small id="pwInputAlert" class="text-danger">
 
@@ -62,7 +62,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
           <label class="form-label required" for="city"><b><?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="text" id="address" name="address" class="form-control" required value="<?= $prev["address"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?>" />
+          <input type="text" id="address" name="address" class="form-control" required value="<?= $prev["address"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["address"][$lang] ?? 'HIBA' ?>" data-validate="required|min:3|max:100" />
 
           <small id="addressInputAlert" class="text-danger"></small>
         </div>
@@ -75,7 +75,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
       <div class="col-xs-12 col-md-6 mt-3">
         <div class="form-outline mb-4">
           <label class="form-label required" for="phone"><b><?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?></b></label>
-          <input type="number" id="phone" name="mobile" class="form-control" value="<?= $prev["mobile"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?>" required />
+          <input type="number" id="phone" name="mobile" class="form-control" value="<?= $prev["mobile"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["mobile"][$lang] ?? 'HIBA' ?>" required data-validate="required|phone" />
 
           <small id="phoneInputAlert" class="text-danger"></small>
 
@@ -108,7 +108,7 @@ $userLanguages = $prev["userLanguages"] ?? null;
           <label class="form-label" for="school-name"><b>
               <?= EDU_INSTITUTION[$lang] ?? 'HIBA' ?>
             </b></label>
-          <input type="text" id="school-name" name="school_name" class="form-control" value="<?= $prev["school_name"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["school_name"][$lang] ?? 'HIBA' ?>""/>
+          <input type="text" id="school-name" name="school_name" class="form-control" value="<?= $prev["school_name"] ?? '' ?>" placeholder="<?= REGISTRATION["form"]["school_name"][$lang] ?? 'HIBA' ?>"/>
         </div>
       </div>
 

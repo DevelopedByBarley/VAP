@@ -100,6 +100,7 @@ $canonical_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "http
     <?php include 'app/views/components/Cookie.php' ?>
     <?php include './app/views/includes/Footer.php' ?>
 
+    <script src="/public/js/Validators.js"></script>
     <script src="/public/js/UUID.js"></script>
     <script src="/public/js/CkEditor.js"></script>
     <script src="/public/js/Navbar.js"></script>

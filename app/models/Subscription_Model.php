@@ -1,7 +1,6 @@
 <?php
 require_once 'app/helpers/UUID.php';
 require_once 'app/helpers/Alert.php';
-require_once 'app/helpers/Validate.php';
 
 
 // ONLY USER NOT ADMIN!

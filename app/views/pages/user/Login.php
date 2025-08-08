@@ -25,12 +25,12 @@ $lang = isset($_COOKIE["lang"]) ? $_COOKIE["lang"] : null;
 
                   <div class="form-outline mb-4">
                     <label for="email" class="form-label"><?= LOGIN["email"][$lang] ?? 'Email cim' ?></label>
-                    <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= LOGIN["email"][$lang] ?? 'HIBA' ?>">
+                    <input type="email" class="form-control rounded" id="email" aria-describedby="emailHelp" name="email" placeholder="<?= LOGIN["email"][$lang] ?? 'HIBA' ?>" data-validate="required|email|min:5">
                   </div>
 
                   <div class="form-outline mb-4">
                     <label for="password" class="form-label"><?= LOGIN["password"][$lang] ?? 'Jelszó' ?></label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="<?= LOGIN["password"][$lang] ?? 'HIBA' ?>">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="<?= LOGIN["password"][$lang] ?? 'HIBA' ?>" data-validate="required|min:8|password">
                   </div>
 
                   <div class="text-center pt-1 mb-2 pb-1">

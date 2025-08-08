@@ -1,5 +1,9 @@
 <?php
+
 require_once 'app/helpers/Alert.php';
+require_once 'app/helpers/functions.php';
+require_once 'app/core/Validator.php';
+require_once 'app/core/ValidationException.php';
 
 class AuthService
 {
@@ -21,6 +25,7 @@ class AuthService
         $name = filter_var($body["name"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
         $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
         $createdAt = time();
+
 
         $stmt = $this->pdo->prepare("INSERT INTO `admins` (`id`, `adminId`, `name`, `password`, `createdAt`) VALUES (NULL, :adminId, :name, :password, :createdAt)");
         $stmt->bindParam(":adminId", $adminId, PDO::PARAM_STR);
@@ -77,7 +82,16 @@ class AuthService
         $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
         $pw = filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS);
 
-        
+        try {
+            \Core\Validator::validate($body, [
+                'email' => ['required', 'email', 'min:5'],
+                'password' => ['required', 'min:8', 'password']
+            ]);
+        } catch (\Core\ValidationException $th) {
+            header("Location: /login");
+            exit;
+        }
+
         $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
