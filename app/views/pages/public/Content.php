@@ -37,14 +37,14 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 				<p class="hero-description lead mb-4 text-center text-xl-start" itemprop="description"><?= CONTENT["header"]["content"][$lang] ?? 'Problem' ?></p>
 				<nav class="d-flex flex-wrap justify-content-center gap-3" aria-label="<?= $lang === 'Hu' ? 'Fő műveletek' : 'Main actions' ?>">
 					<?php if (!$user) : ?>
-						<a href="/user/registration" class="btn btn-pink rounded btn-lg px-4 py-3"
+						<a href="/user/registration" class="btn btn-pink rounded btn-lg px-4 py-3 sc-font"
 							aria-label="<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Register as volunteer' ?>">
 							<i class="bi bi-person-plus me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["reg_volunteer_btn"][$lang] ?? 'Problem' ?>
 						</a>
 					<?php endif ?>
 					<?php if (!empty($latestEvents)) : ?>
-						<a href="#latest-events" class="btn btn-blue btn-lg rounded px-4 py-3"
+						<a href="#latest-events" class="btn btn-blue btn-lg rounded px-4 py-3 sc-font"
 							aria-label="<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'View next event' ?>">
 							<i class="bi bi-calendar-event me-2" aria-hidden="true"></i>
 							<?= CONTENT["header"]["next_event_btn"][$lang] ?? 'Problem' ?>
@@ -534,7 +534,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 							<span class="small text-muted"><?= CONTENT["gallery_section"]["features"]["inspiring_experiences"][$lang] ?? 'Inspiráló élmények' ?></span>
 						</div>
 					</div> -->
-					<a href="/gallery" class="btn btn-pink btn-lg px-4 py-3 shadow-sm">
+					<a href="/gallery" class="btn btn-pink rounded btn-lg px-4 py-3">
 						<i class="bi bi-collection me-2"></i>
 						<?= CONTENT["gallery_section"]["view_gallery_btn"][$lang] ?? 'Galéria megtekintése' ?>
 						<i class="bi bi-arrow-right ms-2"></i>
@@ -676,7 +676,7 @@ $randomGalleryImages = $params["randomGalleryImages"] ?? [];
 			</div>
 
 			<div class="text-center mt-5">
-				<a href="/partners" class="btn btn-pink btn-lg px-4 py-3">
+				<a href="/partners" class="btn btn-pink rounded btn-lg px-4 py-3">
 					<i class="bi bi-arrow-right me-2"></i>
 					<?= CONTENT["partners"]["partner-btn"][$lang] ?? '' ?>
 				</a>
